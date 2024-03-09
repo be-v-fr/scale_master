@@ -12,7 +12,10 @@
 
     #fretboard {
         width: 100%;
-        background: green;
+        background: url(../../assets/img/wood.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
         flex: 1;
     }
 }
