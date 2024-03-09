@@ -1,5 +1,14 @@
+@mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    gap: $g;
+    flex-direction: $dir;
+}
+
 body {
     width: 100vw;
     height: 100vh;
-    background: yellow;
+    background: whitesmoke;
+    margin: 0;
 }

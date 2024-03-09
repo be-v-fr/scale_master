@@ -1,0 +1,18 @@
+@import '../../styles.scss';
+
+.contentWrapper {
+    width: 100%;
+    height: 100%;
+    @include flex($dir: column);
+    #menu {
+        width: 100%;
+        height: 20%;
+        background: blue;
+    }
+
+    #fretboard {
+        width: 100%;
+        background: green;
+        flex: 1;
+    }
+}
