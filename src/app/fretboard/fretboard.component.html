@@ -1,8 +1,10 @@
 <table>
-    @for (string of ['E', 'A', 'D', 'G', 'B', 'e']; track $index) {
+    @for (string of fretboard.intervals; track string; let i = $index) {
         <tr>
-            @for (fret of [0,1,2,3,4,5,6,7,8,9,10,11]; track $index) {
-                <td>
+            <td class="note">{{fretboard.notes[i].print()}}</td>
+            <td class="nut"></td>
+            @for (fret of [1,2,3,4,5,6,7,8,9,10,11]; track $index) {
+                <td class="fret">
                     <hr>
                 </td>
             }

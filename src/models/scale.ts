@@ -48,7 +48,13 @@ export class Scale {
 
     setDiatonicAccidentals() {
         // Indizes der im notes-Array vorhandenen Noten abfragen
-        // Erhöhungszeichen sollten automatisch gesetzt sein...
-        // ...also müssen vermutlich nur b's gesetzt werden
+        // Accidentals entsprechend zuordnen
+        // https://www.bergziege-owl.de/vorzeichen-und-tonarten/
+        for (let i = 0; i < this.notes.length; i++) {
+            let note = this.notes[i];
+            if(note.index == 1) {
+
+            }
+        }
     }
 }

@@ -89,4 +89,12 @@ export class Note {
             console.error('Note broken or not found in NOTES.')
         }
     }
+
+    print() {
+        return this.capitalizeFirstLetter(this.name);
+    }
+
+    capitalizeFirstLetter(string: string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 }
