@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Fretboard } from '../../models/fretboard';
 
 @Component({
   selector: 'app-fretboard',
@@ -8,5 +9,4 @@ import { Component } from '@angular/core';
   styleUrl: './fretboard.component.scss'
 })
 export class FretboardComponent {
-
 }
