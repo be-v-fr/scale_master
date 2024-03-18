@@ -1,0 +1,31 @@
+ul {
+  list-style: none;
+  width: fit-content;
+  li {
+    text-align: center;
+    .visible {
+      cursor: pointer;
+      &:hover {
+        filter: brightness(1.5);
+      }
+      &:active {
+        color: red;
+      }
+    }
+  }
+  .beyond {
+    opacity: 0;
+    font-size: 18px;
+  }
+  .outmost {
+    opacity: 0.5;
+    font-size: 20px;
+  }
+  .outer {
+    opacity: 0.8;
+    font-size: 22px;
+  }
+  .focus {
+    font-size: 26px;
+  }
+}
