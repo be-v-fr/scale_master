@@ -97,4 +97,8 @@ export class Note {
     capitalizeFirstLetter(string: string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    getIntervalIndex(interval: number) {
+        return (this.index + interval) % 12;
+    }
 }

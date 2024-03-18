@@ -28,6 +28,7 @@ export class Scale {
 
     getNaturalNotes() {
         let notes: Note[] = [];
+        notes.push(this.root);
         for (let i = 1; i < this.intervals.length; i++) {
             const interval = this.intervals[i];
             notes.push(this.getNaturalNoteFromInterval(interval));
@@ -56,5 +57,11 @@ export class Scale {
 
             }
         }
+    }
+
+    getNoteNames() {
+        let names:string[] = [];
+        this.notes.forEach(n => names.push(n.name));
+        return names;
     }
 }

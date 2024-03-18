@@ -1,13 +1,13 @@
 <table>
     @for (string of fretboard.intervals; track string; let i = $index) {
-        <tr>
-            <td class="note">{{fretboard.notes[i].print()}}</td>
-            <td class="nut"></td>
-            @for (fret of [1,2,3,4,5,6,7,8,9,10,11]; track $index) {
-                <td class="fret">
-                    <hr>
-                </td>
-            }
-        </tr>
+    <tr>
+        <td class="string-note">{{fretboard.notes[i].print()}}</td>
+        @for (fret of [0,1,2,3,4,5,6,7,8,9,10,11]; track fret; let j = $index; let first = $first) {
+        <td [ngClass]="first ? 'nut' : 'fret'">
+            <app-fret-note [name]="getNoteFromFret(i, j)" [root]="isRoot(i, j)" class="scale-note-wrapper"></app-fret-note>
+        </td>
+        }
+        <hr class="string">
+    </tr>
     }
 </table>
