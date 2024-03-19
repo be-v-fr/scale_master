@@ -1,31 +1,22 @@
+@import "../../../styles.scss";
+
 ul {
   list-style: none;
   width: fit-content;
+  border: 1px solid #000000;
+  @include flex($dir: column);
+  height: 130px;
+  overflow: hidden;
   li {
     text-align: center;
-    .visible {
-      cursor: pointer;
-      &:hover {
-        filter: brightness(1.5);
-      }
-      &:active {
-        color: red;
-      }
+    color: white;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(0.5);
     }
-  }
-  .beyond {
-    opacity: 0;
-    font-size: 18px;
-  }
-  .outmost {
-    opacity: 0.5;
-    font-size: 20px;
-  }
-  .outer {
-    opacity: 0.8;
-    font-size: 22px;
-  }
-  .focus {
-    font-size: 26px;
+    &:active {
+      color: red;
+      opacity: 1;
+    }
   }
 }

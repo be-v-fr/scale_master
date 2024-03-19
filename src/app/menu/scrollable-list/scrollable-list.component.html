@@ -1,9 +1,10 @@
 <ul>
-    @for (pos of ['beyond','outmost','outer','focus','outer','outmost','beyond']; track pos; let i = $index) {
-    <li class="{{pos}}">
-        <button (click)="pos == 'beyond' || scrollIntoFocus(i)" [ngClass]="{visible: pos != 'beyond'}">
-            {{printContent(i)}}
-        </button>
+    @for (pos of positions; track pos; let i = $index) {
+    <li (click)="pos == 'outside' || scrollIntoFocus(i)" [@shift]="positions[i]" [ngStyle]="{
+        'transition': 'transform ' + transition,
+        'transform': getTranslateY(),
+    }">
+        {{printContent(i)}}
     </li>
     }
 </ul>
