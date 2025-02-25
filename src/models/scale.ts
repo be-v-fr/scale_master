@@ -1,13 +1,8 @@
 import { isFormArray } from "@angular/forms";
 import { Note } from "./note";
+import { SCALES } from "../const/scales";
 
 export class Scale {
-    readonly SCALES = { // VORZEICHEN INTEGRIEREN!!
-        diatonic: {
-            major: [0, 2, 4, 5, 7, 9, 11],
-            minor: [0, 2, 3, 5, 7, 8, 10]
-        }
-    };
     category: string;
     mode: string;
     intervals: number[];
@@ -18,7 +13,7 @@ export class Scale {
         this.root = root;
         this.category = category;
         this.mode = mode;
-        this.intervals = this.SCALES[category as keyof {}][mode];
+        this.intervals = SCALES[category as keyof {}][mode];
         if(this.intervals.length == 0) {
             console.error('Mode broken or not found in SCALES.');
         }
