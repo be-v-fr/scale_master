@@ -12,7 +12,7 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
 })
 
 export class ScrollableListComponent {
-  @Input() content: any[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  @Input({ required: true }) content!: any[];
   _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
     return this._positions;
@@ -28,7 +28,6 @@ export class ScrollableListComponent {
   }
 
   handleClick(positionIndex: number) {
-    console.log('click!');
     if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
@@ -38,13 +37,11 @@ export class ScrollableListComponent {
   }
 
   scrollBySteps(steps: number) {
-    console.log('steps:', steps);
     this.scrollSteps = steps;
     setTimeout(() => this.setNewFocus(steps), 300);
   }
 
   setNewFocus(steps: number) {
-    console.log('setting new focus...');
     this.scrollSteps = 0;
     const length = this.content.length;
     this.focus += steps;
