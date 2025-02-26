@@ -1,13 +1,7 @@
 import { Note } from "./note";
+import { TUNINGS } from "../const/tunings";
 
 export class Fretboard {
-    readonly TUNINGS = {
-        guitar: {
-            standard: [0, 5, 10, 15, 19, 24],
-            drop: [0, 7, 12, 17, 21, 26]
-        }
-    };
-
     root: Note;
     instrument: string;
     tuning: string;
@@ -18,7 +12,7 @@ export class Fretboard {
         this.root = root;
         this.instrument = instrument;
         this.tuning = tuning;
-        this.intervals = this.TUNINGS[instrument as keyof {}][tuning];
+        this.intervals = TUNINGS[instrument as keyof {}][tuning];
         if(this.intervals.length == 0) {
             console.error('Tuning broken or not found in TUNINGS.');
         }

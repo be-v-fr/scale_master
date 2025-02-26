@@ -1,1 +1,2 @@
-<app-scrollable-list *ngIf="naturalNotes" [content]="naturalNotes" (current)="updateRootNote($event)" />
+<app-scrollable-list *ngIf="naturalNotes" [content]="naturalNotes" (current)="updateCurrRootNote($event)" />
+<app-scrollable-list *ngIf="scalesData.categories" [content]="scalesData.categories" (current)="updateCurrCategory($event)" />

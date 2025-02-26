@@ -1,13 +1,14 @@
 :host {
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    font-size: 24px;
-    &:hover {
-      filter: brightness(0.5);
-    }
-    &:active {
-      color: red;
-      opacity: 1;
-    }
+  width: 200%;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  &:hover {
+    background: black;
   }
+  &:active {
+    color: red;
+    opacity: 1;
+  }
+}

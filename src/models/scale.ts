@@ -4,28 +4,26 @@ import { SCALES } from "../const/scales";
 export class Scale {
     category: string;
     mode: string;
-    intervals: number[];
     root: Note;
     accidentals?: ('natural' | 'sharp' | 'flat')[];
 
     constructor(root: Note, category: string, mode: string) {
         this.root = root;
+        if (!SCALES[category as keyof {}] || !SCALES[category as keyof {}][mode]) {
+            throw ('Mode broken or not found.');
+        }
         this.category = category;
         this.mode = mode;
-        this.intervals = SCALES[category as keyof {}][mode];
-        if(this.intervals.length == 0) {
-            throw('Mode broken or not found.');
-        }
         this.setAccidentals();
     }
 
     getNaturalNotes(): Note[] {
         let notes: Note[] = [];
-        notes.push(this.root);
-        for (let i = 1; i < this.intervals.length; i++) {
-            const interval = this.intervals[i];
-            notes.push(this.getNaturalNoteFromInterval(interval));
-        }
+        const intervals: number[] = SCALES[this.category as keyof {}][this.mode];
+        intervals.forEach((i: number) => {
+            const note: Note = this.getNaturalNoteFromInterval(i);
+            notes.push(note);
+        });
         return notes;
     }
 
@@ -40,7 +38,7 @@ export class Scale {
     }
 
     setAccidentals() {
-        if(this.category == 'diatonic') {
+        if (this.category == 'diatonic') {
             this.setDiatonicAccidentals();
         }
     }
@@ -52,7 +50,7 @@ export class Scale {
         const naturalNotes: Note[] = this.getNaturalNotes();
         for (let i = 0; i < naturalNotes.length; i++) {
             let note = naturalNotes[i];
-            if(note.index == 1) {
+            if (note.index == 1) {
 
             }
         }

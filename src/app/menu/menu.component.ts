@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ScrollableListComponent } from './scrollable-list/scrollable-list.component';
 import { Note } from '../../models/note';
 import { CurrentScaleService } from '../../services/current-scale.service';
+import { ScalesDataService } from '../../services/scales-data.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +17,7 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private currScale: CurrentScaleService,
+    public scalesData: ScalesDataService,
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +33,12 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  updateRootNote(noteString: string) {
+  updateCurrRootNote(noteString: string) {
     const note: Note = new Note().textToNote(noteString);
     this.currScale.scale.root = note;
+  }
+
+  updateCurrCategory(category: string) {
+    this.currScale.scale.category = category;
   }
 }

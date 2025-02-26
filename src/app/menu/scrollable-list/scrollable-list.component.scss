@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 
 $y-inner: 30px;
-$y-outer: 70px;
+$y-outer: 64px;
 $y-outside: 100px;
 $scl-inner: 0.9;
 $scl-outer: 0.8;
@@ -39,7 +39,7 @@ app-scrollable-list-item {
   position: absolute;
   transition: none;
   &.scroll {
-    transition: 300ms ease;
+    transition: 300ms ease-out;
   }
   &.over {
     opacity: $opac-outside;

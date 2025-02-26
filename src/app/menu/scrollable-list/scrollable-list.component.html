@@ -4,7 +4,7 @@
         @for (pos of positions; track pos; let i = $index; let f = $first; let l = $last) {
         <app-scrollable-list-item
             [ngClass]="f || l || (i == 1 && scrollSteps == 2) || (i == positions.length - 2 && scrollSteps == -2) ? positions[i] : positions[i - scrollSteps]"
-            [class.scroll]="scrollSteps !== 0" (click)="handleClick(i)" [content]="printContent(i)" />
+            [class.scroll]="scrollSteps !== 0" class="prevent-select" (click)="handleClick(i)" [content]="printContent(i)" />
         }
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="scrollBySteps(1)" />
