@@ -1,4 +1,3 @@
-import { isFormArray } from "@angular/forms";
 import { Note } from "./note";
 import { SCALES } from "../const/scales";
 
@@ -7,7 +6,7 @@ export class Scale {
     mode: string;
     intervals: number[];
     root: Note;
-    notes: Note[];
+    accidentals?: ('natural' | 'sharp' | 'flat')[];
 
     constructor(root: Note, category: string, mode: string) {
         this.root = root;
@@ -15,13 +14,12 @@ export class Scale {
         this.mode = mode;
         this.intervals = SCALES[category as keyof {}][mode];
         if(this.intervals.length == 0) {
-            console.error('Mode broken or not found in SCALES.');
+            throw('Mode broken or not found.');
         }
-        this.notes = this.getNaturalNotes();
         this.setAccidentals();
     }
 
-    getNaturalNotes() {
+    getNaturalNotes(): Note[] {
         let notes: Note[] = [];
         notes.push(this.root);
         for (let i = 1; i < this.intervals.length; i++) {
@@ -31,9 +29,14 @@ export class Scale {
         return notes;
     }
 
-    getNaturalNoteFromInterval(interval: number) {
+    getNaturalNoteFromInterval(interval: number): Note {
         const index = (this.root.index + interval) % 12;
         return new Note(index);
+    }
+
+    getNotes(): Note[] {
+        // später accidentals einbinden!
+        return this.getNaturalNotes();
     }
 
     setAccidentals() {
@@ -46,8 +49,9 @@ export class Scale {
         // Indizes der im notes-Array vorhandenen Noten abfragen
         // Accidentals entsprechend zuordnen
         // https://www.bergziege-owl.de/vorzeichen-und-tonarten/
-        for (let i = 0; i < this.notes.length; i++) {
-            let note = this.notes[i];
+        const naturalNotes: Note[] = this.getNaturalNotes();
+        for (let i = 0; i < naturalNotes.length; i++) {
+            let note = naturalNotes[i];
             if(note.index == 1) {
 
             }
@@ -55,8 +59,9 @@ export class Scale {
     }
 
     getNoteNames() {
-        let names:string[] = [];
-        this.notes.forEach(n => names.push(n.name));
+        let names: string[] = [];
+        const notes: Note[] = this.getNotes();
+        notes.forEach((n: Note) => names.push(n.name));
         return names;
     }
 }

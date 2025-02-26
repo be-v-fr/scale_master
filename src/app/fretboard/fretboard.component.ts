@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Fretboard } from '../../models/fretboard';
-import { Scale } from '../../models/scale';
 import { Note } from '../../models/note';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
+import { CurrentScaleService } from '../../services/current-scale.service';
 
 @Component({
   selector: 'app-fretboard',
@@ -13,12 +13,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './fretboard.component.scss'
 })
 export class FretboardComponent {
-  @Input() fretboard: Fretboard = new Fretboard('guitar', 'standard', new Note(7));
-  @Input() scale: Scale = new Scale(new Note(0), 'diatonic', 'minor');
+  fretboard: Fretboard = new Fretboard('guitar', 'standard', new Note(7));
+
+  constructor(
+    private currScale: CurrentScaleService,
+  ) { }
 
   getNoteFromFret(string: number, fret: number): string | undefined {
     const fretNote: Note = new Note(this.getFretNoteIndex(string, fret));
-    const scaleNoteNames: string[] = this.scale.getNoteNames();
+    const scaleNoteNames: string[] = this.currScale.scale.getNoteNames();
     if (scaleNoteNames.includes(fretNote.name)) {
       return fretNote.print();
     } else {
@@ -32,6 +35,6 @@ export class FretboardComponent {
   }
 
   isRoot(string: number, fret: number): boolean {
-    return this.scale.root.index == this.getFretNoteIndex(string, fret);
+    return this.currScale.scale.root.index == this.getFretNoteIndex(string, fret);
   }
 }

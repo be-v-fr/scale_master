@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 
@@ -19,6 +19,7 @@ export class ScrollableListComponent {
   }
   scrollSteps: number = 0;
   focus: number = 0;
+  @Output() current: EventEmitter<any> = new EventEmitter<any>();
 
   printContent(positionIndex: number) {
     const length = this.content.length;
@@ -46,5 +47,6 @@ export class ScrollableListComponent {
     const length = this.content.length;
     this.focus += steps;
     this.focus = (this.focus + length) % length;
+    this.current.emit(this.content[this.focus]);
   }
 }

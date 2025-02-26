@@ -1,1 +1,1 @@
-<app-scrollable-list *ngIf="naturalNotes" [content]="naturalNotes" />
+<app-scrollable-list *ngIf="naturalNotes" [content]="naturalNotes" (current)="updateRootNote($event)" />

@@ -23,8 +23,15 @@ $opac-outside: 0.3;
     width: 100%;
     height: 130px;
   }
-  &:not(:hover) app-scrollable-list-arrow {
-    display: none;
+  app-scrollable-list-arrow {
+    opacity: 0;
+    transition: 200ms ease-in;
+    transition-delay: 100ms;
+  }
+  &:hover app-scrollable-list-arrow {
+    opacity: 1;
+    transition: 50ms;
+    transition-delay: 0;
   }
 }
 

@@ -4,7 +4,9 @@
         <td class="string-note">{{fretboard.notes[i].print()}}</td>
         @for (fret of [0,1,2,3,4,5,6,7,8,9,10,11]; track fret; let j = $index; let first = $first) {
         <td [ngClass]="first ? 'nut' : 'fret'">
-            <app-fret-note [name]="getNoteFromFret(i, j)" [root]="isRoot(i, j)" class="scale-note-wrapper"></app-fret-note>
+            <div class="scale-note-wrapper">
+                <app-fret-note [name]="getNoteFromFret(i, j)" [root]="isRoot(i, j)" />
+            </div>
         </td>
         }
         <hr class="string">

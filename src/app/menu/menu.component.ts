@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollableListComponent } from './scrollable-list/scrollable-list.component';
 import { Note } from '../../models/note';
+import { CurrentScaleService } from '../../services/current-scale.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,10 @@ import { Note } from '../../models/note';
 })
 export class MenuComponent implements OnInit {
   naturalNotes?: string[];
+
+  constructor(
+    private currScale: CurrentScaleService,
+  ) { }
 
   ngOnInit(): void {
     this.loadNaturalNotes();
@@ -24,5 +29,10 @@ export class MenuComponent implements OnInit {
       const note: Note = new Note(i, 'natural');
       this.naturalNotes[i] = note.print();
     }
+  }
+
+  updateRootNote(noteString: string) {
+    const note: Note = new Note().textToNote(noteString);
+    this.currScale.scale.root = note;
   }
 }

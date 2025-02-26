@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './fret-note.component.scss'
 })
 export class FretNoteComponent {
-  @Input() name: string | undefined;
+  @Input() name?: string;
   @Input('root') isRoot: boolean = false;
 }
