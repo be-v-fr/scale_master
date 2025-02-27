@@ -24,15 +24,19 @@ export class Scale {
         let notes: Note[] = [];
         const intervals: number[] = SCALES[this.category as keyof {}].intervals;
         intervals.forEach((i: number) => {
-            i = this.applyModeToBaseInterval(i);
+            i = this.applyModeToBaseInterval(i, intervals);
             const note: Note = this.getNaturalNoteFromInterval(i);
             notes.push(note);
         });
         return notes;
     }
 
-    applyModeToBaseInterval(baseInterval: number) {
-        baseInterval -= SCALES[this.category as keyof {}].modes[this.mode];
+    applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
+        const modeInterval = SCALES[this.category as keyof {}].modes[this.mode];
+        if (!baseIntervals.includes(modeInterval)) {
+            throw ('The base intervals of this scale do not include the requested mode interval.');
+        }
+        baseInterval -= modeInterval;
         return (baseInterval + 12) % 12;
     }
 
