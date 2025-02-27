@@ -23,6 +23,7 @@ export class ScrollableListComponent implements OnInit {
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;
   private throttleTime = 100;
+  private currentTimeout: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private elementRef: ElementRef
@@ -50,14 +51,15 @@ export class ScrollableListComponent implements OnInit {
     if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
-        this.scrollBySteps(steps, 270);
+        const timeoutLength = Math.abs(steps) == 1 ? 210 : 270;
+        this.scrollBySteps(steps, timeoutLength);
       }
     }
   }
 
   scrollBySteps(steps: number, focusTimeoutLength: number) {
     this.scrollSteps = steps;
-    setTimeout(() => this.setNewFocus(steps), focusTimeoutLength);
+    this.currentTimeout = setTimeout(() => this.setNewFocus(steps), focusTimeoutLength);
   }
 
   setNewFocus(steps: number) {
@@ -77,6 +79,16 @@ export class ScrollableListComponent implements OnInit {
         this.scrollBySteps(steps, this.throttleTime / 4);
         this.lastWheelEventTime = now;
       }
+    }
+  }
+
+  @HostListener('document:mousedown', ['$event'])
+  onClick() {
+    if(this.currentTimeout && this.scrollSteps !== 0) {
+      clearTimeout(this.currentTimeout);
+      this.currentTimeout = null;
+      this.scrollSteps *= 2;
+      this.setNewFocus(this.scrollSteps);
     }
   }
 }
