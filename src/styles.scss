@@ -1,3 +1,5 @@
+@import './assets/css/roboto.scss';
+
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;
     justify-content: $jc;
@@ -11,6 +13,7 @@ body {
     height: 100vh;
     background: whitesmoke;
     margin: 0;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 * {
