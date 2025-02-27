@@ -47,7 +47,7 @@ export class ScrollableListComponent implements OnInit {
     return this.content[index];
   }
 
-  handleClick(positionIndex: number) {
+  onListItemClick(positionIndex: number) {
     if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
