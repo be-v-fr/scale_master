@@ -7,6 +7,9 @@ export class Note {
     name: string;
 
     constructor(index?: number, accidental?: 'natural' | 'sharp' | 'flat') {
+        if(index && (index < 0 || index > 11 )) {
+            throw(`Note index "${index}" must lie between 0 and 11.`)
+        }
         this.index = index ? index : 0;
         this.accidental = accidental ? accidental : 'natural';
         this.name = NOTES[this.index][this.accidental];
@@ -53,6 +56,6 @@ export class Note {
     }
 
     getIntervalIndex(interval: number) {
-        return (this.index + interval) % 12;
+        return (this.index + interval + 12) % 12;
     }
 }

@@ -9,8 +9,11 @@ export class Scale {
 
     constructor(root: Note, category: string, mode: string) {
         this.root = root;
-        if (!SCALES[category as keyof {}] || !SCALES[category as keyof {}][mode]) {
-            throw ('Mode broken or not found.');
+        if (!SCALES[category as keyof {}]) {
+            throw (`Scale category "${category}" broken or not found.`);
+        }
+        if (!SCALES[category as keyof {}].modes[mode]) {
+            throw (`Mode "${mode}" broken or not found.`);
         }
         this.category = category;
         this.mode = mode;
@@ -19,16 +22,22 @@ export class Scale {
 
     getNaturalNotes(): Note[] {
         let notes: Note[] = [];
-        const intervals: number[] = SCALES[this.category as keyof {}][this.mode];
+        const intervals: number[] = SCALES[this.category as keyof {}].intervals;
         intervals.forEach((i: number) => {
+            i = this.applyModeToBaseInterval(i);
             const note: Note = this.getNaturalNoteFromInterval(i);
             notes.push(note);
         });
         return notes;
     }
 
+    applyModeToBaseInterval(baseInterval: number) {
+        baseInterval -= SCALES[this.category as keyof {}].modes[this.mode];
+        return (baseInterval + 12) % 12;
+    }
+
     getNaturalNoteFromInterval(interval: number): Note {
-        const index = (this.root.index + interval) % 12;
+        const index = (this.root.index + interval + 12) % 12;
         return new Note(index);
     }
 

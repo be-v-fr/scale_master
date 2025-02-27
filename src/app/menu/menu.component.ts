@@ -13,32 +13,28 @@ import { ScalesDataService } from '../../services/scales-data.service';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
-  naturalNotes?: string[];
+  naturalRootNotes?: string[];
 
   constructor(
-    private currScale: CurrentScaleService,
+    public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
   ) { }
 
   ngOnInit(): void {
-    this.loadNaturalNotes();
+    this.loadNaturalRootNotes();
   }
 
-  loadNaturalNotes(): void {
+  loadNaturalRootNotes(): void {
     const numberOfAllNotes: number = 12;
-    this.naturalNotes = new Array(numberOfAllNotes);
+    this.naturalRootNotes = new Array(numberOfAllNotes);
     for(let i = 0; i < numberOfAllNotes; i++) {
       const note: Note = new Note(i, 'natural');
-      this.naturalNotes[i] = note.print();
+      this.naturalRootNotes[i] = note.print();
     }
   }
 
   updateCurrRootNote(noteString: string) {
     const note: Note = new Note().textToNote(noteString);
     this.currScale.scale.root = note;
-  }
-
-  updateCurrCategory(category: string) {
-    this.currScale.scale.category = category;
   }
 }
