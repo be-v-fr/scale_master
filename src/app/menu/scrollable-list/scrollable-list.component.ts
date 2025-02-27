@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 
@@ -13,7 +13,7 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
 
 export class ScrollableListComponent implements OnInit {
   @Input({ required: true }) content!: any[];
-  _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
+  private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
     return this._positions;
   }
@@ -21,6 +21,12 @@ export class ScrollableListComponent implements OnInit {
   focus: number = 0;
   @Input() current: any;
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
+  private lastWheelEventTime = 0;
+  private throttleTime = 100;
+
+  constructor(
+    private elementRef: ElementRef
+  ) { }
 
   ngOnInit(): void {
     if (this.current) {
@@ -44,14 +50,14 @@ export class ScrollableListComponent implements OnInit {
     if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
-        this.scrollBySteps(steps);
+        this.scrollBySteps(steps, 270);
       }
     }
   }
 
-  scrollBySteps(steps: number) {
+  scrollBySteps(steps: number, focusTimeoutLength: number) {
     this.scrollSteps = steps;
-    setTimeout(() => this.setNewFocus(steps), 300);
+    setTimeout(() => this.setNewFocus(steps), focusTimeoutLength);
   }
 
   setNewFocus(steps: number) {
@@ -60,5 +66,17 @@ export class ScrollableListComponent implements OnInit {
     this.focus += steps;
     this.focus = (this.focus + length) % length;
     this.currentChange.emit(this.content[this.focus]);
+  }
+
+  @HostListener('wheel', ['$event'])
+  onMouseWheel(event: WheelEvent) {
+    if (this.elementRef.nativeElement.contains(event.target)) {
+      const now = Date.now();
+      if (now >= this.lastWheelEventTime + this.throttleTime) {
+        const steps = event.deltaY > 0 ? 1 : -1;
+        this.scrollBySteps(steps, this.throttleTime / 4);
+        this.lastWheelEventTime = now;
+      }
+    }
   }
 }
