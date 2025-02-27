@@ -4,6 +4,7 @@ import { Note } from '../../models/note';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
 import { CurrentScaleService } from '../../services/current-scale.service';
+import { CurrentFretboardService } from '../../services/current-fretboard.service';
 
 @Component({
   selector: 'app-fretboard',
@@ -13,14 +14,13 @@ import { CurrentScaleService } from '../../services/current-scale.service';
   styleUrl: './fretboard.component.scss'
 })
 export class FretboardComponent {
-  fretboard: Fretboard = new Fretboard('guitar', 'standard', new Note(7));
-
   constructor(
     private currScale: CurrentScaleService,
+    public currFretboard: CurrentFretboardService,
   ) { }
 
-  getNoteFromFret(string: number, fret: number): string | undefined {
-    const fretNote: Note = new Note(this.getFretNoteIndex(string, fret));
+  getNoteFromFret(instrumentString: number, fret: number): string | undefined {
+    const fretNote: Note = new Note(this.getFretNoteIndex(instrumentString, fret));
     const scaleNoteNames: string[] = this.currScale.scale.getNoteNames();
     if (scaleNoteNames.includes(fretNote.name)) {
       return fretNote.print();
@@ -29,12 +29,12 @@ export class FretboardComponent {
     }
   }
 
-  getFretNoteIndex(string: number, fret: number): number {
-    const stringNote: Note = this.fretboard.notes[string];
-    return stringNote.getIntervalIndex(fret);
+  getFretNoteIndex(instrumentString: number, fret: number): number {
+    const instrumentStringNote: Note = this.currFretboard.fretboard.getNotes()[instrumentString];
+    return instrumentStringNote.getIntervalIndex(fret);
   }
 
-  isRoot(string: number, fret: number): boolean {
-    return this.currScale.scale.root.index == this.getFretNoteIndex(string, fret);
+  isRoot(instrumentString: number, fret: number): boolean {
+    return this.currScale.scale.root.index == this.getFretNoteIndex(instrumentString, fret);
   }
 }

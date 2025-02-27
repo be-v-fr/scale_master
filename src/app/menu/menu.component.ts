@@ -4,6 +4,8 @@ import { ScrollableListComponent } from './scrollable-list/scrollable-list.compo
 import { Note } from '../../models/note';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { ScalesDataService } from '../../services/scales-data.service';
+import { CurrentFretboardService } from '../../services/current-fretboard.service';
+import { TuningsDataService } from '../../services/tunings-data.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +18,8 @@ export class MenuComponent implements OnInit {
   naturalRootNotes?: string[];
 
   constructor(
+    public currFretboard: CurrentFretboardService,
+    public tuningsData: TuningsDataService,
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
   ) { }
@@ -33,8 +37,13 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  updateCurrRootNote(noteString: string) {
+  updateCurrScaleRootNote(noteString: string) {
     const note: Note = new Note().textToNote(noteString);
     this.currScale.scale.root = note;
+  }
+
+  updateCurrFretboardRootNote(noteString: string) {
+    const note: Note = new Note().textToNote(noteString);
+    this.currFretboard.fretboard.root = note;
   }
 }

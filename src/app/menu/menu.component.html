@@ -1,6 +1,14 @@
+<h4>Scale:</h4>
 <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [current]="currScale.scale.root.print()"
-    (currentChange)="updateCurrRootNote($event)" />
+    (currentChange)="updateCurrScaleRootNote($event)" />
 <app-scrollable-list *ngIf="scalesData.categories" [content]="scalesData.categories"
     [(current)]="currScale.scale.category" (currentChange)="currScale.loadcategoryModes()" />
 <app-scrollable-list *ngIf="currScale.categoryModes" [content]="currScale.categoryModes"
     [(current)]="currScale.scale.mode" />
+<h4>Fretboard:</h4>
+<app-scrollable-list *ngIf="tuningsData.instruments" [content]="tuningsData.instruments"
+    [(current)]="currFretboard.fretboard.instrument" (currentChange)="currFretboard.loadinstrumentTunings()" />
+<app-scrollable-list *ngIf="currFretboard.instrumentTunings" [content]="currFretboard.instrumentTunings"
+    [(current)]="currFretboard.fretboard.tuning" />
+<app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [current]="currFretboard.fretboard.root.print()"
+    (currentChange)="updateCurrFretboardRootNote($event)" />
