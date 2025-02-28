@@ -4,22 +4,35 @@ import { TUNINGS } from "../const/tunings";
 export class Fretboard {
     root: Note;
     instrument: string;
+    numberOfStrings: number;
     tuning: string;
 
-    constructor(instrument: string, tuning: string, root: Note) {
+    constructor(instrument: string, tuning: string, root: Note, numberOfStrings?: number) {
         this.root = root;
         this.instrument = instrument;
         this.tuning = tuning;
+        const defaultNumberOfStrings = this.defaultNumberOfStrings;
+        this.numberOfStrings = numberOfStrings && numberOfStrings > defaultNumberOfStrings ? numberOfStrings : defaultNumberOfStrings;
     }
 
-    getIntervals(): number[] {
+    get defaultNumberOfStrings(): number {
+        return this.intervalsForDefaultStringNumber.length;
+    }
+
+    get intervalsForDefaultStringNumber(): number[] {
         return TUNINGS[this.instrument as keyof {}][this.tuning];
     }
 
-    getNotes(): Note[] {
+    get intervals(): number[] {
+        if (this.numberOfStrings > this.defaultNumberOfStrings) {
+            // zusätzliche Intervalle richtig hinzufügen
+        }
+        return this.intervalsForDefaultStringNumber;
+    }
+
+    get notes(): Note[] {
         const notes: Note[] = [];
-        const intervals: number[] = this.getIntervals();
-        intervals.forEach(i => {
+        this.intervals.forEach(i => {
             let index = (this.root.index + i) % 12;
             while (index < 0) {
                 index += 12;

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Fretboard } from '../../models/fretboard';
 import { Note } from '../../models/note';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
@@ -21,7 +20,7 @@ export class FretboardComponent {
 
   getNoteFromFret(instrumentString: number, fret: number): string | undefined {
     const fretNote: Note = new Note(this.getFretNoteIndex(instrumentString, fret));
-    const scaleNoteNames: string[] = this.currScale.scale.getNoteNames();
+    const scaleNoteNames: string[] = this.currScale.scale.noteNames;
     if (scaleNoteNames.includes(fretNote.name)) {
       return fretNote.print();
     } else {
@@ -30,7 +29,7 @@ export class FretboardComponent {
   }
 
   getFretNoteIndex(instrumentString: number, fret: number): number {
-    const instrumentStringNote: Note = this.currFretboard.fretboard.getNotes()[instrumentString];
+    const instrumentStringNote: Note = this.currFretboard.fretboard.notes[instrumentString];
     return instrumentStringNote.getIntervalIndex(fret);
   }
 

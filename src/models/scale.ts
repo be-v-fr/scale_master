@@ -20,7 +20,7 @@ export class Scale {
         this.setAccidentals();
     }
 
-    getNaturalNotes(): Note[] {
+    get naturalNotes(): Note[] {
         let notes: Note[] = [];
         const intervals: number[] = SCALES[this.category as keyof {}].intervals;
         intervals.forEach((i: number) => {
@@ -29,6 +29,11 @@ export class Scale {
             notes.push(note);
         });
         return notes;
+    }
+
+    get notes(): Note[] {
+        // später accidentals einbinden!
+        return this.naturalNotes;
     }
 
     applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
@@ -45,11 +50,6 @@ export class Scale {
         return new Note(index);
     }
 
-    getNotes(): Note[] {
-        // später accidentals einbinden!
-        return this.getNaturalNotes();
-    }
-
     setAccidentals() {
         if (this.category == 'diatonic') {
             this.setDiatonicAccidentals();
@@ -60,7 +60,7 @@ export class Scale {
         // Indizes der im notes-Array vorhandenen Noten abfragen
         // Accidentals entsprechend zuordnen
         // https://www.bergziege-owl.de/vorzeichen-und-tonarten/
-        const naturalNotes: Note[] = this.getNaturalNotes();
+        const naturalNotes: Note[] = this.naturalNotes;
         for (let i = 0; i < naturalNotes.length; i++) {
             let note = naturalNotes[i];
             if (note.index == 1) {
@@ -69,10 +69,9 @@ export class Scale {
         }
     }
 
-    getNoteNames() {
+    get noteNames(): string[] {
         let names: string[] = [];
-        const notes: Note[] = this.getNotes();
-        notes.forEach((n: Note) => names.push(n.name));
+        this.notes.forEach((n: Note) => names.push(n.name));
         return names;
     }
 }

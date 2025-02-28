@@ -10,7 +10,6 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })
-
 export class ScrollableListComponent implements OnInit {
   @Input({ required: true }) content!: any[];
   private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
@@ -48,12 +47,23 @@ export class ScrollableListComponent implements OnInit {
   }
 
   onListItemClick(positionIndex: number) {
-    if (!this.currentTimeout && !['over', 'under'].includes(this.positions[positionIndex])) {
+    if (this.currentTimeout && this.scrollSteps !== 0) {
+      this.handleListItemDoubleClick();
+    } else if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
         const timeoutLength = Math.abs(steps) == 1 ? 210 : 270;
         this.scrollBySteps(steps, timeoutLength);
       }
+    }
+  }
+
+  handleListItemDoubleClick() {
+    if (this.currentTimeout) {
+      clearTimeout(this.currentTimeout);
+      this.currentTimeout = null;
+      this.scrollBySteps(this.scrollSteps, 0);
+      this.scrollBySteps(this.scrollSteps, 120);
     }
   }
 
@@ -80,16 +90,6 @@ export class ScrollableListComponent implements OnInit {
         this.scrollBySteps(steps, this.throttleTime / 4);
         this.lastWheelEventTime = now;
       }
-    }
-  }
-
-  @HostListener('document:mousedown', ['$event'])
-  onClick() {
-    if(this.currentTimeout && this.scrollSteps !== 0) {
-      clearTimeout(this.currentTimeout);
-      this.currentTimeout = null;
-      this.scrollBySteps(this.scrollSteps, 0);
-      this.scrollBySteps(this.scrollSteps, 120);
     }
   }
 }

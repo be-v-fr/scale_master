@@ -1,5 +1,14 @@
 @import "../../styles.scss";
 
+:host {
+    width: 100%;
+    background: url(../../assets/img/wood.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
+}
+
 table {
   width: 100vw;
   height: 100%;

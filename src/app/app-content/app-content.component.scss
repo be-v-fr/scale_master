@@ -1,21 +1,7 @@
 @import '../../styles.scss';
 
-.contentWrapper {
+:host {
     width: 100%;
     height: 100%;
     @include flex($dir: column);
-    #menu {
-        width: 100%;
-        height: 20%;
-        background: blue;
-    }
-
-    #fretboard {
-        width: 100%;
-        background: url(../../assets/img/wood.jpg);
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        flex: 1;
-    }
 }
