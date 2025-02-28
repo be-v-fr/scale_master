@@ -2,25 +2,24 @@ import { Note } from "./note";
 import { SCALES } from "../const/scales";
 import { ScaleMode } from "../interfaces/scale-mode";
 import { ScaleCategory } from "../interfaces/scale-category";
+import { isEqual } from "lodash";
 
 export class Scale {
     category: ScaleCategory;
-    mode: ScaleMode;
+    mode?: ScaleMode;
     root: Note;
     accidentals?: ('natural' | 'sharp' | 'flat')[];
 
-    constructor(root: Note, category: ScaleCategory, mode: ScaleMode) {
+    constructor(root: Note, category: ScaleCategory, mode?: ScaleMode) {
         this.root = root;
-        if (!SCALES.find(s => s === category)) {
-            throw (`Scale category "${category}" broken or not found.`);
-        }
-        if (category.modes.find(m => m === mode)) {
-            console.log(mode);
-            console.log(category.modes);
-            throw (`Mode "${mode}" broken or not found.`);
-        }
+        this.checkCategory(category);
         this.category = category;
-        this.mode = mode;
+        if (mode) {
+            this.checkModeInCategory(mode);
+            this.mode = mode;
+        } else if (this.category.modes && this.category.modes.length > 0) {
+            this.mode = this.category.modes[0];
+        }
         this.setAccidentals();
     }
 
@@ -41,10 +40,12 @@ export class Scale {
     }
 
     applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
-        if (!baseIntervals.includes(this.mode.interval)) {
-            throw ('The base intervals of this scale do not include the requested mode interval.');
+        if (this.mode) {
+            if (!baseIntervals.includes(this.mode.interval)) {
+                throw ('The base intervals of this scale do not include the requested mode interval.');
+            }
+            baseInterval -= this.mode.interval;
         }
-        baseInterval -= this.mode.interval;
         return (baseInterval + 12) % 12;
     }
 
@@ -69,6 +70,20 @@ export class Scale {
             if (note.index == 1) {
 
             }
+        }
+    }
+
+    checkCategory(category: ScaleCategory): void {
+        if (!SCALES.find(s => s === category)) {
+            throw (`Scale category "${category}" broken or not found.`);
+        }
+    }
+
+    checkModeInCategory(mode: ScaleMode): void {
+        if (!this.category.modes || !this.category.modes.find(m => isEqual(m, mode))) {
+            const modeNames: string[] = [];
+            this.category.modes?.forEach(m => modeNames.push(m.name));
+            throw (`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
         }
     }
 

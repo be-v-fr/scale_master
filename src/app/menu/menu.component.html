@@ -4,8 +4,8 @@
         <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [title]="'Root'"
             [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)" />
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
-            [(current)]="currScale.categoryName" (currentChange)="currScale.loadCategoryModes()" />
-        <app-scrollable-list [content]="currScale.categoryModeNames" [(current)]="currScale.modeName" [title]="'Mode'" />
+            [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
+        <app-scrollable-list *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames" [(current)]="currScale.modeName" [title]="'Mode'" />
     </div>
 </section>
 <section>
