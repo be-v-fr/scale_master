@@ -12,6 +12,7 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
 })
 export class ScrollableListComponent implements OnInit {
   @Input({ required: true }) content!: any[];
+  @Input() title?: string;
   private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
     return this._positions;

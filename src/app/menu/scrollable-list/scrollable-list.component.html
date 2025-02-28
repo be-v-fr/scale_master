@@ -1,11 +1,14 @@
-<div class="wrapper">
+<div class="list-wrapper">
     <app-scrollable-list-arrow [orientation]="'up'" (click)="scrollBySteps(-1, 200)" />
-    <div class="container">
+    <div class="list-container">
         @for (pos of positions; track pos; let i = $index; let f = $first; let l = $last) {
         <app-scrollable-list-item
             [ngClass]="f || l || (i == 1 && scrollSteps == 2) || (i == positions.length - 2 && scrollSteps == -2) ? positions[i] : positions[i - scrollSteps]"
-            [class.scroll]="scrollSteps !== 0" class="prevent-select" (mousedown)="onListItemClick(i)" [content]="printContent(i)" />
+            [class.scroll]="scrollSteps !== 0" (mousedown)="onListItemClick(i)" [content]="printContent(i)" />
         }
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="scrollBySteps(1, 200)" />
+</div>
+<div class="title-container">
+    <span class="title" *ngIf="title">{{title}}</span>
 </div>

@@ -9,7 +9,14 @@
 }
 
 section {
-    @include flex($dir: column);
+    @include flex($dir: column, $g: 6px);
+    h4 {
+        width: 100%;
+        margin: 0;
+        padding-bottom: 6px;
+        @include flex();
+        border-bottom: 1px solid black;
+    }
     .scrollable-lists-container {
         @include flex($g: 3px);
     }
