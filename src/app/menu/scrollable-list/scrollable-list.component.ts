@@ -48,7 +48,7 @@ export class ScrollableListComponent implements OnInit {
   }
 
   onListItemClick(positionIndex: number) {
-    if (!['over', 'under'].includes(this.positions[positionIndex])) {
+    if (!this.currentTimeout && !['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
         const timeoutLength = Math.abs(steps) == 1 ? 210 : 270;
@@ -64,6 +64,7 @@ export class ScrollableListComponent implements OnInit {
 
   setNewFocus(steps: number) {
     this.scrollSteps = 0;
+    this.currentTimeout = null;
     const length = this.content.length;
     this.focus += steps;
     this.focus = (this.focus + length) % length;
@@ -87,8 +88,8 @@ export class ScrollableListComponent implements OnInit {
     if(this.currentTimeout && this.scrollSteps !== 0) {
       clearTimeout(this.currentTimeout);
       this.currentTimeout = null;
-      this.scrollSteps *= 2;
-      this.setNewFocus(this.scrollSteps);
+      this.scrollBySteps(this.scrollSteps, 0);
+      this.scrollBySteps(this.scrollSteps, 120);
     }
   }
 }
