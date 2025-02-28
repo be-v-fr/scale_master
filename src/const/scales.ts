@@ -12,7 +12,27 @@ export const SCALES: ScaleCategory[] = [ // VORZEICHEN INTEGRIEREN!! --> hängt 
             {
                 name: 'minor',
                 interval: 9,
-            }
+            },
+            {
+                name: 'dorian',
+                interval: 2,
+            },
+            {
+                name: 'phrygian',
+                interval: 4,
+            },
+            {
+                name: 'lydian',
+                interval: 5,
+            },
+            {
+                name: 'mixolydian',
+                interval: 7,
+            },
+            {
+                name: 'locrian',
+                interval: 11,
+            },       
         ]
     },
     {
