@@ -3,17 +3,16 @@
     <div class="scrollable-lists-container">
         <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [title]="'Root'"
             [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)" />
-        <app-scrollable-list *ngIf="scalesData.categories" [content]="scalesData.categories" [title]="'Category'"
-            [(current)]="currScale.scale.category" (currentChange)="currScale.loadcategoryModes()" />
-        <app-scrollable-list *ngIf="currScale.categoryModes" [content]="currScale.categoryModes"
-            [(current)]="currScale.scale.mode" [title]="'Mode'" />
+        <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
+            [(current)]="currScale.categoryName" (currentChange)="currScale.loadCategoryModes()" />
+        <app-scrollable-list [content]="currScale.categoryModeNames" [(current)]="currScale.modeName" [title]="'Mode'" />
     </div>
 </section>
 <section>
     <h4>Fretboard</h4>
     <div class="scrollable-lists-container">
         <app-scrollable-list *ngIf="tuningsData.instruments" [content]="tuningsData.instruments" [title]="'Instrument'"
-            [(current)]="currFretboard.fretboard.instrument" (currentChange)="currFretboard.loadinstrumentTunings()" />
+            [(current)]="currFretboard.fretboard.instrument" (currentChange)="currFretboard.loadInstrumentTunings()" />
         <app-scrollable-list *ngIf="currFretboard.instrumentTunings" [content]="currFretboard.instrumentTunings"
             [(current)]="currFretboard.fretboard.tuning" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [title]="'Root'"

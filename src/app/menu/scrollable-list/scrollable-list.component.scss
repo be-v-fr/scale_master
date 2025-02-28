@@ -36,7 +36,6 @@ $opac-outside: 0.3;
 }
 
 .list-wrapper {
-  width: 80px;
   @include flex($dir: column, $g: 3px);
   height: 160px;
   position: relative;

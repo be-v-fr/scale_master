@@ -20,7 +20,8 @@ export class Fretboard {
     }
 
     get intervalsForDefaultStringNumber(): number[] {
-        return TUNINGS[this.instrument as keyof {}][this.tuning];
+        const tuning: number[] = TUNINGS[this.instrument as keyof {}][this.tuning];
+        return Array.from(tuning).reverse();
     }
 
     get intervals(): number[] {

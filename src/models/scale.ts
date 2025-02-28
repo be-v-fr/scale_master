@@ -1,18 +1,22 @@
 import { Note } from "./note";
 import { SCALES } from "../const/scales";
+import { ScaleMode } from "../interfaces/scale-mode";
+import { ScaleCategory } from "../interfaces/scale-category";
 
 export class Scale {
-    category: string;
-    mode: string;
+    category: ScaleCategory;
+    mode: ScaleMode;
     root: Note;
     accidentals?: ('natural' | 'sharp' | 'flat')[];
 
-    constructor(root: Note, category: string, mode: string) {
+    constructor(root: Note, category: ScaleCategory, mode: ScaleMode) {
         this.root = root;
-        if (!SCALES[category as keyof {}]) {
+        if (!SCALES.find(s => s === category)) {
             throw (`Scale category "${category}" broken or not found.`);
         }
-        if (!SCALES[category as keyof {}].modes[mode]) {
+        if (category.modes.find(m => m === mode)) {
+            console.log(mode);
+            console.log(category.modes);
             throw (`Mode "${mode}" broken or not found.`);
         }
         this.category = category;
@@ -22,7 +26,7 @@ export class Scale {
 
     get naturalNotes(): Note[] {
         let notes: Note[] = [];
-        const intervals: number[] = SCALES[this.category as keyof {}].intervals;
+        const intervals: number[] = this.category.intervals;
         intervals.forEach((i: number) => {
             i = this.applyModeToBaseInterval(i, intervals);
             const note: Note = this.getNaturalNoteFromInterval(i);
@@ -37,11 +41,10 @@ export class Scale {
     }
 
     applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
-        const modeInterval = SCALES[this.category as keyof {}].modes[this.mode];
-        if (!baseIntervals.includes(modeInterval)) {
+        if (!baseIntervals.includes(this.mode.interval)) {
             throw ('The base intervals of this scale do not include the requested mode interval.');
         }
-        baseInterval -= modeInterval;
+        baseInterval -= this.mode.interval;
         return (baseInterval + 12) % 12;
     }
 
@@ -51,7 +54,7 @@ export class Scale {
     }
 
     setAccidentals() {
-        if (this.category == 'diatonic') {
+        if (this.category.name == 'diatonic') {
             this.setDiatonicAccidentals();
         }
     }

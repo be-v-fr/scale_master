@@ -15,10 +15,10 @@ export class CurrentFretboardService {
   public fretboard: Fretboard = this._defaultFretboard;
 
   constructor() {
-    this.loadinstrumentTunings();
+    this.loadInstrumentTunings();
   }
 
-  public loadinstrumentTunings(): void {
+  public loadInstrumentTunings(): void {
     this._instrumentTunings = [];
     for(const tuning in TUNINGS[this.fretboard.instrument]) {
       if(TUNINGS[this.fretboard.instrument].hasOwnProperty(tuning)) {

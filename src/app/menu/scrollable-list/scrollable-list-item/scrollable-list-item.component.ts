@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-scrollable-list-item',
@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ScrollableListItemComponent {
   @Input({ required: true }) content!: string;
+  @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>
 }

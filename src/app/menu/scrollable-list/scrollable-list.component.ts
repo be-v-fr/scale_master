@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, AfterViewInit, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 
@@ -10,8 +10,8 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })
-export class ScrollableListComponent implements OnInit {
-  @Input({ required: true }) content!: any[];
+export class ScrollableListComponent implements OnInit, AfterViewInit {
+  @Input({ required: true }) content!: string[];
   @Input() title?: string;
   private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
@@ -19,14 +19,17 @@ export class ScrollableListComponent implements OnInit {
   }
   scrollSteps: number = 0;
   focus: number = 0;
-  @Input() current: any;
+  @Input() current?: string;
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;
   private throttleTime = 100;
   private currentTimeout: ReturnType<typeof setTimeout> | null = null;
+  @ViewChildren(ScrollableListItemComponent) items!: QueryList<ScrollableListItemComponent>;
+  containerWidth: number = 100;
 
   constructor(
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +41,12 @@ export class ScrollableListComponent implements OnInit {
         throw (`Currently selected value "${this.current}" does not exist in list content.`);
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+    const maxWidth = Math.max(...this.items.map(i => i.contentRef.nativeElement.offsetWidth));
+    this.containerWidth = maxWidth / 0.84;
+    this.cdr.detectChanges();
   }
 
   printContent(positionIndex: number) {

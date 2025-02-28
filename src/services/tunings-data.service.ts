@@ -11,10 +11,10 @@ export class TuningsDataService {
   }
 
   constructor() {
-    this._loadinstruments();
+    this._loadInstruments();
   }
 
-  private _loadinstruments(): void {
+  private _loadInstruments(): void {
     this._instruments = [];
     for(const instrument in TUNINGS) {
       if(TUNINGS.hasOwnProperty(instrument)) {
