@@ -25,11 +25,8 @@ export class Fretboard {
     }
 
     get intervals(): number[] {
-        let intervals: number[] = Array.from(this.intervalsForDefaultStringNumber);
-        if (this.numberOfStrings > this.defaultNumberOfStrings) {
-            intervals = this.addIntervalsForExtraStrings(intervals);
-        }
-        return intervals;
+        const intervals: number[] = Array.from(this.intervalsForDefaultStringNumber);
+        return this.numberOfStrings > this.defaultNumberOfStrings ? this.addIntervalsForExtraStrings(intervals) : intervals;
     }
 
     get notes(): Note[] {
