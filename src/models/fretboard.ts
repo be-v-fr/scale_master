@@ -32,15 +32,6 @@ export class Fretboard {
         return intervals;
     }
 
-    addIntervalsForExtraStrings(intervals: number[]): number[] {
-        for(let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
-            let value: number = intervals[i - 1];
-            value += 7;
-            intervals.push(value % 12);
-        }
-        return intervals;
-    }
-
     get notes(): Note[] {
         const notes: Note[] = [];
         this.intervals.forEach(i => {
@@ -51,5 +42,14 @@ export class Fretboard {
             notes.push(new Note(index));
         });
         return notes;
+    }
+
+    addIntervalsForExtraStrings(intervals: number[]): number[] {
+        for(let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
+            let value: number = intervals[i - 1];
+            value += 7;
+            intervals.push(value % 12);
+        }
+        return intervals;
     }
 }
