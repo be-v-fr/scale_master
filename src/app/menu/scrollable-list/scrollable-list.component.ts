@@ -102,4 +102,10 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  onListArrowClick(steps: number, timeoutLength: number): void {
+    if(this.content.length > 0) {
+      this.scrollBySteps(steps, timeoutLength);
+    }
+  }
 }

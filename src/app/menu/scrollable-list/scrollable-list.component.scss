@@ -48,15 +48,23 @@ $opac-outside: 0.3;
     height: 130px;
     background: steelblue;
   }
+  &.list-empty .list-container {
+    background: lightgrey;
+    .empty-field {
+      font-size: 24px;
+      color: white;
+    }
+  }
   app-scrollable-list-arrow {
     opacity: 0;
     transition: 200ms ease-in;
     transition-delay: 100ms;
   }
-  &:hover app-scrollable-list-arrow {
+  &:hover:not(.list-empty) app-scrollable-list-arrow {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;
+    cursor: pointer;
   }
 }
 
