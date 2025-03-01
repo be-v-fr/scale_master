@@ -25,10 +25,15 @@ export class Fretboard {
     }
 
     get intervals(): number[] {
+        const intervals: number[] = Array.from(this.intervalsForDefaultStringNumber);
         if (this.numberOfStrings > this.defaultNumberOfStrings) {
-            // zusätzliche Intervalle richtig hinzufügen
+            for(let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
+                let value: number = intervals[i - 1];
+                value += 7;
+                intervals.push(value % 12);
+            }
         }
-        return this.intervalsForDefaultStringNumber;
+        return intervals;
     }
 
     get notes(): Note[] {
