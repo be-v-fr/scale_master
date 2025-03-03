@@ -6,20 +6,10 @@ import { ScaleCategory } from '../interfaces/scale-category';
   providedIn: 'root'
 })
 export class ScalesDataService {
-  private _categories?: ScaleCategory[];
   get categoryNames(): string[] {
     const categoryNames: string[] = [];
-    this._categories?.forEach(c => categoryNames.push(c.name));
+    SCALES.forEach(s => categoryNames.push(s.name));
     return categoryNames;
 
-  }
-
-  constructor() {
-    this._loadCategories();
-  }
-
-  private _loadCategories(): void {
-    this._categories = [];
-    SCALES.forEach(s => this._categories?.push(s));
   }
 }

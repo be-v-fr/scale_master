@@ -74,7 +74,7 @@ export class Scale {
     }
 
     checkCategory(category: ScaleCategory): void {
-        if (!SCALES.find(s => s === category)) {
+        if (!SCALES.find(s => isEqual(s, category))) {
             throw (`Scale category "${category}" broken or not found.`);
         }
     }

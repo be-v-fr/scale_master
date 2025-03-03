@@ -44,7 +44,7 @@ export class CurrentScaleService {
     if(mode) {
       this.scale.mode = mode;
     } else {
-      throw(`Scale mode with name ${value} not found in the current categories' modes array: ${this.scale.category.modes}`);
+      throw(`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
     }
   }
 

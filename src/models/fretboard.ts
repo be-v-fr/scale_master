@@ -1,16 +1,20 @@
 import { Note } from "./note";
-import { TUNINGS } from "../const/tunings";
+import { INSTRUMENTS } from "../const/instruments";
+import { Instrument } from "../interfaces/instrument";
+import { Tuning } from "../interfaces/tuning";
+import { isEqual } from "lodash";
 
 export class Fretboard {
     root: Note;
-    instrument: string;
+    instrument: Instrument;
     numberOfStrings: number;
-    tuning: string;
+    tuning: Tuning;
 
-    constructor(instrument: string, tuning: string, root: Note, numberOfStrings?: number) {
+    constructor(instrument: Instrument, tuning: Tuning, root: Note, numberOfStrings?: number) {
         this.root = root;
         this.instrument = instrument;
         this.tuning = tuning;
+        this._checkInstrumentAndTuning(instrument, tuning);
         const defaultNumberOfStrings = this.defaultNumberOfStrings;
         this.numberOfStrings = numberOfStrings && numberOfStrings > defaultNumberOfStrings ? numberOfStrings : defaultNumberOfStrings;
     }
@@ -20,13 +24,12 @@ export class Fretboard {
     }
 
     get intervalsForDefaultStringNumber(): number[] {
-        const tuning: number[] = TUNINGS[this.instrument as keyof {}][this.tuning];
-        return Array.from(tuning).reverse();
+        return Array.from(this.tuning.intervals).reverse();
     }
 
     get intervals(): number[] {
         const intervals: number[] = Array.from(this.intervalsForDefaultStringNumber);
-        return this.numberOfStrings > this.defaultNumberOfStrings ? this.addIntervalsForExtraStrings(intervals) : intervals;
+        return this.numberOfStrings > this.defaultNumberOfStrings ? this._addIntervalsForExtraStrings(intervals) : intervals;
     }
 
     get notes(): Note[] {
@@ -41,11 +44,37 @@ export class Fretboard {
         return notes;
     }
 
-    addIntervalsForExtraStrings(intervals: number[]): number[] {
-        for(let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
+    private _checkInstrument(instrument: Instrument): void {
+        if (!INSTRUMENTS.find(i => isEqual(i, instrument))) {
+            throw (`Instrument "${instrument}" broken or not found.`);
+        }
+    }
+
+    private _checkTuningForInstrument(tuning: Tuning): void {
+        if (!this.instrument.tunings.find(t => isEqual(t, tuning))) {
+            const tuningNames: string[] = [];
+            this.instrument.tunings.forEach(t => tuningNames.push(t.name));
+            throw (`Tuning "${tuning.name}" broken or not found in tunings for instrument "${this.instrument.name}": ${tuningNames}`);
+        }
+    }
+
+    private _checkInstrumentAndTuning(instrument: Instrument, tuning: Tuning): void {
+        this._checkInstrument(instrument);
+        this._checkTuningForInstrument(tuning);
+    }
+
+    private _addIntervalsForExtraStrings(intervals: number[]): number[] {
+        for (let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
             let value: number = intervals[i - 1];
-            value += 7;
+            value -= this.tuning.extraStrings.interval;
+            while (value < 0) {
+                value += 12;
+            }
             intervals.push(value % 12);
+            if (this.tuning.extraStrings.previousStringCorrection) {
+                intervals[i - 1] += this.tuning.extraStrings.previousStringCorrection;
+                intervals[i - 1] %= 12;
+            }
         }
         return intervals;
     }

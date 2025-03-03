@@ -11,10 +11,10 @@
 <section>
     <h4>Fretboard</h4>
     <div class="scrollable-lists-container">
-        <app-scrollable-list *ngIf="tuningsData.instruments" [content]="tuningsData.instruments" [title]="'Instrument'"
-            [(current)]="currFretboard.fretboard.instrument" (currentChange)="currFretboard.loadInstrumentTunings()" />
-        <app-scrollable-list *ngIf="currFretboard.instrumentTunings" [content]="currFretboard.instrumentTunings"
-            [(current)]="currFretboard.fretboard.tuning" [title]="'Tuning'" />
+        <app-scrollable-list *ngIf="tuningsData.instrumentNames" [content]="tuningsData.instrumentNames" [title]="'Instrument'"
+            [(current)]="currFretboard.instrumentName" (currentChange)="currFretboard.checkCurrentTuning()" />
+        <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames" [content]="currFretboard.instrumentTuningNames"
+            [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [title]="'Root'"
             [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)" />
     </div>
