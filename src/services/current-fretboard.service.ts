@@ -49,6 +49,14 @@ export class CurrentFretboardService {
     }
   }
 
+  get numbersOfStrings(): number[] {
+    const numbersOfStrings: number[] = [];
+    for(let i = 0; i < 5; i++) {
+      numbersOfStrings.push(this.fretboard.defaultNumberOfStrings + i);
+    }
+    return numbersOfStrings;
+  }
+
   checkCurrentTuning(): void {
       const currentTuningFound: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t === this.fretboard.tuning);
       if (!currentTuningFound) {

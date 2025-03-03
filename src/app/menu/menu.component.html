@@ -17,5 +17,7 @@
             [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="naturalRootNotes" [content]="naturalRootNotes" [title]="'Root'"
             [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)" />
+        <app-scrollable-list *ngIf="currFretboard.numbersOfStrings" [content]="currFretboard.numbersOfStrings" [title]="'# strings'"
+            [(current)]="currFretboard.fretboard.numberOfStrings" />
     </div>
 </section>

@@ -8,6 +8,6 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
   styleUrl: './scrollable-list-item.component.scss'
 })
 export class ScrollableListItemComponent {
-  @Input({ required: true }) content!: string;
+  @Input({ required: true }) content!: string | number;
   @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>
 }

@@ -33,6 +33,8 @@ export class Fretboard {
     }
 
     get notes(): Note[] {
+        // für abweichende Stringzahlen überprüfen!!! Wird hier um das Interval des neidrigsten Strings im Vergleich zum niedrigsten Default-Strong verschoben
+        // mögliche Ursache: erstes Saiten-Intervall muss immer 0 sein!!
         const notes: Note[] = [];
         this.intervals.forEach(i => {
             let index = (this.root.index + i) % 12;
@@ -67,15 +69,12 @@ export class Fretboard {
         for (let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
             let value: number = intervals[i - 1];
             value -= this.tuning.extraStrings.interval;
-            while (value < 0) {
-                value += 12;
-            }
-            intervals.push(value % 12);
+            intervals.push(value);
             if (this.tuning.extraStrings.previousStringCorrection) {
                 intervals[i - 1] += this.tuning.extraStrings.previousStringCorrection;
-                intervals[i - 1] %= 12;
             }
         }
+        intervals.forEach((interval, i) => intervals[i] -= intervals[intervals.length - 1]);
         return intervals;
     }
 }

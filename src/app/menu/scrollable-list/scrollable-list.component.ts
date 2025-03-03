@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, AfterViewInit, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'app-scrollable-list',
@@ -11,7 +12,16 @@ import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable
   styleUrl: './scrollable-list.component.scss'
 })
 export class ScrollableListComponent implements OnInit, AfterViewInit {
-  @Input({ required: true }) content!: string[];
+  private _content: (string | number)[] = [];
+  get content(): (string | number)[] {
+    return this._content;
+  }
+  @Input({ required: true }) set content(value: (string | number)[]) {
+    if (!isEqual(this._content, value)) {
+      this._content = value;
+      this.focus = 0;
+    }
+  };
   @Input() title?: string;
   private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
@@ -19,7 +29,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   }
   scrollSteps: number = 0;
   focus: number = 0;
-  @Input() current?: string;
+  @Input() current?: string | number;
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;
   private throttleTime = 100;
@@ -38,7 +48,6 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
       if (currentIndex >= 0) {
         this.focus = currentIndex;
       } else {
-        console.log(this.content);
         throw (`Currently selected value "${this.current}" does not exist in list content.`);
       }
     }
@@ -105,7 +114,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   }
 
   onListArrowClick(steps: number, timeoutLength: number): void {
-    if(this.content.length > 0) {
+    if (this.content.length > 0) {
       this.scrollBySteps(steps, timeoutLength);
     }
   }
