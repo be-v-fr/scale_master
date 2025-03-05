@@ -34,18 +34,7 @@ export class Scale {
     }
 
     get notes(): Note[] {
-        const notes: Note[] = this._setAccidentalsFirstLoop(this.naturalNotes);
-        return notes;
-    }
-
-    /**
-     * In the first loop to set accidentals, every note is compared to the previous
-     * notes in the notes array to ensure that each note name only occurs once. However,
-     * this logic disregards the case that 
-     * @param notes 
-     * @returns 
-     */
-    private _setAccidentalsFirstLoop(notes: Note[]): Note[] {
+        const notes: Note[] = this.naturalNotes;
         notes.forEach((n: Note, i: number) => {
             const previousIndex: number = getCyclicArrayIndex(notes, i - 1);
             if (n.isNaturallySharp() && n.firstLetterEqualsNoteName(notes[previousIndex])) {
@@ -54,6 +43,7 @@ export class Scale {
         });
         return notes;
     }
+
 
     applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
         if (this.mode) {
