@@ -3,11 +3,12 @@ import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListene
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 import { isEqual } from 'lodash';
+import { HoverDirective } from '../../../directives/hover.directive';
 
 @Component({
   selector: 'app-scrollable-list',
   standalone: true,
-  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent],
+  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent, HoverDirective],
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })
@@ -116,6 +117,14 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   onListArrowClick(steps: number, timeoutLength: number): void {
     if (this.content.length > 0) {
       this.scrollBySteps(steps, timeoutLength);
+    }
+  }
+
+  onHoverKeyDown(event: KeyboardEvent) {
+    const scrollTimeoutLength: number = 240;
+    switch(event.key) {
+      case 'ArrowDown': this.scrollBySteps(1, scrollTimeoutLength); break;
+      case 'ArrowUp': this.scrollBySteps(-1, scrollTimeoutLength);
     }
   }
 }
