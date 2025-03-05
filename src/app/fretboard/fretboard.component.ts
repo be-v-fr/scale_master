@@ -19,10 +19,10 @@ export class FretboardComponent {
   ) { }
 
   getNoteFromFret(instrumentString: number, fret: number): string | undefined {
-    const fretNote: Note = new Note(this.getFretNoteIndex(instrumentString, fret));
-    const scaleNoteNames: string[] = this.currScale.scale.noteNames;
-    if (scaleNoteNames.includes(fretNote.name)) {
-      return fretNote.print();
+    const absoluteIndex: number = this.getFretNoteIndex(instrumentString, fret);
+    const note: Note | undefined = this.currScale.scale.notes.find(n => n.index === absoluteIndex);
+    if (note) {
+      return note.print();
     } else {
       return undefined;
     }

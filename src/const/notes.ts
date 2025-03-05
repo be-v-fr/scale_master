@@ -1,5 +1,9 @@
 import { NoteName } from "../interfaces/note-name";
 
+/**
+ * The entire note accidental logic of the app is based on the premise that for intervals which do
+ * not exist without an accidental, the "natural" note name is set equal to the "sharp" note name.
+ */
 export const NOTES: Array<NoteName> = [
     {
         natural: 'a',

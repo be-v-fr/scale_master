@@ -4,19 +4,18 @@ import { NoteName } from "../interfaces/note-name";
 export class Note {
     index: number;
     accidental: 'natural' | 'sharp' | 'flat';
-    name: string;
 
     constructor(index?: number, accidental?: 'natural' | 'sharp' | 'flat') {
-        let dataIndex = index ? index : 0;
-        this.index = dataIndex;
+        this.index = index ? index : 0;
         this.accidental = accidental ? accidental : 'natural';
-        while(dataIndex < 0) {
-            dataIndex += 12;
+    }
+
+    get name(): string {
+        let modIndex: number = this.index;
+        while(modIndex < 0) {
+            modIndex += 12;
         }
-        this.name = NOTES[dataIndex % 12][this.accidental];
-        if (!this.name) {
-            throw ('Note broken or not found.')
-        }
+        return NOTES[modIndex % 12][this.accidental];
     }
 
     print() {
@@ -62,5 +61,13 @@ export class Note {
             index += 12;
         }
         return index % 12;
+    }
+
+    isNaturallySharp(): boolean {
+        return this.name === NOTES[this.index].sharp;
+    }
+
+    firstLetterEqualsNoteName(note: Note): boolean {
+        return this.name[0] === note.name[0];
     }
 }

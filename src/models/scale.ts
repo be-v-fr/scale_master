@@ -3,12 +3,12 @@ import { SCALES } from "../const/scales";
 import { ScaleMode } from "../interfaces/scale-mode";
 import { ScaleCategory } from "../interfaces/scale-category";
 import { isEqual } from "lodash";
+import { getCyclicArrayIndex } from "../utils/array.utils";
 
 export class Scale {
     category: ScaleCategory;
     mode?: ScaleMode;
     root: Note;
-    accidentals?: ('natural' | 'sharp' | 'flat')[];
 
     constructor(root: Note, category: ScaleCategory, mode?: ScaleMode) {
         this.root = root;
@@ -20,7 +20,6 @@ export class Scale {
         } else if (this.category.modes && this.category.modes.length > 0) {
             this.mode = this.category.modes[0];
         }
-        this.setAccidentals();
     }
 
     get naturalNotes(): Note[] {
@@ -35,8 +34,17 @@ export class Scale {
     }
 
     get notes(): Note[] {
-        // später accidentals einbinden!
-        return this.naturalNotes;
+        const notes: Note[] = this.naturalNotes;
+        this.naturalNotes.forEach((n: Note, i: number) => {
+            const previousIndex: number = getCyclicArrayIndex(notes, i - 1);
+            const doublePreviousIndex: number = getCyclicArrayIndex(notes, i - 2);
+            if (n.isNaturallySharp()) {
+                const equalsPrevious: boolean = n.firstLetterEqualsNoteName(notes[previousIndex]);
+                const equalsDoublePrevious: boolean = n.firstLetterEqualsNoteName(notes[doublePreviousIndex]);
+                notes[i].accidental = (equalsPrevious || equalsDoublePrevious) ? 'flat' : 'sharp';
+            }
+        });
+        return notes;
     }
 
     applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
@@ -52,25 +60,6 @@ export class Scale {
     getNaturalNoteFromInterval(interval: number): Note {
         const index = (this.root.index + interval + 12) % 12;
         return new Note(index);
-    }
-
-    setAccidentals() {
-        if (this.category.name == 'diatonic') {
-            this.setDiatonicAccidentals();
-        }
-    }
-
-    setDiatonicAccidentals() {
-        // Indizes der im notes-Array vorhandenen Noten abfragen
-        // Accidentals entsprechend zuordnen
-        // https://www.bergziege-owl.de/vorzeichen-und-tonarten/
-        const naturalNotes: Note[] = this.naturalNotes;
-        for (let i = 0; i < naturalNotes.length; i++) {
-            let note = naturalNotes[i];
-            if (note.index == 1) {
-
-            }
-        }
     }
 
     checkCategory(category: ScaleCategory): void {
