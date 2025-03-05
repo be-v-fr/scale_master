@@ -64,7 +64,7 @@ export class Note {
     }
 
     isNaturallySharp(): boolean {
-        return this.name === NOTES[this.index].sharp;
+        return NOTES[this.index].natural.includes('#');
     }
 
     firstLetterEqualsNoteName(note: Note): boolean {
