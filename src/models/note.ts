@@ -1,5 +1,6 @@
 import { NOTES } from "../const/notes";
 import { NoteName } from "../interfaces/note-name";
+import { getModTwelveIndex } from "../utils/mod.utils";
 
 export class Note {
     index: number;
@@ -11,11 +12,12 @@ export class Note {
     }
 
     get name(): string {
-        let modIndex: number = this.index;
-        while(modIndex < 0) {
-            modIndex += 12;
-        }
-        return NOTES[modIndex % 12][this.accidental];
+        const index: number = getModTwelveIndex(this.index);
+        return NOTES[index][this.accidental];
+    }
+
+    normalize(): void {
+        this.index = getModTwelveIndex(this.index);
     }
 
     print() {
@@ -56,15 +58,13 @@ export class Note {
     }
 
     getIntervalIndex(interval: number) {
-        let index = this.index + interval;
-        while(index < 0) {
-            index += 12;
-        }
-        return index % 12;
+        const index = this.index + interval;
+        return getModTwelveIndex(index);
     }
 
     isNaturallySharp(): boolean {
-        return NOTES[this.index].natural.includes('#');
+        const index = getModTwelveIndex(this.index);
+        return NOTES[index].natural.includes('#');
     }
 
     firstLetterEqualsNoteName(note: Note): boolean {

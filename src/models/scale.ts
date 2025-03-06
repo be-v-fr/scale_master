@@ -3,7 +3,8 @@ import { SCALES } from "../const/scales";
 import { ScaleMode } from "../interfaces/scale-mode";
 import { ScaleCategory } from "../interfaces/scale-category";
 import { isEqual } from "lodash";
-import { getCyclicArrayIndex } from "../utils/array.utils";
+import { getModTwelveIndex, modWithSubZero } from "../utils/mod.utils";
+import { getAlphabetDistance, getHarmonicMeaningIndex } from "../utils/intervals.utils";
 
 export class Scale {
     category: ScaleCategory;
@@ -22,47 +23,90 @@ export class Scale {
         }
     }
 
-    get naturalNotes(): Note[] {
+    get notes(): Note[] {
+        const defaultNotes = this._constructNotes(this.root);
+        if (this.root.name.length > 1) {
+            const flatRoot: Note = new Note(this.root.index, 'flat');
+            if (flatRoot.name[1] === 'b') {
+                const flatNotes: Note[] = this._constructNotes(flatRoot);
+                return this._selectMoreNaturalNotes(flatNotes, defaultNotes);
+            }
+        }
+        return defaultNotes;
+    }
+
+    private _constructNotes(root: Note): Note[] {
         let notes: Note[] = [];
-        const intervals: number[] = this.category.intervals;
-        intervals.forEach((i: number) => {
-            i = this.applyModeToBaseInterval(i, intervals);
-            const note: Note = this.getNaturalNoteFromInterval(i);
+        const intervals: number[] = Array.from(this.category.intervals);
+        intervals.forEach((interval: number) => {
+            const note = this._contructNote(interval, root);
             notes.push(note);
         });
         return notes;
     }
 
-    get notes(): Note[] {
-        const notes: Note[] = this.naturalNotes;
-        notes.forEach((n: Note, i: number) => {
-            const previousIndex: number = getCyclicArrayIndex(notes, i - 1);
-            if (n.isNaturallySharp() && n.firstLetterEqualsNoteName(notes[previousIndex])) {
-                notes[i].accidental = 'flat';
-            }
-        });
-        return notes;
+    private _contructNote(interval: number, root: Note): Note {
+        interval = this.applyModeToBaseInterval(interval);
+        const note: Note = this.createNaturalNoteFromInterval(interval);
+        if (interval === 0) {
+            note.accidental = root.accidental;
+        } else {
+            const meaningDiff: number = getHarmonicMeaningIndex(interval) - 1;
+            let letterDiff: number = getAlphabetDistance(note.name[0], root.name[0]);
+            letterDiff = modWithSubZero(letterDiff, 7);
+            note.accidental = this._getAccidentalFromDiffs(letterDiff, meaningDiff);
+        }
+        return note;
     }
 
-
-    applyModeToBaseInterval(baseInterval: number, baseIntervals: number[]) {
-        if (this.mode) {
-            if (!baseIntervals.includes(this.mode.interval)) {
-                throw ('The base intervals of this scale do not include the requested mode interval.');
+    private _selectMoreNaturalNotes(notes1: Note[], notes2: Note[]): Note[] {
+        const doubleAccidentals1: number = this._countDoubleAccidentals(notes1);
+        const doubleAccidentals2: number = this._countDoubleAccidentals(notes2);
+        if (doubleAccidentals1 < doubleAccidentals2) {
+            return notes1;
+        } else if (doubleAccidentals1 === doubleAccidentals2) {
+            const noAccidentals1: number = this._countNoAccidentals(notes1);
+            const noAccidentals2: number = this._countNoAccidentals(notes2)
+            if (noAccidentals1 <= noAccidentals2) {
+                return notes1;
             }
+        }
+        return notes2;
+    }
+
+    private _countDoubleAccidentals(notes: Note[]): number {
+        return notes.filter(n => (n.name.includes('x') || n.name.length === 3)).length;
+    }
+
+    private _countNoAccidentals(notes: Note[]): number {
+        return notes.filter(n => n.name.length === 1).length;
+    }
+
+    applyModeToBaseInterval(baseInterval: number) {
+        if (this.mode) {
             baseInterval -= this.mode.interval;
         }
-        return (baseInterval + 12) % 12;
+        return getModTwelveIndex(baseInterval);
     }
 
-    getNaturalNoteFromInterval(interval: number): Note {
-        const index = (this.root.index + interval + 12) % 12;
-        return new Note(index);
+    createNaturalNoteFromInterval(interval: number): Note {
+        const note: Note = new Note(this.root.index + interval);
+        note.normalize();
+        return note;
+    }
+
+    private _getAccidentalFromDiffs(letterDiff: number, meaningDiff: number): 'natural' | 'sharp' | 'flat' {
+        if (letterDiff < meaningDiff) {
+            return 'flat';
+        } else if (letterDiff > meaningDiff) {
+            return 'sharp';
+        }
+        return 'natural';
     }
 
     checkCategory(category: ScaleCategory): void {
         if (!SCALES.find(s => isEqual(s, category))) {
-            throw (`Scale category "${category}" broken or not found.`);
+            throw new Error(`Scale category "${category}" broken or not found.`);
         }
     }
 
@@ -70,13 +114,7 @@ export class Scale {
         if (!this.category.modes || !this.category.modes.find(m => isEqual(m, mode))) {
             const modeNames: string[] = [];
             this.category.modes?.forEach(m => modeNames.push(m.name));
-            throw (`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
+            throw new Error(`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
         }
-    }
-
-    get noteNames(): string[] {
-        let names: string[] = [];
-        this.notes.forEach((n: Note) => names.push(n.name));
-        return names;
     }
 }
