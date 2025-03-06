@@ -25,15 +25,9 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadNaturalRootNotes();
-  }
-
-  loadNaturalRootNotes(): void {
-    const numberOfAllNotes: number = 12;
-    this.naturalRootNotes = new Array(numberOfAllNotes);
-    for(let i = 0; i < numberOfAllNotes; i++) {
-      const note: Note = new Note(i, 'natural');
-      this.naturalRootNotes[i] = note.print();
+    if (this.scalesData.naturalNotes) {
+      this.naturalRootNotes = [];
+      this.scalesData.naturalNotes.forEach(n => this.naturalRootNotes?.push(n.print()));
     }
   }
 

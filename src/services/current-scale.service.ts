@@ -4,6 +4,7 @@ import { Note } from '../models/note';
 import { SCALES } from '../const/scales';
 import { ScaleMode } from '../interfaces/scale-mode';
 import { ScaleCategory } from '../interfaces/scale-category';
+import { ScalesDataService } from './scales-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class CurrentScaleService {
   private _defaultScale = new Scale(new Note(0), SCALES[0], { name: 'minor', interval: 9 });
   public scale: Scale = this._defaultScale; // sicherstellen, dass bei Änderung von "category" die Modes neu geladen werden
 
-  constructor() {
+  constructor(
+    private scalesData: ScalesDataService
+  ) {
     this.checkCurrentMode();
   }
 
@@ -28,10 +31,10 @@ export class CurrentScaleService {
 
   set categoryName(value: string) {
     const category: ScaleCategory | undefined = SCALES.find(s => s.name === value);
-    if(category) {
+    if (category) {
       this.scale.category = category;
     } else {
-      throw(`Scale category with name ${value} not found.`);
+      throw (`Scale category with name ${value} not found.`);
     }
   }
 
@@ -41,11 +44,25 @@ export class CurrentScaleService {
 
   set modeName(value: string) {
     const mode: ScaleMode | undefined = this.scale.category.modes?.find(s => s.name === value);
-    if(mode) {
+    if (mode) {
       this.scale.mode = mode;
     } else {
-      throw(`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
+      throw (`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
     }
+  }
+
+  get matchedNoteNames(): string[] | undefined {
+    if (this.scalesData.naturalNotes) {
+      const noteNames: string[] = new Array<string>(12);
+      this.scalesData.naturalNotes.forEach((note: Note, i: number) => {
+        if (this.scalesData.naturalNotes) {
+          const scaleNote: Note | undefined = this.scale.notes.find(n => n.index === note.index);
+          noteNames[i] = scaleNote ? scaleNote.print() : this.scalesData.naturalNotes[i].print();
+        }
+      });
+      return noteNames;
+    }
+    return undefined;
   }
 
   checkCurrentMode(): void {
