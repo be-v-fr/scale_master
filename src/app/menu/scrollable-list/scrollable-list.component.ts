@@ -20,7 +20,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   @Input({ required: true }) set content(value: (string | number)[]) {
     if (!isEqual(this._content, value)) {
       this._content = value;
-      this.focus = 0;
+      this.focus = this.defaultFocus;
     }
   };
   @Input() title?: string;
@@ -30,6 +30,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   }
   scrollSteps: number = 0;
   focus: number = 0;
+  @Input() defaultFocus: number = 0;
   @Input() current?: string | number;
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;

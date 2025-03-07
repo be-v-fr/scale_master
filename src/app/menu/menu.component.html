@@ -5,19 +5,22 @@
             [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)" />
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
-        <app-scrollable-list *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames" [(current)]="currScale.modeName" [title]="'Mode'" />
+        <app-scrollable-list *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames"
+            [(current)]="currScale.modeName" [title]="'Mode'" />
     </div>
 </section>
 <section>
     <h4>Fretboard</h4>
     <div class="scrollable-lists-container">
-        <app-scrollable-list *ngIf="tuningsData.instrumentNames" [content]="tuningsData.instrumentNames" [title]="'Instrument'"
-            [(current)]="currFretboard.instrumentName" (currentChange)="currFretboard.checkCurrentTuning()" />
+        <app-scrollable-list *ngIf="tuningsData.instrumentNames" [content]="tuningsData.instrumentNames"
+            [title]="'Instrument'" [(current)]="currFretboard.instrumentName"
+            (currentChange)="currFretboard.checkCurrentTuning()" />
         <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames" [content]="currFretboard.instrumentTuningNames"
             [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames" [title]="'Root'"
-            [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)" />
-        <app-scrollable-list *ngIf="currFretboard.numbersOfStrings" [content]="currFretboard.numbersOfStrings" [title]="'# strings'"
-            [(current)]="currFretboard.fretboard.numberOfStrings" />
+            [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)"
+            [defaultFocus]="currFretboard.fretboard.root.index" />
+        <app-scrollable-list *ngIf="currFretboard.numbersOfStrings" [content]="currFretboard.numbersOfStrings"
+            [title]="'# strings'" [(current)]="currFretboard.fretboard.numberOfStrings" />
     </div>
 </section>

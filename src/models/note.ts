@@ -31,7 +31,7 @@ export class Note {
 
     printNaturalWithFlatAlternative(): string {
         const index: number = getModTwelveIndex(this.index);
-        let name = this.capitalizeFirstLetter(NOTES[index]['natural']);
+        const name = this.capitalizeFirstLetter(NOTES[index]['natural']);
         return (name.length === 1) ? name : name + '/' + this.capitalizeFirstLetter(NOTES[index]['flat']);
     }
 
