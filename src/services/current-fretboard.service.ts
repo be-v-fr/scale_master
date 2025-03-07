@@ -21,7 +21,6 @@ export class CurrentFretboardService {
   }
 
   get notes(): Note[] {
-    // const notes: Note[] = Array.from(this.fretboard.naturalNotes);
     const notes = Note.matchOverlappingNotes(this.fretboard.naturalNotes, this.currScale.scale.notes);
     return Note.makeConsistentAccidentals(notes, this.currScale.scale.notes);
   }

@@ -27,11 +27,12 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     if (this.scalesData.naturalNotes) {
       this.naturalRootNotes = [];
-      this.scalesData.naturalNotes.forEach(n => this.naturalRootNotes?.push(n.print()));
+      this.scalesData.naturalNotes.forEach(n => this.naturalRootNotes?.push(n.printNaturalWithFlatAlternative()));
     }
   }
 
   updateCurrScaleRootNote(noteString: string) {
+    noteString = noteString.split('/')[0];
     const note: Note = new Note().textToNote(noteString);
     this.currScale.scale.root = note;
   }

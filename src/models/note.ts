@@ -25,8 +25,14 @@ export class Note {
         return notes;
     }
 
-    print() {
+    print(): string {
         return this.capitalizeFirstLetter(this.name);
+    }
+
+    printNaturalWithFlatAlternative(): string {
+        const index: number = getModTwelveIndex(this.index);
+        let name = this.capitalizeFirstLetter(NOTES[index]['natural']);
+        return (name.length === 1) ? name : name + '/' + this.capitalizeFirstLetter(NOTES[index]['flat']);
     }
 
     capitalizeFirstLetter(string: string) {
