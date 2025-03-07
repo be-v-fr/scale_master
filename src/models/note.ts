@@ -20,6 +20,11 @@ export class Note {
         this.index = getModTwelveIndex(this.index);
     }
 
+    public static normalizeMany(notes: Note[]): Note[] {
+        notes.forEach((n: Note, i: number) => notes[i].normalize());
+        return notes;
+    }
+
     print() {
         return this.capitalizeFirstLetter(this.name);
     }
@@ -69,5 +74,54 @@ export class Note {
 
     firstLetterEqualsNoteName(note: Note): boolean {
         return this.name[0] === note.name[0];
+    }
+
+    public static matchOverlappingNotes(notes: Note[], referenceNotes: Note[]): Note[] {
+        referenceNotes = this.normalizeMany(referenceNotes);
+        notes.forEach((n: Note, i: number) => {
+          n.normalize();
+          const scaleNote: Note | undefined = referenceNotes.find(rn => rn.index === n.index);
+          if (scaleNote) {
+            notes[i].accidental = scaleNote.accidental;
+          }
+        });
+        return notes;
+      }
+
+    public static makeConsistentAccidentals(notes: Note[], referenceNotes?: Note[]): Note[] {
+        const notesToCheck: Note[] = referenceNotes ? referenceNotes : notes;
+        const countSharps: number = notesToCheck.filter(n => n.isSharp()).length;
+        const countFlats: number = notesToCheck.filter(n => n.isFlat()).length;
+        if(countFlats >= countSharps) {
+            return this.flattenNotes(notes);
+        } else {
+            return this.naturalizeNotes(notes);
+        }
+    }
+
+    isSharp(): boolean {
+        return this.name.includes('#') || this.name.includes('x');
+    }
+
+    isFlat(): boolean {
+        return this.name.includes('b') || this.name.length === 3;        
+    }
+
+    static flattenNotes(notes: Note[]): Note[] {
+        notes.forEach((n: Note, i: number) => {
+            if(n.isSharp()) {
+                notes[i].accidental = 'flat';
+            }
+        })
+        return notes;        
+    }
+
+    static naturalizeNotes(notes: Note[]): Note[] {
+        notes.forEach((n: Note, i: number) => {
+            if(n.isFlat()) {
+                notes[i].accidental = 'natural';
+            }
+        })
+        return notes;        
     }
 }

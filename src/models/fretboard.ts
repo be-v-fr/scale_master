@@ -32,7 +32,7 @@ export class Fretboard {
         return this.numberOfStrings > this.defaultNumberOfStrings ? this._addIntervalsForExtraStrings(intervals) : intervals;
     }
 
-    get notes(): Note[] {
+    get naturalNotes(): Note[] {
         const notes: Note[] = [];
         this.intervals.forEach(i => {
             let index = this.root.index + i;

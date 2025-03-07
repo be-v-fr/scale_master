@@ -29,7 +29,7 @@ export class FretboardComponent {
   }
 
   getFretNoteIndex(instrumentString: number, fret: number): number {
-    const instrumentStringNote: Note = this.currFretboard.fretboard.notes[instrumentString];
+    const instrumentStringNote: Note = this.currFretboard.notes[instrumentString];
     return instrumentStringNote.getIntervalIndex(fret);
   }
 

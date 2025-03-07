@@ -4,6 +4,7 @@ import { Tuning } from '../interfaces/tuning';
 import { Instrument } from '../interfaces/instrument';
 import { Fretboard } from '../models/fretboard';
 import { Note } from '../models/note';
+import { CurrentScaleService } from './current-scale.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,16 @@ export class CurrentFretboardService {
 
   public fretboard: Fretboard = this._defaultFretboard;
 
-  constructor() {
+  constructor(
+    private currScale: CurrentScaleService,
+  ) {
     this.checkCurrentTuning();
+  }
+
+  get notes(): Note[] {
+    // const notes: Note[] = Array.from(this.fretboard.naturalNotes);
+    const notes = Note.matchOverlappingNotes(this.fretboard.naturalNotes, this.currScale.scale.notes);
+    return Note.makeConsistentAccidentals(notes, this.currScale.scale.notes);
   }
 
   get instrumentTuningNames(): string[] {
@@ -29,10 +38,10 @@ export class CurrentFretboardService {
 
   set instrumentName(value: string) {
     const instrument: Instrument | undefined = INSTRUMENTS.find(i => i.name === value);
-    if(instrument) {
+    if (instrument) {
       this.fretboard.instrument = instrument;
     } else {
-      throw(`Instrument with name ${value} not found.`);
+      throw (`Instrument with name ${value} not found.`);
     }
   }
 
@@ -42,26 +51,26 @@ export class CurrentFretboardService {
 
   set tuningName(value: string) {
     const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
-    if(tuning) {
+    if (tuning) {
       this.fretboard.tuning = tuning;
     } else {
-      throw(`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
+      throw (`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
     }
   }
 
   get numbersOfStrings(): number[] {
     const numbersOfStrings: number[] = [];
-    for(let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       numbersOfStrings.push(this.fretboard.defaultNumberOfStrings + i);
     }
     return numbersOfStrings;
   }
 
   checkCurrentTuning(): void {
-      const currentTuningFound: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t === this.fretboard.tuning);
-      if (!currentTuningFound) {
-        this.fretboard.tuning = this.fretboard.instrument.tunings[0];
-        this.fretboard.numberOfStrings = this.fretboard.defaultNumberOfStrings;
-      }
+    const currentTuningFound: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t === this.fretboard.tuning);
+    if (!currentTuningFound) {
+      this.fretboard.tuning = this.fretboard.instrument.tunings[0];
+      this.fretboard.numberOfStrings = this.fretboard.defaultNumberOfStrings;
     }
+  }
 }

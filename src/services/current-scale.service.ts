@@ -53,13 +53,10 @@ export class CurrentScaleService {
 
   get matchedNoteNames(): string[] | undefined {
     if (this.scalesData.naturalNotes) {
-      const noteNames: string[] = new Array<string>(12);
-      this.scalesData.naturalNotes.forEach((note: Note, i: number) => {
-        if (this.scalesData.naturalNotes) {
-          const scaleNote: Note | undefined = this.scale.notes.find(n => n.index === note.index);
-          noteNames[i] = scaleNote ? scaleNote.print() : this.scalesData.naturalNotes[i].print();
-        }
-      });
+      let matchedNotes: Note[] = Note.matchOverlappingNotes(this.scalesData.naturalNotes, this.scale.notes);
+      matchedNotes = Note.makeConsistentAccidentals(matchedNotes, this.scale.notes);
+      const noteNames: string[] = [];
+      matchedNotes.forEach((n: Note) => noteNames.push(n.print()));
       return noteNames;
     }
     return undefined;
