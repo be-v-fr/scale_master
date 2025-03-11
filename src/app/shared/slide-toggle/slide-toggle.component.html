@@ -1,3 +1,5 @@
-<button (click)="toggle()" [class.toggle-on]="toggleOn" [class.mode-check]="mode === 'check'">
-    <div class="knob"></div>
+<button (click)="toggle()">
+    <div class="knob" [class.toggle-on]="toggleOn" [class.mode-check]="mode === 'check'">
+        <div class="tiny-led"></div>
+    </div>
 </button>

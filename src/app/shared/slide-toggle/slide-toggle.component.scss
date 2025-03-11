@@ -1,8 +1,10 @@
-@import '../../../styles.scss';
+@import "../../../styles.scss";
 
 $width: 52px;
 $height: 32px;
 $knob-margin: 4px;
+$button-bg-transition: 50ms ease;
+$knob-transition: 175ms;
 
 :host {
     display: block;
@@ -15,25 +17,42 @@ button {
     height: 100%;
     border: 1px solid black;
     border-radius: calc($height / 2);
-    opacity: 1;
     @include flex();
-    transition: 150ms ease;
+    transition: $button-bg-transition;
     .knob {
         width: calc($height - 2 * $knob-margin);
         height: calc($height - 2 * $knob-margin);
         border-radius: 50%;
+        @include flex();
         background: black;
         transform: translateX($knob-margin - $width * 0.25);
-        transition: 175ms;
-    }
-    &.toggle-on {
-        .knob {
+        opacity: 1;
+        transition: $knob-transition;
+        .tiny-led {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgb(47, 171, 209);
+        }
+        &.toggle-on {
             transform: translateX($width * 0.25 - $knob-margin);
-            transition: 175ms;
+            transition: $knob-transition;
+        }
+        &.mode-check {
+            .tiny-led {
+                background: rgb(71, 185, 71);
+                transition: $knob-transition;
+            }
+            &:not(.toggle-on) {
+                .tiny-led {
+                    background: rgb(245, 78, 78);
+                    transition: $knob-transition;
+                }
+            }
         }
     }
-    &:not(.toggle-on).mode-check {
-        opacity: 0.5;
-        transition: 150ms ease;
+    &:hover {
+        background-color: #0000000D;
+        transition: $button-bg-transition;
     }
 }
