@@ -5,10 +5,15 @@ import { getModTwelveIndex } from "../utils/mod.utils";
 export class Note {
     index: number;
     accidental: 'natural' | 'sharp' | 'flat';
+    meaning?: number;
 
-    constructor(index?: number, accidental?: 'natural' | 'sharp' | 'flat') {
+    constructor(index?: number, accidental?: 'natural' | 'sharp' | 'flat', meaning?: number) {
         this.index = index ? index : 0;
         this.accidental = accidental ? accidental : 'natural';
+        this.meaning = meaning ? meaning : undefined;
+        if(meaning && (meaning < 0 || meaning > 7)) {
+            throw new Error(`Meaning index "${meaning}" is outside of the permitted range.`);
+        }
     }
 
     get name(): string {
@@ -27,6 +32,21 @@ export class Note {
 
     print(): string {
         return this.capitalizeFirstLetter(this.name);
+    }
+
+    printMeaning(): string {
+        if(this.meaning) {
+            switch(this.meaning) {
+                case 1: return '1st';
+                case 2: return '2nd';
+                case 3: return '3rd';
+                case 4:
+                case 5:
+                case 6:
+                case 7: return `${this.meaning}th`;
+            }
+        }
+        return this.print();
     }
 
     printNaturalWithFlatAlternative(): string {

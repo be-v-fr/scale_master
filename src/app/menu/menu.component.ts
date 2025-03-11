@@ -6,11 +6,12 @@ import { CurrentScaleService } from '../../services/current-scale.service';
 import { ScalesDataService } from '../../services/scales-data.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { TuningsDataService } from '../../services/tunings-data.service';
+import { SettingsDisplayComponent } from './settings-display/settings-display.component';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

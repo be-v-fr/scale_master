@@ -4,6 +4,7 @@ import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
+import { DisplayService } from '../../services/display.service';
 
 @Component({
   selector: 'app-fretboard',
@@ -16,16 +17,12 @@ export class FretboardComponent {
   constructor(
     private currScale: CurrentScaleService,
     public currFretboard: CurrentFretboardService,
+    public display: DisplayService
   ) { }
 
-  getNoteFromFret(instrumentString: number, fret: number): string | undefined {
+  getNoteFromFret(instrumentString: number, fret: number): Note | undefined {
     const absoluteIndex: number = this.getFretNoteIndex(instrumentString, fret);
-    const note: Note | undefined = this.currScale.scale.notes.find(n => n.index === absoluteIndex);
-    if (note) {
-      return note.print();
-    } else {
-      return undefined;
-    }
+    return this.currScale.scale.notes.find(n => n.index === absoluteIndex);
   }
 
   getFretNoteIndex(instrumentString: number, fret: number): number {

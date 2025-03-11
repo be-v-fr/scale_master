@@ -90,7 +90,12 @@ export class Scale {
     }
 
     createNaturalNoteFromInterval(interval: number): Note {
-        const note: Note = new Note(this.root.index + interval);
+        const meaning: number = getHarmonicMeaningIndex(interval);
+        const note: Note = new Note(
+            this.root.index + interval,
+            'natural',
+            meaning
+        );
         note.normalize();
         return note;
     }

@@ -1,0 +1,39 @@
+@import '../../../styles.scss';
+
+$width: 52px;
+$height: 32px;
+$knob-margin: 4px;
+
+:host {
+    display: block;
+    width: $width;
+    height: $height;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: calc($height / 2);
+    opacity: 1;
+    @include flex();
+    transition: 150ms ease;
+    .knob {
+        width: calc($height - 2 * $knob-margin);
+        height: calc($height - 2 * $knob-margin);
+        border-radius: 50%;
+        background: black;
+        transform: translateX($knob-margin - $width * 0.25);
+        transition: 175ms;
+    }
+    &.toggle-on {
+        .knob {
+            transform: translateX($width * 0.25 - $knob-margin);
+            transition: 175ms;
+        }
+    }
+    &:not(.toggle-on).mode-check {
+        opacity: 0.5;
+        transition: 150ms ease;
+    }
+}

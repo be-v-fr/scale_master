@@ -1,3 +1,7 @@
-<p *ngIf="name" class="note" [ngClass]="{root: isRoot}">
-    {{name}}
+<p *ngIf="note" class="note" [ngClass]="{root: isRoot}">
+    @if(display.noteDisplay === 'name') {
+        {{note.print()}}
+    } @else {
+        {{note.printMeaning()}}
+    }
 </p>
