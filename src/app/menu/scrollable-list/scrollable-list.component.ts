@@ -21,20 +21,22 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   @Input({ required: true }) set content(value: (string | number)[]) {
     if (!isEqual(this._content, value)) {
       this._content = value;
-      this.focus = this.defaultFocus;
+      this.focus = this.defaultIndex;
     }
   };
 
   @Input() title?: string;
 
-  private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
+  private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = [
+    'over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'
+  ];
   get positions() {
     return this._positions;
   }
 
   scrollSteps: number = 0;
   focus: number = 0;
-  @Input() defaultFocus: number = 0;
+  @Input() defaultIndex: number = 0;
 
   @Input() set autofocus(value: number) {
     this.focus = value;
@@ -82,8 +84,8 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   }
 
   isDefault(positionIndex: number): boolean {
-    if (this.defaultFocus) {
-      return this.getContentItem(positionIndex) === this._content[this.defaultFocus];
+    if (this.defaultIndex) {
+      return this.getContentItem(positionIndex) === this._content[this.defaultIndex];
     }
     return false;
   }

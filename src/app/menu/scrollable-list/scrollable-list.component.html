@@ -5,7 +5,7 @@
         @for (pos of positions; track pos; let i = $index; let f = $first; let l = $last) {
         <app-scrollable-list-item #contentRef
             [ngClass]="f || l || (i == 1 && scrollSteps == 2) || (i == positions.length - 2 && scrollSteps == -2) ? positions[i] : positions[i - scrollSteps]"
-            [class.scroll]="scrollSteps !== 0" [default]="content[defaultFocus]" (mousedown)="onListItemClick(i)" [content]="getContentItem(i)" />
+            [class.scroll]="scrollSteps !== 0" [default]="content[defaultIndex]" (mousedown)="onListItemClick(i)" [content]="getContentItem(i)" />
         }
         } @else {
         <span class="empty-field">&ndash;</span>

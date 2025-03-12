@@ -18,7 +18,7 @@
             [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames" [title]="'Root'"
             [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)"
-            [defaultFocus]="currFretboard.fretboard.tuning.defaultRoot.index" [autofocus]="currFretboard.fretboard.root.index" />
+            [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index" [autofocus]="currFretboard.fretboard.root.index" />
         <app-scrollable-list *ngIf="currFretboard.numbersOfStrings" [content]="currFretboard.numbersOfStrings"
             [title]="'# strings'" [(current)]="currFretboard.fretboard.numberOfStrings" />
     </div>
