@@ -4,6 +4,7 @@ import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-l
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 import { isEqual } from 'lodash';
 import { HoverDirective } from '../../../directives/hover.directive';
+import { modWithSubZero } from '../../../utils/mod.utils';
 
 @Component({
   selector: 'app-scrollable-list',
@@ -23,15 +24,23 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
       this.focus = this.defaultFocus;
     }
   };
+
   @Input() title?: string;
+
   private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
   get positions() {
     return this._positions;
   }
+
   scrollSteps: number = 0;
   focus: number = 0;
   @Input() defaultFocus: number = 0;
-  @Input() current?: string | number;
+
+  @Input() set autofocus(value: number) {
+    this.focus = value;
+  }
+
+  @Input() current?: any;
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;
   private throttleTime = 100;
@@ -46,7 +55,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this.current) {
-      const currentIndex = this.content.indexOf(this.current);
+      const currentIndex = this._content.indexOf(this.current);
       if (currentIndex >= 0) {
         this.focus = currentIndex;
       } else {
@@ -61,11 +70,22 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
-  printContent(positionIndex: number) {
+  getContentIndexFromPositionIndex(positionIndex: number): number {
     const length = this.content.length;
-    let index = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
-    index = (index + length) % length;
-    return this.content[index];
+    const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
+    return modWithSubZero(contentIndex, length);
+  }
+
+  getContentItem(positionIndex: number): any {
+    const contentIndex = this.getContentIndexFromPositionIndex(positionIndex);
+    return this._content[contentIndex];
+  }
+
+  isDefault(positionIndex: number): boolean {
+    if (this.defaultFocus) {
+      return this.getContentItem(positionIndex) === this._content[this.defaultFocus];
+    }
+    return false;
   }
 
   onListItemClick(positionIndex: number) {
@@ -123,7 +143,7 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
 
   onHoverKeyDown(event: KeyboardEvent) {
     const scrollTimeoutLength: number = 240;
-    switch(event.key) {
+    switch (event.key) {
       case 'ArrowDown': this.scrollBySteps(1, scrollTimeoutLength); break;
       case 'ArrowUp': this.scrollBySteps(-1, scrollTimeoutLength);
     }

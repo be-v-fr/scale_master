@@ -7,8 +7,6 @@ import { Instrument } from '../interfaces/instrument';
 })
 export class TuningsDataService {
   get instrumentNames(): string[] | undefined {
-    const instrumentNames: string[] = [];
-    INSTRUMENTS.forEach(i => instrumentNames.push(i.name));
-    return instrumentNames;
+    return INSTRUMENTS.map(i => i.name);
   }
 }

@@ -6,6 +6,9 @@
   color: white;
   cursor: pointer;
   font-size: 24px;
+  .default-item {
+    color: lightgreen;
+  }
   &:hover {
     background: black;
   }

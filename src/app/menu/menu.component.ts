@@ -16,7 +16,7 @@ import { SettingsDisplayComponent } from './settings-display/settings-display.co
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
-  naturalRootNotes?: string[];
+  extendedNaturalNoteNames?: string[];
 
   constructor(
     public currFretboard: CurrentFretboardService,
@@ -27,8 +27,8 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.scalesData.naturalNotes) {
-      this.naturalRootNotes = [];
-      this.scalesData.naturalNotes.forEach(n => this.naturalRootNotes?.push(n.printNaturalWithFlatAlternative()));
+      this.extendedNaturalNoteNames = [];
+      this.scalesData.naturalNotes.forEach(n => this.extendedNaturalNoteNames?.push(n.printNaturalWithFlatAlternative()));
     }
   }
 

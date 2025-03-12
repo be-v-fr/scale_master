@@ -17,7 +17,7 @@ export class CurrentFretboardService {
   constructor(
     private currScale: CurrentScaleService,
   ) {
-    this.checkCurrentTuning();
+    this.updateTuningForNewInstrument();
   }
 
   get notes(): Note[] {
@@ -39,6 +39,8 @@ export class CurrentFretboardService {
     const instrument: Instrument | undefined = INSTRUMENTS.find(i => i.name === value);
     if (instrument) {
       this.fretboard.instrument = instrument;
+      this.updateTuningForNewInstrument();
+      this.updateRootToNewTuning();
     } else {
       throw (`Instrument with name ${value} not found.`);
     }
@@ -49,27 +51,40 @@ export class CurrentFretboardService {
   }
 
   set tuningName(value: string) {
+    const diffToDefault: number = this.fretboard.root.index - this.fretboard.tuning.defaultRoot.index;
     const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
     if (tuning) {
       this.fretboard.tuning = tuning;
+      this.updateRootToNewTuning(diffToDefault);
     } else {
       throw (`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
     }
   }
 
-  get numbersOfStrings(): number[] {
+  get numbersOfStrings(): number[] | undefined {
     const numbersOfStrings: number[] = [];
-    for (let i = 0; i < 5; i++) {
-      numbersOfStrings.push(this.fretboard.defaultNumberOfStrings + i);
+    if (this.fretboard.instrument.maxExtraStrings > 0) {
+      for (let i = 0; i <= this.fretboard.instrument.maxExtraStrings; i++) {
+        numbersOfStrings.push(this.fretboard.defaultNumberOfStrings + i);
+      }
     }
     return numbersOfStrings;
   }
 
-  checkCurrentTuning(): void {
+  updateTuningForNewInstrument(): void {
     const currentTuningFound: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t === this.fretboard.tuning);
     if (!currentTuningFound) {
       this.fretboard.tuning = this.fretboard.instrument.tunings[0];
       this.fretboard.numberOfStrings = this.fretboard.defaultNumberOfStrings;
     }
+  }
+
+  updateRootToNewTuning(diffToDefault?: number): void {
+    let updatedIndex: number = this.fretboard.tuning.defaultRoot.index;
+    if(diffToDefault) {
+      updatedIndex += diffToDefault;
+    }
+    const note: Note | undefined = this.currScale.matchedNotes?.find(n => n.index === updatedIndex);
+    this.fretboard.root = note ? note : this.fretboard.tuning.defaultRoot;
   }
 }

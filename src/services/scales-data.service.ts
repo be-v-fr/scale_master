@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SCALES } from '../const/scales';
 import { Note } from '../models/note';
+import { NOTES } from '../const/notes';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,7 @@ export class ScalesDataService {
   }
 
   get categoryNames(): string[] {
-    const categoryNames: string[] = [];
-    SCALES.forEach(s => categoryNames.push(s.name));
-    return categoryNames;
+    return SCALES.map(s => s.name);
   }
 
   private _loadNaturalNotes(): void {

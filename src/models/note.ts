@@ -34,21 +34,6 @@ export class Note {
         return this.capitalizeFirstLetter(this.name);
     }
 
-    printMeaning(): string {
-        if(this.meaning) {
-            switch(this.meaning) {
-                case 1: return '1st';
-                case 2: return '2nd';
-                case 3: return '3rd';
-                case 4:
-                case 5:
-                case 6:
-                case 7: return `${this.meaning}th`;
-            }
-        }
-        return this.print();
-    }
-
     printNaturalWithFlatAlternative(): string {
         const index: number = getModTwelveIndex(this.index);
         const name = this.capitalizeFirstLetter(NOTES[index]['natural']);
