@@ -13,6 +13,9 @@
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" />
 </div>
-<div class="title-container">
-    <span class="title" *ngIf="title">{{title}}</span>
+<div class="title-submenu-wrapper">
+    <div class="title-submenu-container">
+        <span class="title" *ngIf="title">{{title}}</span>
+        <button class="material-icons reset-btn" (click)="refocusByIndex(defaultIndex)">autorenew</button>
+    </div>
 </div>

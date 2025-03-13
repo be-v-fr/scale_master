@@ -113,16 +113,20 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
 
   scrollBySteps(steps: number, focusTimeoutLength: number) {
     this.scrollSteps = steps;
-    this.currentTimeout = setTimeout(() => this.setNewFocus(steps), focusTimeoutLength);
+    this.currentTimeout = setTimeout(() => this.refocusBySteps(steps), focusTimeoutLength);
   }
 
-  setNewFocus(steps: number) {
+  refocusByIndex(index: number) {
+    this.focus = index;
+    this.currentChange.emit(this.content[index]);    
+  }
+
+  refocusBySteps(steps: number) {
     this.scrollSteps = 0;
     this.currentTimeout = null;
     const length = this.content.length;
     this.focus += steps;
-    this.focus = (this.focus + length) % length;
-    this.currentChange.emit(this.content[this.focus]);
+    this.refocusByIndex((this.focus + length) % length);
   }
 
   @HostListener('wheel', ['$event'])
