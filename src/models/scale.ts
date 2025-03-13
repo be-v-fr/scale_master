@@ -67,7 +67,7 @@ export class Scale {
         } else if (doubleAccidentals1 === doubleAccidentals2) {
             const noAccidentals1: number = this._countNoAccidentals(notes1);
             const noAccidentals2: number = this._countNoAccidentals(notes2)
-            if (noAccidentals1 <= noAccidentals2) {
+            if (noAccidentals1 >= noAccidentals2) {
                 return notes1;
             }
         }
