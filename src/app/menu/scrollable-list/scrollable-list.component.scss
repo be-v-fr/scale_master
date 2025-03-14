@@ -18,7 +18,7 @@ $opac-outside: 0.3;
     transition: 750ms ease-out;
     transition-delay: 250ms;
   }
-  &:hover app-scrollable-list-submenu {
+  &:hover app-scrollable-list-submenu, app-scrollable-list-submenu.searching {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;

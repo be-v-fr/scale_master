@@ -1,7 +1,7 @@
-<div class="list-wrapper" [class.list-empty]="content.length === 0" appHover (hoverKeyDown)="onHoverKeyDown($event)">
+<div class="list-wrapper" [class.list-empty]="filteredContent.length === 0" appHover (hoverKeyDown)="onHoverKeyDown($event)">
     <app-scrollable-list-arrow [orientation]="'up'" (click)="onListArrowClick(-1, 200)" />
     <div class="list-container">
-        @if(content.length > 0) {
+        @if(filteredContent.length > 0) {
         @for (pos of positions; track pos; let i = $index; let f = $first; let l = $last) {
         <app-scrollable-list-item #contentRef
             [ngClass]="f || l || (i == 1 && scrollSteps == 2) || (i == positions.length - 2 && scrollSteps == -2) ? positions[i] : positions[i - scrollSteps]"
@@ -14,5 +14,6 @@
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" />
 </div>
-<app-scrollable-list-submenu [(searchFilter)]="searchFilter" [title]="title" [allowSearch]="allowSearch"
-    (refocus)="refocusByIndex(defaultIndex)" (searchFilterChange)="refocusByIndex(defaultIndex)" />
+<app-scrollable-list-submenu [class.searching]="searchFilter" [(searchFilter)]="searchFilter"
+    (refocus)="refocusByIndex(defaultIndex)" [title]="title" [allowSearch]="allowSearch"
+    (searchFilterChange)="refocusByIndex(defaultIndex)" />
