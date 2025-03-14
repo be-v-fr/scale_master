@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, AfterViewInit, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 import { isEqual } from 'lodash';
 import { HoverDirective } from '../../../directives/hover.directive';
 import { modWithSubZero } from '../../../utils/mod.utils';
+import { ScrollableListSubmenuComponent } from './scrollable-list-submenu/scrollable-list-submenu.component';
 
 @Component({
   selector: 'app-scrollable-list',
   standalone: true,
-  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent, HoverDirective],
+  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent, HoverDirective, ScrollableListSubmenuComponent],
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })
-export class ScrollableListComponent implements OnInit, AfterViewInit {
+export class ScrollableListComponent implements OnInit {
   private _content: (string | number)[] = [];
   get content(): (string | number)[] {
     return this._content;
@@ -48,12 +49,21 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
   private throttleTime = 100;
   private currentTimeout: ReturnType<typeof setTimeout> | null = null;
   @ViewChildren(ScrollableListItemComponent) items!: QueryList<ScrollableListItemComponent>;
-  containerWidth: number = 100;
+  searchFilter?: string;
+  @Input() allowSearch: boolean = true;
 
   constructor(
     private elementRef: ElementRef,
-    private cdr: ChangeDetectorRef,
   ) { }
+
+  get filteredContent(): (string | number)[] {
+    return this._content.filter(item => {
+      if(this.searchFilter) {
+        return item.toString().toLowerCase().includes(this.searchFilter.toLowerCase());
+      }
+      return true;
+    }); 
+  }
 
   ngOnInit(): void {
     if (this.current) {
@@ -66,21 +76,15 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    const maxWidth = Math.max(...this.items.map(i => i.contentRef.nativeElement.offsetWidth));
-    this.containerWidth = maxWidth / 0.84;
-    this.cdr.detectChanges();
-  }
-
   getContentIndexFromPositionIndex(positionIndex: number): number {
-    const length = this.content.length;
+    const length = this.filteredContent.length;
     const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
     return modWithSubZero(contentIndex, length);
   }
 
   getContentItem(positionIndex: number): any {
     const contentIndex = this.getContentIndexFromPositionIndex(positionIndex);
-    return this._content[contentIndex];
+    return this.filteredContent[contentIndex];
   }
 
   isDefault(positionIndex: number): boolean {
@@ -118,13 +122,13 @@ export class ScrollableListComponent implements OnInit, AfterViewInit {
 
   refocusByIndex(index: number) {
     this.focus = index;
-    this.currentChange.emit(this.content[index]);    
+    this.currentChange.emit(this.filteredContent[index]);
   }
 
   refocusBySteps(steps: number) {
     this.scrollSteps = 0;
     this.currentTimeout = null;
-    const length = this.content.length;
+    const length = this.filteredContent.length;
     this.focus += steps;
     this.refocusByIndex((this.focus + length) % length);
   }

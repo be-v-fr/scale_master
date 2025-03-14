@@ -25,6 +25,8 @@ button {
     border: none;
     outline: none;
     background: none;
+    padding: 0;
+    margin: 0;
     cursor: pointer;
 }
 
@@ -34,8 +36,20 @@ button {
     user-select: none;
 }
 
+button.icon-btn {
+    transition: 75ms ease;
+    &:hover {
+        transition: 75ms ease;
+        text-shadow: 1px 2px 1px #0002;
+    }
+    &:active {
+        transition: 75ms ease;
+        transform: scale(0.84);
+    }
+}
+
 button.reset-btn {
-    transition: 0;
+    transition: all 75ms, transform 0;
     transform: rotate(0) scale(1);
     &:hover {
         transition: 250ms ease;

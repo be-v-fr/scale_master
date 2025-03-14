@@ -12,4 +12,6 @@ export class ScrollableListItemComponent {
   @Input({ required: true }) content!: string | number;
   @Input() default?: string | number;
   @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>
+
+  // TODO: Check width compared to parent. Reduce font size if too large.
 }

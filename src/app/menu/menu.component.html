@@ -2,7 +2,7 @@
     <h4>Scale</h4>
     <div class="scrollable-lists-container">
         <app-scrollable-list *ngIf="extendedNaturalNoteNames" [content]="extendedNaturalNoteNames" [title]="'Root'"
-            [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)" />
+            [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)" [allowSearch]="false" />
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
         <app-scrollable-list *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames"
@@ -17,10 +17,10 @@
         <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames" [content]="currFretboard.instrumentTuningNames"
             [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         <app-scrollable-list *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames" [title]="'Root'"
-            [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)"
+            [current]="currFretboard.fretboard.root.print()" (currentChange)="updateCurrFretboardRootNote($event)" [allowSearch]="false"
             [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index" [autofocus]="currFretboard.fretboard.root.index" />
         <app-scrollable-list *ngIf="currFretboard.numbersOfStrings" [content]="currFretboard.numbersOfStrings"
-            [title]="'# strings'" [(current)]="currFretboard.fretboard.numberOfStrings" />
+            [title]="'# strings'" [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
     </div>
 </section>
 <section>

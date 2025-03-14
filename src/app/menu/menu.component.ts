@@ -28,7 +28,10 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     if (this.scalesData.naturalNotes) {
       this.extendedNaturalNoteNames = [];
-      this.scalesData.naturalNotes.forEach(n => this.extendedNaturalNoteNames?.push(n.printNaturalWithFlatAlternative()));
+      this.scalesData.naturalNotes.forEach(n => {
+        const name = n.printNaturalWithFlatAlternative();
+        this.extendedNaturalNoteNames?.push(name);
+      });
     }
   }
 

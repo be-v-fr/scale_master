@@ -12,25 +12,13 @@ $opac-outside: 0.3;
 
 :host {
   @extend .prevent-select;
-  .title-submenu-wrapper {
-    width: 100%;
-    @include flex();
-    .title-submenu-container {
-      width: calc(100% - 6px);
-      height: 24px;
-      margin-top: 6px;
-      @include flex();
-      padding-top: 4px;
-      border-top: 1px solid grey;
-      opacity: 0;
-      transition: 750ms ease-out;
-      transition-delay: 250ms;
-      & * {
-        color: grey;
-      }
-    }
+  width: 100%;
+  app-scrollable-list-submenu {
+    opacity: 0;
+    transition: 750ms ease-out;
+    transition-delay: 250ms;
   }
-  &:hover .title-submenu-wrapper .title-submenu-container {
+  &:hover app-scrollable-list-submenu {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;
@@ -38,16 +26,17 @@ $opac-outside: 0.3;
 }
 
 .list-wrapper {
-  @include flex($dir: column, $g: 3px);
+  width: 100%;
   height: 160px;
+  @include flex($dir: column, $g: 3px);
   position: relative;
   .list-container {
     position: relative;
+    width: 100%;
+    height: 130px;
     overflow: hidden;
     border: 1px solid #000000;
     @include flex($dir: column);
-    width: 100%;
-    height: 130px;
     background: steelblue;
   }
   &.list-empty .list-container {

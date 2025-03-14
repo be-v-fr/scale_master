@@ -21,6 +21,9 @@ section {
     .scrollable-lists-container {
         @include flex($g: 3px);
     }
+    app-scrollable-list{
+        width: 200px;
+    }
     app-settings-display {
         height: 160px;
     }
