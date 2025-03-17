@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * Displays a button shaped as an arrow.
+ */
 @Component({
   selector: 'app-scrollable-list-arrow',
   standalone: true,

@@ -6,35 +6,55 @@ import { Fretboard } from '../models/fretboard';
 import { Note } from '../models/note';
 import { CurrentScaleService } from './current-scale.service';
 
+/**
+ * Service for handling the current fretboard.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentFretboardService {
   private _defaultFretboard: Fretboard = new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], new Note(7));
-
   public fretboard: Fretboard = this._defaultFretboard;
 
+
+  /**
+   * Constructor for injection of services and data initialization.
+   */
   constructor(
     private currScale: CurrentScaleService,
   ) {
     this.updateTuningForNewInstrument();
   }
 
+
+  /**
+   * Returns the notes corresponding to the current fretboard's open strings.
+   */
   get notes(): Note[] {
     const notes = Note.matchOverlappingNotes(this.fretboard.naturalNotes, this.currScale.scale.notes);
     return Note.makeConsistentAccidentals(notes, this.currScale.scale.notes);
   }
 
+
+  /**
+   * Returns the names of the tunings corresponding to the current instrument.
+   */
   get instrumentTuningNames(): string[] {
-    const tuningNames: string[] = [];
-    this.fretboard.instrument.tunings.forEach(t => tuningNames.push(t.name));
-    return tuningNames;
+    return this.fretboard.instrument.tunings.map(t => t.name);
   }
 
+
+  /**
+   * Returns the current instrument's name.
+   */
   get instrumentName(): string {
     return this.fretboard.instrument.name;
   }
 
+
+  /**
+   * Updates the current instrument by name.
+   */
   set instrumentName(value: string) {
     const instrument: Instrument | undefined = INSTRUMENTS.find(i => i.name === value);
     if (instrument) {
@@ -46,10 +66,18 @@ export class CurrentFretboardService {
     }
   }
 
+
+  /**
+   * Returns the current tuning's name.
+   */
   get tuningName(): string | undefined {
     return this.fretboard.tuning?.name;
   }
 
+
+  /**
+   * Updates the current tuning by name.
+   */
   set tuningName(value: string) {
     const diffToDefault: number = this.fretboard.root.index - this.fretboard.tuning.defaultRoot.index;
     const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
@@ -61,6 +89,10 @@ export class CurrentFretboardService {
     }
   }
 
+
+  /**
+   * Returns the different numbers of strings that are available for the current instrument.
+   */
   get numbersOfStrings(): number[] | undefined {
     const numbersOfStrings: number[] = [];
     if (this.fretboard.instrument.maxExtraStrings > 0) {
@@ -71,6 +103,11 @@ export class CurrentFretboardService {
     return numbersOfStrings;
   }
 
+
+  /**
+   * Checks if the current tuning is available for the current instruments.
+   * Sets tuning to the instrument's default tuning otherwise.
+   */
   updateTuningForNewInstrument(): void {
     const currentTuningFound: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t === this.fretboard.tuning);
     if (!currentTuningFound) {
@@ -79,6 +116,12 @@ export class CurrentFretboardService {
     }
   }
 
+
+  /**
+   * Updates the root note of the current tuning to its default root note,
+   * adding a difference if given.
+   * @param diffToDefault - Difference to default root in half tone steps.
+   */
   updateRootToNewTuning(diffToDefault?: number): void {
     let updatedIndex: number = this.fretboard.tuning.defaultRoot.index;
     if(diffToDefault) {

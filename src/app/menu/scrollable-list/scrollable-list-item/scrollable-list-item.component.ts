@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
+/**
+ * Displays an item contained in a scrollable list.
+ */
 @Component({
   selector: 'app-scrollable-list-item',
   standalone: true,

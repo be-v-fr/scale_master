@@ -3,6 +3,10 @@ import { Component, Input } from '@angular/core';
 import { Note } from '../../../models/note';
 import { DisplayService } from '../../../services/display.service';
 
+/**
+ * Displays a note on the fretboard, if a note is transferred via input.
+ * Displays an empty element otherwise.
+ */
 @Component({
   selector: 'app-fret-note',
   standalone: true,
@@ -14,6 +18,10 @@ export class FretNoteComponent {
   @Input() note?: Note;
   @Input('root') isRoot: boolean = false;
 
+  
+  /**
+   * Constructor for injection of services.
+   */
   constructor(
     public display: DisplayService
   ) { }

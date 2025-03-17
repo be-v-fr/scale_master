@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/**
+ * Displays a slide toggle button.
+ */
 @Component({
   selector: 'app-slide-toggle',
   standalone: true,
@@ -13,6 +16,10 @@ export class SlideToggleComponent {
   @Input() toggleOn: boolean = false;
   @Output() toggleOnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+
+  /**
+   * Toggles button.
+   */
   toggle(): void {
     this.toggleOn = !this.toggleOn;
     this.toggleOnChange.emit(this.toggleOn);

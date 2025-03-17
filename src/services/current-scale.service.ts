@@ -6,29 +6,46 @@ import { ScaleMode } from '../interfaces/scale-mode';
 import { ScaleCategory } from '../interfaces/scale-category';
 import { ScalesDataService } from './scales-data.service';
 
+/**
+ * Service for handling the current scale.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentScaleService {
   private _defaultScale = new Scale(new Note(0), SCALES[0], { name: 'minor', interval: 9 });
-  public scale: Scale = this._defaultScale; // sicherstellen, dass bei Änderung von "category" die Modes neu geladen werden
+  public scale: Scale = this._defaultScale;
 
+
+  /**
+   * Constructor for injection of services and data initialization.
+   */
   constructor(
     private scalesData: ScalesDataService
   ) {
     this.checkCurrentMode();
   }
 
+
+  /**
+   * Returns the names of the modes corresponding to the current category.
+   */
   get categoryModeNames(): string[] {
-    const modeNames: string[] = [];
-    this.scale.category.modes?.forEach(m => modeNames.push(m.name));
-    return modeNames;
+    return this.scale.category.modes?.map(m => m.name) || [];
   }
 
+
+  /**
+   * Returns the current category's name.
+   */
   get categoryName(): string {
     return this.scale.category.name;
   }
 
+
+  /**
+   * Updates the current category by name.
+   */
   set categoryName(value: string) {
     const category: ScaleCategory | undefined = SCALES.find(s => s.name === value);
     if (category) {
@@ -38,10 +55,18 @@ export class CurrentScaleService {
     }
   }
 
+
+  /**
+   * Returns the current mode's name.
+   */
   get modeName(): string | undefined {
     return this.scale.mode?.name;
   }
 
+
+  /**
+   * Updates the current mode by name.
+   */
   set modeName(value: string) {
     const mode: ScaleMode | undefined = this.scale.category.modes?.find(s => s.name === value);
     if (mode) {
@@ -51,6 +76,11 @@ export class CurrentScaleService {
     }
   }
 
+
+  /**
+   * Returns an array of all existing notes matched to the current scale's accidentals.
+   * Also matches the accidentals of the notes not contained in the current scale.
+   */
   get matchedNotes(): Note[] | undefined {
     if (this.scalesData.naturalNotes) {
       const matchedNotes: Note[] = Note.matchOverlappingNotes(this.scalesData.naturalNotes, this.scale.notes);
@@ -59,15 +89,19 @@ export class CurrentScaleService {
     return undefined;    
   }
 
+
+  /**
+   * Returns the names of the notes matched to the current scale.
+   */
   get matchedNoteNames(): string[] | undefined {
-    if (this.matchedNotes) {
-      const noteNames: string[] = [];
-      this.matchedNotes.forEach((n: Note) => noteNames.push(n.print()));
-      return noteNames;
-    }
-    return undefined;
+    return this.matchedNotes?.map(n => n.print());
   }
 
+
+  /**
+   * Checks if the current mode is available for the current category.
+   * Sets mode to the category's default mode otherwise.
+   */
   checkCurrentMode(): void {
     if (this.scale.category.modes) {
       const currentModeFound: ScaleMode | undefined = this.scale.category.modes.find(m => m === this.scale.mode);
