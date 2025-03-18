@@ -1,14 +1,20 @@
-<div class="title-submenu-container" [class.searching]="searchFilter || searchFilter === ''">
-    @if(searchFilter || searchFilter === '') {
-    <button class="material-icons icon-btn search-off-btn" (click)="clearSearch()">search_off</button>
-    <input type="text" [(ngModel)]="searchFilter" #searchInput (keyup)="emitSearch()" />
-    } @else {
-    @if(allowSearch) {
-    <button class="material-icons icon-btn" (click)="initSearch()">search</button>
-    } @else {
-    <div class="icon-placeholder"></div>
-    }
-    <span class="title" *ngIf="title">{{title}}</span>
-    <button class="material-icons reset-btn" (click)="refocus.emit()">autorenew</button>
-    }
+<div class="submenu-outer-wrapper" [class.searching]="searchFilter || searchFilter === ''">
+    <div #innerWrapper class="submenu-inner-wrapper">
+        <div class="submenu-container">
+            @if(allowSearch) {
+            <button class="material-icons icon-btn" (click)="initSearch()">search</button>
+            } @else {
+            <div *ngIf="useIconPlaceholder" class="icon-placeholder"></div>
+            }
+            <span class="title" *ngIf="title">{{title}}</span>
+            <button class="material-icons reset-btn" (click)="refocus.emit()">autorenew</button>
+            <div class="searchbar">
+                <button class="material-icons icon-btn search-off-btn"
+                    (click)="$event.stopPropagation(); clearSearch()">
+                    search_off
+                </button>
+                <input type="text" [(ngModel)]="searchFilter" #searchInput (keyup)="emitSearch()" />
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,8 +1,8 @@
 @import "../../../styles.scss";
 
-$y-inner: 30px;
-$y-outer: 64px;
-$y-outside: 100px;
+$y-inner: 26px;
+$y-outer: 56px;
+$y-outside: 88px;
 $scl-inner: 0.9;
 $scl-outer: 0.8;
 $scl-outside: 0.7;
@@ -13,6 +13,7 @@ $opac-outside: 0.3;
 :host {
   @extend .prevent-select;
   width: 100%;
+  @include flex($dir: column);
   app-scrollable-list-submenu {
     opacity: 0;
     transition: 750ms ease-out;
@@ -27,7 +28,7 @@ $opac-outside: 0.3;
 
 .list-wrapper {
   width: 100%;
-  height: 160px;
+  height: 144px;
   @include flex($dir: column, $g: 3px);
   position: relative;
   .list-container {

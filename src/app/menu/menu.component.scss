@@ -2,9 +2,9 @@
 
 :host {
     width: 100%;
-    height: 280px;
+    height: 100%;
     background: white;
-    padding: 32px 8px;
+    padding: 18px 8px;
     @include flex($g: 24px);
 }
 
@@ -19,10 +19,19 @@ section {
         border-bottom: 1px solid black;
     }
     .scrollable-lists-container {
-        @include flex($g: 3px);
+        @include flex($g: 10px);
     }
-    app-scrollable-list{
-        width: 200px;
+    app-scrollable-list {
+        width: 148px;
+        &.narrow {
+            width: 96px;
+        }
+        &.narrower {
+            width: 72px;
+        }
+        &.tiny {
+            width: 40px;
+        }
     }
     app-settings-display {
         height: 160px;
