@@ -16,4 +16,4 @@
 </div>
 <app-scrollable-list-submenu [class.searching]="searchFilter" [(searchFilter)]="searchFilter"
     (refocus)="refocusByIndex(defaultIndex)" [title]="title" [allowSearch]="allowSearch"
-    (searchFilterChange)="refocusByIndex(defaultIndex)" />
+    (searchFilterChange)="onSearchChange()" />

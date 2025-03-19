@@ -233,4 +233,15 @@ export class ScrollableListComponent implements OnInit {
       case 'ArrowUp': this.scrollBySteps(-1, scrollTimeoutLength);
     }
   }
+
+
+  /**
+   * Handles search filter changes. Either refocuses the list or does nothing.
+   */
+  onSearchChange(): void {
+    if(this.searchFilter === undefined && this._content.includes(this.current)) {
+      return;
+    }
+    this.refocusByIndex(this.defaultIndex);
+  }
 }
