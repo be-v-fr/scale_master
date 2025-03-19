@@ -1,4 +1,5 @@
-<div class="list-wrapper" [class.list-empty]="filteredContent.length === 0" appHover (hoverKeyDown)="onHoverKeyDown($event)">
+<div class="list-wrapper" [class.list-empty]="filteredContent.length === 0" appHover
+    (hoverKeyDown)="onHoverKeyDown($event)">
     <app-scrollable-list-arrow [orientation]="'up'" (click)="onListArrowClick(-1, 200)" />
     <div class="list-container">
         @if(filteredContent.length > 0) {
@@ -14,6 +15,6 @@
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" />
 </div>
-<app-scrollable-list-submenu [class.searching]="searchFilter" [(searchFilter)]="searchFilter"
+<app-scrollable-list-submenu [class.searching]="searchFilter || searchFilter === ''" [(searchFilter)]="searchFilter"
     (refocus)="refocusByIndex(defaultIndex)" [title]="title" [allowSearch]="allowSearch"
     (searchFilterChange)="onSearchChange()" />

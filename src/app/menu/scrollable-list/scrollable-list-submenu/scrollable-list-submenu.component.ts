@@ -62,6 +62,7 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
    */
   initSearch(): void {
     this.searchFilter = '';
+    this.emitSearch();
     setTimeout(() => this.focusSearch(), 80);
   }
 
