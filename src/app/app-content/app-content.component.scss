@@ -10,6 +10,8 @@
 .menu-container {
     width: 100vw;
     height: 240px;
+    position: relative;
+    z-index: 10;
     @media screen and (max-height: $vh-breakpoint-1) {
         height: 206px;
     }

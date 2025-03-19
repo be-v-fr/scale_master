@@ -99,6 +99,15 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
+   * Initializes submenu background element using the width from the submenu component. 
+   */
+  initSubmenuBg(bgWidth: number): void {
+    this.submenuBgWidth = bgWidth;
+    this.cdr.detectChanges();
+  }
+
+
+  /**
    * Transforms the index of an item in the positions array to the index
    * of the same item in the content array.
    * @param positionIndex - Item index in the list positions array (not to be confused with the list content array).
@@ -241,15 +250,7 @@ export class ScrollableListComponent implements OnInit {
    * Handles search filter changes. Either refocuses the list or does nothing.
    */
   onSearchChange(): void {
-    if(this.searchFilter === undefined && this._content.includes(this.current)) {
-      return;
-    }
-    this.refocusByIndex(this.defaultIndex);
-  }
-
-
-  initSubmenuBg(bgWidth: number): void {
-    this.submenuBgWidth = bgWidth;
-    this.cdr.detectChanges();
+    const index = this.searchFilter ? 0 : this._content.indexOf(this.focus);
+    this.refocusByIndex(index);
   }
 }
