@@ -1,6 +1,8 @@
 @import "./assets/css/roboto.scss";
 @import "material-icons/iconfont/material-icons.css";
 
+$vh-breakpoint-1: 800px;
+
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;
     justify-content: $jc;

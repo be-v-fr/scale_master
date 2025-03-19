@@ -10,6 +10,9 @@
 .menu-container {
     width: 100vw;
     height: 240px;
+    @media screen and (max-height: $vh-breakpoint-1) {
+        height: 206px;
+    }
 }
 
 .fretboard-container {
@@ -17,7 +20,7 @@
     width: 100vw;
     max-width: 1280px;
     @include flex();
-    @media screen and (max-height: 800px) {
+    @media screen and (max-height: $vh-breakpoint-1) {
         max-width: unset;
     }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 /**
@@ -22,13 +22,32 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
   @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;
   @ViewChild('innerWrapper') innerWrapper!: ElementRef<HTMLDivElement>;
   useIconPlaceholder: boolean = true;
+  submenuWidth?: number;
+  @Output() bgWidth: EventEmitter<number> = new EventEmitter<number>();
+
+
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
 
   /**
    * After component view initialization, executes custom initialization.
    */
   ngAfterViewInit(): void {
-    this.checkWidth();
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.initWidth();
+      this.checkWidth();
+    }, 200);
+  }
+
+
+  initWidth(): void {
+    this.cdr.detectChanges();
+    this.submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
+    this.bgWidth.emit(this.submenuWidth + 16);
+    console.log(this.title, 'submenu width:', this.submenuWidth);
   }
 
 
@@ -37,11 +56,11 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
    * Sets style control properties accordingly. 
    */
   checkWidth(): void {
-    const innerWrapper: HTMLDivElement = this.innerWrapper.nativeElement;
     const outerWrapper: HTMLElement | null = this.innerWrapper.nativeElement.parentElement;
-    if(outerWrapper) {
-      if(innerWrapper.offsetWidth > outerWrapper.offsetWidth) {
+    if(this.submenuWidth && outerWrapper) {
+      if(this.submenuWidth > outerWrapper.offsetWidth) {
         this.useIconPlaceholder = false;
+        this.cdr.detectChanges();
       }
     } else {
       console.error('Outer wrapper was not found.');

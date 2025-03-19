@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 import { isEqual } from 'lodash';
@@ -55,6 +55,7 @@ export class ScrollableListComponent implements OnInit {
   @ViewChildren(ScrollableListItemComponent) items!: QueryList<ScrollableListItemComponent>;
   searchFilter?: string;
   @Input() allowSearch: boolean = true;
+  submenuBgWidth?: number;
 
 
   /**
@@ -62,6 +63,7 @@ export class ScrollableListComponent implements OnInit {
    */
   constructor(
     private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
   ) { }
 
 
@@ -243,5 +245,11 @@ export class ScrollableListComponent implements OnInit {
       return;
     }
     this.refocusByIndex(this.defaultIndex);
+  }
+
+
+  initSubmenuBg(bgWidth: number): void {
+    this.submenuBgWidth = bgWidth;
+    this.cdr.detectChanges();
   }
 }

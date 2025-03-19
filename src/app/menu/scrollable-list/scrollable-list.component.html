@@ -15,6 +15,9 @@
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" />
 </div>
-<app-scrollable-list-submenu [class.searching]="searchFilter || searchFilter === ''" [(searchFilter)]="searchFilter"
-    (refocus)="refocusByIndex(defaultIndex)" [title]="title" [allowSearch]="allowSearch"
-    (searchFilterChange)="onSearchChange()" />
+<div class="submenu-wrapper" [class.searching]="searchFilter || searchFilter === ''">
+    <app-scrollable-list-submenu [(searchFilter)]="searchFilter"
+        (refocus)="refocusByIndex(defaultIndex)" [title]="title" [allowSearch]="allowSearch"
+        (searchFilterChange)="onSearchChange()" (bgWidth)="initSubmenuBg($event)" />
+    <div *ngIf="submenuBgWidth" class="submenu-bg" [style.width.px]="submenuBgWidth"></div>
+</div>

@@ -5,6 +5,8 @@ $container-padding: 4px;
 :host {
     width: 100%;
     @include flex();
+    position: relative;
+    z-index: 0;
 
     .submenu-outer-wrapper {
         position: relative;
@@ -56,6 +58,7 @@ $container-padding: 4px;
         .searchbar {
             display: none;
             position: absolute;
+            z-index: 2;
             inset: 0;
             align-items: center;
             background: white;

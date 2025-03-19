@@ -11,7 +11,7 @@ $string-margin: 8vw;
     background-repeat: no-repeat;
     background-size: cover;
     flex: 1;
-    @media screen and (max-height: 800px) {
+    @media screen and (max-height: $vh-breakpoint-1) {
       height: 100%;
     }
 }

@@ -14,12 +14,32 @@ $opac-outside: 0.3;
   @extend .prevent-select;
   width: 100%;
   @include flex($dir: column);
-  app-scrollable-list-submenu {
+
+  .submenu-wrapper {
+    width: 100%;
     opacity: 0;
     transition: 750ms ease-out;
     transition-delay: 250ms;
+
+    app-scrollable-list-submenu {
+      position: relative;
+      z-index: 10;
+    }
+
+    .submenu-bg {
+      position: relative;
+      z-index: 9;
+      height: 32px;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      background: white;
+    }
   }
-  &:hover app-scrollable-list-submenu, app-scrollable-list-submenu.searching {
+
+  &:hover .submenu-wrapper,
+  .submenu-wrapper.searching {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;
@@ -31,6 +51,7 @@ $opac-outside: 0.3;
   height: 144px;
   @include flex($dir: column, $g: 3px);
   position: relative;
+
   .list-container {
     position: relative;
     width: 100%;
@@ -40,18 +61,22 @@ $opac-outside: 0.3;
     @include flex($dir: column);
     background: steelblue;
   }
+
   &.list-empty .list-container {
     background: lightgrey;
+
     .empty-field {
       font-size: 24px;
       color: white;
     }
   }
+
   app-scrollable-list-arrow {
     opacity: 0;
     transition: 200ms ease-in;
     transition-delay: 100ms;
   }
+
   &:hover:not(.list-empty) app-scrollable-list-arrow {
     opacity: 1;
     transition: 50ms;
@@ -63,40 +88,50 @@ $opac-outside: 0.3;
 app-scrollable-list-item {
   position: absolute;
   transition: none;
+
   &.scroll {
     transition: 300ms ease-out;
   }
+
   &.over {
     opacity: $opac-outside;
     transform: scale($scl-outside) translateY(-$y-outside);
   }
+
   &.top {
     opacity: $opac-outer;
     transform: scale($scl-outer) translateY(-$y-outer);
   }
+
   &.up {
     opacity: $opac-inner;
     transform: scale($scl-inner) translateY(-$y-inner);
   }
+
   &.center {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+
   &.down {
     opacity: $opac-inner;
     transform: scale($scl-inner) translateY($y-inner);
   }
+
   &.bottom {
     opacity: $opac-outer;
     transform: scale($scl-outer) translateY($y-outer);
   }
+
   &.under {
     opacity: $opac-outside;
     transform: scale($scl-outside) translateY($y-outside);
   }
+
   &.over-out {
     @extend .over;
   }
+
   &.under-out {
     @extend .under;
   }
