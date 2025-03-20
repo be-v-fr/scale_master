@@ -2,6 +2,7 @@
 @import "material-icons/iconfont/material-icons.css";
 
 $vh-breakpoint-1: 800px;
+$vh-breakpoint-2: 640px;
 
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;
@@ -9,6 +10,14 @@ $vh-breakpoint-1: 800px;
     align-items: $ai;
     gap: $g;
     flex-direction: $dir;
+}
+
+:root {
+    --collapsed-menu-height: 120px;
+    --expanded-menu-height: 240px;
+    @media screen and (max-height: $vh-breakpoint-1) {
+        --expanded-menu-height: 206px;
+    }
 }
 
 body {

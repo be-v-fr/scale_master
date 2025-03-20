@@ -7,13 +7,27 @@
     overflow: hidden;
 }
 
-.menu-container {
+.menu-wrapper {
     width: 100vw;
-    height: 240px;
+    height: var(--expanded-menu-height);
     position: relative;
     z-index: 10;
-    @media screen and (max-height: $vh-breakpoint-1) {
-        height: 206px;
+
+    .menu-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        transition: height 200ms ease-out;
+    }
+
+    @media screen and (max-height: $vh-breakpoint-2) {
+        height: var(--collapsed-menu-height);
+
+        .menu-container:not(.collapsed) {
+            height: var(--expanded-menu-height);
+        }
     }
 }
 
@@ -22,6 +36,7 @@
     width: 100vw;
     max-width: 1280px;
     @include flex();
+
     @media screen and (max-height: $vh-breakpoint-1) {
         max-width: unset;
     }
@@ -33,9 +48,11 @@
     z-index: 10;
     background: white;
     @include flex($dir: column, $g: 24px);
+
     .material-icons {
         font-size: 96px;
     }
+
     @media screen and (orientation: landscape) {
         display: none;
     }

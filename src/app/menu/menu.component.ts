@@ -7,6 +7,7 @@ import { ScalesDataService } from '../../services/scales-data.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { TuningsDataService } from '../../services/tunings-data.service';
 import { SettingsDisplayComponent } from './settings-display/settings-display.component';
+import { DisplayService } from '../../services/display.service';
 
 /**
  * Displays the menu offering any app controls.
@@ -30,6 +31,7 @@ export class MenuComponent implements OnInit {
     public tuningsData: TuningsDataService,
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
+    public display: DisplayService
   ) { }
 
 

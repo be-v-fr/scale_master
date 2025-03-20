@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class DisplayService {
   private _noteDisplay: 'name' | 'meaning' = 'name';
   lefty: boolean = false;
+  menuCollapsed: boolean = true;
 
 
   /**

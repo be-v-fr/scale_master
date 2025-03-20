@@ -6,6 +6,7 @@ import { isEqual } from 'lodash';
 import { HoverDirective } from '../../../directives/hover.directive';
 import { modWithSubZero } from '../../../utils/mod.utils';
 import { ScrollableListSubmenuComponent } from './scrollable-list-submenu/scrollable-list-submenu.component';
+import { DisplayService } from '../../../services/display.service';
 
 /**
  * Displays a scrollable list for any content array that consists of strings or numbers.
@@ -64,6 +65,7 @@ export class ScrollableListComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
+    public display: DisplayService
   ) { }
 
 

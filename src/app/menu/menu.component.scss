@@ -1,16 +1,46 @@
 @import "../../styles.scss";
 
+$vertical-padding: 18px;
+
 :host {
     width: 100%;
     height: 100%;
     background: white;
-    padding: 18px 8px;
+    padding: $vertical-padding 8px;
     @include flex($g: 24px);
+}
+
+.expand-btn-wrapper {
+    display: none;
+    width: 64px;
+    height: 100%;
+
+    .expand-btn-container {
+        margin-bottom: -$vertical-padding;
+        width: 44px;
+        height: 44px;
+
+        button {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            @include flex();
+            margin: 0;
+            position: relative;
+            bottom: -50%;
+        }
+    }
+
+    @media screen and (max-height: $vh-breakpoint-2) {
+        @include flex($ai: flex-end);
+    }
 }
 
 section {
     height: 100%;
     @include flex($dir: column, $jc: flex-start, $g: 6px);
+
     h4 {
         width: 100%;
         margin: 0;
@@ -18,21 +48,27 @@ section {
         @include flex();
         border-bottom: 1px solid black;
     }
+
     .scrollable-lists-container {
         @include flex($g: 10px);
     }
+
     app-scrollable-list {
         width: 148px;
+
         &.narrow {
             width: 96px;
         }
+
         &.narrower {
             width: 72px;
         }
+
         &.tiny {
             width: 40px;
         }
     }
+
     app-settings-display {
         height: 160px;
     }

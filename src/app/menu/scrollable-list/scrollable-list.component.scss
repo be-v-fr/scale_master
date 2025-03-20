@@ -51,6 +51,14 @@ $opac-outside: 0.3;
   height: 144px;
   @include flex($dir: column, $g: 3px);
   position: relative;
+  transition: height 200ms ease-out;
+
+  &.collapsed {
+    @media screen and (max-height: $vh-breakpoint-2) {
+      height: 61px;
+      transition: height 200ms ease-out;
+    }
+  }
 
   .list-container {
     position: relative;

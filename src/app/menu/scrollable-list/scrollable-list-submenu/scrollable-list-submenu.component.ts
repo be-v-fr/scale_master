@@ -26,6 +26,9 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
   @Output() bgWidth: EventEmitter<number> = new EventEmitter<number>();
 
 
+  /**
+   * Constructor for injections.
+   */
   constructor(
     private cdr: ChangeDetectorRef
   ) { }
@@ -43,11 +46,14 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Reads the submenu width from the DOM tree, saves it and emits
+   * the corresponding background width.
+   */
   initWidth(): void {
     this.cdr.detectChanges();
     this.submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
     this.bgWidth.emit(this.submenuWidth + 16);
-    console.log(this.title, 'submenu width:', this.submenuWidth);
   }
 
 
