@@ -3,11 +3,11 @@
         <div class="submenu-container">
             @if(allowSearch) {
             <button class="material-icons icon-btn" (click)="initSearch()">search</button>
-            } @else {
-            <div *ngIf="useIconPlaceholder" class="icon-placeholder"></div>
             }
             <span class="title" *ngIf="title">{{title}}</span>
+            @if(allowReset) {
             <button class="material-icons reset-btn" (click)="refocus.emit()">autorenew</button>
+            }
             <div class="searchbar">
                 <button class="material-icons icon-btn search-off-btn"
                     (click)="$event.stopPropagation(); clearSearch()">

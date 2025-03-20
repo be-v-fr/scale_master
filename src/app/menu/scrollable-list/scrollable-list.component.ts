@@ -56,6 +56,7 @@ export class ScrollableListComponent implements OnInit {
   @ViewChildren(ScrollableListItemComponent) items!: QueryList<ScrollableListItemComponent>;
   searchFilter?: string;
   @Input() allowSearch: boolean = true;
+  @Input() allowReset: boolean = true;
   submenuBgWidth?: number;
 
 

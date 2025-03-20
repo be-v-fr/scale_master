@@ -16,13 +16,12 @@ import { FormsModule } from '@angular/forms';
 export class ScrollableListSubmenuComponent implements AfterViewInit {
   @Input() title?: string;
   @Input() allowSearch: boolean = true;
+  @Input() allowReset: boolean = true;
   @Input() searchFilter?: string;
   @Output() searchFilterChange: EventEmitter<string | undefined> = new EventEmitter<string | undefined>();
   @Output() refocus: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;
   @ViewChild('innerWrapper') innerWrapper!: ElementRef<HTMLDivElement>;
-  useIconPlaceholder: boolean = true;
-  submenuWidth?: number;
   @Output() bgWidth: EventEmitter<number> = new EventEmitter<number>();
 
 
@@ -40,37 +39,18 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
     setTimeout(() => {
+      this.cdr.detectChanges();
       this.initWidth();
-      this.checkWidth();
     }, 200);
   }
 
 
   /**
-   * Reads the submenu width from the DOM tree, saves it and emits
-   * the corresponding background width.
+   * Reads the submenu width from the DOM tree and emits the corresponding background width.
    */
   initWidth(): void {
-    this.cdr.detectChanges();
-    this.submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
-    this.bgWidth.emit(this.submenuWidth + 16);
-  }
-
-
-  /**
-   * Checks the width of the inner and outer wrapper elements.
-   * Sets style control properties accordingly. 
-   */
-  checkWidth(): void {
-    const outerWrapper: HTMLElement | null = this.innerWrapper.nativeElement.parentElement;
-    if(this.submenuWidth && outerWrapper) {
-      if(this.submenuWidth > outerWrapper.offsetWidth) {
-        this.useIconPlaceholder = false;
-        this.cdr.detectChanges();
-      }
-    } else {
-      console.error('Outer wrapper was not found.');
-    }
+    const submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
+    this.bgWidth.emit(submenuWidth + 16);
   }
 
 

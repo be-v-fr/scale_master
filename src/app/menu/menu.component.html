@@ -18,7 +18,8 @@
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
         <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames"
-            [(current)]="currScale.modeName" [title]="'Mode'" />
+            [(current)]="currScale.modeName" [allowSearch]="currScale.categoryModeNames.length > 0" 
+            [allowReset]="currScale.categoryModeNames.length > 0" [title]="'Mode'" />
     </div>
 </section>
 <section>
