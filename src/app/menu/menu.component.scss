@@ -56,6 +56,14 @@ section {
         padding-bottom: 6px;
         @include flex();
         border-bottom: 1px solid black;
+        transition: 200ms ease;
+
+        &.collapsed {
+            @media screen and (max-height: $vh-breakpoint-2) {
+                padding-bottom: 0;
+                border-bottom: none;   
+            }
+        }
     }
 
     .scrollable-lists-container {

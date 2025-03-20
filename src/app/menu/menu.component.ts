@@ -8,6 +8,7 @@ import { CurrentFretboardService } from '../../services/current-fretboard.servic
 import { TuningsDataService } from '../../services/tunings-data.service';
 import { SettingsDisplayComponent } from './settings-display/settings-display.component';
 import { DisplayService } from '../../services/display.service';
+import { FileMenuComponent } from './file-menu/file-menu.component';
 
 /**
  * Displays the menu offering any app controls.
@@ -15,7 +16,7 @@ import { DisplayService } from '../../services/display.service';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, FileMenuComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

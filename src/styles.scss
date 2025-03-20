@@ -3,6 +3,7 @@
 
 $vh-breakpoint-1: 800px;
 $vh-breakpoint-2: 640px;
+$vh-breaktpoint-3: 520px;
 
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;

@@ -1,0 +1,8 @@
+@import '.././../../styles.scss';
+
+:host {
+    @include flex($g: 6px);
+    button {
+        @include flex($dir: column);
+    }
+}
