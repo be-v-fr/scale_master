@@ -29,6 +29,15 @@ $vertical-padding: 18px;
             margin: 0;
             position: relative;
             bottom: -50%;
+            transition: 50ms;
+            &:hover {
+                transition: 50ms;
+                box-shadow: 1px 2px 2px 4px #0002;
+            }
+            &:active {
+                transition: 50ms;
+                box-shadow: 1px 2px 2px 4px #0003;
+            }
         }
     }
 
