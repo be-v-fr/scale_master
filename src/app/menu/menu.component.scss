@@ -1,6 +1,7 @@
 @import "../../styles.scss";
 
 $vertical-padding: 18px;
+$edit-btn-size: 28px;
 
 :host {
     width: 100%;
@@ -52,6 +53,7 @@ section {
 
     h4 {
         width: 100%;
+        height: calc($edit-btn-size + 6px);
         margin: 0;
         padding-bottom: 6px;
         @include flex($g: 6px);
@@ -60,14 +62,15 @@ section {
 
         &.collapsed {
             @media screen and (max-height: $vh-breakpoint-2) {
+                height: $edit-btn-size;
                 padding-bottom: 0;
                 border-bottom: none;   
             }
         }
 
         .edit-btn {
-            width: 28px;
-            height: 28px;
+            width: $edit-btn-size;
+            height: $edit-btn-size;
             font-size: 20px;
             @include flex();
             border-radius: 50%;
@@ -105,9 +108,5 @@ section {
         &.tiny {
             width: 40px;
         }
-    }
-
-    app-settings-display {
-        height: 160px;
     }
 }
