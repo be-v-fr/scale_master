@@ -2,7 +2,28 @@
 
 :host {
     @include flex($g: 6px);
+
     button {
+        width: 48px;
+        height: 48px;
         @include flex($dir: column);
+        border: 1px solid black;
+        border-radius: 3px;
+        transition: 75ms ease;
+
+        &:hover {
+            transition: 75ms ease;
+            box-shadow: 1px 2px 2px 1px #0002;
+        }
+
+        &:active {
+            transition: 75ms ease;
+            box-shadow: 1px 2px 2px 1px #0003;
+
+            .material-icons {
+                transition: 100ms ease;
+                transform: scale(0.9);
+            }
+        }
     }
 }
