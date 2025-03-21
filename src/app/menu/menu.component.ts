@@ -9,6 +9,7 @@ import { TuningsDataService } from '../../services/tunings-data.service';
 import { SettingsDisplayComponent } from './settings-display/settings-display.component';
 import { DisplayService } from '../../services/display.service';
 import { FileMenuComponent } from './file-menu/file-menu.component';
+import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
 
 /**
  * Displays the menu offering any app controls.
@@ -16,7 +17,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, FileMenuComponent],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, FileMenuComponent, CircularButtonComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
