@@ -1,0 +1,13 @@
+@import '../../../styles.scss';
+
+.export-wrapper {
+    position: relative;
+    .overlay {
+        position: absolute;
+        z-index: 10;
+        inset: 0;
+        @include flex();
+        background: #fffb;
+        backdrop-filter: blur(1.5px);
+    }
+}
