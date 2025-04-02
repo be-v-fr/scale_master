@@ -8,8 +8,8 @@ import { CurrentFretboardService } from '../../services/current-fretboard.servic
 import { TuningsDataService } from '../../services/tunings-data.service';
 import { SettingsDisplayComponent } from './settings-display/settings-display.component';
 import { DisplayService } from '../../services/display.service';
-import { FileMenuComponent } from './file-menu/file-menu.component';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
+import { ExportComponent } from './export/export.component';
 
 /**
  * Displays the menu offering any app controls.
@@ -17,7 +17,7 @@ import { CircularButtonComponent } from '../shared/circular-button/circular-butt
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, FileMenuComponent, CircularButtonComponent],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

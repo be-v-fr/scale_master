@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileMenuComponent } from './file-menu.component';
+import { DialogOverlayComponent } from './dialog-overlay.component';
 
-describe('FileMenuComponent', () => {
-  let component: FileMenuComponent;
-  let fixture: ComponentFixture<FileMenuComponent>;
+describe('DialogOverlayComponent', () => {
+  let component: DialogOverlayComponent;
+  let fixture: ComponentFixture<DialogOverlayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FileMenuComponent]
+      imports: [DialogOverlayComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FileMenuComponent);
+    fixture = TestBed.createComponent(DialogOverlayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

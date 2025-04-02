@@ -10,11 +10,4 @@
     <i class="material-icons">screen_rotation</i>
     <span>Please turn your device horizontally.</span>
 </div>
-<div class="dialog-overlay" *ngIf="router.url.includes('dialog')" [routerLink]="''">
-    <div class="dialog-wrapper" (click)="$event.stopPropagation()">
-        <app-circular-button [icon]="'close'" [routerLink]="''" />
-        <div class="dialog-container">
-            <router-outlet />
-        </div>
-    </div>
-</div>
+<app-dialog-overlay [show]="router.url.includes('dialog')" (close)="router.navigateByUrl('')" />

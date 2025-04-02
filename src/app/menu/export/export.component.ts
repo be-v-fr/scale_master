@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-file-menu',
+  selector: 'app-export',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './file-menu.component.html',
-  styleUrl: './file-menu.component.scss'
+  templateUrl: './export.component.html',
+  styleUrl: './export.component.scss'
 })
-export class FileMenuComponent {
+export class ExportComponent {
 
 }

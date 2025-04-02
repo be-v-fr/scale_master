@@ -1,0 +1,11 @@
+@import '.././../../styles.scss';
+
+:host {
+    @include flex($dir: column, $g: 6px);
+
+    button {
+        width: 100%;
+        padding: 6px;
+        @include flex($jc: flex-start, $g: 6px);
+    }
+}
