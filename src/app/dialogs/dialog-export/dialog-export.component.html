@@ -5,6 +5,7 @@
         <app-fretboard-as-text *ngSwitchCase="'txt'" (onFretboardInit)="data = $event" />
     </div>
     <div *ngIf="!downloadUrl" class="overlay exporting">
+        <app-loader /> 
         <span>Exporting...</span>
     </div>
     <img class="overlay export-img-result" *ngIf="downloadUrl && fileType == 'img'" [src]="downloadUrl" alt="Export preview" />

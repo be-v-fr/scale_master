@@ -9,11 +9,12 @@ import { CurrentScaleService } from '../../../services/current-scale.service';
 import { ExportOptionsComponent } from './export-options/export-options.component';
 import { ToastMessageService } from '../../../services/toast-message.service';
 import { capitalizeFirstLetter } from '../../../utils/string.utils';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-dialog-export',
   standalone: true,
-  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent, ExportOptionsComponent],
+  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent, ExportOptionsComponent, LoaderComponent],
   templateUrl: './dialog-export.component.html',
   styleUrl: './dialog-export.component.scss'
 })

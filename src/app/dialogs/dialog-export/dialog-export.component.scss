@@ -10,7 +10,7 @@
             inset: 0;
             overflow: hidden;
             &.exporting {
-                @include flex();
+                @include flex($g: 12px);
                 background: #fffb;
                 backdrop-filter: blur(1.5px);
             }
