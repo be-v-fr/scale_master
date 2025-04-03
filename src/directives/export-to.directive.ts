@@ -6,7 +6,7 @@ import domtoimage from 'dom-to-image';
   standalone: true
 })
 export class ExportToDirective implements AfterViewInit {
-  @Input({ alias: 'exportType', required: true }) fileType!: 'img' | 'txt';
+  @Input({ alias: 'appExportTo', required: true }) fileType!: 'img' | 'txt';
   private _selfReliantExportTypes: Array<'img' | 'txt'> = ['img'];
   @Input() set export(data: any) {
     if (data && !this._selfReliantExportTypes.includes(this.fileType)) {

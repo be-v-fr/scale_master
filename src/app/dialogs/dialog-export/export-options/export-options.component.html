@@ -2,7 +2,7 @@
     <i class="material-icons">download</i>
     <span>Download</span>
 </a>
-<button class="border-btn" [disabled]="!fileUrl">
+<button class="border-btn" [appCopyToClipboard]="fileUrl" [disabled]="!fileUrl" (copied)="copied.emit()">
     <i class="material-icons">content_copy</i>
     <span>Copy</span>
 </button>

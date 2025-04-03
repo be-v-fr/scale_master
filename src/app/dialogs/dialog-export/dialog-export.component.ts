@@ -7,6 +7,8 @@ import { FretboardComponent } from '../../fretboard/fretboard.component';
 import { FretboardAsTextComponent } from '../../fretboard-as-text/fretboard-as-text.component';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { ExportOptionsComponent } from './export-options/export-options.component';
+import { ToastMessageService } from '../../../services/toast-message.service';
+import { capitalizeFirstLetter } from '../../../utils/string.utils';
 
 @Component({
   selector: 'app-dialog-export',
@@ -25,6 +27,7 @@ export class DialogExportComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private currScale: CurrentScaleService,
     private cdr: ChangeDetectorRef,
+    public toastMsg: ToastMessageService
   ) { }
 
 
@@ -74,5 +77,12 @@ export class DialogExportComponent implements OnInit, OnDestroy {
 
   get fileName(): string {
     return this.currScale.scale.name.replaceAll(' ', '_');
+  }
+
+
+  get copyMsg(): string | undefined {
+    const type: string | undefined = this.fileTypeToString;
+    if(!type) return;
+    return `${capitalizeFirstLetter(type)} copied to clipboard`;
   }
 }

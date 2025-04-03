@@ -11,3 +11,4 @@
     <span>Please turn your device horizontally.</span>
 </div>
 <app-dialog-overlay [show]="router.url.includes('dialog')" (close)="router.navigateByUrl('')" />
+<app-toast-message *ngIf="toastMsg.message" [message]="toastMsg.message" />

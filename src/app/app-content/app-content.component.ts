@@ -5,6 +5,8 @@ import { MenuComponent } from '../menu/menu.component';
 import { DisplayService } from '../../services/display.service';
 import { Router } from '@angular/router';
 import { DialogOverlayComponent } from "../dialog-overlay/dialog-overlay.component";
+import { ToastMessageComponent } from '../shared/toast-message/toast-message.component';
+import { ToastMessageService } from '../../services/toast-message.service';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -12,7 +14,7 @@ import { DialogOverlayComponent } from "../dialog-overlay/dialog-overlay.compone
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FretboardComponent, MenuComponent, DialogOverlayComponent],
+  imports: [CommonModule, FretboardComponent, MenuComponent, DialogOverlayComponent, ToastMessageComponent],
   templateUrl: './app-content.component.html',
   styleUrl: './app-content.component.scss'
 })
@@ -24,6 +26,7 @@ export class AppContentComponent {
    */
   constructor(
     public router: Router,
-    public display: DisplayService
+    public display: DisplayService,
+    public toastMsg: ToastMessageService
   ) { }
 }

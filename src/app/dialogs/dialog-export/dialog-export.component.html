@@ -1,6 +1,6 @@
 <h2>Export as {{fileTypeToString}}</h2>
 <div class="export-wrapper">
-    <div *ngIf="fileType" [ngSwitch]="fileType" appExportTo [exportType]="fileType" [export]="data" (urlReady)="downloadUrl = $event">
+    <div *ngIf="fileType" [ngSwitch]="fileType" [appExportTo]="fileType" [export]="data" (urlReady)="downloadUrl = $event">
         <app-fretboard *ngSwitchCase="'img'" />
         <app-fretboard-as-text *ngSwitchCase="'txt'" (onFretboardInit)="data = $event" />
     </div>
@@ -9,4 +9,4 @@
     </div>
     <img class="overlay export-img-result" *ngIf="downloadUrl && fileType == 'img'" [src]="downloadUrl" alt="Export preview" />
 </div>
-<app-export-options [fileName]="fileName" [fileUrl]="downloadUrl" />
+<app-export-options *ngIf="fileTypeToString" [fileName]="fileName" [fileUrl]="downloadUrl" (copied)="toastMsg.message = copyMsg" />
