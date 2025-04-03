@@ -6,11 +6,12 @@ import { ExportToDirective } from '../../../directives/export-to.directive';
 import { FretboardComponent } from '../../fretboard/fretboard.component';
 import { FretboardAsTextComponent } from '../../fretboard-as-text/fretboard-as-text.component';
 import { CurrentScaleService } from '../../../services/current-scale.service';
+import { ExportOptionsComponent } from './export-options/export-options.component';
 
 @Component({
   selector: 'app-dialog-export',
   standalone: true,
-  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent],
+  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent, ExportOptionsComponent],
   templateUrl: './dialog-export.component.html',
   styleUrl: './dialog-export.component.scss'
 })

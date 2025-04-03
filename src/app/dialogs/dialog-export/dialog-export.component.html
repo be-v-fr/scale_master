@@ -4,8 +4,9 @@
         <app-fretboard *ngSwitchCase="'img'" />
         <app-fretboard-as-text *ngSwitchCase="'txt'" (onFretboardInit)="data = $event" />
     </div>
-    <div *ngIf="!downloadUrl" class="overlay">
+    <div *ngIf="!downloadUrl" class="overlay exporting">
         <span>Exporting...</span>
     </div>
+    <img class="overlay export-img-result" *ngIf="downloadUrl && fileType == 'img'" [src]="downloadUrl" alt="Export preview" />
 </div>
-<a *ngIf="downloadUrl" [download]="fileName" [href]="downloadUrl">Download</a>
+<app-export-options [fileName]="fileName" [fileUrl]="downloadUrl" />

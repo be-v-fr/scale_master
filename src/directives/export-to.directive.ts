@@ -47,6 +47,5 @@ export class ExportToDirective implements AfterViewInit {
     const blob: Blob = new Blob([data], { type: 'text/plain' });
     const dataUrl: string = URL.createObjectURL(blob);
     this.urlReady.emit(dataUrl);
-    // URL.revokeObjectURL(url); // Speicher wieder freigeben
   }
 }

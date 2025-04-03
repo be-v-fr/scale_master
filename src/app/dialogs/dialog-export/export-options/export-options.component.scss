@@ -1,0 +1,11 @@
+@import '.././../../../styles.scss';
+
+:host {
+    @include flex($jc: flex-end, $g: 6px);
+
+    .border-btn {
+        width: 114px;
+        padding: 6px;
+        @include flex($g: 6px);
+    }
+}

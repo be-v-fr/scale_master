@@ -35,12 +35,15 @@ body {
     box-sizing: border-box;
 }
 
-button {
+button,
+a {
     border: none;
     outline: none;
     background: none;
+    text-decoration: none;
     padding: 0;
     margin: 0;
+    color: black;
     cursor: pointer;
 }
 
@@ -65,7 +68,9 @@ button.icon-btn {
 }
 
 button.reset-btn {
-    transition: all 75ms, transform 0;
+    transition:
+        all 75ms,
+        transform 0;
     transform: rotate(0) scale(1);
 
     &:hover {
@@ -84,6 +89,7 @@ button.reset-btn {
     border: 1px solid black;
     border-radius: 3px;
     transition: 75ms ease;
+    font-size: 14px;
 
     &:hover {
         transition: 75ms ease;
@@ -97,6 +103,18 @@ button.reset-btn {
         .material-icons {
             transition: 100ms ease;
             transform: scale(0.9);
+        }
+    }
+
+    &:disabled,
+    &.disabled {
+        border-color: grey;
+        color: grey;
+        pointer-events: none;
+        cursor: not-allowed;
+
+        .material-icons {
+            transform: none;
         }
     }
 }
