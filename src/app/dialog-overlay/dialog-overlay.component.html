@@ -1,5 +1,5 @@
-<div class="dialog-overlay" *ngIf="showing" (click)="close.emit()">
-    <div class="dialog-wrapper" (click)="$event.stopPropagation()">
+<div class="dialog-overlay" *ngIf="showing" (mousedown)="close.emit()">
+    <div class="dialog-wrapper" (mousedown)="$event.stopPropagation()">
         <app-circular-button [icon]="'close'" (click)="close.emit()" />
         <div class="dialog-container">
             <router-outlet />
