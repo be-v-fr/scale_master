@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Directive({
   selector: '[appHover]',
@@ -7,10 +7,6 @@ import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angu
 export class HoverDirective {
   hovering: boolean = false;
   @Output() hoverKeyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-  constructor(
-    private elementRef: ElementRef
-  ) { }
 
   @HostListener('mouseenter', ['$event'])
   onMouseEnter() {

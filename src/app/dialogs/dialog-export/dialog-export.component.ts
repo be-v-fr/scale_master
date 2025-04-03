@@ -1,25 +1,49 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ExportToDirective } from '../../../directives/export-to.directive';
 import { FretboardComponent } from '../../fretboard/fretboard.component';
+import { FretboardAsTextComponent } from '../../fretboard-as-text/fretboard-as-text.component';
+import { CurrentScaleService } from '../../../services/current-scale.service';
 
 @Component({
   selector: 'app-dialog-export',
   standalone: true,
-  imports: [CommonModule, ExportToDirective, FretboardComponent],
+  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent],
   templateUrl: './dialog-export.component.html',
   styleUrl: './dialog-export.component.scss'
 })
 export class DialogExportComponent implements OnInit, OnDestroy {
   fileType?: 'img' | 'txt';
   routeSub: Subscription = new Subscription();
-  downloadUrl?: string;
+  private _downloadUrl?: string;
+  private _data?: any;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private currScale: CurrentScaleService,
+    private cdr: ChangeDetectorRef,
   ) { }
+
+
+  get downloadUrl(): string | undefined {
+    return this._downloadUrl;
+  }
+  set downloadUrl(value: string) {
+    this._downloadUrl = value;
+    this.cdr.detectChanges();
+  }
+
+
+  get data(): any {
+    return this._data;
+  }
+  set data(value: any) {
+    this._data = value;
+    this.cdr.detectChanges();
+  }
+
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
@@ -32,9 +56,11 @@ export class DialogExportComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
+
 
   get fileTypeToString(): string | undefined {
     switch(this.fileType) {
@@ -42,5 +68,10 @@ export class DialogExportComponent implements OnInit, OnDestroy {
       case 'txt': return 'text';
     }
     return undefined;
+  }
+
+
+  get fileName(): string {
+    return this.currScale.scale.name.replaceAll(' ', '_');
   }
 }

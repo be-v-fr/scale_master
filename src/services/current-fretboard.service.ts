@@ -130,4 +130,36 @@ export class CurrentFretboardService {
     const note: Note | undefined = this.currScale.matchedNotes?.find(n => n.index === updatedIndex);
     this.fretboard.root = note ? note : this.fretboard.tuning.defaultRoot;
   }
+
+
+  /**
+   * Retrieves the note of the current scale corresponding to a given position on the fretboard. 
+   * @param instrumentString - Index number of the string (counting from high to low).
+   * @param fret - Fret number (0 to 11).
+   */
+  getNoteFromFret(instrumentString: number, fret: number): Note | undefined {
+    const absoluteIndex: number = this.getFretNoteIndex(instrumentString, fret);
+    return this.currScale.scale.notes.find(n => n.index === absoluteIndex);
+  }
+
+
+  /**
+   * Retrieves the note index/pitch corresponding to a given position on the fretboard. 
+   * @param instrumentString - Index number of the string (counting from high to low).
+   * @param fret - Fret number (0 to 11).
+   */
+  getFretNoteIndex(instrumentString: number, fret: number): number {
+    const instrumentStringNote: Note = this.notes[instrumentString];
+    return instrumentStringNote.getIntervalIndex(fret);
+  }
+
+
+  /**
+   * Checks if a given position on the fretboard corresponds to the current scale's root note.
+   * @param instrumentString - Index number of the string (counting from high to low).
+   * @param fret - Fret number (0 to 11).
+   */
+  isRoot(instrumentString: number, fret: number): boolean {
+    return this.currScale.scale.root.index == this.getFretNoteIndex(instrumentString, fret);
+  }
 }

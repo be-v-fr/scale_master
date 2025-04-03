@@ -35,6 +35,11 @@ export class Scale {
         return defaultNotes;
     }
 
+    get name(): string {
+        const baseName: string = `${this.root.print()} ${this.category.name}`;
+        return this.mode ? `${baseName} ${this.mode.name}` : baseName;
+    }
+
     private _constructNotes(root: Note): Note[] {
         let notes: Note[] = [];
         const intervals: number[] = Array.from(this.category.intervals);
