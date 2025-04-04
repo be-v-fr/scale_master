@@ -7,9 +7,7 @@ import { Router } from '@angular/router';
 import { DialogOverlayComponent } from "../dialog-overlay/dialog-overlay.component";
 import { ToastMessageComponent } from '../shared/toast-message/toast-message.component';
 import { ToastMessageService } from '../../services/toast-message.service';
-import { CustomizeService } from '../../services/customize.service';
-import { MenuEditScaleComponent } from '../menu-edit-scale/menu-edit-scale.component';
-import { MenuEditFretboardComponent } from '../menu-edit-fretboard/menu-edit-fretboard.component';
+import { MenuEditComponent } from '../menu-edit/menu-edit.component';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -17,7 +15,7 @@ import { MenuEditFretboardComponent } from '../menu-edit-fretboard/menu-edit-fre
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FretboardComponent, MenuComponent, DialogOverlayComponent, ToastMessageComponent, MenuEditScaleComponent, MenuEditFretboardComponent],
+  imports: [CommonModule, FretboardComponent, MenuComponent, DialogOverlayComponent, ToastMessageComponent, MenuEditComponent],
   templateUrl: './app-content.component.html',
   styleUrl: './app-content.component.scss'
 })
@@ -30,7 +28,6 @@ export class AppContentComponent {
   constructor(
     public router: Router,
     public display: DisplayService,
-    public toastMsg: ToastMessageService,
-    public custom: CustomizeService
+    public toastMsg: ToastMessageService
   ) { }
 }

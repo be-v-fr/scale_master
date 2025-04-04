@@ -10,7 +10,7 @@ import { SettingsDisplayComponent } from './settings-display/settings-display.co
 import { DisplayService } from '../../services/display.service';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
 import { ExportComponent } from './export/export.component';
-import { CustomizeService } from '../../services/customize.service';
+import { RouterLink } from '@angular/router';
 
 /**
  * Displays the menu offering any app controls.
@@ -18,7 +18,7 @@ import { CustomizeService } from '../../services/customize.service';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
@@ -35,7 +35,6 @@ export class MenuComponent implements OnInit {
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
     public display: DisplayService,
-    public custom: CustomizeService
   ) { }
 
 

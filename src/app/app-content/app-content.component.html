@@ -1,8 +1,10 @@
 <div class="menu-wrapper">
-    <div class="menu-container" [class.collapsed]="display.menuCollapsed" [ngSwitch]="custom.customizing">
-        <app-menu *ngSwitchCase="undefined" />
-        <app-menu-edit-scale *ngSwitchCase="'scale'" />
-        <app-menu-edit-fretboard *ngSwitchCase="'fretboard'" />
+    <div class="menu-container" [class.collapsed]="display.menuCollapsed">
+        @if(router.url.includes('edit')) {
+        <app-menu-edit />
+        } @else {
+        <app-menu />
+        }
     </div>
 </div>
 <div class="fretboard-container">
