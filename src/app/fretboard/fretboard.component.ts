@@ -6,6 +6,7 @@ import { DisplayService } from '../../services/display.service';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { Router } from '@angular/router';
 import { Note } from '../../models/note';
+import { CustomizeService } from '../../services/customize.service';
 
 /**
  * Displays the fretboard with the currently selected scale.
@@ -24,10 +25,11 @@ export class FretboardComponent {
    * Constructor for injection of services.
    */
   constructor(
-    private router: Router,
+    public router: Router,
     private currScale: CurrentScaleService,
     public currFretboard: CurrentFretboardService,
-    public display: DisplayService
+    public display: DisplayService,
+    public custom: CustomizeService
   ) { }
 
   get frets(): number[] {

@@ -10,6 +10,7 @@ import { Scale } from '../../models/scale';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { Fretboard } from '../../models/fretboard';
+import { CustomizeService } from '../../services/customize.service';
 
 @Component({
   selector: 'app-menu-edit',
@@ -20,8 +21,6 @@ import { Fretboard } from '../../models/fretboard';
 })
 export class MenuEditComponent {
   routeSub: Subscription = new Subscription();
-  totalSteps: number = 3;
-  currentStep: number = 0;
   previousScale: Scale = cloneDeep(this.currScale.scale);
   previousFretboard: Fretboard = cloneDeep(this.currFretboard.fretboard);
 
@@ -30,12 +29,8 @@ export class MenuEditComponent {
     public display: DisplayService,
     private currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService,
+    public custom: CustomizeService
   ) { }
-
-  get routeEnd(): string {
-    const urlSegments: Array<string> = this.router.url.split('/');
-    return urlSegments[urlSegments.length - 1];
-  }
 
   undoAll(): void {
     this.currScale.scale = this.previousScale;

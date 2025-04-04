@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { AppContentComponent } from './app-content/app-content.component';
 import { DialogExportComponent } from './dialogs/dialog-export/dialog-export.component';
-import { MenuEditScaleComponent } from './menu-edit-scale/menu-edit-scale.component';
-import { MenuEditFretboardComponent } from './menu-edit-fretboard/menu-edit-fretboard.component';
+import { MenuEditScaleComponent } from './menu-edit/menu-edit-scale/menu-edit-scale.component';
+import { MenuEditFretboardComponent } from './menu-edit/menu-edit-fretboard/menu-edit-fretboard.component';
 
 export const routes: Routes = [
     {

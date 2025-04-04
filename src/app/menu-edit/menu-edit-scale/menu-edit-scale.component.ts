@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DisplayService } from '../../services/display.service';
-import { CurrentScaleService } from '../../services/current-scale.service';
+import { DisplayService } from '../../../services/display.service';
+import { CurrentScaleService } from '../../../services/current-scale.service';
 import { cloneDeep } from 'lodash';
-import { ScaleCategory } from '../../interfaces/scale-category';
+import { ScaleCategory } from '../../../interfaces/scale-category';
+import { CustomizeService } from '../../../services/customize.service';
 
 @Component({
   selector: 'app-menu-edit-scale',
@@ -13,12 +14,11 @@ import { ScaleCategory } from '../../interfaces/scale-category';
   styleUrl: './menu-edit-scale.component.scss'
 })
 export class MenuEditScaleComponent implements OnInit {
-  totalSteps: number = 3;
-  currentStep: number = 0;
 
   constructor(
     public display: DisplayService,
-    private currScale: CurrentScaleService
+    private currScale: CurrentScaleService,
+    public custom: CustomizeService
   ) { }
 
   ngOnInit(): void {

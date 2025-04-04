@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DisplayService } from '../../services/display.service';
+import { DisplayService } from '../../../services/display.service';
 
 @Component({
   selector: 'app-menu-edit-fretboard',

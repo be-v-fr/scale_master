@@ -4,16 +4,16 @@ $fret-border: 2px solid rgba(206, 174, 32);
 $string-margin: 8vw;
 
 :host {
-    width: 100%;
-    height: 400px;
-    background: url(../../assets/img/wood.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    flex: 1;
-    @media screen and (max-height: $vh-breakpoint-1) {
-      height: 100%;
-    }
+  width: 100%;
+  height: 400px;
+  background: url(../../assets/img/wood.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: 1;
+  @media screen and (max-height: $vh-breakpoint-1) {
+    height: 100%;
+  }
 }
 
 table {
@@ -39,15 +39,31 @@ table {
       @include flex();
       width: 100%;
       height: 100%;
+      .note-container {
+        width: 46px;
+        height: 46px;
+        border: 3px solid #0000;
+        z-index: 2;
+        border-radius: 50%;
+        transition: 225ms ease;
+        @media screen and (max-height: $vh-breaktpoint-3) {
+          width: 38px;
+          height: 38px;
+        }
+      }
+    }
+    td.enable-hover:hover {
+      cursor: pointer;
+      .scale-note-wrapper .note-container {
+        border-color: yellow;
+        transition: 100ms ease;
+      }
     }
     .string {
       position: absolute;
       height: 6px;
       background-color: rgb(248, 248, 248);
-      background-image: linear-gradient(
-        rgb(248, 248, 248) 30%,
-        rgb(180, 180, 180) 80%
-      );
+      background-image: linear-gradient(rgb(248, 248, 248) 30%, rgb(180, 180, 180) 80%);
       border: 0;
       left: $string-margin;
       right: 0;
@@ -70,7 +86,7 @@ table {
     }
     .string {
       left: 0;
-      right: $string-margin;      
+      right: $string-margin;
     }
   }
 }

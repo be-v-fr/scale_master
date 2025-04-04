@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Note } from '../../../models/note';
 import { DisplayService } from '../../../services/display.service';
+import { CustomizeService } from '../../../services/customize.service';
+import { Router } from '@angular/router';
 
 /**
  * Displays a note on the fretboard, if a note is transferred via input.
