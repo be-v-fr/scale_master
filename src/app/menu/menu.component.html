@@ -12,7 +12,7 @@
 <section>
     <h4 [class.collapsed]="display.menuCollapsed">
         Scale
-        <app-circular-button [icon]="'edit'" />
+        <app-circular-button [icon]="'edit'" (click)="custom.customizing = 'scale'" />
     </h4>
     <div class="scrollable-lists-container">
         <app-scrollable-list class="narrower" *ngIf="extendedNaturalNoteNames" [content]="extendedNaturalNoteNames"
@@ -28,7 +28,7 @@
 <section>
     <h4 [class.collapsed]="display.menuCollapsed">
         Fretboard
-        <app-circular-button [icon]="'edit'" />
+        <app-circular-button [icon]="'edit'" (click)="custom.customizing = 'fretboard'" />
     </h4>
     <div class="scrollable-lists-container">
         <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames" [content]="tuningsData.instrumentNames"

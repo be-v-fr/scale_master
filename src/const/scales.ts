@@ -1,6 +1,6 @@
 import { ScaleCategory } from "../interfaces/scale-category";
 
-export const SCALES: ScaleCategory[] = [ // VORZEICHEN INTEGRIEREN!! --> hängt von Grundton ab?! --> gibt es eine Möglichkeit der automatischen Ermittlung??
+export const SCALES: ScaleCategory[] = [
     {
         name: 'diatonic',
         intervals: [0, 2, 4, 5, 7, 9, 11],

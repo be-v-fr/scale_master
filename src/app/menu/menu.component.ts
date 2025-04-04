@@ -10,6 +10,7 @@ import { SettingsDisplayComponent } from './settings-display/settings-display.co
 import { DisplayService } from '../../services/display.service';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
 import { ExportComponent } from './export/export.component';
+import { CustomizeService } from '../../services/customize.service';
 
 /**
  * Displays the menu offering any app controls.
@@ -33,7 +34,8 @@ export class MenuComponent implements OnInit {
     public tuningsData: TuningsDataService,
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
-    public display: DisplayService
+    public display: DisplayService,
+    public custom: CustomizeService
   ) { }
 
 

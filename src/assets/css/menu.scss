@@ -1,0 +1,90 @@
+@import "../../styles.scss";
+
+$vertical-padding: 18px;
+
+:host {
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: $vertical-padding 8px;
+    @include flex($g: 24px);
+}
+
+.expand-btn-wrapper {
+    display: none;
+    width: 64px;
+    height: 100%;
+
+    .expand-btn-container {
+        margin-bottom: -$vertical-padding;
+        width: 44px;
+        height: 44px;
+
+        button {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            @include flex();
+            margin: 0;
+            position: relative;
+            bottom: -50%;
+            transition: 50ms;
+            &:hover {
+                transition: 50ms;
+                box-shadow: 1px 2px 2px 4px #0002;
+            }
+            &:active {
+                transition: 50ms;
+                box-shadow: 1px 2px 2px 4px #0003;
+            }
+        }
+    }
+
+    @media screen and (max-height: $vh-breakpoint-2) {
+        @include flex($ai: flex-end);
+    }
+}
+
+section {
+    height: 100%;
+    @include flex($dir: column, $jc: flex-start, $g: 6px);
+
+    h4 {
+        width: 100%;
+        height: calc($circular-btn-size + 6px);
+        margin: 0;
+        padding-bottom: 6px;
+        @include flex($g: 6px);
+        border-bottom: 1px solid black;
+        transition: 200ms ease;
+
+        &.collapsed {
+            @media screen and (max-height: $vh-breakpoint-2) {
+                height: $circular-btn-size;
+                padding-bottom: 0;
+                border-bottom: none;   
+            }
+        }
+    }
+
+    .scrollable-lists-container {
+        @include flex($g: 10px);
+    }
+
+    app-scrollable-list {
+        width: 148px;
+
+        &.narrow {
+            width: 96px;
+        }
+
+        &.narrower {
+            width: 72px;
+        }
+
+        &.tiny {
+            width: 40px;
+        }
+    }
+}
