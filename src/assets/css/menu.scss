@@ -68,6 +68,10 @@ section {
         }
     }
 
+    .section-content {
+        flex: 1;
+    }
+
     .scrollable-lists-container {
         @include flex($g: 10px);
     }
@@ -87,4 +91,9 @@ section {
             width: 40px;
         }
     }
+}
+
+.side-arrow-btn-container {
+    width: 32px;
+    height: 32px;
 }

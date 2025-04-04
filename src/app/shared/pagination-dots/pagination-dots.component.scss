@@ -1,0 +1,31 @@
+@import "../../../styles.scss";
+
+:host {
+    @include flex($g: 1px);
+    margin-top: 10px;
+}
+
+.dot-container {
+    width: 17px;
+    height: 17px;
+    padding: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .dot {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+        background-color: lightgray;
+        transition: background-color 175ms ease-in-out;
+    }
+
+    &:hover .dot {
+        background-color: darkgray;
+    }
+
+    &:active .dot, &.active .dot {
+        background-color: black;
+    }
+}

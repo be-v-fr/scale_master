@@ -1,6 +1,14 @@
+<div class="side-arrow-btn-container">
+    <app-circular-button *ngIf="currentStep > 0" [icon]="'arrow_left'" (click)="currentStep = currentStep - 1" />
+</div>
 <section>
     <h4 [class.collapsed]="display.menuCollapsed">
         Customize scale
         <app-circular-button [icon]="'cancel'" (click)="custom.customizing = undefined" />
     </h4>
+    <div class="section-content"></div>
+    <app-pagination-dots [total]="totalSteps" [activeIndex]="currentStep" (dotClick)="currentStep = $event" />
 </section>
+<div class="side-arrow-btn-container">
+    <app-circular-button *ngIf="currentStep < totalSteps - 1" [icon]="'arrow_right'" (click)="currentStep = currentStep + 1" />
+</div>

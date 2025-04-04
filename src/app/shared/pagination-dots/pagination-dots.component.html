@@ -1,0 +1,4 @@
+<div *ngFor="let _ of dots; let i = index" class="dot-container" [class.active]="i === activeIndex"
+    (click)="onDotClick(i)">
+    <span class="dot"></span>
+</div>
