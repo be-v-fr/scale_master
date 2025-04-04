@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { DisplayService } from '../../../../services/display.service';
 
 /**
  * Displays an item contained in a scrollable list.
@@ -17,4 +18,8 @@ export class ScrollableListItemComponent {
   @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>
 
   // TODO: Check width compared to parent. Reduce font size if too large.
+
+  constructor(
+    public display: DisplayService
+  ) { }
 }

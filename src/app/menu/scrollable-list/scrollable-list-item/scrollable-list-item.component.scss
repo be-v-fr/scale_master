@@ -1,20 +1,28 @@
-@import '../../../../styles.scss';
+@import "../../../../styles.scss";
 
 :host {
   width: 200%;
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  font-size: 20px;
-  .default-item {
-    color: lightgreen;
-  }
-  &:hover {
-    background: black;
-  }
-  &:active {
-    color: red;
-    opacity: 1;
+  .item-wrapper {
+    width: 100%;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    .default-item {
+      color: lightgreen;
+    }
+    &:hover {
+      background: black;
+      @media screen and (max-height: $vh-breakpoint-2) {
+        &.menu-collapsed {
+          background: none;
+        }
+      }
+    }
+    &:active {
+      color: red;
+      opacity: 1;
+    }
   }
 }
 
