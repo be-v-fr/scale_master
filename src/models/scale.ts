@@ -127,4 +127,14 @@ export class Scale {
             throw new Error(`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
         }
     }
+
+    toggleInterval(interval: number): void {
+        if(interval === 0) return;
+        const arrayIndex: number = this.category.intervals.findIndex(i => i === interval);
+        if(arrayIndex >= 0) {
+            this.category.intervals.splice(arrayIndex, 1);
+        } else {
+            this.category.intervals.push(interval);
+        }
+    }
 }

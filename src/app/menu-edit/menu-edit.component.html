@@ -4,7 +4,7 @@
 <section>
     <h4 [class.collapsed]="display.menuCollapsed">
         Customize {{routeEnd}}
-        <app-circular-button [icon]="'cancel'" [routerLink]="''" />
+        <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
     </h4>
     <div class="menu-content">
         <router-outlet />
