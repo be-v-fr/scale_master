@@ -2,7 +2,6 @@
     @for (string of currFretboard.fretboard.intervals; track string; let i = $index) {
     <tr>
         <td class="string-note">{{currFretboard.notes[i].print()}}</td>
-        <hr class="string">
         @for (_ of frets; track _; let j = $index; let first = $first) {
         <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)" [class.enable-hover]="router.url.includes('edit/scale') && [0, 1].includes(custom.currentStep)">
             <div class="scale-note-wrapper">
@@ -12,6 +11,7 @@
             </div>
         </td>
         }
+        <hr class="string">
     </tr>
     }
 </table>
