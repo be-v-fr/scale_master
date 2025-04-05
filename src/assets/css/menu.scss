@@ -1,6 +1,7 @@
 @import "../../styles.scss";
 
 $vertical-padding: 18px;
+$scrollable-list-narrow: 72px;
 
 :host {
     width: 100%;
@@ -68,10 +69,6 @@ section {
         }
     }
 
-    .menu-content {
-        flex: 1;
-    }
-
     .scrollable-lists-container {
         @include flex($g: 10px);
     }
@@ -84,7 +81,7 @@ section {
         }
 
         &.narrower {
-            width: 72px;
+            width: $scrollable-list-narrow;
         }
 
         &.tiny {

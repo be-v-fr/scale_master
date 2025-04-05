@@ -1,2 +1,25 @@
 @import "../../styles.scss";
 @import "../../assets/css/menu.scss";
+
+.menu-wrapper {
+    flex: 1;
+    @include flex($g: 16px);
+    .edit-menu-scrollable-list-wrapper {
+        position: relative;
+        width: $scrollable-list-narrow;
+        height: 100%;
+        app-scrollable-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .menu-container {
+        height: 100%;
+        @include flex($dir: column);
+        .menu-content {
+            flex: 1;
+            @include flex();
+        }
+    }
+}

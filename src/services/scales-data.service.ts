@@ -29,6 +29,18 @@ export class ScalesDataService {
 
 
   /**
+   * Extended natural note names by combining the sharp and flat note name
+   * if no plain note name exists for the respective note.
+   */
+  get extendedNaturalNoteNames(): string[] {
+    if (this.naturalNotes) {
+      return this.naturalNotes.map(n => n.printNaturalWithFlatAlternative());
+    }
+    return [];
+  }
+
+
+  /**
    * Returns an array containing all scale category names.
    */
   get categoryNames(): string[] {

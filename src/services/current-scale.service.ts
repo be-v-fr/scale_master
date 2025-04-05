@@ -110,4 +110,16 @@ export class CurrentScaleService {
       }
     }
   }
+
+
+  /**
+   * Updates the current scale's root note by transforming
+   * the note name and creating a Note instance.
+   * @param noteString - note name.
+   */
+  updateCurrScaleRootNote(noteString: string) {
+    noteString = noteString.split('/')[0];
+    const note: Note = new Note().textToNote(noteString);
+    this.scale.root = note;
+  }
 }

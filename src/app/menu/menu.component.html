@@ -15,8 +15,8 @@
         <app-circular-button [icon]="'edit'" [routerLink]="['edit', 'scale']" />
     </h4>
     <div class="scrollable-lists-container">
-        <app-scrollable-list class="narrower" *ngIf="extendedNaturalNoteNames" [content]="extendedNaturalNoteNames"
-            [title]="'Root'" [current]="currScale.scale.root.print()" (currentChange)="updateCurrScaleRootNote($event)"
+        <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames" [content]="scalesData.extendedNaturalNoteNames"
+            [title]="'Root'" [current]="currScale.scale.root.print()" (currentChange)="currScale.updateCurrScaleRootNote($event)"
             [allowSearch]="false" />
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />

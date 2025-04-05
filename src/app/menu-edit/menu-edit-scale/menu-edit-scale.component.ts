@@ -5,6 +5,7 @@ import { CurrentScaleService } from '../../../services/current-scale.service';
 import { cloneDeep } from 'lodash';
 import { ScaleCategory } from '../../../interfaces/scale-category';
 import { CustomizeService } from '../../../services/customize.service';
+import { ScalesDataService } from '../../../services/scales-data.service';
 
 @Component({
   selector: 'app-menu-edit-scale',
@@ -26,4 +27,6 @@ export class MenuEditScaleComponent implements OnInit {
     categoryClone.name = 'untitled';
     this.currScale.scale.category = categoryClone;
   }
+
+  // root-menu muss im collapsed-Modus angezeigt werden oder seitlich versetzt zu edit scale-Titel etc.
 }

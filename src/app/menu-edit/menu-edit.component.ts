@@ -11,11 +11,13 @@ import { CurrentScaleService } from '../../services/current-scale.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { Fretboard } from '../../models/fretboard';
 import { CustomizeService } from '../../services/customize.service';
+import { ScrollableListComponent } from '../menu/scrollable-list/scrollable-list.component';
+import { ScalesDataService } from '../../services/scales-data.service';
 
 @Component({
   selector: 'app-menu-edit',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CircularButtonComponent, PaginationDotsComponent, RouterLink],
+  imports: [CommonModule, RouterOutlet, CircularButtonComponent, PaginationDotsComponent, RouterLink, ScrollableListComponent],
   templateUrl: './menu-edit.component.html',
   styleUrl: './menu-edit.component.scss'
 })
@@ -27,7 +29,8 @@ export class MenuEditComponent {
   constructor(
     public router: Router,
     public display: DisplayService,
-    private currScale: CurrentScaleService,
+    public scalesData: ScalesDataService,
+    public currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService,
     public custom: CustomizeService
   ) { }

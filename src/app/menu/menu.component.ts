@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollableListComponent } from './scrollable-list/scrollable-list.component';
 import { Note } from '../../models/note';
@@ -22,8 +22,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
-export class MenuComponent implements OnInit {
-  extendedNaturalNoteNames?: string[];
+export class MenuComponent {
 
 
   /**
@@ -36,38 +35,6 @@ export class MenuComponent implements OnInit {
     public scalesData: ScalesDataService,
     public display: DisplayService,
   ) { }
-
-
-  /**
-   * Calls initialization methods upon component initialization.
-   */
-  ngOnInit(): void {
-    this._initNoteNames();
-  }
-
-
-  /**
-   * Initializes extended natural note names by combining the sharp
-   * and flat note name if no plain note name exists for the
-   * respecitve note.
-   */
-  private _initNoteNames(): void {
-    if (this.scalesData.naturalNotes) {
-      this.extendedNaturalNoteNames = this.scalesData.naturalNotes.map(n => n.printNaturalWithFlatAlternative());
-    }
-  }
-
-
-  /**
-   * Updates the current scale's root note by transforming
-   * the note name and creating a Note instance.
-   * @param noteString - note name.
-   */
-  updateCurrScaleRootNote(noteString: string) {
-    noteString = noteString.split('/')[0];
-    const note: Note = new Note().textToNote(noteString);
-    this.currScale.scale.root = note;
-  }
 
   
   /**

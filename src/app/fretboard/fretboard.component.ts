@@ -5,8 +5,8 @@ import { CurrentFretboardService } from '../../services/current-fretboard.servic
 import { DisplayService } from '../../services/display.service';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { Router } from '@angular/router';
-import { Note } from '../../models/note';
 import { CustomizeService } from '../../services/customize.service';
+import { getModTwelveIndex } from '../../utils/mod.utils';
 
 /**
  * Displays the fretboard with the currently selected scale.
@@ -39,7 +39,8 @@ export class FretboardComponent {
   onFretClick(instrumentStringIndex: number, fret: number) {
     if(this.router.url.includes('edit/scale')) {
       const pitch: number = this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
-      const interval: number = pitch - this.currScale.scale.root.index;
+      let interval: number = pitch - this.currScale.scale.root.index;
+      interval = getModTwelveIndex(interval);
       this.currScale.scale.toggleInterval(interval);
     }
   }

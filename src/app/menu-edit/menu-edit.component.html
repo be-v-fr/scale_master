@@ -1,15 +1,26 @@
 <div class="side-arrow-btn-container">
-    <app-circular-button *ngIf="custom.currentStep > 0" [icon]="'arrow_left'" (click)="custom.currentStep = custom.currentStep - 1" />
+    <app-circular-button *ngIf="custom.currentStep > 0" [icon]="'arrow_left'"
+        (click)="custom.currentStep = custom.currentStep - 1" />
 </div>
 <section>
-    <h4 [class.collapsed]="display.menuCollapsed">
-        Customize {{router.url.split('/').pop()}}
-        <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
-    </h4>
-    <div class="menu-content">
-        <router-outlet />
+    <div class="menu-wrapper">
+        <div *ngIf="router.url.split('/').pop() === 'scale'" class="edit-menu-scrollable-list-wrapper">
+            <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
+                [title]="'Root'" [current]="currScale.scale.root.print()"
+                (currentChange)="currScale.updateCurrScaleRootNote($event)" />
+        </div>
+        <div class="menu-container">
+            <h4 [class.collapsed]="display.menuCollapsed">
+                Customize {{router.url.split('/').pop()}}
+                <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
+            </h4>
+            <div class="menu-content">
+                <router-outlet />
+            </div>
+        </div>
     </div>
-    <app-pagination-dots [total]="custom.totalSteps" [activeIndex]="custom.currentStep" (dotClick)="custom.currentStep = $event" />
+    <app-pagination-dots [total]="custom.totalSteps" [activeIndex]="custom.currentStep"
+        (dotClick)="custom.currentStep = $event" />
 </section>
 <div class="side-arrow-btn-container">
     <app-circular-button *ngIf="custom.currentStep < custom.totalSteps - 1" [icon]="'arrow_right'"
