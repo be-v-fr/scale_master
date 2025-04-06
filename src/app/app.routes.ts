@@ -3,6 +3,10 @@ import { AppContentComponent } from './app-content/app-content.component';
 import { DialogExportComponent } from './dialogs/dialog-export/dialog-export.component';
 import { MenuEditScaleComponent } from './menu-edit/menu-edit-scale/menu-edit-scale.component';
 import { MenuEditFretboardComponent } from './menu-edit/menu-edit-fretboard/menu-edit-fretboard.component';
+import { DialogModesComponent } from './dialogs/dialog-modes/dialog-modes.component';
+import { DialogOverlayComponent } from './dialog-overlay/dialog-overlay.component';
+import { MenuEditComponent } from './menu-edit/menu-edit.component';
+import { MenuComponent } from './menu/menu.component';
 
 export const routes: Routes = [
     {
@@ -10,17 +14,13 @@ export const routes: Routes = [
         component: AppContentComponent,
         children: [
             {
-                path: 'dialog',
-                children: [
-                    {
-                        path: 'export/:fileType',
-                        component: DialogExportComponent,
-                    }
-                ],
+                path: '',
+                component: MenuComponent,
             },
 
             {
-                path: 'edit',
+                path: 'edit/:step',
+                component: MenuEditComponent,
                 children: [
                     {
                         path: 'scale',
@@ -34,5 +34,21 @@ export const routes: Routes = [
                 ],
             }
         ]
-    }
+    },
+
+    {
+        path: 'd',
+        outlet: 'dialog',
+        component: DialogOverlayComponent,
+        children: [
+            {
+                path: 'export/:fileType',
+                component: DialogExportComponent,
+            },
+            {
+                path: 'modes/:catIndex',
+                component: DialogModesComponent,
+            }
+        ],
+    },
 ];

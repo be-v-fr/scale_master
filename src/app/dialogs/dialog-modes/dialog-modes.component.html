@@ -1,0 +1,10 @@
+@if(category && category.name) {
+<p>The scale you configured is identical to the</p>
+<p><b>{{category.name}} scale</b>.</p>
+<p>How do you want to proceed?</p>
+<div class="btns-container">
+    <button class="border-btn">Abort customization and navigate to {{category.name}} scale instead.</button>
+    <button class="border-btn">Continue by loading modes of the {{category.name}} scale.</button>
+    <button class="border-btn">Set modes from scratch.</button>
+</div>
+}

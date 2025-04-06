@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DisplayService } from '../../services/display.service';
 import { PaginationDotsComponent } from '../shared/pagination-dots/pagination-dots.component';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { cloneDeep } from 'lodash';
 import { Scale } from '../../models/scale';
@@ -21,12 +21,15 @@ import { ScalesDataService } from '../../services/scales-data.service';
   templateUrl: './menu-edit.component.html',
   styleUrl: './menu-edit.component.scss'
 })
-export class MenuEditComponent {
+export class MenuEditComponent implements OnInit {
   routeSub: Subscription = new Subscription();
+  currentStep: number = 0;
   previousScale: Scale = cloneDeep(this.currScale.scale);
   previousFretboard: Fretboard = cloneDeep(this.currFretboard.fretboard);
 
+
   constructor(
+    private route: ActivatedRoute,
     public router: Router,
     public display: DisplayService,
     public scalesData: ScalesDataService,
@@ -34,6 +37,29 @@ export class MenuEditComponent {
     private currFretboard: CurrentFretboardService,
     public custom: CustomizeService
   ) { }
+
+
+  ngOnInit(): void {
+    this.routeSub = this.route.params.subscribe(params => {
+      const step: number = parseInt(params['step'], 10);
+      if (step >= 0) {
+        this.currentStep = step;
+      } else {
+        console.error('Could not set scale edit step because value was invalid:', step);
+      }
+    });
+  }
+
+
+  navigateStepByRouter(stepToNav: number): void {
+    const urlSegments: (string | number)[] = this.router.url.split('/');
+    const editIndex: number = urlSegments.findIndex(s => s === 'edit');
+    if(editIndex >= 0) {
+      urlSegments[editIndex + 1] = stepToNav;
+      this.router.navigate(urlSegments);
+    }
+  }
+
 
   undoAll(): void {
     this.currScale.scale = this.previousScale;

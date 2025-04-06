@@ -1,1 +1,10 @@
+@switch (currentStep) {
+@case(0) {
 <p>Click frets to add or remove notes.</p>
+}
+@case(1) {
+<p appSearchCurrent="scale" (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event] } }]);">
+    Click notes to add or remove modes.
+</p>
+}
+}

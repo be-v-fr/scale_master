@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
 
 @Component({
@@ -11,6 +11,12 @@ import { CircularButtonComponent } from '../shared/circular-button/circular-butt
   styleUrl: './dialog-overlay.component.scss'
 })
 export class DialogOverlayComponent {
-  @Input('show') showing: boolean = false;
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(
+    private router: Router
+  ) { }
+
+  close() {
+    this.router.navigate([{ outlets: { dialog: null } }]);
+  }
 }
