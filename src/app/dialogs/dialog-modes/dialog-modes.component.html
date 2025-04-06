@@ -1,5 +1,9 @@
 @if(category && category.name) {
 <p>The scale you configured is identical to the</p>
+@if(category.modes && modeIndex > 0) {
+<p><b>{{category.modes[modeIndex].name}} mode</b></p>
+<p>of the</p>
+}
 <p><b>{{category.name}} scale</b>.</p>
 <p>How do you want to proceed?</p>
 <div class="btns-container">

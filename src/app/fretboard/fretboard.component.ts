@@ -37,7 +37,7 @@ export class FretboardComponent {
   }
 
   onFretClick(instrumentStringIndex: number, fret: number) {
-    if(this.router.url.includes('edit/scale')) {
+    if(this.router.url.includes('edit/0/scale')) {
       const pitch: number = this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
       let interval: number = pitch - this.currScale.scale.root.index;
       interval = getModTwelveIndex(interval);

@@ -4,7 +4,7 @@
         <td class="string-note">{{currFretboard.notes[i].print()}}</td>
         @for (_ of frets; track _; let j = $index; let first = $first) {
         <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)"
-            [class.enable-hover]="!currFretboard.isRoot(i, j) && router.url.includes('edit/scale')">
+            [class.enable-hover]="!currFretboard.isRoot(i, j) && router.url.includes('edit/0/scale')">
             <div class="scale-note-wrapper">
                 <div class="note-container">
                     <app-fret-note [note]="currFretboard.getNoteFromFret(i, j)" [root]="currFretboard.isRoot(i, j)" />

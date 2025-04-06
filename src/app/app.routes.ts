@@ -46,7 +46,7 @@ export const routes: Routes = [
                 component: DialogExportComponent,
             },
             {
-                path: 'modes/:catIndex',
+                path: 'modes/:catIndex/:modeIndex',
                 component: DialogModesComponent,
             }
         ],

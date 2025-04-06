@@ -4,6 +4,9 @@ import { CurrentFretboardService } from '../services/current-fretboard.service';
 import { ScaleCategory } from '../interfaces/scale-category';
 import { SCALES } from '../const/scales';
 import { equalItems } from '../utils/array.utils';
+import { Scale } from '../models/scale';
+import { ScaleMode } from '../interfaces/scale-mode';
+import { getModTwelveIndex } from '../utils/mod.utils';
 
 @Directive({
   selector: '[appSearchCurrent]',
@@ -11,7 +14,7 @@ import { equalItems } from '../utils/array.utils';
 })
 export class SearchCurrentDirective implements OnInit {
   @Input({ alias: 'appSearchCurrent', required: true }) mode!: 'scale' | 'fretboard';
-  @Output() indexFound: EventEmitter<number> = new EventEmitter();
+  @Output() indexFound: EventEmitter<{ catIndex: number, modeIndex: number }> = new EventEmitter();
 
   constructor(
     private currScale: CurrentScaleService,
@@ -19,23 +22,38 @@ export class SearchCurrentDirective implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    switch(this.mode) {
+    switch (this.mode) {
       case 'scale': this.searchScaleCategory(); break;
       case 'fretboard': this.searchFretboard();
     }
   }
 
   searchScaleCategory(): void {
-    const index: number = SCALES.findIndex(s => equalItems<number>(s.intervals, this.currScale.scale.category.intervals));
-    // nicht nur Base-Intervals durchsuchen, sondern auch sämtliche Modes !!
-    // Idee: Loop, der Intervalle von SCALES je nach vorhandenen Modi permutativ verschiebt
-    // nicht nur Category-Index, sondern auch Mode-Index weitergeben
-    if(index >= 0) {
-      this.indexFound.emit(index);
+    let catIndex: number = -1;
+    let modeIndex: number = -1;
+    SCALES.forEach((s: ScaleCategory, sIndex: number) => {
+      if (equalItems(s.intervals, this.currScale.scale.category.intervals)) {
+        catIndex = sIndex;
+        modeIndex = 0;
+      } else {
+        s.modes?.forEach((m: ScaleMode, mIndex: number) => {
+          if (mIndex >= 1) {
+            const modeIntervals: number[] = s.intervals.map(i => i = getModTwelveIndex(i - m.interval));
+            if (equalItems(modeIntervals, this.currScale.scale.category.intervals)) {
+              catIndex = sIndex;
+              modeIndex = mIndex;
+            }
+          }
+        }
+        );
+      }
+    });
+    if (catIndex >= 0 && modeIndex >= 0) {
+      this.indexFound.emit({ catIndex: catIndex, modeIndex: modeIndex });
     }
   }
 
   searchFretboard(): void {
-    
+
   }
 }

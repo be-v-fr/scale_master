@@ -16,6 +16,7 @@ import { SCALES } from '../../../const/scales';
 export class DialogModesComponent {
   routeSub: Subscription = new Subscription();
   category?: ScaleCategory;
+  modeIndex: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,10 +27,14 @@ export class DialogModesComponent {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const catIndex: number = params['catIndex'] as number;
+      const modeIndex: number = params['modeIndex'] as number;
       if(catIndex && catIndex >= 0) {
         this.category = SCALES[catIndex];
       } else {
         console.error('Modes dialog initialization failed because scale category index was missing or invalid.');
+      }
+      if(modeIndex > 0) {
+        this.modeIndex = modeIndex;
       }
     });
   }
