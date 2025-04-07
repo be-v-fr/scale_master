@@ -129,12 +129,39 @@ export class Scale {
     }
 
     toggleInterval(interval: number): void {
-        if(interval === 0) return;
+        if (interval === 0) return;
         const arrayIndex: number = this.category.intervals.findIndex(i => i === interval);
-        if(arrayIndex >= 0) {
+        if (arrayIndex >= 0) {
             this.category.intervals.splice(arrayIndex, 1);
+            this.removeModeByInterval(interval);
         } else {
             this.category.intervals.push(interval);
         }
+    }
+
+    removeModeByInterval(interval: number) {
+        this.category.modes = this.category.modes?.filter(m => m.interval !== interval);
+        if (this.category.modes && this.category.modes.length <= 1) this.category.modes = undefined;
+    }
+
+    toggleMode(interval: number): void {
+        if (this.modeExists(interval)) {
+            if (interval !== 0) {
+                this.removeModeByInterval(interval);
+            }
+        } else {
+            if (!this.category.modes) this.addMode(0);
+            this.addMode(interval);
+        }
+    }
+
+    modeExists(interval: number): boolean {
+        return this.category.modes?.find(m => m.interval === interval) !== undefined;
+    }
+
+    addMode(interval: number): void {
+        const mode: ScaleMode = { name: 'untitled', interval: interval };
+        if (!this.category.modes) this.category.modes = [];
+        this.category.modes.push(mode);
     }
 }

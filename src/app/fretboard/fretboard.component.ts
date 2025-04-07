@@ -37,11 +37,21 @@ export class FretboardComponent {
   }
 
   onFretClick(instrumentStringIndex: number, fret: number) {
-    if(this.router.url.includes('edit/0/scale')) {
-      const pitch: number = this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
-      let interval: number = pitch - this.currScale.scale.root.index;
-      interval = getModTwelveIndex(interval);
-      this.currScale.scale.toggleInterval(interval);
+    if (this.custom.mode === 'scale') {
+      const urlSegments: string[] = this.router.url.split('/');
+      const editIndex: number = urlSegments.findIndex(s => s === 'edit');
+      const step: number = parseInt(urlSegments[editIndex + 1], 10);
+      this.onScaleEditFretClick(step, instrumentStringIndex, fret);
+    }
+  }
+
+  onScaleEditFretClick(step: number, instrumentStringIndex: number, fret: number) {
+    const pitch: number = this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
+    let interval: number = pitch - this.currScale.scale.root.index;
+    interval = getModTwelveIndex(interval);
+    switch (step) {
+      case 0: this.currScale.scale.toggleInterval(interval); break;
+      case 1: this.currScale.scale.toggleMode(interval);
     }
   }
 }

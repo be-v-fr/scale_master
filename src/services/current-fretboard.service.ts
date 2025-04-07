@@ -5,6 +5,7 @@ import { Instrument } from '../interfaces/instrument';
 import { Fretboard } from '../models/fretboard';
 import { Note } from '../models/note';
 import { CurrentScaleService } from './current-scale.service';
+import { getModTwelveIndex } from '../utils/mod.utils';
 
 /**
  * Service for handling the current fretboard.
@@ -161,5 +162,17 @@ export class CurrentFretboardService {
    */
   isRoot(instrumentString: number, fret: number): boolean {
     return this.currScale.scale.root.index == this.getFretNoteIndex(instrumentString, fret);
+  }
+
+
+  isModeRoot(instrumentString: number, fret: number): boolean {
+    let result: boolean = false;
+    this.currScale.scale.category.modes?.forEach(m => {
+      let modeIndex: number = this.currScale.scale.root.index + m.interval;
+      modeIndex = getModTwelveIndex(modeIndex);
+      const indexEqual: boolean = (modeIndex === this.getFretNoteIndex(instrumentString, fret));
+      if(indexEqual) result = true;
+    });
+    return result;
   }
 }

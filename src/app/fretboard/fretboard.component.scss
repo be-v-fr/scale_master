@@ -51,13 +51,18 @@ table {
           width: 38px;
           height: 38px;
         }
+        &.mark-mode {
+          border-color: lightgreen;
+        }
       }
     }
     td.enable-hover:hover {
       cursor: pointer;
-      .scale-note-wrapper .note-container {
-        border-color: #ff0b;
-        transition: 125ms ease;
+      .scale-note-wrapper {
+        .note-container, .note-container.mark-mode {
+          border-color: #ff0b;
+          transition: 125ms ease;
+        }
       }
     }
     .string {
