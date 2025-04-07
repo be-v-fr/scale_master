@@ -51,7 +51,14 @@ export class FretboardComponent {
     interval = getModTwelveIndex(interval);
     switch (step) {
       case 0: this.currScale.scale.toggleInterval(interval); break;
-      case 1: this.currScale.scale.toggleMode(interval);
+      case 1: this.handleModeToggling(interval);
+    }
+  }
+
+  handleModeToggling(interval: number): void {
+    this.currScale.scale.toggleMode(interval);
+    if(this.currScale.scale.modeExists(interval)) {
+      this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'name', interval] } }])
     }
   }
 }

@@ -9,13 +9,13 @@ import { DialogService } from '../../../services/dialog.service';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 
 @Component({
-  selector: 'app-dialog-modes',
+  selector: 'app-dialog-scale-found',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dialog-modes.component.html',
-  styleUrl: './dialog-modes.component.scss'
+  templateUrl: './dialog-scale-found.component.html',
+  styleUrl: './dialog-scale-found.component.scss'
 })
-export class DialogModesComponent {
+export class DialogScaleFoundComponent {
   routeSub: Subscription = new Subscription();
   category?: ScaleCategory;
   modeIndex: number = 0;

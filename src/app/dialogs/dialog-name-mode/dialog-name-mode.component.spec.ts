@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogModesComponent } from './dialog-modes.component';
+import { DialogNameModeComponent } from './dialog-name-mode.component';
 
-describe('DialogModesComponent', () => {
-  let component: DialogModesComponent;
-  let fixture: ComponentFixture<DialogModesComponent>;
+describe('DialogNameModeComponent', () => {
+  let component: DialogNameModeComponent;
+  let fixture: ComponentFixture<DialogNameModeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogModesComponent]
+      imports: [DialogNameModeComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DialogModesComponent);
+    fixture = TestBed.createComponent(DialogNameModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

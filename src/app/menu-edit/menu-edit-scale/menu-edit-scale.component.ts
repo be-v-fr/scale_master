@@ -44,6 +44,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
   initCategory(): void {
     const categoryClone: ScaleCategory = cloneDeep(this.currScale.scale.category);
     categoryClone.name = 'untitled';
+    categoryClone.modes = undefined;
     this.currScale.scale.category = categoryClone;
   }
 
