@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-dialog-overlay',
@@ -13,10 +14,6 @@ import { CircularButtonComponent } from '../shared/circular-button/circular-butt
 export class DialogOverlayComponent {
 
   constructor(
-    private router: Router
+    public dialog: DialogService
   ) { }
-
-  close() {
-    this.router.navigate([{ outlets: { dialog: null } }]);
-  }
 }

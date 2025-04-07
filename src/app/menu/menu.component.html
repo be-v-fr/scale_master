@@ -16,7 +16,7 @@
     </h4>
     <div class="scrollable-lists-container">
         <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames" [content]="scalesData.extendedNaturalNoteNames"
-            [title]="'Root'" [current]="currScale.scale.root.print()" (currentChange)="currScale.updateCurrScaleRootNote($event)"
+            [title]="'Root'" [current]="currScale.scale.root.printNaturalWithFlatAlternative()" (currentChange)="currScale.updateCurrScaleRootNote($event)"
             [allowSearch]="false" />
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
