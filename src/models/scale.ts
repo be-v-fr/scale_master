@@ -40,6 +40,14 @@ export class Scale {
         return this.mode ? `${baseName} ${this.mode.name}` : baseName;
     }
 
+    get catIndex(): number {
+        return SCALES.findIndex(s => isEqual(s, this.category));
+    }
+
+    get modeIndex(): number {
+        return this.category.modes ? this.category.modes.findIndex(m => isEqual(m, this.mode)) : -1;
+    }
+
     private _constructNotes(root: Note): Note[] {
         let notes: Note[] = [];
         const intervals: number[] = Array.from(this.category.intervals);
@@ -141,7 +149,7 @@ export class Scale {
 
     removeModeByInterval(interval: number) {
         this.category.modes = this.category.modes?.filter(m => m.interval !== interval);
-        if (this.category.modes && this.category.modes.length <= 1) this.category.modes = undefined;
+        if (this.category.modes && this.category.modes.length === 0) this.category.modes = undefined;
     }
 
     toggleMode(interval: number): void {

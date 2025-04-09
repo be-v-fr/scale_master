@@ -52,7 +52,8 @@ export class MenuEditComponent implements OnInit {
 
 
   navigateStepByRouter(stepToNav: number): void {
-    const urlSegments: (string | number)[] = this.router.url.split('/');
+    const mainUrl = this.router.url.split(';')[0];
+    const urlSegments: (string | number)[] = mainUrl.split('/');
     const editIndex: number = urlSegments.findIndex(s => s === 'edit');
     if(editIndex >= 0) {
       urlSegments[editIndex + 1] = stepToNav;

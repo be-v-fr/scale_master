@@ -41,6 +41,14 @@ export class Fretboard {
         return notes;
     }
 
+    get instrIndex(): number {
+        return INSTRUMENTS.findIndex(i => isEqual(i, this.instrument));
+    }
+
+    get tuningIndex(): number {
+        return this.instrument.tunings.findIndex(t => isEqual(t, this.tuning));
+    }
+
     private _checkInstrument(instrument: Instrument): void {
         if (!INSTRUMENTS.find(i => isEqual(i, instrument))) {
             throw (`Instrument "${instrument}" broken or not found.`);

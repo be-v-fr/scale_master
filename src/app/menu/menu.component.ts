@@ -11,6 +11,7 @@ import { DisplayService } from '../../services/display.service';
 import { CircularButtonComponent } from '../shared/circular-button/circular-button.component';
 import { ExportComponent } from './export/export.component';
 import { RouterLink } from '@angular/router';
+import { CustomizeService } from '../../services/customize.service';
 
 /**
  * Displays the menu offering any app controls.
@@ -34,6 +35,7 @@ export class MenuComponent {
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
     public display: DisplayService,
+    public custom: CustomizeService
   ) { }
 
   
