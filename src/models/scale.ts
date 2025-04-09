@@ -157,19 +157,25 @@ export class Scale {
             if (interval !== 0) {
                 this.removeModeByInterval(interval);
             }
-        } else {
+        } else if (this.category.intervals.includes(interval)) {
             if (!this.category.modes) this.addMode(0);
             this.addMode(interval);
         }
     }
 
+    getMode(interval: number): ScaleMode | undefined {
+        return this.category.modes?.find(m => m.interval === interval);
+    }
+
     modeExists(interval: number): boolean {
-        return this.category.modes?.find(m => m.interval === interval) !== undefined;
+        return this.getMode(interval) !== undefined;
     }
 
     addMode(interval: number): void {
-        const mode: ScaleMode = { name: 'untitled', interval: interval };
-        if (!this.category.modes) this.category.modes = [];
-        this.category.modes.push(mode);
+        if (this.category.intervals.includes(interval)) {
+            const mode: ScaleMode = { name: 'untitled', interval: interval };
+            if (!this.category.modes) this.category.modes = [];
+            this.category.modes.push(mode);
+        }
     }
 }
