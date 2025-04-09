@@ -154,11 +154,8 @@ export class Scale {
 
     toggleMode(interval: number): void {
         if (this.modeExists(interval)) {
-            if (interval !== 0) {
-                this.removeModeByInterval(interval);
-            }
+            this.removeModeByInterval(interval);
         } else if (this.category.intervals.includes(interval)) {
-            if (!this.category.modes) this.addMode(0);
             this.addMode(interval);
         }
     }

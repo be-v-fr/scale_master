@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { parseNumberParamIfExists } from '../../../utils/router.utils';
 
 @Component({
   selector: 'app-dialog-name-mode',
@@ -24,11 +25,11 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      const interval: number = parseInt(params['interval']);
-      if (interval >= 0) {
+      const interval: number | undefined = parseNumberParamIfExists(params, 'interval');
+      if (typeof(interval) === 'number') {
         this.initModeName(interval);
       } else {
-        console.error('Modes naming dialog initialization failed because the mode interval was missing or invalid.');
+        console.error('Initialization failed because the mode interval was missing or invalid.');
       }
     });
   }
@@ -40,11 +41,12 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
 
   initModeName(interval: number): void {
     const modeOriginal: ScaleMode | undefined = this.currScale.scale.getMode(interval);
+    console.log(modeOriginal);
     if (modeOriginal) {
       const modeClone: ScaleMode = cloneDeep(modeOriginal);
       this.modeName = modeClone.name;
     } else {
-      console.error('Modes naming dialog initialization failed because the mode could not be found in the scale category.');
+      console.error('Initialization failed because the mode could not be found in the scale category.');
     }
   }
 }

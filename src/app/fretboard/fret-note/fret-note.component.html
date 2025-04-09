@@ -1,4 +1,4 @@
-<p *ngIf="note" class="note" [class.root]="isRoot">
+<p *ngIf="note" matTooltip="{{tooltipContent}}" matTooltipHideDelay="175" class="note" [class.root]="isRoot">
     @if(display.noteDisplay === 'meaning' && note.meaning) {
     {{note.meaning}}
     } @else {

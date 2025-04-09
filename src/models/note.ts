@@ -74,8 +74,13 @@ export class Note {
     }
 
     getIntervalIndex(interval: number) {
-        const index = this.index + interval;
+        const index: number = this.index + interval;
         return getModTwelveIndex(index);
+    }
+
+    getIntervalFromIndex(rootIndex: number) {
+        const interval: number = this.index - rootIndex;
+        return getModTwelveIndex(interval);
     }
 
     isNaturallySharp(): boolean {
