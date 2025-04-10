@@ -1,2 +1,6 @@
 <p>Please name this mode:</p>
-<input type="text" [(ngModel)]="modeName" />
+<input type="text" [(ngModel)]="modeName" autofocus />
+<div class="btns-container">
+    <button class="border-btn" (click)="dialog.close()">Cancel</button>
+    <button class="border-btn" (click)="submit()">Ok</button>
+</div>

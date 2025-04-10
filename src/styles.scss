@@ -37,13 +37,17 @@ body {
 }
 
 button,
-a {
+a,
+input {
     border: none;
     outline: none;
     background: none;
     text-decoration: none;
     padding: 0;
     margin: 0;
+}
+
+button, a {
     color: black;
     cursor: pointer;
 }
@@ -91,6 +95,7 @@ button.reset-btn {
     border-radius: 3px;
     transition: 75ms ease;
     font-size: 14px;
+    padding: 10px;
 
     &:hover {
         transition: 75ms ease;
@@ -130,5 +135,11 @@ button.reset-btn {
     }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

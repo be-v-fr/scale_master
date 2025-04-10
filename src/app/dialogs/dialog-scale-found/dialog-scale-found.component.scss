@@ -7,7 +7,4 @@
 
 .btns-container {
     @include flex($dir: column, $ai: flex-start, $g: 8px);
-    .border-btn {
-        padding: 10px;
-    }
 }
