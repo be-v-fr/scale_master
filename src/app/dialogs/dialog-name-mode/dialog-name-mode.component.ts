@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { ScaleMode } from '../../../interfaces/scale-mode';
 import { cloneDeep } from 'lodash';
@@ -11,7 +12,7 @@ import { DialogService } from '../../../services/dialog.service';
 @Component({
   selector: 'app-dialog-name-mode',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './dialog-name-mode.component.html',
   styleUrl: './dialog-name-mode.component.scss'
 })
@@ -19,6 +20,7 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   modeInterval?: number;
   modeName?: string;
   routeSub: Subscription = new Subscription();
+  forceRoot?: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const interval: number | undefined = parseNumberParamIfExists(params, 'interval');
+      this.forceRoot = (params['forceRoot'] === 'true');
       if (typeof(interval) === 'number') {
         this.modeInterval = interval;
         this.initModeName(interval);
@@ -43,6 +46,7 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
     this.routeSub.unsubscribe();
   }
 
+
   initModeName(interval: number): void {
     const modeOriginal: ScaleMode | undefined = this.currScale.scale.getMode(interval);
     if (modeOriginal) {
@@ -52,6 +56,7 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
       console.error('Initialization failed because the mode could not be found in the scale category.');
     }
   }
+
 
   submit(): void {
     if(!this.modeName || !(typeof(this.modeInterval) === 'number')) return;

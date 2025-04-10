@@ -74,8 +74,19 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
       this.currentStep = parseNumberParamIfExists(params, 'step') || 0;
       if (!this.initComplete) {
         this.initScale();
+        this.initComplete = true;
       }
-      this.initComplete = true;
+      if (this.currentStep === 2) {
+        this.forceRootMode();
+      }
     });
+  }
+
+
+  forceRootMode(): void {
+    if (this.currScale.scale.category.modes && !this.currScale.scale.getMode(0)) {
+      this.currScale.scale.addMode(0);
+      this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'name', 0, { forceRoot: true }] } }]);
+    }
   }
 }

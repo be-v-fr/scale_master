@@ -170,7 +170,7 @@ export class Scale {
 
     addMode(interval: number): void {
         if (this.category.intervals.includes(interval)) {
-            const mode: ScaleMode = { name: 'untitled', interval: interval };
+            const mode: ScaleMode = { name: `untitled/${interval}`, interval: interval };
             if (!this.category.modes) this.category.modes = [];
             this.category.modes.push(mode);
         }

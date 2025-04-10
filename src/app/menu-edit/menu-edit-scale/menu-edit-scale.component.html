@@ -3,8 +3,12 @@
 <p>Click frets to add or remove notes.</p>
 }
 @case(1) {
-<p appSearchCurrent="scale" (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event.catIndex, $event.modeIndex] } }]);">
+<p appSearchCurrent="scale"
+    (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event.catIndex, $event.modeIndex] } }]);">
     Click notes to add or remove modes.
 </p>
+}
+@case(2) {
+<p>Your scale is ready.</p>
 }
 }
