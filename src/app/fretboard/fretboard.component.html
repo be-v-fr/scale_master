@@ -3,11 +3,12 @@
     <tr>
         <td class="string-note">{{currFretboard.notes[i].print()}}</td>
         @for (_ of frets; track _; let j = $index; let first = $first) {
-        <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)" [class.enable-hover]="
-            (router.url.includes('edit/0/scale') && !currFretboard.isRoot(i, j)) ||
-            (router.url.includes('edit/1/scale') && currFretboard.getNoteFromFret(i, j))">
+        <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)" [class.enable-hover]="custom.mode === 'scale' && (
+            (custom.currentStep === 0 && !currFretboard.isRoot(i, j)) ||
+            (custom.currentStep === 1 && currFretboard.getNoteFromFret(i, j)))">
             <div class="scale-note-wrapper">
-                <div class="note-container" [class.mark-mode]="router.url.includes('edit/1/scale') && currFretboard.isModeRoot(i, j)">
+                <div class="note-container"
+                    [class.mark-mode]="custom.mode === 'scale' && custom.currentStep && [1, 2].includes(custom.currentStep) && currFretboard.isModeRoot(i, j)">
                     <app-fret-note [note]="currFretboard.getNoteFromFret(i, j)" [root]="currFretboard.isRoot(i, j)" />
                 </div>
             </div>

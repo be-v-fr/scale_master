@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ScaleCategory } from '../interfaces/scale-category';
+import { Router } from '@angular/router';
 import { CurrentScaleService } from './current-scale.service';
 import { CurrentFretboardService } from './current-fretboard.service';
-import { SCALES } from '../const/scales';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +27,25 @@ export class CustomizeService {
       }
     }
     return null;
+  }
+
+  get isActive(): boolean {
+    return this.router.url.includes('edit');
+  }
+
+  get currentStep(): number | undefined {
+    const maxStep: number = 10;
+    if(this.isActive) {
+      const urlSegments: string[] = this.router.url.split('/');
+      const editIndex: number = urlSegments.findIndex(s => s === 'edit');
+      const step: number = parseInt(urlSegments[editIndex + 1], 10);
+      if(step >= 0 && step < maxStep) {
+        return step;
+      } else {
+        console.error('Invalid step number:', step + '.', 'Maximum step is set to:', maxStep);
+      }
+    }
+    return undefined;
   }
 
   get totalSteps(): number {

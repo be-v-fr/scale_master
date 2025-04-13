@@ -4,8 +4,8 @@ import { Note } from '../../../models/note';
 import { DisplayService } from '../../../services/display.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CurrentScaleService } from '../../../services/current-scale.service';
-import { Router } from '@angular/router';
 import { ScaleMode } from '../../../interfaces/scale-mode';
+import { CustomizeService } from '../../../services/customize.service';
 
 /**
  * Displays a note on the fretboard, if a note is transferred via input.
@@ -27,9 +27,9 @@ export class FretNoteComponent {
    * Constructor for injection of services.
    */
   constructor(
-    private router: Router,
     public display: DisplayService,
-    public currScale: CurrentScaleService
+    public currScale: CurrentScaleService,
+    private custom: CustomizeService,
   ) { }
 
 
@@ -39,7 +39,7 @@ export class FretNoteComponent {
 
 
   get tooltipContent(): string {
-    if(typeof(this.interval) === 'number' && this.currScale.scale.category.modes && this.router.url.includes('edit/1/scale') && this.currScale.scale.category.intervals.includes(this.interval)) {
+    if(typeof(this.interval) === 'number' && this.currScale.scale.category.modes && this.custom.mode === 'scale' && this.custom.currentStep && [1, 2].includes(this.custom.currentStep) && this.currScale.scale.category.intervals.includes(this.interval)) {
       const mode: ScaleMode | undefined = this.currScale.scale.getMode(this.interval);
       if(mode) return mode.name;
     }
