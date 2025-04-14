@@ -38,4 +38,12 @@ export class DialogLoadScaleComponent implements OnInit {
   delete(scale: ScaleCategory): void {
     this.storage.deleteScale(scale);
   }
+
+  
+  updateName(arrIndex: number, name: string) {
+    if(this.storage.scales) {
+      this.storage.scales[arrIndex].name = name;
+      this.storage.saveScales();
+    }
+  }
 }
