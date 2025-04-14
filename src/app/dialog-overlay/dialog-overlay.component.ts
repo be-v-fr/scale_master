@@ -16,4 +16,13 @@ export class DialogOverlayComponent {
   constructor(
     public dialog: DialogService
   ) { }
+
+
+  onOverlayMouseDown(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const currentTarget = event.currentTarget as HTMLElement;
+    if (target === currentTarget) {
+      this.dialog.close();
+    }
+  }
 }
