@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DisplayService } from '../../../services/display.service';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { ScaleCategory } from '../../../interfaces/scale-category';
 import { CustomizeService } from '../../../services/customize.service';
@@ -29,7 +28,6 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    public display: DisplayService,
     public currScale: CurrentScaleService,
     public custom: CustomizeService
   ) { }
