@@ -1,0 +1,8 @@
+<h2>Open scale</h2>
+@if(storage.scales) {
+@for (scale of storage.scales; track scale) {
+<app-open-item [name]="scale.name" (open)="open(scale)" (delete)="delete(scale)" />
+}
+} @else {
+<app-loader />
+}

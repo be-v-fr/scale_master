@@ -8,6 +8,8 @@ import { DialogOverlayComponent } from './dialog-overlay/dialog-overlay.componen
 import { MenuEditComponent } from './menu-edit/menu-edit.component';
 import { MenuComponent } from './menu/menu.component';
 import { DialogNameModeComponent } from './dialogs/dialog-name-mode/dialog-name-mode.component';
+import { DialogLoadScaleComponent } from './dialogs/dialog-load-scale/dialog-load-scale.component';
+import { DialogLoadFretboardComponent } from './dialogs/dialog-load-fretboard/dialog-load-fretboard.component';
 
 export const routes: Routes = [
     {
@@ -57,6 +59,19 @@ export const routes: Routes = [
                         path: ':catIndex/:modeIndex',
                         component: DialogScaleFoundComponent,
                     },
+                ]
+            },
+            {
+                path: 'open',
+                children: [
+                    {
+                        path: 'scale',
+                        component: DialogLoadScaleComponent
+                    },
+                    {
+                        path: 'fretboard',
+                        component: DialogLoadFretboardComponent
+                    }
                 ]
             }
         ],

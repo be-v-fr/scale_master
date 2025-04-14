@@ -1,0 +1,9 @@
+@import '../../../styles.scss';
+
+.item {
+    @include flex($jc: space-between);
+    cursor: pointer;
+    .options {
+        @include flex($g: 3px);
+    }
+}

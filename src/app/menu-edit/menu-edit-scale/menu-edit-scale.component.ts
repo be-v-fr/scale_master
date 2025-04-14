@@ -30,7 +30,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public router: Router,
     public display: DisplayService,
-    private currScale: CurrentScaleService,
+    public currScale: CurrentScaleService,
     public custom: CustomizeService
   ) { }
 

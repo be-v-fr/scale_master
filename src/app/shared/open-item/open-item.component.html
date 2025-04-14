@@ -1,0 +1,7 @@
+<div (click)="open.emit()" class="item">
+    <span>{{name}}</span>
+    <div class="options">
+        <button class="material-icons">edit</button>
+        <button class="material-icons" (click)="delete.emit()">delete</button>
+    </div>
+</div>

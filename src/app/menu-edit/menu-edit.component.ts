@@ -13,6 +13,7 @@ import { Fretboard } from '../../models/fretboard';
 import { CustomizeService } from '../../services/customize.service';
 import { ScrollableListComponent } from '../menu/scrollable-list/scrollable-list.component';
 import { ScalesDataService } from '../../services/scales-data.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-menu-edit',
@@ -35,7 +36,8 @@ export class MenuEditComponent implements OnInit {
     public scalesData: ScalesDataService,
     public currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService,
-    public custom: CustomizeService
+    public custom: CustomizeService,
+    private storage: StorageService
   ) { }
 
 
@@ -65,5 +67,20 @@ export class MenuEditComponent implements OnInit {
   undoAll(): void {
     this.currScale.scale = this.previousScale;
     this.currFretboard.fretboard = this.previousFretboard;
+  }
+
+
+  async complete(): Promise<void> {
+    switch(this.custom.mode) {
+      case 'scale': await this.completeScale(); break;
+      case 'fretboard': break; // add later
+    }
+    this.router.navigateByUrl('');
+  }
+
+
+  async completeScale(): Promise<void> {
+    await this.storage.saveScale(this.currScale.scale.category);
+    this.currScale.isCustom = true;
   }
 }

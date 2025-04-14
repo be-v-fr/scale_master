@@ -15,6 +15,7 @@ import { ScalesDataService } from './scales-data.service';
 export class CurrentScaleService {
   private _defaultScale = new Scale(new Note(0), SCALES[0], { name: 'minor', interval: 9 });
   public scale: Scale = this._defaultScale;
+  isCustom: boolean = false;
 
 
   /**
@@ -121,5 +122,11 @@ export class CurrentScaleService {
     noteString = noteString.split('/')[0];
     const note: Note = new Note().textToNote(noteString);
     this.scale.root = note;
+  }
+
+
+  closeCustom(): void {
+    this.scale = this._defaultScale;
+    this.isCustom = false;
   }
 }

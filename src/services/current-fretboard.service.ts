@@ -16,6 +16,7 @@ import { getModTwelveIndex } from '../utils/mod.utils';
 export class CurrentFretboardService {
   private _defaultFretboard: Fretboard = new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], new Note(7));
   public fretboard: Fretboard = this._defaultFretboard;
+  isCustom: boolean = false;
 
 
   /**
@@ -174,5 +175,11 @@ export class CurrentFretboardService {
       if(indexEqual) result = true;
     });
     return result;
+  }
+  
+
+  closeCustom(): void {
+    this.fretboard = this._defaultFretboard;
+    this.isCustom = false;
   }
 }
