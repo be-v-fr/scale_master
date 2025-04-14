@@ -14,7 +14,7 @@ import { getModTwelveIndex } from '../utils/mod.utils';
 })
 export class SearchCurrentDirective implements OnInit {
   @Input({ alias: 'appSearchCurrent', required: true }) mode!: 'scale' | 'fretboard';
-  @Output() indexFound: EventEmitter<{ catIndex: number, modeIndex: number }> = new EventEmitter();
+  @Output() indexFound: EventEmitter<{ primary: number, secondary: number }> = new EventEmitter();
 
   constructor(
     private currScale: CurrentScaleService,
@@ -49,7 +49,7 @@ export class SearchCurrentDirective implements OnInit {
       }
     });
     if (catIndex >= 0 && modeIndex >= 0) {
-      this.indexFound.emit({ catIndex: catIndex, modeIndex: modeIndex });
+      this.indexFound.emit({ primary: catIndex, secondary: modeIndex });
     }
   }
 

@@ -4,7 +4,7 @@
 }
 @case(1) {
 <p appSearchCurrent="scale"
-    (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event.catIndex, $event.modeIndex] } }]);">
+    (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event.primary, $event.secondary] } }]);">
     Click notes to add or remove modes.
 </p>
 }

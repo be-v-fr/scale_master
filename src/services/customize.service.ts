@@ -8,7 +8,7 @@ import { CurrentFretboardService } from './current-fretboard.service';
 })
 export class CustomizeService {
   private _scaleSteps: number = 3;
-  private _fretboardSteps: number = 2;
+  private _fretboardSteps: number = 5;
 
   constructor(
     private router: Router,

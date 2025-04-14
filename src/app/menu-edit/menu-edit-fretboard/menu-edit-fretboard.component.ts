@@ -8,11 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentFretboardService } from '../../../services/current-fretboard.service';
 import { CustomizeService } from '../../../services/customize.service';
 import { Tuning } from '../../../interfaces/tuning';
+import { SearchCurrentDirective } from '../../../directives/search-current.directive';
 
 @Component({
   selector: 'app-menu-edit-fretboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SearchCurrentDirective],
   templateUrl: './menu-edit-fretboard.component.html',
   styleUrl: './menu-edit-fretboard.component.scss'
 })

@@ -1,1 +1,20 @@
-fretboard
+@switch (currentStep) {
+@case(0) {
+<p>Set the number of strings.</p>
+}
+@case(1) {
+<p>Select the lowest string.<br>This string will be identified with your tuning's root note.</p>   
+}
+@case(2) {
+<p>Click the string notes to set the respective intervals.</p>   
+}
+@case(3) {
+<p appSearchCurrent="fretboard"
+    (indexFound)="router.navigate([{ outlets: { 'dialog': ['d', 'modes', $event.primary, $event.secondary] } }]);">
+    Click notes to add or remove modes.
+</p>
+}
+@case(4) {
+<p>Your tuning is ready.</p>   
+}
+}
