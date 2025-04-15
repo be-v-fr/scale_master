@@ -1,6 +1,6 @@
 <div class="overlay" [class.lefty]="display.lefty">
     <div class="overlay-half-transparent">
-        <div class="list-container">
+        <div class="list-container" *ngIf="custom.currentStep !== undefined && [0].includes(custom.currentStep)">
             <app-scrollable-list *ngIf="custom.currentStep === 0 && currFretboard.numbersOfStrings"
             [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
             [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
