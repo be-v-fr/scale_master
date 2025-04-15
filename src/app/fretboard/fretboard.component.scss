@@ -1,9 +1,9 @@
 @import "../../styles.scss";
 
 $fret-border: 2px solid rgba(206, 174, 32);
-$string-margin: 8vw;
 
 :host {
+  position: relative;
   width: 100%;
   height: 400px;
   background: url(../../assets/img/wood.jpg);
@@ -26,7 +26,7 @@ table {
       background: black;
       color: white;
       text-align: center;
-      width: $string-margin;
+      width: $fretboard-string-margin;
     }
     .nut {
       background: beige;
@@ -70,7 +70,7 @@ table {
       height: 6px;
       background-image: linear-gradient(#eee 30%, #bbb 80%);
       border: 0;
-      left: $string-margin;
+      left: $fretboard-string-margin;
       right: 0;
       top: calc(50% - 10px);
       box-shadow: 0 4px 3px 3px rgba(0, 0, 0, 0.3);
@@ -92,7 +92,7 @@ table {
     }
     .string {
       left: 0;
-      right: $string-margin;
+      right: $fretboard-string-margin;
     }
   }
 }

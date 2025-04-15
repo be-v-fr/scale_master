@@ -5,6 +5,8 @@ import { DisplayService } from '../../services/display.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { ToastMessageComponent } from '../shared/toast-message/toast-message.component';
 import { ToastMessageService } from '../../services/toast-message.service';
+import { EditFretboardOverlayComponent } from '../edit-fretboard-overlay/edit-fretboard-overlay.component';
+import { CustomizeService } from '../../services/customize.service';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.

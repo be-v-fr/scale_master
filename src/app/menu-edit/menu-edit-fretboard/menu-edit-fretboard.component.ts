@@ -47,6 +47,7 @@ export class MenuEditFretboardComponent {
 
   initFretboard(): void {
     (typeof this.instrIndex === 'number') ? this.initExistingFretboard() : this.initNewFretboard();
+    this.currFretboard.fretboard.instrument.maxExtraStrings = 8 - this.currFretboard.fretboard.intervals.length;
   }
 
 

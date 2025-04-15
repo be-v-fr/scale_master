@@ -7,6 +7,7 @@ import { CurrentScaleService } from '../../services/current-scale.service';
 import { Router } from '@angular/router';
 import { CustomizeService } from '../../services/customize.service';
 import { getModTwelveIndex } from '../../utils/mod.utils';
+import { EditFretboardOverlayComponent } from '../edit-fretboard-overlay/edit-fretboard-overlay.component';
 
 /**
  * Displays the fretboard with the currently selected scale.
@@ -14,7 +15,7 @@ import { getModTwelveIndex } from '../../utils/mod.utils';
 @Component({
   selector: 'app-fretboard',
   standalone: true,
-  imports: [CommonModule, FretNoteComponent],
+  imports: [CommonModule, FretNoteComponent, EditFretboardOverlayComponent],
   templateUrl: './fretboard.component.html',
   styleUrl: './fretboard.component.scss'
 })
