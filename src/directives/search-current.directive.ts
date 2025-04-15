@@ -16,10 +16,12 @@ export class SearchCurrentDirective implements OnInit {
   @Input({ alias: 'appSearchCurrent', required: true }) mode!: 'scale' | 'fretboard';
   @Output() indexFound: EventEmitter<{ primary: number, secondary: number }> = new EventEmitter();
 
+
   constructor(
     private currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService
   ) { }
+
 
   ngOnInit(): void {
     switch (this.mode) {
@@ -27,6 +29,7 @@ export class SearchCurrentDirective implements OnInit {
       case 'fretboard': this.searchFretboard();
     }
   }
+
 
   searchScaleCategory(): void {
     let catIndex: number = -1;
@@ -36,22 +39,30 @@ export class SearchCurrentDirective implements OnInit {
         catIndex = sIndex;
         modeIndex = 0;
       } else {
-        s.modes?.forEach((m: ScaleMode, mIndex: number) => {
-          if (mIndex >= 1) {
-            const modeIntervals: number[] = s.intervals.map(i => i = getModTwelveIndex(i - m.interval));
-            if (equalItems(modeIntervals, this.currScale.scale.category.intervals)) {
-              catIndex = sIndex;
-              modeIndex = mIndex;
-            }
-          }
-        }
-        );
+        this.searchScaleCategoryModes(s, sIndex);
       }
     });
     if (catIndex >= 0 && modeIndex >= 0) {
       this.indexFound.emit({ primary: catIndex, secondary: modeIndex });
     }
   }
+
+
+  searchScaleCategoryModes(s: ScaleCategory, sIndex: number): { catIndex: number, modeIndex: number } {
+    let catIndex: number = -1;
+    let modeIndex: number = -1;
+    s.modes?.forEach((m: ScaleMode, mIndex: number) => {
+      if (mIndex >= 1) {
+        const modeIntervals: number[] = s.intervals.map(i => i = getModTwelveIndex(i - m.interval));
+        if (equalItems(modeIntervals, this.currScale.scale.category.intervals)) {
+          catIndex = sIndex;
+          modeIndex = mIndex;
+        }
+      }
+    });
+    return { catIndex: catIndex, modeIndex: modeIndex }
+  }
+
 
   searchFretboard(): void {
 
