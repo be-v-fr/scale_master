@@ -47,11 +47,12 @@ table {
         border: 3px solid #0000;
         border-radius: 50%;
         transition: 225ms ease;
+        @include flex();
         @media screen and (max-height: $vh-breaktpoint-3) {
           width: 38px;
           height: 38px;
         }
-        &.mark-mode {
+        &.marked {
           border-color: lightgreen;
         }
       }
@@ -59,7 +60,7 @@ table {
     td.enable-hover:hover {
       cursor: pointer;
       .scale-note-wrapper {
-        .note-container, .note-container.mark-mode {
+        .note-container, .note-container.marked {
           border-color: #ff0b;
           transition: 125ms ease;
         }

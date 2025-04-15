@@ -1,4 +1,5 @@
 export function modWithSubZero(value: number, mod: number) {
+    mod = Math.abs(mod);
     value %= mod;
     while(value < 0) {
         value += mod;

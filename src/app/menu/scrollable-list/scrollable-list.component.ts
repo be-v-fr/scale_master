@@ -48,7 +48,15 @@ export class ScrollableListComponent implements OnInit {
     this.focus = value;
   }
 
-  @Input() current?: any;
+  private _current?: any;
+  get current(): any {
+    return this._current;
+  }
+  @Input() set current(value: any) {
+    this._current = value;
+    this.focus = this.filteredContent.indexOf(value);
+  }
+
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
   private lastWheelEventTime = 0;
   private throttleTime = 100;

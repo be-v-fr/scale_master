@@ -38,11 +38,8 @@ export class FretboardComponent {
   }
 
   onFretClick(instrumentStringIndex: number, fret: number) {
-    if (this.custom.mode === 'scale') {
-      const urlSegments: string[] = this.router.url.split('/');
-      const editIndex: number = urlSegments.findIndex(s => s === 'edit');
-      const step: number = parseInt(urlSegments[editIndex + 1], 10);
-      this.onScaleEditFretClick(step, instrumentStringIndex, fret);
+    if (this.custom.mode === 'scale' && typeof(this.custom.currentStep) === 'number') {
+      this.onScaleEditFretClick(this.custom.currentStep, instrumentStringIndex, fret);
     }
   }
 
@@ -60,6 +57,19 @@ export class FretboardComponent {
     this.currScale.scale.toggleMode(interval);
     if (this.currScale.scale.modeExists(interval)) {
       this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'name', interval] } }])
+    }
+  }
+
+  onStringNoteClick(interval: number): void {
+    if (this.custom.mode === 'fretboard' && this.custom.currentStep) {
+      this.onFretboardEditStringClick(this.custom.currentStep, interval);      
+    }
+  }
+
+  onFretboardEditStringClick(step: number, interval: number) {
+    switch (step) {
+      case 0: break;
+      case 1: this.currFretboard.fretboard.setIntervalAsRoot(interval);
     }
   }
 }

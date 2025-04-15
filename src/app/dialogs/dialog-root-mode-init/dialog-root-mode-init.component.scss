@@ -1,0 +1,6 @@
+@import '../../../styles.scss';
+
+:host {
+    max-width: 480px;
+    @include flex($dir: column, $g: 20px);
+}

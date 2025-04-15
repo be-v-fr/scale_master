@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { DialogNameModeComponent } from './dialogs/dialog-name-mode/dialog-name-mode.component';
 import { DialogLoadScaleComponent } from './dialogs/dialog-load-scale/dialog-load-scale.component';
 import { DialogLoadFretboardComponent } from './dialogs/dialog-load-fretboard/dialog-load-fretboard.component';
+import { DialogRootModeInitComponent } from './dialogs/dialog-root-mode-init/dialog-root-mode-init.component';
 
 export const routes: Routes = [
     {
@@ -51,6 +52,10 @@ export const routes: Routes = [
             {
                 path: 'modes',
                 children: [
+                    {
+                        path: 'rootInit',
+                        component: DialogRootModeInitComponent,
+                    },
                     {
                         path: 'name/:interval',
                         component: DialogNameModeComponent,

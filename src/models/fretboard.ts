@@ -3,6 +3,7 @@ import { INSTRUMENTS } from "../const/instruments";
 import { Instrument } from "../interfaces/instrument";
 import { Tuning } from "../interfaces/tuning";
 import { isEqual } from "lodash";
+import { getModTwelveIndex } from "../utils/mod.utils";
 
 export class Fretboard {
     root: Note;
@@ -79,5 +80,14 @@ export class Fretboard {
         }
         intervals.forEach((interval, i) => intervals[i] -= intervals[intervals.length - 1]);
         return intervals;
+    }
+
+    setIntervalAsRoot(interval: number) {
+        console.log(this.tuning.intervals);
+        this.tuning.intervals = this.tuning.intervals.map(i => {
+            i -= interval;
+            return getModTwelveIndex(i);
+        });
+        console.log(this.tuning.intervals);
     }
 }

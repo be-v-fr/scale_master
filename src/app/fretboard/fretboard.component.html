@@ -1,14 +1,20 @@
 <table class="prevent-select" [class.lefty]="display.lefty">
     @for (string of currFretboard.fretboard.intervals; track string; let i = $index) {
     <tr>
-        <td class="string-note">{{currFretboard.notes[i].print()}}</td>
+        <td class="string-note" (click)="onStringNoteClick(string)" [class.enable-hover]="custom.mode === 'fretboard' && custom.currentStep === 1">
+            <div class="scale-note-wrapper">
+                <div class="note-container" [class.marked]="custom.mode === 'fretboard' && custom.currentStep === 1 && string === 0">
+                    {{currFretboard.notes[i].print()}}
+                </div>
+            </div>
+        </td>
         @for (_ of frets; track _; let j = $index; let first = $first) {
         <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)" [class.enable-hover]="custom.mode === 'scale' && (
             (custom.currentStep === 0 && !currFretboard.isRoot(i, j)) ||
             (custom.currentStep === 1 && currFretboard.getNoteFromFret(i, j)))">
             <div class="scale-note-wrapper">
                 <div class="note-container"
-                    [class.mark-mode]="custom.mode === 'scale' && custom.currentStep && [1, 2].includes(custom.currentStep) && currFretboard.isModeRoot(i, j)">
+                    [class.marked]="custom.mode === 'scale' && custom.currentStep && [1, 2].includes(custom.currentStep) && currFretboard.isModeRoot(i, j)">
                     <app-fret-note [note]="currFretboard.getNoteFromFret(i, j)" [root]="currFretboard.isRoot(i, j)" />
                 </div>
             </div>

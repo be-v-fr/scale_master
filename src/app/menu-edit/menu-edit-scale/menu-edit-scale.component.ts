@@ -46,7 +46,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
 
 
   initScale(): void {
-    (typeof this.catIndex === 'number') ? this.initExistingScale() : this.initNewScale();
+    (typeof (this.catIndex) === 'number') ? this.initExistingScale() : this.initNewScale();
   }
 
 
@@ -60,9 +60,14 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
 
 
   initExistingScale(): void {
-    if (this.catIndex) {
+    if (typeof (this.catIndex) === 'number') {
       this.currScale.scale.category = SCALES[this.catIndex];
-      this.currScale.scale.mode = (this.modeIndex && this.currScale.scale.category.modes ? this.currScale.scale.category.modes[this.modeIndex] : undefined);
+      if (this.currScale.scale.mode && this.currScale.scale.mode.interval !== 0) {
+        this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'rootInit'] } }]);
+        this.currScale.scale.root.index -= this.currScale.scale.mode.interval;
+        this.currScale.scale.root.normalize();
+      }
+      this.currScale.scale.mode = (this.currScale.scale.category.modes ? this.currScale.scale.category.modes[0] : undefined);
     }
   }
 
@@ -71,8 +76,10 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
     return this.route.parent?.params.subscribe(params => {
       this.currentStep = parseNumberParamIfExists(params, 'step') || 0;
       if (!this.initComplete) {
-        this.initScale();
-        this.initComplete = true;
+        setTimeout(() => {
+          this.initScale();
+          this.initComplete = true;
+        }, 80);
       }
       if (this.currentStep === 2) {
         this.forceRootMode();
