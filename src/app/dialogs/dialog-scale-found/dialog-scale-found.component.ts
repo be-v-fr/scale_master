@@ -7,6 +7,7 @@ import { ScaleCategory } from '../../../interfaces/scale-category';
 import { SCALES } from '../../../const/scales';
 import { DialogService } from '../../../services/dialog.service';
 import { CurrentScaleService } from '../../../services/current-scale.service';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-dialog-scale-found',
@@ -34,7 +35,7 @@ export class DialogScaleFoundComponent {
       const catIndex: number = params['catIndex'] as number;
       const modeIndex: number = params['modeIndex'] as number;
       if (catIndex && catIndex >= 0) {
-        this.category = SCALES[catIndex];
+        this.category = cloneDeep(SCALES[catIndex]);
       } else {
         console.error('Modes dialog initialization failed because scale category index was missing or invalid.');
       }
@@ -51,23 +52,27 @@ export class DialogScaleFoundComponent {
 
   abortWithMatchingScale(): void {
     if (this.category) {
-      this.currScale.scale.category = this.category;
-      this.continueWithMatchingScaleModes();
+      this._loadMatchingScaleModes();
+      this.dialog.close();
       this.router.navigateByUrl('');
     }
   }
 
   continueWithMatchingScaleModes(): void {
     this._loadMatchingScaleModes();
-    this.dialog.close();
+    this.dialog.close().then(() => {
+      this.currScale.shiftRootAccordingToMode(true); // dialog does not show... is routing the problem? may be use timeout?
+      if (this.category && this.category.modes) {
+        this.currScale
+        this.currScale.scale.mode = this.category.modes[0];
+      }
+    });
   }
 
   private _loadMatchingScaleModes(): void {
     if (this.category && this.category.modes) {
-      this.currScale.scale.category.modes = this.category.modes;
-      if (this.category.modes[this.modeIndex]) {
-        this.currScale.scale.mode = this.category.modes[this.modeIndex];
-      }
+      this.currScale.scale.category = this.category;
+      this.currScale.scale.mode = this.category.modes[this.modeIndex];
     }
   }
 }

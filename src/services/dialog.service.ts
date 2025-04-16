@@ -10,7 +10,7 @@ export class DialogService {
     private router: Router
   ) { }
 
-  close(): void {
-    this.router.navigate([{ outlets: { dialog: null } }]);
+  close(): Promise<boolean> {
+    return this.router.navigate([{ outlets: { dialog: null } }]);
   }
 }

@@ -25,25 +25,33 @@ export class SearchCurrentDirective implements OnInit {
 
   ngOnInit(): void {
     switch (this.mode) {
-      case 'scale': this.searchScaleCategory(); break;
+      case 'scale': this.searchScaleCategories(); break;
       case 'fretboard': this.searchFretboard();
     }
   }
 
 
-  searchScaleCategory(): void {
-    let catIndex: number = -1;
-    let modeIndex: number = -1;
+  searchScaleCategories(): void {
+    let result: { catIndex: number, modeIndex: number } = {
+      catIndex: -1,
+      modeIndex: -1
+    }
     SCALES.forEach((s: ScaleCategory, sIndex: number) => {
-      if (equalItems(s.intervals, this.currScale.scale.category.intervals)) {
-        catIndex = sIndex;
-        modeIndex = 0;
-      } else {
-        this.searchScaleCategoryModes(s, sIndex);
+      if(result.catIndex === -1) {
+        result = this.searchScaleCategory(s, sIndex);
       }
     });
-    if (catIndex >= 0 && modeIndex >= 0) {
-      this.indexFound.emit({ primary: catIndex, secondary: modeIndex });
+    if (result.catIndex >= 0 && result.modeIndex >= 0) {
+      this.indexFound.emit({ primary: result.catIndex, secondary: result.modeIndex });
+    }
+  }
+
+
+  searchScaleCategory(s: ScaleCategory, sIndex: number): { catIndex: number, modeIndex: number } {
+    if (equalItems(s.intervals, this.currScale.scale.category.intervals)) {
+      return { catIndex: sIndex, modeIndex: 0 };
+    } else {
+      return this.searchScaleCategoryModes(s, sIndex);
     }
   }
 
@@ -52,7 +60,7 @@ export class SearchCurrentDirective implements OnInit {
     let catIndex: number = -1;
     let modeIndex: number = -1;
     s.modes?.forEach((m: ScaleMode, mIndex: number) => {
-      if (mIndex >= 1) {
+      if (catIndex === -1 && mIndex >= 1) {
         const modeIntervals: number[] = s.intervals.map(i => i = getModTwelveIndex(i - m.interval));
         if (equalItems(modeIntervals, this.currScale.scale.category.intervals)) {
           catIndex = sIndex;

@@ -62,7 +62,7 @@ export class MenuEditFretboardComponent {
   initExistingFretboard(): void {
     if (this.instrIndex) {
       const tuningIndex = this.tuningIndex ?? 0;
-      this.currFretboard.fretboard.instrument = INSTRUMENTS[this.instrIndex];
+      this.currFretboard.fretboard.instrument = cloneDeep(INSTRUMENTS[this.instrIndex]);
       this.currFretboard.fretboard.tuning = this.currFretboard.fretboard.instrument.tunings[tuningIndex];
     }
   }

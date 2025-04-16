@@ -62,11 +62,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
   initExistingScale(): void {
     if (typeof (this.catIndex) === 'number') {
       this.currScale.scale.category = cloneDeep(SCALES[this.catIndex]);
-      if (this.currScale.scale.mode && this.currScale.scale.mode.interval !== 0) {
-        this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'rootInit'] } }]);
-        this.currScale.scale.root.index -= this.currScale.scale.mode.interval;
-        this.currScale.scale.root.normalize();
-      }
+      this.currScale.shiftRootAccordingToMode(true);
       this.currScale.scale.mode = (this.currScale.scale.category.modes ? this.currScale.scale.category.modes[0] : undefined);
     }
   }

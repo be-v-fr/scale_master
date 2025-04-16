@@ -5,6 +5,7 @@ import { SCALES } from '../const/scales';
 import { ScaleMode } from '../interfaces/scale-mode';
 import { ScaleCategory } from '../interfaces/scale-category';
 import { ScalesDataService } from './scales-data.service';
+import { Router } from '@angular/router';
 
 /**
  * Service for handling the current scale.
@@ -22,7 +23,8 @@ export class CurrentScaleService {
    * Constructor for injection of services and data initialization.
    */
   constructor(
-    private scalesData: ScalesDataService
+    private scalesData: ScalesDataService,
+    private router: Router
   ) {
     this.checkCurrentMode();
   }
@@ -87,7 +89,7 @@ export class CurrentScaleService {
       const matchedNotes: Note[] = Note.matchOverlappingNotes(this.scalesData.naturalNotes, this.scale.notes);
       return Note.makeConsistentAccidentals(matchedNotes, this.scale.notes);
     }
-    return undefined;    
+    return undefined;
   }
 
 
@@ -128,5 +130,16 @@ export class CurrentScaleService {
   closeCustom(): void {
     this.scale = this._defaultScale;
     this.isCustom = false;
+  }
+
+
+  shiftRootAccordingToMode(showDialog: boolean): void {
+    if (this.scale.mode && this.scale.mode.interval !== 0) {
+      if (showDialog) {
+        this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'rootInit'] } }]);
+      }
+      this.scale.root.index -= this.scale.mode.interval;
+      this.scale.root.normalize();
+    }
   }
 }
