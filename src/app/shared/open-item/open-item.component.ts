@@ -39,7 +39,6 @@ export class OpenItemComponent {
 
   onInputBlur() {
     if (this.editing) {
-      console.log('emit name:', this.name);
       this.nameChange.emit(this.name);
       this.editing = false;
     }
