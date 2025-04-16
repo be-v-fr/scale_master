@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogLoadScaleComponent } from './dialog-load-scale.component';
+import { DialogOpenScaleComponent } from './dialog-open-scale.component';
 
-describe('DialogLoadScaleComponent', () => {
-  let component: DialogLoadScaleComponent;
-  let fixture: ComponentFixture<DialogLoadScaleComponent>;
+describe('DialogOpenScaleComponent', () => {
+  let component: DialogOpenScaleComponent;
+  let fixture: ComponentFixture<DialogOpenScaleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogLoadScaleComponent]
+      imports: [DialogOpenScaleComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DialogLoadScaleComponent);
+    fixture = TestBed.createComponent(DialogOpenScaleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

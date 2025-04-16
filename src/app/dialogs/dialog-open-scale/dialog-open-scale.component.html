@@ -3,6 +3,7 @@
 @for (scale of storage.scales; track scale; let i = $index) {
 <app-open-item [name]="scale.name" (open)="open(scale)" (delete)="delete(scale)" (nameChange)="updateName(i, $event)" />
 }
+<p *ngIf="storage.scales && storage.scales.length === 0">You have not created any scales yet.</p>
 } @else {
 <app-loader />
 }

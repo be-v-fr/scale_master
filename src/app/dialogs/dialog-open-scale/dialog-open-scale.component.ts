@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StorageService } from '../../../services/storage.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { OpenItemComponent } from '../../shared/open-item/open-item.component';
 import { ScaleCategory } from '../../../interfaces/scale-category';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { DialogService } from '../../../services/dialog.service';
+import { Scale } from '../../../models/scale';
 
 @Component({
-  selector: 'app-dialog-load-scale',
+  selector: 'app-dialog-open-scale',
   standalone: true,
-  imports: [LoaderComponent, OpenItemComponent],
-  templateUrl: './dialog-load-scale.component.html',
-  styleUrl: './dialog-load-scale.component.scss'
+  imports: [CommonModule, LoaderComponent, OpenItemComponent],
+  templateUrl: './dialog-open-scale.component.html',
+  styleUrl: './dialog-open-scale.component.scss'
 })
-export class DialogLoadScaleComponent implements OnInit {
+export class DialogOpenScaleComponent implements OnInit {
 
 
   constructor(
@@ -29,8 +31,8 @@ export class DialogLoadScaleComponent implements OnInit {
 
 
   open(scale: ScaleCategory): void {
-    this.currScale.scale.category = scale;
     this.currScale.isCustom = true;
+    this.currScale.scale = new Scale(this.currScale.scale.root, scale, scale.modes ? scale.modes[0] : undefined);
     this.dialog.close();
   }
 

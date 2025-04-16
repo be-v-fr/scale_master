@@ -13,7 +13,6 @@ export class Scale {
 
     constructor(root: Note, category: ScaleCategory, mode?: ScaleMode) {
         this.root = root;
-        this.checkCategory(category);
         this.category = category;
         if (mode) {
             this.checkModeInCategory(mode);
@@ -122,17 +121,11 @@ export class Scale {
         return 'natural';
     }
 
-    checkCategory(category: ScaleCategory): void {
-        if (!SCALES.find(s => isEqual(s, category))) {
-            throw new Error(`Scale category "${category}" broken or not found.`);
-        }
-    }
-
     checkModeInCategory(mode: ScaleMode): void {
         if (!this.category.modes || !this.category.modes.find(m => isEqual(m, mode))) {
             const modeNames: string[] = [];
             this.category.modes?.forEach(m => modeNames.push(m.name));
-            throw new Error(`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
+            console.error(`Mode "${mode.name}" broken or not found in modes from category "${this.category.name}": ${modeNames}`);
         }
     }
 
