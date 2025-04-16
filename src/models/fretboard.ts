@@ -83,11 +83,9 @@ export class Fretboard {
     }
 
     setIntervalAsRoot(interval: number) {
-        console.log(this.tuning.intervals);
         this.tuning.intervals = this.tuning.intervals.map(i => {
             i -= interval;
             return getModTwelveIndex(i);
         });
-        console.log(this.tuning.intervals);
     }
 }

@@ -141,10 +141,6 @@ export class CurrentFretboardService {
    */
   getNoteFromFret(instrumentString: number, fret: number): Note | undefined {
     const absoluteIndex: number = this.getFretNoteIndex(instrumentString, fret);
-    if(instrumentString === 5 && fret === 6) {
-      console.log('notes:', this.currScale.scale.notes);
-      console.log(`${absoluteIndex}:`, this.currScale.scale.notes.find(n => n.index === absoluteIndex));
-    }
     return this.currScale.scale.notes.find(n => n.index === absoluteIndex);
   }
 
