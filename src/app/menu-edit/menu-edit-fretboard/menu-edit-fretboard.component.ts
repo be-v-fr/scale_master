@@ -75,6 +75,9 @@ export class MenuEditFretboardComponent {
         this.initFretboard();
         this.initComplete = true;
       }
+      if (this.currentStep === 1) {
+        this.currFretboard.fretboard.tuning.intervals = this.currFretboard.fretboard.intervals.reverse();
+      }
     });
   }
 }
