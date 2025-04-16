@@ -164,6 +164,10 @@ export class Scale {
         return this.category.modes?.find(m => m.interval === interval);
     }
 
+    get primeMode(): ScaleMode | undefined {
+        return this.getMode(0);
+    }
+
     modeExists(interval: number): boolean {
         return this.getMode(interval) !== undefined;
     }

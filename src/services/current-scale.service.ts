@@ -109,7 +109,7 @@ export class CurrentScaleService {
     if (this.scale.category.modes) {
       const currentModeFound: ScaleMode | undefined = this.scale.category.modes.find(m => m === this.scale.mode);
       if (!currentModeFound) {
-        this.scale.mode = this.scale.category.modes[0];
+        this.scale.mode = this.scale.primeMode;
       }
     }
   }

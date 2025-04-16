@@ -64,7 +64,7 @@ export class DialogScaleFoundComponent {
       this.currScale.shiftRootAccordingToMode(true); // dialog does not show... is routing the problem? may be use timeout?
       if (this.category && this.category.modes) {
         this.currScale
-        this.currScale.scale.mode = this.category.modes[0];
+        this.currScale.scale.mode = this.currScale.scale.primeMode;
       }
     });
   }

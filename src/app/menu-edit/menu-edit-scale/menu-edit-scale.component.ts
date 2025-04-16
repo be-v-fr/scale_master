@@ -61,9 +61,9 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
 
   initExistingScale(): void {
     if (typeof (this.catIndex) === 'number') {
-      this.currScale.scale.category = cloneDeep(SCALES[this.catIndex]);
+      this.currScale.scale.category = cloneDeep(this.catIndex >= 0 ? SCALES[this.catIndex] : this.currScale.scale.category);
       this.currScale.shiftRootAccordingToMode(true);
-      this.currScale.scale.mode = (this.currScale.scale.category.modes ? this.currScale.scale.category.modes[0] : undefined);
+      this.currScale.scale.mode = this.currScale.scale.primeMode ?? undefined;
     }
   }
 
@@ -77,7 +77,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
           this.initComplete = true;
         }, 80);
       }
-      if(this.currentStep === 2) {
+      if (this.currentStep === 2) {
         this.handleStepTwo();
       }
     });
@@ -86,7 +86,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
 
   handleStepTwo(): void {
     const rootModeDialogOpened: boolean = this.forceRootMode();
-    if(!rootModeDialogOpened) {
+    if (!rootModeDialogOpened) {
       this.router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }]);
     }
   }
