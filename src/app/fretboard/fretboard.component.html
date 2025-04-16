@@ -1,5 +1,5 @@
 <table class="prevent-select" [class.lefty]="display.lefty">
-    @for (string of currFretboard.fretboard.intervals; track string; let i = $index) {
+    @for (string of currFretboard.fretboard.intervals; track i; let i = $index) {
     <tr>
         <td class="string-note" (click)="onStringNoteClick(string)" [class.enable-hover]="custom.mode === 'fretboard' && custom.currentStep === 1">
             <div class="scale-note-wrapper">
