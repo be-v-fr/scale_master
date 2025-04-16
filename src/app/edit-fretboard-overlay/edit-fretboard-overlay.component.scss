@@ -2,6 +2,7 @@
 
 .overlay {
     width: 100%;
+    max-width: calc(1280px - $fretboard-string-margin);
     height: 100%;
     position: absolute;
     z-index: 2;
