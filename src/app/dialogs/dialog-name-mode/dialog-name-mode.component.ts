@@ -4,7 +4,7 @@ import { CurrentScaleService } from '../../../services/current-scale.service';
 import { ScaleMode } from '../../../interfaces/scale-mode';
 import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { parseNumberParamIfExists } from '../../../utils/router.utils';
 import { DialogService } from '../../../services/dialog.service';
@@ -25,7 +25,8 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private currScale: CurrentScaleService,
-    public dialog: DialogService
+    public dialog: DialogService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +65,10 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
     if (modeOriginal) {
       modeOriginal.name = this.modeName;
     }
-    this.dialog.close();
+    this.dialog.close().then(() => {
+      if(this.forceRoot) {
+        this.router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }]);
+      }
+    });
   }
 }

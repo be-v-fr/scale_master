@@ -77,17 +77,27 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
           this.initComplete = true;
         }, 80);
       }
-      if (this.currentStep === 2) {
-        this.forceRootMode();
+      if(this.currentStep === 2) {
+        this.handleStepTwo();
       }
     });
   }
 
 
-  forceRootMode(): void {
+  handleStepTwo(): void {
+    const rootModeDialogOpened: boolean = this.forceRootMode();
+    if(!rootModeDialogOpened) {
+      this.router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }]);
+    }
+  }
+
+
+  forceRootMode(): boolean {
     if (this.currScale.scale.category.modes && !this.currScale.scale.getMode(0)) {
       this.currScale.scale.addMode(0);
       this.router.navigate([{ outlets: { 'dialog': ['d', 'modes', 'name', 0, { forceRoot: true }] } }]);
+      return true;
     }
+    return false;
   }
 }
