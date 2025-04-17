@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { ScaleCategory } from '../interfaces/scale-category';
+import { StorageSave } from '../interfaces/storage-save';
+import { Ordering } from '../interfaces/ordering';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  scales?: ScaleCategory[];
+  scalesData?: StorageSave[];
   private _keys = {
     scales: 'scales',
   }
@@ -27,8 +29,8 @@ export class StorageService {
     const value: string | null = await this.get(this._keys.scales);
     if (value) {
       try {
-        this.scales = JSON.parse(value);
-      } catch(err) {
+        this.scalesData = JSON.parse(value);
+      } catch (err) {
         console.error('Could not parse storage value in ScaleCategory[] format:', value);
       }
     }
@@ -36,23 +38,38 @@ export class StorageService {
 
 
   async saveScales(): Promise<void> {
-    const scalesString: string = JSON.stringify(this.scales);
-    await this.set(this._keys.scales, scalesString);    
+    const scalesString: string = JSON.stringify(this.scalesData);
+    await this.set(this._keys.scales, scalesString);
   }
 
 
   async saveScale(scale: ScaleCategory): Promise<void> {
     await this.loadScales();
-    if(!this.scales) {
-      this.scales = [];
+    if (!this.scalesData) {
+      this.scalesData = [];
     }
-    this.scales.push(scale);
+    this.scalesData.push({ data: scale, timestamp: Date.now() });
     await this.saveScales();
   }
 
 
-  async deleteScale(scale: ScaleCategory): Promise<void> {
-    this.scales = this.scales?.filter(s => s !== scale);
+  async deleteScale(scaleSave: StorageSave): Promise<void> {
+    this.scalesData = this.scalesData?.filter(sd => sd !== scaleSave);
     await this.saveScales();
+  }
+
+
+  orderScales(ordering: Ordering): void {
+    switch (ordering.orderingBy) {
+      case 'name': this.scalesData?.sort((a, b) => this._compareValues(a.data.name, b.data.name, ordering.order)); break;
+      case 'createdAt': this.scalesData?.sort((a, b) => this._compareValues(a.timestamp, b.timestamp, ordering.order));
+    }
+  }
+
+
+  private _compareValues<T>(a: T, b: T, order: 'asc' | 'desc'): number {
+    if (a < b) return order === 'asc' ? -1 : 1;
+    if (a > b) return order === 'asc' ? 1 : -1;
+    return 0;
   }
 }

@@ -7,15 +7,26 @@ import { ScaleCategory } from '../../../interfaces/scale-category';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { DialogService } from '../../../services/dialog.service';
 import { Scale } from '../../../models/scale';
+import { OrderingBarComponent } from '../../shared/ordering-bar/ordering-bar.component';
+import { Ordering } from '../../../interfaces/ordering';
+import { StorageSave } from '../../../interfaces/storage-save';
 
 @Component({
   selector: 'app-dialog-open-scale',
   standalone: true,
-  imports: [CommonModule, LoaderComponent, OpenItemComponent],
+  imports: [CommonModule, LoaderComponent, OpenItemComponent, OrderingBarComponent],
   templateUrl: './dialog-open-scale.component.html',
   styleUrl: './dialog-open-scale.component.scss'
 })
 export class DialogOpenScaleComponent implements OnInit {
+  private _ordering: Ordering = { order: 'desc', orderingBy: 'createdAt' };
+  get ordering(): Ordering {
+    this.storage.orderScales(this._ordering);
+    return this._ordering;
+  }
+  set ordering(value: Ordering) {
+    this._ordering = value;
+  }
 
 
   constructor(
@@ -37,14 +48,14 @@ export class DialogOpenScaleComponent implements OnInit {
   }
 
 
-  delete(scale: ScaleCategory): void {
-    this.storage.deleteScale(scale);
+  deleteSave(save: StorageSave): void {
+    this.storage.deleteScale(save);
   }
 
   
   updateName(arrIndex: number, name: string) {
-    if(this.storage.scales) {
-      this.storage.scales[arrIndex].name = name;
+    if(this.storage.scalesData) {
+      this.storage.scalesData[arrIndex].data.name = name;
       this.storage.saveScales();
     }
   }

@@ -1,0 +1,39 @@
+@import '../../../styles.scss';
+
+$border-color: lightgrey;
+$border-style: 1px solid $border-color;
+
+:host {
+    @include flex();
+    border-bottom: $border-style;
+}
+
+.ordering-btn {
+    @include flex($g: 1px);
+    padding: 1px 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid #0000;
+    border-bottom: none;
+    &.active {
+        font-weight: bold;
+    }
+    &:hover {
+        border-color: $border-color;
+    }
+    .material-icons.arrow-up {
+        transform: rotate(180deg);
+    }
+    span {
+        flex: 1;
+        text-align: center;
+        &::after {
+            content: attr(data-text);
+            font-weight: bold;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+            display: block;
+          }
+    }
+}

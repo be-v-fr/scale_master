@@ -1,9 +1,12 @@
 <h2>Open scale</h2>
-@if(storage.scales) {
-@for (scale of storage.scales; track scale; let i = $index) {
-<app-open-item [name]="scale.name" (open)="open(scale)" (delete)="delete(scale)" (nameChange)="updateName(i, $event)" />
+@if(storage.scalesData) {
+@if (storage.scalesData.length === 0) {<p>You have not created any scales yet.</p>}
+@else {
+<app-ordering-bar [(ordering)]="ordering" />
+@for (scaleSave of storage.scalesData; track scaleSave.timestamp; let i = $index) {
+<app-open-item [name]="scaleSave.data.name" (open)="open(scaleSave.data)" (delete)="deleteSave(scaleSave)" (nameChange)="updateName(i, $event)" />
 }
-<p *ngIf="storage.scales && storage.scales.length === 0">You have not created any scales yet.</p>
+}
 } @else {
 <app-loader />
 }
