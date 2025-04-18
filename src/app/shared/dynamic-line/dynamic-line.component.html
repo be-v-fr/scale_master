@@ -1,0 +1,36 @@
+<svg class="line-layer" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="moving-gradient" x1="-100%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff0b" />
+        <stop offset="10%" stop-color="#ff64" />
+        <stop offset="20%" stop-color="#ff0b" />
+        <stop offset="30%" stop-color="#ff64" />
+        <stop offset="40%" stop-color="#ff0b" />
+        <stop offset="50%" stop-color="#ff64" />
+        <stop offset="60%" stop-color="#ff0b" />
+        <stop offset="70%" stop-color="#ff64" />
+        <stop offset="80%" stop-color="#ff0b" />
+        <stop offset="90%" stop-color="#ff64" />
+        <stop offset="100%" stop-color="#ff0b" />
+        <animateTransform
+          attributeName="gradientTransform"
+          type="translate"
+          from="0,0"
+          to="0.8,0"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </linearGradient>
+    </defs>
+  
+    <line
+      [attr.x1]="lineLeft.x"
+      [attr.y1]="lineLeft.y"
+      [attr.x2]="lineRight.x"
+      [attr.y2]="lineRight.y"
+      stroke="url(#moving-gradient)"
+      stroke-width="6"
+      stroke-linecap="round"
+    />
+  </svg>
+  

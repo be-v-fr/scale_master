@@ -99,7 +99,9 @@ export class CurrentFretboardService {
     const numbersOfStrings: number[] = [];
     if (this.fretboard.instrument.maxExtraStrings > 0) {
       for (let i = 0; i <= this.fretboard.instrument.maxExtraStrings; i++) {
-        numbersOfStrings.push(this.fretboard.defaultNumberOfStrings + i);
+        const numberOfStrings: number = this.fretboard.defaultNumberOfStrings + i;
+        if(numberOfStrings > 8) break;
+        numbersOfStrings.push(numberOfStrings);
       }
     }
     return numbersOfStrings;

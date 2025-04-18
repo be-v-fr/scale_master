@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
@@ -20,6 +20,13 @@ import { EditFretboardOverlayComponent } from '../edit-fretboard-overlay/edit-fr
   styleUrl: './fretboard.component.scss'
 })
 export class FretboardComponent {
+  @ViewChildren('stringNoteContainer') stringNoteRefs!: QueryList<ElementRef<HTMLElement>>;
+  get selectedStringNote(): HTMLElement | undefined {
+    if (typeof (this.custom.currentStringSelection) === 'number') {
+      return this.stringNoteRefs.toArray()[this.custom.currentStringSelection].nativeElement;
+    }
+    return undefined;
+  }
 
 
   /**
@@ -38,7 +45,7 @@ export class FretboardComponent {
   }
 
   onFretClick(instrumentStringIndex: number, fret: number) {
-    if (this.custom.mode === 'scale' && typeof(this.custom.currentStep) === 'number') {
+    if (this.custom.mode === 'scale' && typeof (this.custom.currentStep) === 'number') {
       this.onScaleEditFretClick(this.custom.currentStep, instrumentStringIndex, fret);
     }
   }
@@ -60,16 +67,17 @@ export class FretboardComponent {
     }
   }
 
-  onStringNoteClick(interval: number): void {
-    if (this.custom.mode === 'fretboard' && this.custom.currentStep) {
-      this.onFretboardEditStringClick(this.custom.currentStep, interval);      
+  onStringNoteClick(interval: number, stringIndex: number): void {
+    if (this.custom.mode === 'fretboard' && typeof (this.custom.currentStep) === 'number') {
+      this.onFretboardEditStringClick(this.custom.currentStep, interval, stringIndex);
     }
   }
 
-  onFretboardEditStringClick(step: number, interval: number) {
+  onFretboardEditStringClick(step: number, interval: number, stringIndex: number) {
     switch (step) {
       case 0: break;
-      case 1: this.currFretboard.fretboard.setIntervalAsRoot(interval);
+      case 1: this.currFretboard.fretboard.setIntervalAsRoot(interval); break;
+      case 2: this.custom.currentStringSelection = (stringIndex ?? 0);
     }
   }
 }

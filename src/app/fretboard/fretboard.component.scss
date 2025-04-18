@@ -1,6 +1,7 @@
 @import "../../styles.scss";
 
 $fret-border: 2px solid rgba(206, 174, 32);
+$select: #ff0b;
 
 :host {
   position: relative;
@@ -55,13 +56,16 @@ table {
         &.marked {
           border-color: lightgreen;
         }
+        &.marked-selection {
+          border-color: $select;
+        }
       }
     }
     td.enable-hover:hover {
       cursor: pointer;
       .scale-note-wrapper {
         .note-container, .note-container.marked {
-          border-color: #ff0b;
+          border-color: $select;
           transition: 125ms ease;
         }
       }

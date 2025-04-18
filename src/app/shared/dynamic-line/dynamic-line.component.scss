@@ -1,0 +1,12 @@
+@import '../../../styles.scss';
+
+.line-layer {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    filter: drop-shadow(0px 2px 3px #0002);
+}

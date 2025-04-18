@@ -9,6 +9,13 @@ import { CurrentFretboardService } from './current-fretboard.service';
 export class CustomizeService {
   private _scaleSteps: number = 3;
   private _fretboardSteps: number = 5;
+  private _currentStringSelection: number = 0;
+  get currentStringSelection(): number | undefined {
+    return (this.mode === 'fretboard' && this.currentStep === 2) ? this._currentStringSelection : undefined;
+  }
+  set currentStringSelection(value: number) {
+    this._currentStringSelection = value;
+  }
 
   constructor(
     private router: Router,

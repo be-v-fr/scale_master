@@ -86,4 +86,16 @@ export class Fretboard {
         this.root.index += interval;
         this.root.normalize();
     }
+
+    replaceSurplus0IntervalsW12s() {
+        let zeroCount: number = 0;
+        for (let i = 0; i < this.tuning.intervals.length; i++) {
+          if (this.tuning.intervals[i] === 0) {
+            zeroCount++;
+            if (zeroCount > 1) {
+              this.tuning.intervals[i] = 12;
+            }
+          }
+        }
+    }
 }

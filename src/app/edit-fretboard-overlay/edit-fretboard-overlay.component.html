@@ -1,9 +1,19 @@
 <div class="overlay" [class.lefty]="display.lefty">
     <div class="overlay-half-transparent">
-        <div class="list-container" *ngIf="custom.currentStep !== undefined && [0].includes(custom.currentStep)">
+        <div #listContainer class="list-container"
+            *ngIf="custom.currentStep !== undefined && [0, 2].includes(custom.currentStep)">
             <app-scrollable-list *ngIf="custom.currentStep === 0 && currFretboard.numbersOfStrings"
-            [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
-            [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
+                [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
+                [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
+            <app-scrollable-list
+                *ngIf="custom.currentStep === 2 && custom.currentStringSelection !== undefined && scalesData.extendedNaturalNoteNames"
+                [content]="scalesData.extendedNaturalNoteNames" [title]="'Note'"
+                (currentChange)="onCurrentStringSelectionChange($event)" [defaultIndex]="listDefaultIndex"
+                [current]="currFretboard.fretboard.naturalNotes[custom.currentStringSelection].printNaturalWithFlatAlternative()"
+                [allowSearch]="false" />
         </div>
     </div>
 </div>
+<app-dynamic-line *ngIf="selectedStringNote && listContainerRef"
+    [leftEl]="display.lefty ? listContainerRef.nativeElement : selectedStringNote"
+    [rightEl]="display.lefty ? selectedStringNote : listContainerRef.nativeElement" />

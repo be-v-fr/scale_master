@@ -1,9 +1,12 @@
 <table class="prevent-select" [class.lefty]="display.lefty">
     @for (string of currFretboard.fretboard.intervals; track i; let i = $index) {
     <tr>
-        <td class="string-note" (click)="onStringNoteClick(string)" [class.enable-hover]="custom.mode === 'fretboard' && custom.currentStep === 1">
+        <td class="string-note" (click)="onStringNoteClick(string, i)"
+            [class.enable-hover]="custom.mode === 'fretboard' && custom.currentStep && [1, 2].includes(custom.currentStep)">
             <div class="scale-note-wrapper">
-                <div class="note-container" [class.marked]="custom.mode === 'fretboard' && custom.currentStep === 1 && string === 0">
+                <div class="note-container" #stringNoteContainer
+                    [class.marked]="custom.mode === 'fretboard' && custom.currentStep && [1, 2].includes(custom.currentStep) && string === 0"
+                    [class.marked-selection]="i === custom.currentStringSelection">
                     {{currFretboard.notes[i].print()}}
                 </div>
             </div>
@@ -24,4 +27,4 @@
     </tr>
     }
 </table>
-<app-edit-fretboard-overlay *ngIf="custom.mode === 'fretboard'" />
+<app-edit-fretboard-overlay *ngIf="custom.mode === 'fretboard'" [selectedStringNote]="selectedStringNote" />

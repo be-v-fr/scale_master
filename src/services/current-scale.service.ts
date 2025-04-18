@@ -122,7 +122,7 @@ export class CurrentScaleService {
    */
   updateCurrScaleRootNote(noteString: string) {
     noteString = noteString.split('/')[0];
-    const note: Note = new Note().textToNote(noteString);
+    const note: Note = Note.textToNote(noteString);
     this.scale.root = note;
   }
 

@@ -45,7 +45,7 @@ export class MenuComponent {
    * @param noteString - note name.
    */
   updateCurrFretboardRootNote(noteString: string) {
-    const note: Note = new Note().textToNote(noteString);
+    const note: Note = Note.textToNote(noteString);
     this.currFretboard.fretboard.root = note;
   }
 }
