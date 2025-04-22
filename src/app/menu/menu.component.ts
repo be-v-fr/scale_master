@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScrollableListComponent } from './scrollable-list/scrollable-list.component';
+import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
 import { Note } from '../../models/note';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { ScalesDataService } from '../../services/scales-data.service';

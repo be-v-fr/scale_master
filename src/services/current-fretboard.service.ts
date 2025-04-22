@@ -95,7 +95,7 @@ export class CurrentFretboardService {
   /**
    * Returns the different numbers of strings that are available for the current instrument.
    */
-  get numbersOfStrings(): number[] | undefined {
+  get numbersOfStrings(): number[] {
     const numbersOfStrings: number[] = [];
     if (this.fretboard.instrument.maxExtraStrings > 0) {
       for (let i = 0; i <= this.fretboard.instrument.maxExtraStrings; i++) {

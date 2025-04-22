@@ -56,6 +56,7 @@ export class MenuEditFretboardComponent {
     clonedTuning.name = 'untitled';
     clonedTuning.intervals = [0];
     this.currFretboard.fretboard.tuning = clonedTuning;
+    this.currFretboard.fretboard.numberOfStrings = 1;
   }
 
 

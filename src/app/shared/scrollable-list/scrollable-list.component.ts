@@ -48,11 +48,11 @@ export class ScrollableListComponent implements OnInit {
     this.focus = value;
   }
 
-  private _current?: any;
-  get current(): any {
+  private _current?: string | number;
+  get current(): string | number | undefined {
     return this._current;
   }
-  @Input() set current(value: any) {
+  @Input() set current(value: string | number) {
     this._current = value;
     this.focus = this.filteredContent.indexOf(value);
   }
@@ -66,6 +66,14 @@ export class ScrollableListComponent implements OnInit {
   @Input() allowSearch: boolean = true;
   @Input() allowReset: boolean = true;
   submenuBgWidth?: number;
+  
+  private _disabled: boolean = false;
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  @Input() set disabled(value: boolean) {
+    this._disabled = value;
+  }
 
 
   /**
@@ -84,11 +92,11 @@ export class ScrollableListComponent implements OnInit {
    */
   get filteredContent(): (string | number)[] {
     return this._content.filter(item => {
-      if(this.searchFilter) {
+      if (this.searchFilter) {
         return item.toString().toLowerCase().includes(this.searchFilter.toLowerCase());
       }
       return true;
-    }); 
+    });
   }
 
 
@@ -98,13 +106,12 @@ export class ScrollableListComponent implements OnInit {
    * list focus accordingly.
    */
   ngOnInit(): void {
-    if (this.current) {
-      const currentIndex = this._content.indexOf(this.current);
-      if (currentIndex >= 0) {
-        this.focus = currentIndex;
-      } else {
-        throw (`Currently selected value "${this.current}" does not exist in list content.`);
-      }
+    if (this.current === undefined) return
+    const currentIndex = this._content.indexOf(this.current);
+    if (currentIndex >= 0) {
+      this.focus = currentIndex;
+    } else {
+      throw (`Currently selected value "${this.current}" does not exist in list content.`);
     }
   }
 
@@ -137,18 +144,6 @@ export class ScrollableListComponent implements OnInit {
   getContentItem(positionIndex: number): any {
     const contentIndex = this.getContentIndexFromPositionIndex(positionIndex);
     return this.filteredContent[contentIndex];
-  }
-
-
-  /**
-   * Checks if an item is the default item.
-   * @param positionIndex - Item index in the list positions array.
-   */
-  isDefault(positionIndex: number): boolean {
-    if (this.defaultIndex) {
-      return this.getContentItem(positionIndex) === this._content[this.defaultIndex];
-    }
-    return false;
   }
 
 
@@ -239,7 +234,7 @@ export class ScrollableListComponent implements OnInit {
    * @param focusTimeoutLength - Length of refocus timeout. 
    */
   onListArrowClick(steps: number, timeoutLength: number): void {
-    if (this.content.length > 0) {
+    if (!this.disabled && this.content.length > 0) {
       this.scrollBySteps(steps, timeoutLength);
     }
   }

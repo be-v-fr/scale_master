@@ -15,25 +15,30 @@
         background: #4444;
         backdrop-filter: blur(1.5px);
         @include flex();
-        .list-container {
+        .layout-container {
+            width: 60%;
+            height: 80%;
+            padding: 20px;
             position: relative;
             right: calc($fretboard-string-margin / 2);
-            width: 240px;
-            height: 200px;
-            padding-top: 40px;
             background: white;
             border-radius: 16px;
             box-shadow: 1px 2px 2px 4px #0002;
-            @include flex();
-            app-scrollable-list {
-                width: 120px;
+            &.list-container {
+                width: 240px;
+                height: 200px;
+                padding-top: 40px;
+                @include flex();
+                app-scrollable-list {
+                    width: 120px;
+                }
             }
         }
     }
     &.lefty {
         left: 0;
         right: $fretboard-string-margin;
-        .overlay-half-transparent .list-container {
+        .overlay-half-transparent .layout-container {
             left: calc($fretboard-string-margin / 2);
             right: 0;
         }

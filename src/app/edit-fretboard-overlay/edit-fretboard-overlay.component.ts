@@ -1,17 +1,18 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomizeService } from '../../services/customize.service';
-import { ScrollableListComponent } from '../menu/scrollable-list/scrollable-list.component';
 import { DisplayService } from '../../services/display.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { ScalesDataService } from '../../services/scales-data.service';
 import { Note } from '../../models/note';
 import { DynamicLineComponent } from '../shared/dynamic-line/dynamic-line.component';
+import { DialogAddStringsRulesComponent } from '../dialogs/dialog-add-strings-rules/dialog-add-strings-rules.component';
+import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
 
 @Component({
   selector: 'app-edit-fretboard-overlay',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, DynamicLineComponent],
+  imports: [CommonModule, ScrollableListComponent, DynamicLineComponent, DialogAddStringsRulesComponent],
   templateUrl: './edit-fretboard-overlay.component.html',
   styleUrl: './edit-fretboard-overlay.component.scss'
 })

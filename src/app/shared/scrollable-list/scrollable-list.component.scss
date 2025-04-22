@@ -70,7 +70,8 @@ $opac-outside: 0.3;
     background: steelblue;
   }
 
-  &.list-empty .list-container {
+  &.list-disabled .list-container {
+    pointer-events: none;
     background: lightgrey;
 
     .empty-field {
@@ -85,7 +86,7 @@ $opac-outside: 0.3;
     transition-delay: 100ms;
   }
 
-  &:hover:not(.list-empty) app-scrollable-list-arrow {
+  &:hover:not(.list-disabled) app-scrollable-list-arrow {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;

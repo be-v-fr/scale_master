@@ -11,9 +11,9 @@ import { CurrentScaleService } from '../../services/current-scale.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
 import { Fretboard } from '../../models/fretboard';
 import { CustomizeService } from '../../services/customize.service';
-import { ScrollableListComponent } from '../menu/scrollable-list/scrollable-list.component';
 import { ScalesDataService } from '../../services/scales-data.service';
 import { StorageService } from '../../services/storage.service';
+import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
 
 @Component({
   selector: 'app-menu-edit',

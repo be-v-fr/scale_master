@@ -1,5 +1,5 @@
 <table class="prevent-select" [class.lefty]="display.lefty">
-    @for (string of currFretboard.fretboard.intervals; track i; let i = $index) {
+    @for (string of custom.maxFretboardIntervals ?? currFretboard.fretboard.intervals; track i; let i = $index) {
     <tr>
         <td class="string-note" (click)="onStringNoteClick(string, i)"
             [class.enable-hover]="custom.mode === 'fretboard' && custom.currentStep && [1, 2].includes(custom.currentStep)">
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </td>
-        @for (_ of frets; track _; let j = $index; let first = $first) {
+        @for (_ of frets; track j; let j = $index; let first = $first) {
         <td [ngClass]="first ? 'nut' : 'fret'" (click)="onFretClick(i, j)" [class.enable-hover]="custom.mode === 'scale' && (
             (custom.currentStep === 0 && !currFretboard.isRoot(i, j)) ||
             (custom.currentStep === 1 && currFretboard.getNoteFromFret(i, j)))">

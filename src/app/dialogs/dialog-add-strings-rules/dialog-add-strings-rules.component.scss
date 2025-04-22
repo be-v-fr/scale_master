@@ -1,0 +1,9 @@
+@import '../../../styles.scss';
+
+.slide-toggle-container {
+    @include flex($jc: flex-start, $g: 6px);
+}
+
+.scrollable-lists-container {
+    @include flex($jc: space-around);
+}

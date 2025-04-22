@@ -28,7 +28,7 @@
         } @else {
         <app-scrollable-list *ngIf="scalesData.categoryNames" [content]="scalesData.categoryNames" [title]="'Category'"
             [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
-        <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames" [content]="currScale.categoryModeNames"
+        <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames && currScale.modeName" [content]="currScale.categoryModeNames"
             [(current)]="currScale.modeName" [allowSearch]="currScale.categoryModeNames.length > 0"
             [allowReset]="currScale.categoryModeNames.length > 0" [title]="'Mode'" />
         }
@@ -49,7 +49,7 @@
         } @else {
         <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames" [content]="tuningsData.instrumentNames"
             [title]="'Instrument'" [(current)]="currFretboard.instrumentName" />
-        <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames" [content]="currFretboard.instrumentTuningNames"
+        <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames && currFretboard.tuningName" [content]="currFretboard.instrumentTuningNames"
             [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
         }
         <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"
@@ -57,8 +57,7 @@
             (currentChange)="updateCurrFretboardRootNote($event)" [allowSearch]="false"
             [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
             [autofocus]="currFretboard.fretboard.root.index" />
-        <app-scrollable-list class="tiny" *ngIf="currFretboard.numbersOfStrings"
-            [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
+        <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
             [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
     </div>
 </section>

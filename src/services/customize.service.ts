@@ -16,6 +16,8 @@ export class CustomizeService {
   set currentStringSelection(value: number) {
     this._currentStringSelection = value;
   }
+  allowAddingStrings: boolean = false;
+  maxNumberOfExtraStrings: number = 0;
 
   constructor(
     private router: Router,
@@ -42,11 +44,11 @@ export class CustomizeService {
 
   get currentStep(): number | undefined {
     const maxStep: number = 10;
-    if(this.isActive) {
+    if (this.isActive) {
       const urlSegments: string[] = this.router.url.split('/');
       const editIndex: number = urlSegments.findIndex(s => s === 'edit');
       const step: number = parseInt(urlSegments[editIndex + 1], 10);
-      if(step >= 0 && step < maxStep) {
+      if (step >= 0 && step < maxStep) {
         return step;
       } else {
         console.error('Invalid step number:', step + '.', 'Maximum step is set to:', maxStep);
@@ -78,6 +80,24 @@ export class CustomizeService {
       instrIndex: this.currFretboard.fretboard.instrIndex,
       tuningIndex: this.currFretboard.fretboard.tuningIndex
     }
+  }
+
+  get maxFretboardIntervals(): number[] | undefined {
+    if (this.mode === 'fretboard' && this.currentStep === 3 && this.allowAddingStrings) {
+      this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.defaultNumberOfStrings + this.maxNumberOfExtraStrings;
+      return this.currFretboard.fretboard.intervals;
+    } else {
+      this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.defaultNumberOfStrings;
+    }
+    return undefined;
+  }
+
+  get previousStringCorrectionInterface(): number {
+    return this.currFretboard.fretboard.tuning.extraStrings.previousStringCorrection || 0;
+  }
+
+  set previousStringCorrectionInterface(value: number) {
+    this.currFretboard.fretboard.tuning.extraStrings.previousStringCorrection = value;
   }
 
   getEditRouteWParams(editMode: 'scale' | 'fretboard', useCurrent: boolean): (string | number | {})[] {
