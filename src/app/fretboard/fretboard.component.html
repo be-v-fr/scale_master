@@ -27,4 +27,4 @@
     </tr>
     }
 </table>
-<app-edit-fretboard-overlay *ngIf="custom.mode === 'fretboard'" [selectedStringNote]="selectedStringNote" />
+<app-edit-fretboard-overlay *ngIf="custom.mode === 'fretboard' && custom.currentStep !== undefined && custom.currentStep <= 3" [selectedStringNote]="selectedStringNote" />

@@ -11,7 +11,7 @@ import { DialogNameModeComponent } from './dialogs/dialog-name-mode/dialog-name-
 import { DialogOpenScaleComponent } from './dialogs/dialog-open-scale/dialog-open-scale.component';
 import { DialogLoadFretboardComponent } from './dialogs/dialog-load-fretboard/dialog-load-fretboard.component';
 import { DialogRootModeInitComponent } from './dialogs/dialog-root-mode-init/dialog-root-mode-init.component';
-import { DialogNameScaleComponent } from './dialogs/dialog-name-scale/dialog-name-scale.component';
+import { DialogNameCustomComponent } from './dialogs/dialog-name-custom/dialog-name-custom.component';
 
 export const routes: Routes = [
     {
@@ -51,13 +51,8 @@ export const routes: Routes = [
                 component: DialogExportComponent,
             },
             {
-                path: 'scale',
-                children: [
-                    {
-                        path: 'name',
-                        component: DialogNameScaleComponent
-                    }
-                ]
+                path: 'name',
+                component: DialogNameCustomComponent,
             },
             {
                 path: 'modes',

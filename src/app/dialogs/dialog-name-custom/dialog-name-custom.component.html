@@ -1,0 +1,9 @@
+<p>Please name your {{custom.mode === 'scale' ? 'scale category' : 'tuning'}}:</p>
+@if(custom.mode === 'scale') {
+    <input type="text" [(ngModel)]="currScale.scale.category.name" autofocus />
+} @else {
+    <input type="text" [(ngModel)]="currFretboard.fretboard.tuning.name" autofocus />
+}
+<div class="btns-container">
+    <button class="border-btn" (click)="dialog.close()">Ok</button>
+</div>

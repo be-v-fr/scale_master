@@ -87,7 +87,7 @@ export class MenuEditScaleComponent implements OnInit, OnDestroy {
   handleStepTwo(): void {
     const rootModeDialogOpened: boolean = this.forceRootMode();
     if (!rootModeDialogOpened) {
-      this.router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }]);
+      this.router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }]);
     }
   }
 

@@ -3,10 +3,10 @@
 <p>Set the number of strings.</p>
 }
 @case(1) {
-<p>Select the lowest string.<br>This string will be identified with your tuning's root note.</p>   
+<p>Select the lowest string.<br>This string will be identified with your tuning's root note.</p>
 }
 @case(2) {
-<p>Click the string notes to set the respective intervals.</p>   
+<p>Click the string notes to set the respective intervals.</p>
 }
 @case(3) {
 <p appSearchCurrent="fretboard"
@@ -15,6 +15,12 @@
 </p>
 }
 @case(4) {
-<p>Your tuning is ready.</p>   
+<p>
+    Your
+    <a (click)="router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }])">
+        <i>{{currFretboard.fretboard.tuning.name}}</i>
+    </a>
+    tuning is ready.
+</p>
 }
 }

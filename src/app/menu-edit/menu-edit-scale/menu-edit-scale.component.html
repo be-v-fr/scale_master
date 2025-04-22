@@ -9,6 +9,12 @@
 </p>
 }
 @case(2) {
-<p>Your <a (click)="router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }])" ><i>{{currScale.scale.category.name}}</i></a> scale is ready.</p>
+<p>
+    Your
+    <a (click)="router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }])">
+        <i>{{currScale.scale.category.name}}</i>
+    </a>
+    scale is ready.
+</p>
 }
 }
