@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { ScaleCategory } from '../interfaces/scale-category';
+import { Tuning } from '../interfaces/tuning';
 import { StorageSave } from '../interfaces/storage-save';
 import { Ordering } from '../interfaces/ordering';
 
@@ -8,9 +9,11 @@ import { Ordering } from '../interfaces/ordering';
   providedIn: 'root'
 })
 export class StorageService {
-  scalesData?: StorageSave[];
+  scalesData?: StorageSave<ScaleCategory>[];
+  tuningsData?: StorageSave<Tuning>[];
   private _keys = {
     scales: 'scales',
+    tunings: 'tunings'
   }
 
 
@@ -33,6 +36,22 @@ export class StorageService {
       } catch (err) {
         console.error('Could not parse storage value in ScaleCategory[] format:', value);
       }
+    } else {
+      this.scalesData = [];
+    }
+  }
+
+
+  async loadTunings(): Promise<void> {
+    const value: string | null = await this.get(this._keys.tunings);
+    if (value) {
+      try {
+        this.tuningsData = JSON.parse(value);
+      } catch (err) {
+        console.error('Could not parse storage value in Tuning[] format:', value);
+      }
+    } else {
+      this.tuningsData = [];
     }
   }
 
@@ -40,6 +59,12 @@ export class StorageService {
   async saveScales(): Promise<void> {
     const scalesString: string = JSON.stringify(this.scalesData);
     await this.set(this._keys.scales, scalesString);
+  }
+
+
+  async saveTunings(): Promise<void> {
+    const tuningsString: string = JSON.stringify(this.tuningsData);
+    await this.set(this._keys.tunings, tuningsString);
   }
 
 
@@ -53,16 +78,32 @@ export class StorageService {
   }
 
 
-  async deleteScale(scaleSave: StorageSave): Promise<void> {
+  async saveTuning(tuning: Tuning): Promise<void> {
+    await this.loadTunings();
+    if (!this.tuningsData) {
+      this.tuningsData = [];
+    }
+    this.tuningsData.push({ data: tuning, timestamp: Date.now() });
+    await this.saveTunings();
+  }
+
+
+  async deleteScale(scaleSave: StorageSave<ScaleCategory>): Promise<void> {
     this.scalesData = this.scalesData?.filter(sd => sd !== scaleSave);
     await this.saveScales();
   }
 
 
-  orderScales(ordering: Ordering): void {
+  async deleteTuning(tuningSave: StorageSave<Tuning>): Promise<void> {
+    this.tuningsData = this.tuningsData?.filter(td => td !== tuningSave);
+    await this.saveTunings();
+  }
+
+
+  order(array: StorageSave<ScaleCategory>[] | StorageSave<Tuning>[], ordering: Ordering): void {
     switch (ordering.orderingBy) {
-      case 'name': this.scalesData?.sort((a, b) => this._compareValues(a.data.name, b.data.name, ordering.order)); break;
-      case 'createdAt': this.scalesData?.sort((a, b) => this._compareValues(a.timestamp, b.timestamp, ordering.order));
+      case 'name': array.sort((a, b) => this._compareValues(a.data.name, b.data.name, ordering.order)); break;
+      case 'createdAt': array.sort((a, b) => this._compareValues(a.timestamp, b.timestamp, ordering.order));
     }
   }
 

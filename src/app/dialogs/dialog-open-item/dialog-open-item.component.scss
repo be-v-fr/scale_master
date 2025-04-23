@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+:host {
+    width: 100%;
+    flex: 1;
+    @include flex($jc: flex-start, $ai: flex-start, $dir: column);
+    .content-wrapper {
+        width: 100%;
+        flex: 1;
+        @include flex($dir: column);
+        .content-main {
+            width: 100%;
+            flex: 1;
+            @include flex($dir: column, $jc: flex-start);
+            app-ordering-bar {
+                width: 100%;
+            }
+            app-open-item {
+                width: 100%;
+            }
+        }
+    }
+}

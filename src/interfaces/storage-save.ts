@@ -1,7 +1,4 @@
-import { ScaleCategory } from "./scale-category";
-import { Tuning } from "./tuning";
-
-export interface StorageSave {
-    data: ScaleCategory | Tuning,
+export interface StorageSave<T> {
+    data: T,
     timestamp: number
 }

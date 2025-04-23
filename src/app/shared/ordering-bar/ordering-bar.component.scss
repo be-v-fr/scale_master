@@ -4,7 +4,7 @@ $border-color: lightgrey;
 $border-style: 1px solid $border-color;
 
 :host {
-    @include flex();
+    @include flex($jc: flex-end);
     border-bottom: $border-style;
 }
 

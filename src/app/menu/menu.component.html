@@ -41,7 +41,7 @@
         Fretboard
         <app-circular-button [icon]="'edit'" [routerLink]="custom.getEditRouteWParams('fretboard', true)" />
         <app-circular-button [icon]="'add'" [routerLink]="custom.getEditRouteWParams('fretboard', false)" />
-        <app-circular-button [icon]="'folder_open'" [routerLink]="[{ outlets: { 'dialog': ['d', 'open', 'fretboard'] } }]" />
+        <app-circular-button [icon]="'folder_open'" [routerLink]="[{ outlets: { 'dialog': ['d', 'open', 'tuning'] } }]" />
     </h4>
     <div class="scrollable-lists-container">
         @if(currFretboard.isCustom) {

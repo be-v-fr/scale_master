@@ -73,7 +73,7 @@ export class MenuEditComponent implements OnInit {
   async complete(): Promise<void> {
     switch(this.custom.mode) {
       case 'scale': await this.completeScale(); break;
-      case 'fretboard': break; // add later
+      case 'fretboard': await this.completeTuning();
     }
     this.router.navigateByUrl('');
   }
@@ -82,5 +82,11 @@ export class MenuEditComponent implements OnInit {
   async completeScale(): Promise<void> {
     await this.storage.saveScale(this.currScale.scale.category);
     this.currScale.isCustom = true;
+  }
+
+
+  async completeTuning(): Promise<void> {
+    await this.storage.saveTuning(this.currFretboard.fretboard.tuning);
+    this.currFretboard.isCustom = true;
   }
 }

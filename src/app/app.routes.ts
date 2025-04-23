@@ -8,10 +8,9 @@ import { DialogOverlayComponent } from './dialog-overlay/dialog-overlay.componen
 import { MenuEditComponent } from './menu-edit/menu-edit.component';
 import { MenuComponent } from './menu/menu.component';
 import { DialogNameModeComponent } from './dialogs/dialog-name-mode/dialog-name-mode.component';
-import { DialogOpenScaleComponent } from './dialogs/dialog-open-scale/dialog-open-scale.component';
-import { DialogLoadFretboardComponent } from './dialogs/dialog-load-fretboard/dialog-load-fretboard.component';
 import { DialogRootModeInitComponent } from './dialogs/dialog-root-mode-init/dialog-root-mode-init.component';
 import { DialogNameCustomComponent } from './dialogs/dialog-name-custom/dialog-name-custom.component';
+import { DialogOpenItemComponent } from './dialogs/dialog-open-item/dialog-open-item.component';
 
 export const routes: Routes = [
     {
@@ -72,17 +71,8 @@ export const routes: Routes = [
                 ]
             },
             {
-                path: 'open',
-                children: [
-                    {
-                        path: 'scale',
-                        component: DialogOpenScaleComponent
-                    },
-                    {
-                        path: 'fretboard',
-                        component: DialogLoadFretboardComponent
-                    }
-                ]
+                path: 'open/:type',
+                component: DialogOpenItemComponent
             }
         ],
     },
