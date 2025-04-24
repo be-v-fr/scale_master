@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-line',
@@ -48,8 +48,13 @@ export class DynamicLineComponent implements AfterViewInit {
   }
 
 
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
+
+
   ngAfterViewInit() {
-    // window.addEventListener('resize', () => this.updateLine());
+    window.addEventListener('resize', () => this.cdr.detectChanges());
   }
 
 

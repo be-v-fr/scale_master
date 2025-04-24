@@ -1,7 +1,6 @@
 <div class="overlay" [class.lefty]="display.lefty">
     <div class="overlay-half-transparent" [ngSwitch]="custom.currentStep">
         <div class="layout-container list-container" *ngSwitchCase="0">
-            {{ currFretboard.fretboard.numberOfStrings }}
             <app-scrollable-list *ngIf="currFretboard.numbersOfStrings"
                 [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
                 [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
@@ -19,6 +18,6 @@
         </div>
     </div>
 </div>
-<app-dynamic-line *ngIf="selectedStringNote && listContainerRef"
+<app-dynamic-line *ngIf="selectedStringNote && listContainerRef && custom.currentStep === 2"
     [leftEl]="display.lefty ? listContainerRef.nativeElement : selectedStringNote"
     [rightEl]="display.lefty ? selectedStringNote : listContainerRef.nativeElement" />
