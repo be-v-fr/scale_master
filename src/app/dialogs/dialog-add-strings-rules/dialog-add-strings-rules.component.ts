@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { CurrentFretboardService } from '../../../services/current-fretboard.service';
@@ -13,15 +13,19 @@ import { CustomizeService } from '../../../services/customize.service';
   templateUrl: './dialog-add-strings-rules.component.html',
   styleUrl: './dialog-add-strings-rules.component.scss'
 })
-export class DialogAddStringsRulesComponent {
+export class DialogAddStringsRulesComponent implements OnInit {
   getIncrArray: (length: number) => number[] = getIncrementalArray;
-  maxNumberOfExtraStrings: number = 1;
 
 
   constructor(
     public currFretboard: CurrentFretboardService,
     public custom: CustomizeService
   ) { }
+
+
+  ngOnInit(): void {
+    this.updateStrings(0);
+  }
 
 
   get maxNumberOfExtraStringsLimit(): number {
@@ -32,4 +36,10 @@ export class DialogAddStringsRulesComponent {
   get semitones(): number[] {
     return SEMITONE_OPTIONS;
   };
+
+
+  updateStrings(maxExtraStrings: number) {
+    this.currFretboard.fretboard.instrument.maxExtraStrings = maxExtraStrings;
+    this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.tuning.intervals.length + maxExtraStrings;
+  }
 }

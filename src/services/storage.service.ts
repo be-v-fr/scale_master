@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { ScaleCategory } from '../interfaces/scale-category';
-import { Tuning } from '../interfaces/tuning';
+import { ExtendedTuning } from '../interfaces/extended-tuning';
 import { StorageSave } from '../interfaces/storage-save';
 import { Ordering } from '../interfaces/ordering';
 
@@ -10,7 +10,7 @@ import { Ordering } from '../interfaces/ordering';
 })
 export class StorageService {
   scalesData?: StorageSave<ScaleCategory>[];
-  tuningsData?: StorageSave<Tuning>[];
+  tuningsData?: StorageSave<ExtendedTuning>[];
   private _keys = {
     scales: 'scales',
     tunings: 'tunings'
@@ -78,7 +78,7 @@ export class StorageService {
   }
 
 
-  async saveTuning(tuning: Tuning): Promise<void> {
+  async saveTuning(tuning: ExtendedTuning): Promise<void> {
     await this.loadTunings();
     if (!this.tuningsData) {
       this.tuningsData = [];
@@ -94,13 +94,13 @@ export class StorageService {
   }
 
 
-  async deleteTuning(tuningSave: StorageSave<Tuning>): Promise<void> {
+  async deleteTuning(tuningSave: StorageSave<ExtendedTuning>): Promise<void> {
     this.tuningsData = this.tuningsData?.filter(td => td !== tuningSave);
     await this.saveTunings();
   }
 
 
-  order(array: StorageSave<ScaleCategory>[] | StorageSave<Tuning>[], ordering: Ordering): void {
+  order(array: StorageSave<ScaleCategory>[] | StorageSave<ExtendedTuning>[], ordering: Ordering): void {
     switch (ordering.orderingBy) {
       case 'name': array.sort((a, b) => this._compareValues(a.data.name, b.data.name, ordering.order)); break;
       case 'createdAt': array.sort((a, b) => this._compareValues(a.timestamp, b.timestamp, ordering.order));

@@ -14,6 +14,8 @@ import { CustomizeService } from '../../services/customize.service';
 import { ScalesDataService } from '../../services/scales-data.service';
 import { StorageService } from '../../services/storage.service';
 import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
+import { ExtendedTuning } from '../../interfaces/extended-tuning';
+import { Tuning } from '../../interfaces/tuning';
 
 @Component({
   selector: 'app-menu-edit',
@@ -86,7 +88,18 @@ export class MenuEditComponent implements OnInit {
 
 
   async completeTuning(): Promise<void> {
-    await this.storage.saveTuning(this.currFretboard.fretboard.tuning);
+    const currentTuning: Tuning = this.currFretboard.fretboard.tuning;
+    const extendedTuning: ExtendedTuning = {
+      name: currentTuning.name,
+      intervals: currentTuning.intervals,
+      defaultRoot: this.currFretboard.fretboard.root,
+      extraStrings: {
+        interval: currentTuning.extraStrings.interval,
+        previousStringCorrection: currentTuning.extraStrings.previousStringCorrection
+      },
+      maxExtraStrings: this.currFretboard.fretboard.instrument.maxExtraStrings
+    };
+    await this.storage.saveTuning(extendedTuning);
     this.currFretboard.isCustom = true;
   }
 }

@@ -17,7 +17,7 @@ export class CustomizeService {
     this._currentStringSelection = value;
   }
   allowAddingStrings: boolean = false;
-  maxNumberOfExtraStrings: number = 0;
+  // maxNumberOfExtraStrings: number = 0;
 
   constructor(
     private router: Router,
@@ -80,16 +80,6 @@ export class CustomizeService {
       instrIndex: this.currFretboard.fretboard.instrIndex,
       tuningIndex: this.currFretboard.fretboard.tuningIndex
     }
-  }
-
-  get maxFretboardIntervals(): number[] | undefined {
-    if (this.mode === 'fretboard' && this.currentStep === 3 && this.allowAddingStrings) {
-      this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.defaultNumberOfStrings + this.maxNumberOfExtraStrings;
-      return this.currFretboard.fretboard.intervals;
-    } else {
-      this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.defaultNumberOfStrings;
-    }
-    return undefined;
   }
 
   get previousStringCorrectionInterface(): number {

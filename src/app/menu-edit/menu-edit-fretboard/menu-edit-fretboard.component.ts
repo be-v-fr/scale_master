@@ -61,7 +61,7 @@ export class MenuEditFretboardComponent {
 
 
   initExistingFretboard(): void {
-    if (typeof(this.instrIndex) === 'number') {
+    if (typeof (this.instrIndex) === 'number') {
       const tuningIndex: number = this.tuningIndex ?? 0;
       this.currFretboard.fretboard.instrument = cloneDeep(this.instrIndex >= 0 ? INSTRUMENTS[this.instrIndex] : this.currFretboard.fretboard.instrument);
       this.currFretboard.fretboard.tuning = this.currFretboard.fretboard.instrument.tunings[tuningIndex];
@@ -76,9 +76,12 @@ export class MenuEditFretboardComponent {
         this.initFretboard();
         this.initComplete = true;
       }
-      switch(this.currentStep) {
+      switch (this.currentStep) {
         case 1: this.currFretboard.fretboard.tuning.intervals = this.currFretboard.fretboard.intervals.reverse(); break;
         case 4: this.router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }]);
+      }
+      if (this.currentStep !== 3) {
+        this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.tuning.intervals.length;
       }
     });
   }
