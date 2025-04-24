@@ -13,6 +13,8 @@ import { StorageSave } from "../../../interfaces/storage-save";
 import { Scale } from "../../../models/scale";
 import { ScaleCategory } from "../../../interfaces/scale-category";
 import { Tuning } from "../../../interfaces/tuning";
+import { ExtendedTuning } from "../../../interfaces/extended-tuning";
+import { Fretboard } from "../../../models/fretboard";
 
 @Component({
   selector: 'app-dialog-open-item',
@@ -42,7 +44,7 @@ export class DialogOpenItemComponent implements OnInit {
     private dialog: DialogService,
     private currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -56,19 +58,24 @@ export class DialogOpenItemComponent implements OnInit {
     this.type === 'scale' ? this.storage.loadScales() : this.storage.loadTunings();
   }
 
-  get data(): StorageSave<ScaleCategory | Tuning>[] | undefined {
+  get data(): StorageSave<ScaleCategory | ExtendedTuning>[] | undefined {
     return this.type === 'scale' ? this.storage.scalesData : this.storage.tuningsData;
   }
 
-  open(item: any): void {
-    if (this.type === 'scale') {
-      this.currScale.isCustom = true;
-      this.currScale.scale = new Scale(this.currScale.scale.root, item, item.modes?.[0]);
-    } else {
-      this.currFretboard.isCustom = true;
-      this.currFretboard.fretboard.tuning = item;
-    }
+  open(item: ScaleCategory | ExtendedTuning): void {
+    this.type === 'scale' ? this.openScale(item as ScaleCategory) : this.openTuning(item as ExtendedTuning);
     this.dialog.close();
+  }
+
+  openScale(scale: ScaleCategory): void {
+    this.currScale.isCustom = true;
+    this.currScale.scale = new Scale(this.currScale.scale.root, scale, scale.modes?.[0]);
+  }
+
+  openTuning(tuning: ExtendedTuning): void {
+    this.currFretboard.isCustom = true;
+    this.currFretboard.fretboard = new Fretboard(this.currFretboard.fretboard.instrument, tuning, this.currFretboard.fretboard.root, tuning.intervals.length);
+    this.currFretboard.fretboard.instrument.maxExtraStrings = tuning.maxExtraStrings;
   }
 
   deleteSave(save: StorageSave<any>): void {
