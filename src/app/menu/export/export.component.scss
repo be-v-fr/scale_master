@@ -4,8 +4,13 @@
     @include flex($dir: column, $g: 6px);
 
     button {
-        width: 100%;
+        width: 128px;
         padding: 6px;
         @include flex($jc: flex-start, $g: 6px);
+
+        i.material-icons {
+            width: 24px;
+            height: 24px;
+        }
     }
 }
