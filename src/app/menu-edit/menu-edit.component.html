@@ -4,7 +4,7 @@
 </div>
 <section>
     <div class="menu-wrapper">
-        <div *ngIf="custom.mode === 'scale'" class="edit-menu-scrollable-list-wrapper">
+        <div class="edit-menu-scrollable-list-wrapper">
             <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
                 [title]="'Root'" [current]="currScale.scale.root.printNaturalWithFlatAlternative()"
                 (currentChange)="currScale.updateCurrScaleRootNote($event)" />
