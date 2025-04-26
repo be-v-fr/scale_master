@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { LogoComponent } from '../shared/logo/logo.component';
 
 @Component({
   selector: 'app-intro-logo',
   standalone: true,
-  imports: [],
+  imports: [LogoComponent],
   templateUrl: './intro-logo.component.html',
   styleUrl: './intro-logo.component.scss'
 })

@@ -57,6 +57,7 @@ $color-info: #4ec5e9;
 :root {
     --collapsed-menu-height: 120px;
     --expanded-menu-height: 240px;
+    --fretboard-height: 400px;
 
     @media screen and (max-height: $vh-breakpoint-1) {
         --expanded-menu-height: 206px;

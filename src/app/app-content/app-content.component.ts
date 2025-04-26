@@ -5,8 +5,7 @@ import { DisplayService } from '../../services/display.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { ToastMessageComponent } from '../shared/toast-message/toast-message.component';
 import { ToastMessageService } from '../../services/toast-message.service';
-import { EditFretboardOverlayComponent } from '../edit-fretboard-overlay/edit-fretboard-overlay.component';
-import { CustomizeService } from '../../services/customize.service';
+import { LogoComponent } from '../shared/logo/logo.component';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -14,7 +13,7 @@ import { CustomizeService } from '../../services/customize.service';
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet],
+  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet, LogoComponent],
   templateUrl: './app-content.component.html',
   styleUrl: './app-content.component.scss'
 })

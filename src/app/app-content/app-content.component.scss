@@ -13,7 +13,7 @@
         height: 100vh;
         z-index: -1;
         background-image: linear-gradient(rgba(245, 232, 216, 0.75), rgba(235, 211, 181, 0.75)),
-            url('../../assets/img/wood.jpg');
+            url("../../assets/img/wood.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -58,6 +58,35 @@
 
     app-fretboard {
         box-shadow: 1px 3px 8px 1px #0005;
+    }
+}
+
+.logo-container {
+    position: fixed;
+    z-index: 10;
+    top: var(--expanded-menu-height);
+    bottom: calc((100dvh - var(--expanded-menu-height) + var(--fretboard-height)) / 2);
+    @include flex();
+    app-logo {
+        transform: scale(0.64);
+        @media screen and (max-height: 920px) {
+            transform: scale(0.44);                
+        }
+    }
+    @media screen and (max-height: $vh-breakpoint-1) {
+        top: 10px;
+        bottom: calc(100dvh - var(--expanded-menu-height));
+        left: 40px;
+        width: auto;
+        app-logo {
+            transform: scale(0.64);
+        }
+    }
+    @media screen and (max-height: $vh-breakpoint-2) {
+        transition: 200ms ease-out;
+        &.collapsed {
+            bottom: calc(100dvh - var(--collapsed-menu-height));
+        }       
     }
 }
 

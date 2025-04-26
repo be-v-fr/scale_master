@@ -7,6 +7,9 @@
 <div class="fretboard-container">
     <app-fretboard />
 </div>
+<div class="logo-container" [class.collapsed]="display.menuCollapsed">
+    <app-logo [dark]="true" [allowCollapse]="true" />
+</div>
 <div class="rotate-device-overlay">
     <i class="material-icons">screen_rotation</i>
     <span>Please turn your device horizontally.</span>

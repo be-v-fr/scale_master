@@ -6,7 +6,7 @@ $select: #ff0b;
 :host {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: var(--fretboard-height);
   background: url(../../assets/img/wood.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
