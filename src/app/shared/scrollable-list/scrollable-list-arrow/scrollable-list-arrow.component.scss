@@ -1,5 +1,8 @@
 :host {
     height: 15px;
+    &:hover {
+        filter: brightness(1.2);
+    }
 }
 
 .point-down {

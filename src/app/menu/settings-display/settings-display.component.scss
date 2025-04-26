@@ -1,0 +1,9 @@
+@import '../../../styles.scss';
+
+:host {
+    margin-top: -24px;
+    flex: 1;
+    @include flex($dir: column, $g: 6px);
+    color: $color-text-primary;
+    font-size: 14px;
+}

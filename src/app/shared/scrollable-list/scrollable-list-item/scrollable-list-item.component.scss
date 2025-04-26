@@ -9,10 +9,10 @@
     cursor: pointer;
     font-size: 20px;
     .default-item {
-      color: lightgreen;
+      color: $color-info;
     }
     &:hover {
-      background: black;
+      background: $color-text-primary;
       @media screen and (max-height: $vh-breakpoint-2) {
         &.menu-collapsed {
           background: none;
@@ -20,7 +20,7 @@
       }
     }
     &:active {
-      color: red;
+      color: $color-text-muted;
       opacity: 1;
     }
   }

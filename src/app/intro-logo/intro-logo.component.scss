@@ -4,9 +4,10 @@
     position: fixed;
     inset: 0;
     z-index: 20;
-    background: white;
+    background: $color-panel-bg;
     @include flex();
-    animation: fade-in 800ms ease-in-out reverse forwards 2400ms;
+    animation: fade-in 800ms ease-in-out reverse forwards 2200ms;
+    color: $color-text-primary;
 }
 
 .text-container {
@@ -33,7 +34,7 @@
             width: 0%;
             height: 0%;
             border-radius: 50%;
-            background: white;
+            background: $color-panel-bg;
             opacity: 0;
             animation: to-full 450ms ease-out forwards 500ms, fade-in 300ms ease-out forwards 450ms;
         }

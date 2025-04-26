@@ -5,6 +5,20 @@
     height: 100%;
     @include flex($dir: column);
     overflow: hidden;
+    .app-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background-image: linear-gradient(rgba(245, 232, 216, 0.75), rgba(235, 211, 181, 0.75)),
+            url('../../assets/img/wood.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: blur(1px);
+    }
 }
 
 .menu-wrapper {
@@ -20,6 +34,7 @@
         right: 0;
         height: 100%;
         transition: height 200ms ease-out;
+        box-shadow: $shadow-menu;
     }
 
     @media screen and (max-height: $vh-breakpoint-2) {
@@ -39,6 +54,10 @@
 
     @media screen and (max-height: $vh-breakpoint-1) {
         max-width: unset;
+    }
+
+    app-fretboard {
+        box-shadow: 1px 3px 8px 1px #0005;
     }
 }
 

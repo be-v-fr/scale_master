@@ -15,8 +15,9 @@ $knob-transition: 175ms;
 button {
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid $color-text-primary;
     border-radius: calc($height / 2);
+    background: #f1ddc6;
     @include flex();
     transition: $button-bg-transition;
     .knob {
@@ -24,7 +25,8 @@ button {
         height: calc($height - 2 * $knob-margin);
         border-radius: 50%;
         @include flex();
-        background: black;
+        background: white;
+        border: 1px solid lightgrey;
         transform: translateX($knob-margin - $width * 0.25);
         opacity: 1;
         transition: $knob-transition;
@@ -32,7 +34,7 @@ button {
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: rgb(47, 171, 209);
+            background: $color-info;
         }
         &.toggle-on {
             transform: translateX($width * 0.25 - $knob-margin);
@@ -40,19 +42,19 @@ button {
         }
         &.mode-check {
             .tiny-led {
-                background: rgb(71, 185, 71);
+                background: #98cf2b;
                 transition: $knob-transition;
             }
             &:not(.toggle-on) {
                 .tiny-led {
-                    background: rgb(245, 78, 78);
+                    background: #d13535;
                     transition: $knob-transition;
                 }
             }
         }
     }
     &:hover {
-        background-color: #0000000D;
+        background-color: #f7d7b3;
         transition: $button-bg-transition;
     }
 }

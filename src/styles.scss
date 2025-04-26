@@ -6,8 +6,45 @@
 $vh-breakpoint-1: 800px;
 $vh-breakpoint-2: 640px;
 $vh-breaktpoint-3: 520px;
-$circular-btn-size: 28px;
+$circular-btn-size: 32px;
 $fretboard-string-margin: 8vw;
+
+
+$shadow-menu: 0 9px 8px -6px #0003;
+
+
+
+// === Grundfarben ===
+$color-wood-bg:        #EBD3B5;   // Holztextur-Hintergrund
+$color-panel-bg:       #FAF3EB;   // Scrollbare Menüs / Panels
+$color-subtle-bg:      #F5E8D8;   // Leicht abgesetzter Bereich
+
+// === Textfarben ===
+$color-text-primary:   #4A3F35;   // Haupttext
+$color-text-secondary: #7D6F63;   // Sekundärer Text
+$color-text-muted:     #B6A89A;   // Deaktivierter / schwacher Text
+
+// === Linien / Icons / Details ===
+$color-line:           #8B7355;   // Linienfarbe (z. B. Saiten, Bünde)
+$color-line-hover:     #C7A781;   // Hover-Linienfarbe
+
+// === Scrollbar ===
+$color-scrollbar:      #BDAA90;
+$color-scrollbar-hover:#A89174;
+
+$color-small-btn-bg: #f1ddc6;
+
+// === Transparenzen (optional) ===
+$color-overlay:        rgba(235, 211, 181, 0.85); // Für Overlays über Holztextur
+
+// === Utility Farben ===
+$color-success:        #6B8E23;
+$color-warning:        #D98E04;
+$color-error:          #B22222;
+$color-info: #4ec5e9;
+
+
+
 
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;
@@ -29,7 +66,6 @@ $fretboard-string-margin: 8vw;
 body {
     width: 100vw;
     height: 100vh;
-    background: whitesmoke;
     margin: 0;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
@@ -97,13 +133,15 @@ button.reset-btn {
 }
 
 .border-btn {
-    border: 1px solid black;
+    border: 1px solid $color-text-primary;
     border-radius: 3px;
     transition: 75ms ease;
     font-size: 14px;
     padding: 10px;
+    background: #fdfbf8;
 
     &:hover {
+        background: white;
         transition: 75ms ease;
         box-shadow: 1px 2px 2px 1px #0002;
     }
