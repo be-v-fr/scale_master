@@ -109,6 +109,17 @@ export class CurrentFretboardService {
 
 
   /**
+   * Updates the current fretboard's root note by creating
+   * a Note instance from the note name5.
+   * @param noteString - note name.
+   */
+  updateCurrFretboardRootNote(noteString: string) {
+    const note: Note = Note.textToNote(noteString);
+    this.fretboard.root = note;
+  }
+
+
+  /**
    * Checks if the current tuning is available for the current instruments.
    * Sets tuning to the instrument's default tuning otherwise.
    */

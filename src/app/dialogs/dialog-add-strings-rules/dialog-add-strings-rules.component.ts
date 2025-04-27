@@ -5,11 +5,13 @@ import { CurrentFretboardService } from '../../../services/current-fretboard.ser
 import { getIncrementalArray, SEMITONE_OPTIONS } from '../../../utils/array.utils';
 import { ScrollableListComponent } from '../../shared/scrollable-list/scrollable-list.component';
 import { CustomizeService } from '../../../services/customize.service';
+import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-add-strings-rules',
   standalone: true,
-  imports: [CommonModule, SlideToggleComponent, ScrollableListComponent],
+  imports: [CommonModule, SlideToggleComponent, ScrollableListComponent, InfoMsgComponent, RouterLink],
   templateUrl: './dialog-add-strings-rules.component.html',
   styleUrl: './dialog-add-strings-rules.component.scss'
 })

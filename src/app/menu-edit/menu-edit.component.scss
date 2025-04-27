@@ -1,25 +1,45 @@
 @import "../../styles.scss";
 @import "../../assets/css/menu.scss";
 
-.menu-wrapper {
-    flex: 1;
-    @include flex($g: 16px);
-    .edit-menu-scrollable-list-wrapper {
-        position: relative;
-        width: $scrollable-list-narrow;
+section {
+    width: 50vw;
+    max-width: 640px;
+}
+
+.edit-menu-container {
+    position: relative;
+    width: 100%;
+    flex-shrink: 1;
+    min-height: 0;
+    @include flex($ai: flex-start, $g: 10px);
+    .menu-content-wrapper {
+        flex: 1;
         height: 100%;
-        app-scrollable-list {
-            position: absolute;
-            top: 0;
-            left: 0;
+        @include flex();
+        padding: 0 12px;
+        .menu-content {
+            width: 100%;
+            height: auto;
+            @include flex();
+            padding: 16px 0;
+            background: $color-subtle-bg;
+            border-radius: 8px;
         }
     }
-    .menu-container {
-        height: 100%;
-        @include flex($dir: column);
-        .menu-content {
-            flex: 1;
-            @include flex();
+    .side-arrow-btns-container {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        @include flex($jc: space-between);
+        $translate-btn: 150%;
+        .side-arrow-btn-container {
+            pointer-events: auto;
+            &:nth-child(1) {
+                transform: translateX(-$translate-btn);
+            }
+            &:nth-child(2) {
+                transform: translateX($translate-btn);
+            }
         }
     }
 }

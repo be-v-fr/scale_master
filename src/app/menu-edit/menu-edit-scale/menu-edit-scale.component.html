@@ -11,9 +11,7 @@
 @case(2) {
 <p>
     Your
-    <a (click)="router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }])">
-        <i>{{currScale.scale.category.name}}</i>
-    </a>
+    <app-inline-name-link [name]="currScale.scale.category.name" />
     scale is ready.
 </p>
 }

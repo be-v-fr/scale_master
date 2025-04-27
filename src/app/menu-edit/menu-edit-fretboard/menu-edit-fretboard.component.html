@@ -17,11 +17,10 @@
 @case(4) {
 <p>
     Your
-    <a (click)="router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }])">
-        <i>{{currFretboard.fretboard.tuning.name}}</i>
-    </a>
+    <app-inline-name-link [name]="currFretboard.fretboard.tuning.name" />
     tuning is ready.
-    <br>
+</p>
+<p>
     The selected root note, {{currFretboard.fretboard.root.print()}}, will be used as the default root.
 </p>
 }

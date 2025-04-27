@@ -17,15 +17,15 @@
         height: 100%;
         border-radius: 50%;
         display: block;
-        background-color: lightgray;
+        background-color: #cebfb0;
         transition: background-color 175ms ease-in-out;
     }
 
     &:hover .dot {
-        background-color: darkgray;
+        background-color: $color-text-secondary;
     }
 
     &:active .dot, &.active .dot {
-        background-color: black;
+        background-color: $color-text-primary;
     }
 }

@@ -37,15 +37,4 @@ export class MenuComponent {
     public display: DisplayService,
     public custom: CustomizeService
   ) { }
-
-  
-  /**
-   * Updates the current fretboard's root note by creating
-   * a Note instance from the note name5.
-   * @param noteString - note name.
-   */
-  updateCurrFretboardRootNote(noteString: string) {
-    const note: Note = Note.textToNote(noteString);
-    this.currFretboard.fretboard.root = note;
-  }
 }

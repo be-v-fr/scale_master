@@ -1,0 +1,16 @@
+@import '../../../styles.scss';
+
+:host {
+    display: inline;
+    a {
+        padding: 0 2px;
+        border-radius: 4px;
+        color: $color-info;
+        text-shadow: 1px 2px 1px $color-panel-bg;
+        transition: 75ms ease;
+        &:hover {
+            transition: 75ms ease;
+            background: $color-panel-bg;
+        }
+    }
+}

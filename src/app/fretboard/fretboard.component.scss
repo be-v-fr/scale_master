@@ -30,7 +30,7 @@ table {
       width: $fretboard-string-margin;
     }
     .nut {
-      background: beige;
+      background: rgb(241, 238, 220);
       width: 5vw;
     }
     .fret {
@@ -55,10 +55,10 @@ table {
           height: 38px;
         }
         &.marked {
-          border-color: lightgreen;
+          border-color: $color-info-bright;
         }
         &.marked-selection {
-          border-color: $select;
+          border-color: $color-warning;
         }
       }
     }
@@ -67,7 +67,7 @@ table {
       .scale-note-wrapper {
         .note-container,
         .note-container.marked {
-          border-color: $select;
+          border-color: $color-warning;
           transition: 125ms ease;
         }
       }

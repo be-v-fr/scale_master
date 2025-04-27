@@ -9,11 +9,12 @@ import { CurrentFretboardService } from '../../../services/current-fretboard.ser
 import { CustomizeService } from '../../../services/customize.service';
 import { Tuning } from '../../../interfaces/tuning';
 import { SearchCurrentDirective } from '../../../directives/search-current.directive';
+import { InlineNameLinkComponent } from '../../shared/inline-name-link/inline-name-link.component';
 
 @Component({
   selector: 'app-menu-edit-fretboard',
   standalone: true,
-  imports: [CommonModule, SearchCurrentDirective],
+  imports: [CommonModule, SearchCurrentDirective, InlineNameLinkComponent],
   templateUrl: './menu-edit-fretboard.component.html',
   styleUrl: './menu-edit-fretboard.component.scss'
 })

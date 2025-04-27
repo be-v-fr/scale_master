@@ -1,31 +1,40 @@
-<div class="side-arrow-btn-container">
-    <app-circular-button *ngIf="currentStep > 0" [icon]="'arrow_left'"
-        (click)="navigateStepByRouter(currentStep - 1)" />
-</div>
 <section>
-    <div class="menu-wrapper">
-        <div class="edit-menu-scrollable-list-wrapper">
-            <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
-                [title]="'Root'" [current]="currScale.scale.root.printNaturalWithFlatAlternative()"
-                (currentChange)="currScale.updateCurrScaleRootNote($event)" />
-        </div>
-        <div class="menu-container">
-            <h4 [class.collapsed]="display.menuCollapsed">
-                Customize {{custom.mode}}
-                <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
-            </h4>
+    <h4 [class.collapsed]="display.menuCollapsed">
+        Customize {{custom.mode}}
+        <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
+    </h4>
+    <div class="edit-menu-container">
+        @if(custom.mode === 'scale') {
+        <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
+            [title]="'Root'" [current]="currScale.scale.root.printNaturalWithFlatAlternative()"
+            (currentChange)="currScale.updateCurrScaleRootNote($event)" />
+        } @else {
+        <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
+            [title]="'Root'" [current]="currFretboard.fretboard.root.printNaturalWithFlatAlternative()"
+            (currentChange)="currFretboard.updateCurrFretboardRootNote($event)"
+            [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
+            [autofocus]="currFretboard.fretboard.root.index" />
+        }
+        <div class="menu-content-wrapper">
             <div class="menu-content">
                 <router-outlet />
+            </div>
+        </div>
+        <div class="side-arrow-btns-container">
+            <div class="side-arrow-btn-container">
+                <app-circular-button *ngIf="currentStep > 0" [icon]="'arrow_left'"
+                    (click)="navigateStepByRouter(currentStep - 1)" />
+            </div>
+            <div class="side-arrow-btn-container">
+                @if(currentStep
+                < custom.totalSteps - 1) { <app-circular-button [icon]="'arrow_right'"
+                    (click)="navigateStepByRouter(currentStep + 1)" />
+                } @else if (currentStep === custom.totalSteps - 1) {
+                <app-circular-button [icon]="'check'" (click)="complete()" />
+                }
             </div>
         </div>
     </div>
     <app-pagination-dots [total]="custom.totalSteps" [activeIndex]="currentStep"
         (dotClick)="navigateStepByRouter($event)" />
 </section>
-<div class="side-arrow-btn-container">
-    @if(currentStep < custom.totalSteps - 1) {
-        <app-circular-button [icon]="'arrow_right'" (click)="navigateStepByRouter(currentStep + 1)" />
-    } @else if (currentStep === custom.totalSteps - 1) {
-        <app-circular-button [icon]="'check'" (click)="complete()" />
-    }
-</div>

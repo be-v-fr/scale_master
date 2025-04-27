@@ -54,7 +54,7 @@
         }
         <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"
             [title]="'Root'" [current]="currFretboard.fretboard.root.print()"
-            (currentChange)="updateCurrFretboardRootNote($event)" [allowSearch]="false"
+            (currentChange)="currFretboard.updateCurrFretboardRootNote($event)" [allowSearch]="false"
             [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
             [autofocus]="currFretboard.fretboard.root.index" />
         <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="'#str.'"

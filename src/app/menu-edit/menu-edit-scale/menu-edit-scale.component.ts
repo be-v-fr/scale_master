@@ -9,11 +9,12 @@ import { Subscription } from 'rxjs';
 import { parseNumberParamIfExists } from '../../../utils/router.utils';
 import { SCALES } from '../../../const/scales';
 import { cloneDeep } from 'lodash';
+import { InlineNameLinkComponent } from '../../shared/inline-name-link/inline-name-link.component';
 
 @Component({
   selector: 'app-menu-edit-scale',
   standalone: true,
-  imports: [CommonModule, SearchCurrentDirective],
+  imports: [CommonModule, SearchCurrentDirective, InlineNameLinkComponent],
   templateUrl: './menu-edit-scale.component.html',
   styleUrl: './menu-edit-scale.component.scss'
 })

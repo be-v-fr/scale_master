@@ -1,21 +1,31 @@
+@if(currFretboard.fretboard.tuning.intervals.length < 8) {
 <div class="slide-toggle-container">
-    <app-slide-toggle [(toggleOn)]="custom.allowAddingStrings" />
-    <p>Allow adding extra strings.</p>
+<app-slide-toggle [(toggleOn)]="custom.allowAddingStrings" />
+<p>Allow adding extra strings.</p>
 </div>
 <div class="scrollable-lists-container">
     <div class="scrollable-list-container">
         <p>Maximum number of extra strings.</p>
-        <app-scrollable-list *ngIf="maxNumberOfExtraStringsLimit > 0" [content]="[0].concat(getIncrArray(maxNumberOfExtraStringsLimit))"
-            [title]="'Number'" [current]="currFretboard.fretboard.instrument.maxExtraStrings" (currentChange)="updateStrings($event)" [allowSearch]="false" [disabled]="!custom.allowAddingStrings" />
+        <app-scrollable-list *ngIf="maxNumberOfExtraStringsLimit > 0"
+            [content]="[0].concat(getIncrArray(maxNumberOfExtraStringsLimit))" [title]="'Number'"
+            [current]="currFretboard.fretboard.instrument.maxExtraStrings" (currentChange)="updateStrings($event)"
+            [allowSearch]="false" [disabled]="!custom.allowAddingStrings" />
     </div>
     <div class="scrollable-list-container">
         <p>Semitones difference for extra strings.</p>
-        <app-scrollable-list [content]="semitones" [defaultIndex]="16" [allowSearch]="false" [disabled]="!custom.allowAddingStrings"
-            [title]="'Difference'" [(current)]="currFretboard.fretboard.tuning.extraStrings.interval" />
+        <app-scrollable-list [content]="semitones" [defaultIndex]="16" [allowSearch]="false"
+            [disabled]="!custom.allowAddingStrings" [title]="'Difference'"
+            [(current)]="currFretboard.fretboard.tuning.extraStrings.interval" />
     </div>
     <div class="scrollable-list-container">
         <p>Semitones correction for previous string.</p>
-        <app-scrollable-list [content]="semitones" [defaultIndex]="11" [allowSearch]="false" [disabled]="!custom.allowAddingStrings"
-            [title]="'Correction'" [(current)]="custom.previousStringCorrectionInterface" />
+        <app-scrollable-list [content]="semitones" [defaultIndex]="11" [allowSearch]="false"
+            [disabled]="!custom.allowAddingStrings" [title]="'Correction'"
+            [(current)]="custom.previousStringCorrectionInterface" />
     </div>
 </div>
+} @else {
+<app-info-msg
+    [msg]="'Your tuning already has achieved the string number limit. Thus, you cannot specify any rules for adding extra strings.'" />
+<button class="border-btn" [routerLink]="['edit', 4, 'fretboard']">Continue</button>
+}

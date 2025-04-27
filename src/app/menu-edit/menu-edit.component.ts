@@ -37,7 +37,7 @@ export class MenuEditComponent implements OnInit {
     public display: DisplayService,
     public scalesData: ScalesDataService,
     public currScale: CurrentScaleService,
-    private currFretboard: CurrentFretboardService,
+    public currFretboard: CurrentFretboardService,
     public custom: CustomizeService,
     private storage: StorageService
   ) { }

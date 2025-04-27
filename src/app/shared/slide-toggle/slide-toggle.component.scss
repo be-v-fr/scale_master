@@ -42,7 +42,7 @@ button {
         }
         &.mode-check {
             .tiny-led {
-                background: #98cf2b;
+                background: $color-success;
                 transition: $knob-transition;
             }
             &:not(.toggle-on) {
