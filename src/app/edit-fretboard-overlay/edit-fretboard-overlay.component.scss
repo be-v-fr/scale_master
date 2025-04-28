@@ -16,9 +16,7 @@
         backdrop-filter: blur(1.5px);
         @include flex();
         .layout-container {
-            width: 60%;
-            height: 80%;
-            padding: 20px;
+            padding: 20px 40px 0 40px;
             position: relative;
             right: calc($fretboard-string-margin / 2);
             background: $color-panel-bg;

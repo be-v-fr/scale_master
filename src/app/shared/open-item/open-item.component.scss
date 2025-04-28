@@ -2,7 +2,13 @@
 
 .item {
     @include flex($jc: space-between);
+    padding: 2px;
     cursor: pointer;
+    transition: 75ms ease;
+    &:hover {
+        background: white;
+        transition: 225ms ease;
+    }
     .options {
         @include flex($g: 3px);
     }

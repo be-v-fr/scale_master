@@ -2,5 +2,11 @@
 
 :host {
     max-width: 480px;
-    @include flex($dir: column, $g: 20px);
+    flex: 1;
+    @include flex($dir: column, $jc: space-around);
+}
+
+.btns-container {
+    width: 100%;
+    @include flex($jc: flex-end);
 }

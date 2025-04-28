@@ -1,9 +1,27 @@
 @import '../../../styles.scss';
 
+:host {
+    @include flex($dir: column, $ai: flex-start, $g: 16px);
+}
+
 .slide-toggle-container {
     @include flex($jc: flex-start, $g: 6px);
 }
 
 .scrollable-lists-container {
-    @include flex($jc: space-around);
+    @include flex($jc: space-around, $g: 16px);
+    .scrollable-list-container {
+        p {
+            border-bottom: 1px solid $color-text-primary;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: $color-text-primary;
+            text-align: center;
+        }
+        app-scrollable-list {
+            margin-top: 24px;
+            height: 160px;
+        }
+    }
 }

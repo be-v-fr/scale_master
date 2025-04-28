@@ -67,7 +67,7 @@ $color-info-bright: #72d1ee;
 
 body {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     margin: 0;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
@@ -136,6 +136,7 @@ button.reset-btn {
 
 .border-btn {
     border: 1px solid $color-text-primary;
+    color: $color-text-primary;
     border-radius: 3px;
     transition: 75ms ease;
     font-size: 14px;
@@ -181,11 +182,9 @@ button.reset-btn {
     }
 }
 
-html,
-body {
-    height: 100%;
-}
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+.input-name {
+    background: white;
+    font-size: 16px;
+    padding: 3px;
+    color: $color-info;
 }

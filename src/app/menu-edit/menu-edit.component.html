@@ -1,7 +1,7 @@
 <section>
     <h4 [class.collapsed]="display.menuCollapsed">
         Customize {{custom.mode}}
-        <app-circular-button [icon]="'cancel'" (click)="undoAll()" [routerLink]="''" />
+        <app-circular-button [icon]="'close'" (click)="undoAll()" [routerLink]="''" />
     </h4>
     <div class="edit-menu-container">
         @if(custom.mode === 'scale') {

@@ -1,6 +1,8 @@
-<p *ngIf="forceRoot">You have defined modes, but left out the prime mode.</p>
-<p>Please name this mode:</p>
-<input type="text" [(ngModel)]="modeName" autofocus />
+<section>
+    <app-info-msg *ngIf="forceRoot" [mode]="'warning'" [msg]="'You have defined modes, but left out the prime mode.'" />
+    <p>Please name this mode:</p>
+    <input class="input-name" type="text" [(ngModel)]="modeName" autofocus />
+</section>
 <div class="btns-container">
     <button class="border-btn" (click)="dialog.close()">Cancel</button>
     <button class="border-btn" (click)="submit()">Ok</button>

@@ -1,5 +1,5 @@
-@import '../../../styles.scss';
+@import '../../../assets/css/dialog-name.scss';
 
-.btns-container {
-    @include flex($jc: flex-end, $g: 8px);
+app-info-msg {
+    margin-bottom: 14px;
 }

@@ -4,3 +4,11 @@
     width: 100%;
     @include flex($g: 20px);
 }
+
+i.materials-icons {
+    color: $color-info;
+}
+
+.warning {
+    color: $color-warning !important;
+}

@@ -1,2 +1,4 @@
-<i class="material-icons">info</i>
-<p>{{message}}</p>
+<i class="material-icons" [class.warning]="mode === 'warning'">
+    {{mode === 'info' ? 'info' : 'warning'}}
+</i>
+<p [class.warning]="mode === 'warning'">{{message}}</p>

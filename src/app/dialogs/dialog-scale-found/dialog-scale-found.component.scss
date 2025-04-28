@@ -1,10 +1,20 @@
 @import '../../../styles.scss';
 
+:host {
+    width: 100%;
+    @include flex($dir: column, $ai: flex-start, $g: 3px);
+}
+
+p {
+    margin-bottom: 10px;
+}
+
 .highlight {
     width: 100%;
     @include flex();
 }
 
 .btns-container {
-    @include flex($dir: column, $ai: flex-start, $g: 8px);
+    width: 100%;
+    @include flex($dir: column, $ai: flex-end, $g: 8px);
 }

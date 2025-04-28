@@ -8,11 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { parseNumberParamIfExists } from '../../../utils/router.utils';
 import { DialogService } from '../../../services/dialog.service';
+import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
 
 @Component({
   selector: 'app-dialog-name-mode',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InfoMsgComponent],
   templateUrl: './dialog-name-mode.component.html',
   styleUrl: './dialog-name-mode.component.scss'
 })

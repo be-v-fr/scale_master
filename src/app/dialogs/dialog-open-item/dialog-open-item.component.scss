@@ -14,6 +14,7 @@
             @include flex($dir: column, $jc: flex-start);
             app-ordering-bar {
                 width: 100%;
+                margin-bottom: 10px;
             }
             app-open-item {
                 width: 100%;

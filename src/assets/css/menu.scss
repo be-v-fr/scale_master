@@ -57,7 +57,7 @@ section {
         margin: 0;
         padding-bottom: 6px;
         @include flex($g: 6px);
-        color: black;
+        color: $color-text-primary;
         border-bottom: 1px solid $color-text-primary;
         transition: 200ms ease;
 
