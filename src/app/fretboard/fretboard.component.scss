@@ -7,6 +7,7 @@ $select: #ff0b;
   position: relative;
   width: 100%;
   height: var(--fretboard-height);
+  min-height: 360px;
   background: url(../../assets/img/wood.jpg);
   background-size: 100%;
   background-repeat: no-repeat;

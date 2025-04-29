@@ -51,6 +51,7 @@
     width: 100vw;
     max-width: 1280px;
     @include flex();
+    overflow-y: auto;
 
     @media screen and (max-height: $vh-breakpoint-1) {
         max-width: unset;
