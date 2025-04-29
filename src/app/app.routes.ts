@@ -11,6 +11,7 @@ import { DialogNameModeComponent } from './dialogs/dialog-name-mode/dialog-name-
 import { DialogRootModeInitComponent } from './dialogs/dialog-root-mode-init/dialog-root-mode-init.component';
 import { DialogNameCustomComponent } from './dialogs/dialog-name-custom/dialog-name-custom.component';
 import { DialogOpenItemComponent } from './dialogs/dialog-open-item/dialog-open-item.component';
+import { DialogTuningFoundComponent } from './dialogs/dialog-tuning-found/dialog-tuning-found.component';
 
 export const routes: Routes = [
     {
@@ -69,6 +70,10 @@ export const routes: Routes = [
                         component: DialogScaleFoundComponent,
                     },
                 ]
+            },
+            {
+                path: 'tunings/:instrIndex/:tuningIndex',
+                component: DialogTuningFoundComponent
             },
             {
                 path: 'open/:type',

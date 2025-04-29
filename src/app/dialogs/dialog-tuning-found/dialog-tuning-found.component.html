@@ -1,0 +1,12 @@
+@if(instrument && instrument.name) {
+<p>The tuning you configured is identical to the</p>
+<p class="highlight"><b>{{instrument.tunings[tuningIndex].name}} tuning</b></p>
+<p>for</p>
+<p class="highlight"><b>{{instrument.name}}</b>.</p>
+<p>How do you want to proceed?</p>
+<div class="btns-container">
+    <button class="border-btn" (click)="abortWithMatchingFretboard()">Abort customization and navigate to
+        {{instrument.tunings[tuningIndex].name}} {{instrument.name}} tuning.</button>
+    <button class="border-btn" (click)="dialog.close()">Just let me continue.</button>
+</div>
+}

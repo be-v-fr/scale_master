@@ -4,9 +4,14 @@ import { CurrentFretboardService } from '../services/current-fretboard.service';
 import { ScaleCategory } from '../interfaces/scale-category';
 import { SCALES } from '../const/scales';
 import { equalItems } from '../utils/array.utils';
-import { Scale } from '../models/scale';
 import { ScaleMode } from '../interfaces/scale-mode';
 import { getModTwelveIndex } from '../utils/mod.utils';
+import { INSTRUMENTS } from '../const/instruments';
+import { Instrument } from '../interfaces/instrument';
+import { Tuning } from '../interfaces/tuning';
+
+type ScaleResult = { catIndex: number, modeIndex: number };
+type TuningResult = { instrIndex: number, tuningIndex: number };
 
 @Directive({
   selector: '[appSearchCurrent]',
@@ -32,18 +37,13 @@ export class SearchCurrentDirective implements OnInit {
 
 
   searchScaleCategories(): void {
-    let result: { catIndex: number, modeIndex: number } = {
-      catIndex: -1,
-      modeIndex: -1
-    }
+    let result: ScaleResult = { catIndex: -1, modeIndex: -1 };
     SCALES.forEach((s: ScaleCategory, sIndex: number) => {
-      if(result.catIndex === -1) {
+      if (result.catIndex === -1) {
         result = this.searchScaleCategory(s, sIndex);
       }
     });
-    if (result.catIndex >= 0 && result.modeIndex >= 0) {
-      this.indexFound.emit({ primary: result.catIndex, secondary: result.modeIndex });
-    }
+    this.onSearchComplete(result);
   }
 
 
@@ -61,7 +61,7 @@ export class SearchCurrentDirective implements OnInit {
     let modeIndex: number = -1;
     s.modes?.forEach((m: ScaleMode, mIndex: number) => {
       if (catIndex === -1 && mIndex >= 1) {
-        const modeIntervals: number[] = s.intervals.map(i => i = getModTwelveIndex(i - m.interval));
+        const modeIntervals: number[] = s.intervals.map(i => getModTwelveIndex(i - m.interval));
         if (equalItems(modeIntervals, this.currScale.scale.category.intervals)) {
           catIndex = sIndex;
           modeIndex = mIndex;
@@ -73,6 +73,38 @@ export class SearchCurrentDirective implements OnInit {
 
 
   searchFretboard(): void {
+    let result: TuningResult = { instrIndex: -1, tuningIndex: -1 };
+    INSTRUMENTS.forEach((i: Instrument, iIndex: number) => {
+      if (result.instrIndex === -1) {
+        result = this.searchInstrumentTunings(i, iIndex);
+      }
+    });
+    this.onSearchComplete(result);
+  }
 
+
+  searchInstrumentTunings(i: Instrument, iIndex: number): { instrIndex: number, tuningIndex: number } {
+    let instrIndex: number = -1;
+    let tuningIndex: number = -1;
+    i.tunings.forEach((t: Tuning, tIndex: number) => {
+      if (instrIndex === -1) {
+        const searchIntervals: number[] = t.intervals.map(i => getModTwelveIndex(i));
+        const currIntervals: number[] = this.currFretboard.fretboard.tuning.intervals.map(i => getModTwelveIndex(i));
+        if (equalItems(searchIntervals, currIntervals)) {
+          instrIndex = iIndex;
+          tuningIndex = tIndex;
+        }
+      }
+    });
+    return { instrIndex: instrIndex, tuningIndex: tuningIndex }
+  }
+
+
+  onSearchComplete(result: ScaleResult | TuningResult): void {
+    const primary: number = 'catIndex' in result ? result.catIndex : result.instrIndex;
+    const secondary: number = 'modeIndex' in result ? result.modeIndex : result.tuningIndex;
+    if (primary >= 0 && secondary >= 0) {
+      this.indexFound.emit({ primary: primary, secondary: secondary });
+    }
   }
 }

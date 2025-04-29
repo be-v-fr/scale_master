@@ -13,4 +13,10 @@ export class DialogService {
   close(): Promise<boolean> {
     return this.router.navigate([{ outlets: { dialog: null } }]);
   }
+
+  checkIndexLeqZeroOnInit(index: number | undefined, name: string): boolean {
+    if(typeof(index) === 'number' && index >= 0) return true;
+    console.error(`Dialog initialization failed because ${name} index was missing or invalid.`);
+    return false;
+  }
 }

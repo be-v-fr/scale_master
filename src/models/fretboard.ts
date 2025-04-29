@@ -14,8 +14,7 @@ export class Fretboard {
         this.root = root;
         this.instrument = instrument;
         this.tuning = tuning;
-        const defaultNumberOfStrings = this.defaultNumberOfStrings;
-        this.numberOfStrings = numberOfStrings && numberOfStrings > defaultNumberOfStrings ? numberOfStrings : defaultNumberOfStrings;
+        this.numberOfStrings = numberOfStrings && numberOfStrings > this.defaultNumberOfStrings ? numberOfStrings : this.defaultNumberOfStrings;
     }
 
     get defaultNumberOfStrings(): number {

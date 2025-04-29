@@ -8,6 +8,7 @@ import { SCALES } from '../../../const/scales';
 import { DialogService } from '../../../services/dialog.service';
 import { CurrentScaleService } from '../../../services/current-scale.service';
 import { cloneDeep } from 'lodash';
+import { parseNumberParamIfExists } from '../../../utils/router.utils';
 
 @Component({
   selector: 'app-dialog-scale-found',
@@ -24,7 +25,6 @@ export class DialogScaleFoundComponent {
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    public custom: CustomizeService,
     public dialog: DialogService,
     private currScale: CurrentScaleService,
   ) { }
@@ -32,14 +32,12 @@ export class DialogScaleFoundComponent {
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      const catIndex: number = params['catIndex'] as number;
-      const modeIndex: number = params['modeIndex'] as number;
-      if (catIndex && catIndex >= 0) {
+      const catIndex: number | undefined = parseNumberParamIfExists(params, 'catIndex');
+      const modeIndex: number | undefined = parseNumberParamIfExists(params, 'modeIndex');
+      if(typeof(catIndex) === 'number' && this.dialog.checkIndexLeqZeroOnInit(catIndex, 'scale category')) {
         this.category = cloneDeep(SCALES[catIndex]);
-      } else {
-        console.error('Modes dialog initialization failed because scale category index was missing or invalid.');
       }
-      if (modeIndex > 0) {
+      if (typeof(modeIndex) === 'number' && modeIndex > 0) {
         this.modeIndex = modeIndex;
       }
     });
