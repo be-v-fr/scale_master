@@ -1,0 +1,16 @@
+@import '../../../styles.scss';
+
+:host {
+    display: inline;
+}
+
+button {
+    border-radius: 50%;
+    border: 1px solid $color-text-muted;
+    padding: 5px;
+    transition: 75ms ease;
+    &:hover {
+        transition: 75ms ease;
+        border-color: $color-text-secondary;
+    }
+}

@@ -13,8 +13,7 @@ button {
 
     &:hover {
         transition: 75ms ease;
-        color: black;
-        background: whitesmoke;
+        border-color: $color-text-muted;
     }
 
     &:active {

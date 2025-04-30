@@ -1,0 +1,17 @@
+@import '../styles.scss';
+
+footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    @include flex($g: 10px);
+    a {
+        color: $color-text-secondary;
+        font-size: 12px;
+        &:hover {
+            color: $color-text-primary;
+        }
+    }
+}

@@ -1,3 +1,7 @@
 <router-outlet />
+<footer>
+    <a [routerLink]="['legal', 'imprint']">Imprint</a>
+    <a [routerLink]="['legal', 'privacy']">Privacy policy</a>
+</footer>
 <router-outlet name="dialog" />
 <!-- <app-intro-logo *ngIf="awaitingIntro" /> -->

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { IntroLogoComponent } from './intro-logo/intro-logo.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, IntroLogoComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, IntroLogoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

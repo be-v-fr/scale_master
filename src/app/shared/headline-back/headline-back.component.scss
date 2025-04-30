@@ -1,0 +1,6 @@
+@import '../../../styles.scss';
+
+h2 {
+    @include flex($g: 16px);
+    color: $color-text-primary;
+}
