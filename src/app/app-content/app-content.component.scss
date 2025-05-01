@@ -33,7 +33,7 @@
         left: 0;
         right: 0;
         height: 100%;
-        transition: height 200ms ease-out;
+        transition: height $transition-menu-collapse;
         box-shadow: $shadow-menu;
     }
 
@@ -84,7 +84,7 @@
         }
     }
     @media screen and (max-height: $vh-breakpoint-2) {
-        transition: 200ms ease-out;
+        transition: $transition-menu-collapse;
         &.collapsed {
             bottom: calc(100dvh - var(--collapsed-menu-height));
         }       
@@ -104,5 +104,17 @@
 
     @media screen and (orientation: landscape) {
         display: none;
+    }
+}
+
+app-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    display: none;
+    @media screen and (max-height: $vh-breakpoint-1) {
+        display: flex;
     }
 }

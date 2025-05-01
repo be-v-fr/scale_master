@@ -6,6 +6,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { ToastMessageComponent } from '../shared/toast-message/toast-message.component';
 import { ToastMessageService } from '../../services/toast-message.service';
 import { LogoComponent } from '../shared/logo/logo.component';
+import { FooterComponent } from '../footer/footer.component';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -13,7 +14,7 @@ import { LogoComponent } from '../shared/logo/logo.component';
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet, LogoComponent],
+  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet, LogoComponent, FooterComponent],
   templateUrl: './app-content.component.html',
   styleUrl: './app-content.component.scss'
 })

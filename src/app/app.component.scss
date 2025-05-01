@@ -1,10 +1,12 @@
 @import '../styles.scss';
 
-footer {
+app-footer {
     position: fixed;
     right: 0;
     bottom: 0;
     padding-right: 16px;
     padding-bottom: 10px;
-    @include flex($g: 10px);
+    @media screen and (max-height: $vh-breakpoint-1) {
+        display: none;
+    }
 }

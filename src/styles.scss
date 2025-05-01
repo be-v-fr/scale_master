@@ -10,6 +10,7 @@ $circular-btn-size: 32px;
 $fretboard-string-margin: 8vw;
 $padding-text-page: 20px;
 $shadow-menu: 0 9px 8px -6px #0003;
+$transition-menu-collapse: 200ms ease-out;
 
 $color-wood-bg:         #EBD3B5;
 $color-panel-bg:        #FAF3EB;
@@ -23,9 +24,6 @@ $color-error:           #B22222;
 $color-info:            #4ec5e9;
 $color-info-bright:     #72d1ee;
 $color-almost-black:    #111;
-
-
-
 
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;

@@ -59,7 +59,7 @@ section {
         @include flex($g: 6px);
         color: $color-text-primary;
         border-bottom: 1px solid $color-text-primary;
-        transition: 200ms ease;
+        transition: $transition-menu-collapse;
 
         &.collapsed {
             @media screen and (max-height: $vh-breakpoint-2) {

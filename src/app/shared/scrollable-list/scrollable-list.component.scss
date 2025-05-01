@@ -53,12 +53,11 @@ $opac-outside: 0.3;
   height: 144px;
   @include flex($dir: column, $g: 3px);
   position: relative;
-  transition: height 200ms ease-out;
+  transition: height $transition-menu-collapse;
 
   &.collapsed {
     @media screen and (max-height: $vh-breakpoint-2) {
       height: 61px;
-      transition: height 200ms ease-out;
     }
   }
 
@@ -69,8 +68,6 @@ $opac-outside: 0.3;
     overflow: hidden;
     border: 1px solid $color-text-primary;
     @include flex($dir: column);
-    // background: $color-text-secondary;
-    // background: #c4b3a4;
     background: linear-gradient(to bottom, #b6a496 -6%, #7D6F63 26%, #7D6F63 76%, #554b43 100%);
   }
 

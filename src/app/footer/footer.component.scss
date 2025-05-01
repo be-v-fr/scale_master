@@ -1,0 +1,5 @@
+@import '../../styles.scss';
+
+:host {
+    @include flex($g: 10px);
+}
