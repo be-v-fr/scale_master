@@ -61,11 +61,12 @@
             [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
     </div>
 </section>
-<section>
+<section class="secondary-submenu">
     <h4 [class.collapsed]="display.menuCollapsed">Display</h4>
     <app-settings-display />
 </section>
-<section>
+<section class="secondary-submenu">
     <h4 [class.collapsed]="display.menuCollapsed">Export</h4>
     <app-export />
 </section>
+<app-more-menu />

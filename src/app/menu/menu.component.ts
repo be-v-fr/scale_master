@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
-import { Note } from '../../models/note';
 import { CurrentScaleService } from '../../services/current-scale.service';
 import { ScalesDataService } from '../../services/scales-data.service';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
@@ -12,6 +11,7 @@ import { CircularButtonComponent } from '../shared/circular-button/circular-butt
 import { ExportComponent } from './export/export.component';
 import { RouterLink } from '@angular/router';
 import { CustomizeService } from '../../services/customize.service';
+import { MoreMenuComponent } from './more-menu/more-menu.component';
 
 /**
  * Displays the menu offering any app controls.
@@ -19,7 +19,7 @@ import { CustomizeService } from '../../services/customize.service';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink],
+  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink, MoreMenuComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

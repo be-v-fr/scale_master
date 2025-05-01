@@ -15,6 +15,8 @@ import { DialogTuningFoundComponent } from './dialogs/dialog-tuning-found/dialog
 import { ImprintComponent } from './legal-pages/imprint/imprint.component';
 import { PrivacyComponent } from './legal-pages/privacy/privacy.component';
 import { LegalPageWrapperComponent } from './legal-page-wrapper/legal-page-wrapper.component';
+import { SettingsDisplayComponent } from './menu/settings-display/settings-display.component';
+import { ExportComponent } from './menu/export/export.component';
 
 export const routes: Routes = [
     {
@@ -90,6 +92,13 @@ export const routes: Routes = [
             {
                 path: 'open/:type',
                 component: DialogOpenItemComponent
+            },
+            {
+                path: 'more',
+                children: [
+                    { path: 'display', component: SettingsDisplayComponent },
+                    { path: 'export', component: ExportComponent },
+                ]
             }
         ],
     },

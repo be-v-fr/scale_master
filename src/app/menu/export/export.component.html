@@ -1,8 +1,8 @@
-<button class="border-btn" [routerLink]="[ {outlets: { 'dialog': ['d', 'export', 'img']}}]">
+<button class="border-btn" (click)="dialog.forceOpen(['export', 'img'])">
     <i class="material-icons">output</i>
     <span>Export image</span>
 </button>
-<button class="border-btn" [routerLink]="[ {outlets: { 'dialog': ['d', 'export', 'txt']}}]">
+<button class="border-btn" (click)="dialog.forceOpen(['export', 'txt'])">
     <i class="material-icons">output</i>
     <span>Export text</span>
 </button>

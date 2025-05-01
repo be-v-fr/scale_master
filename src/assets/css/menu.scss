@@ -1,13 +1,12 @@
 @import "../../styles.scss";
 
-$vertical-padding: 18px;
 $scrollable-list-narrow: 72px;
 
 :host {
     width: 100%;
     height: 100%;
     background: $color-panel-bg;
-    padding: $vertical-padding 8px;
+    padding: $menu-y-padding $menu-x-padding;
     @include flex($g: 24px);
 }
 
@@ -17,7 +16,7 @@ $scrollable-list-narrow: 72px;
     height: 100%;
 
     .expand-btn-container {
-        margin-bottom: -$vertical-padding;
+        margin-bottom: -$menu-y-padding;
         width: 44px;
         height: 44px;
 
@@ -94,4 +93,10 @@ section {
 .side-arrow-btn-container {
     width: 32px;
     height: 32px;
+}
+
+@media screen and (max-width: $vw-breakpoint-1) {
+    section.secondary-submenu {
+        display: none;
+    }   
 }

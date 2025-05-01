@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { DialogService } from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-export',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './export.component.html',
   styleUrl: './export.component.scss'
 })
 export class ExportComponent {
 
+
+  constructor(
+    public dialog: DialogService
+  ) { }
 }

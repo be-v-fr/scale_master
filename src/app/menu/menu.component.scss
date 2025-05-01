@@ -1,2 +1,15 @@
 @import "../../styles.scss";
 @import "../../assets/css/menu.scss";
+
+:host {
+    position: relative;
+    app-more-menu {
+        display: none;
+        position: absolute;
+        top: $menu-y-padding;
+        right: $menu-x-padding;
+        @media screen and (max-width: $vw-breakpoint-1) {
+            display: block;
+        }
+    }
+}

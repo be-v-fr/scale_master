@@ -1,0 +1,29 @@
+@import '../../../styles.scss';
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    padding: $menu-y-padding $menu-x-padding;
+    @include flex($jc: flex-end, $ai: flex-start);
+}
+.menu {
+    background: white;
+    border-radius: calc($circular-btn-size / 2);
+    border-top-right-radius: 0;
+    border: 1px solid lightgrey;
+    padding: 20px;
+    box-shadow: 1px 1px 3px -1px #0002;
+    animation: fade-in 500ms ease forwards;
+    h4 {
+        width: 100%;
+        text-align: center;
+        color: $color-text-primary;
+        cursor: pointer;
+        transition: 75ms ease;
+        padding: 3px 20px;
+        &:hover {
+            transition: 75ms ease;
+            color: $color-text-secondary;
+        }
+    }
+}
