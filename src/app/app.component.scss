@@ -7,11 +7,4 @@ footer {
     padding-right: 16px;
     padding-bottom: 10px;
     @include flex($g: 10px);
-    a {
-        color: $color-text-secondary;
-        font-size: 12px;
-        &:hover {
-            color: $color-text-primary;
-        }
-    }
 }

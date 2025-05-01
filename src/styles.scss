@@ -189,3 +189,15 @@ button.reset-btn {
     padding: 3px;
     color: $color-info;
 }
+
+.small-print {
+    color: $color-text-secondary;
+    font-size: 12px;
+}
+
+.small-print-link {
+    @extend .small-print;
+    &:hover {
+        color: $color-text-primary;
+    }
+}

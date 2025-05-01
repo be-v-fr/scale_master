@@ -1,1 +1,18 @@
 @import '../../styles.scss';
+
+app-headline-back {
+    margin-bottom: 16px;
+}
+
+app-info-msg {
+    border: 1px solid $color-text-muted;
+    border-radius: 5px;
+    padding: 6px;
+    color: $color-text-secondary;
+    background: white;
+    margin-bottom: 16px;
+}
+
+section p {
+    margin-bottom: 6px;
+}

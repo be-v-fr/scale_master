@@ -4,7 +4,12 @@
     display: block;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     padding: $padding-text-page;
     background: $color-panel-bg;
     @include flex($ai: flex-start);
+    .content {
+        width: 100%;
+        max-width: 800px;
+    }
 }

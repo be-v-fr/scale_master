@@ -1,5 +1,9 @@
 @import '../../../styles.scss';
 
+:host {
+    display: inline-block;
+}
+
 h2 {
     @include flex($g: 16px);
     color: $color-text-primary;

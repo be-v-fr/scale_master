@@ -12,8 +12,8 @@ import { DialogRootModeInitComponent } from './dialogs/dialog-root-mode-init/dia
 import { DialogNameCustomComponent } from './dialogs/dialog-name-custom/dialog-name-custom.component';
 import { DialogOpenItemComponent } from './dialogs/dialog-open-item/dialog-open-item.component';
 import { DialogTuningFoundComponent } from './dialogs/dialog-tuning-found/dialog-tuning-found.component';
-import { ImprintComponent } from './legal-page-wrapper/imprint/imprint.component';
-import { PrivacyComponent } from './legal-page-wrapper/privacy/privacy.component';
+import { ImprintComponent } from './legal-pages/imprint/imprint.component';
+import { PrivacyComponent } from './legal-pages/privacy/privacy.component';
 import { LegalPageWrapperComponent } from './legal-page-wrapper/legal-page-wrapper.component';
 
 export const routes: Routes = [

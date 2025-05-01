@@ -1,0 +1,34 @@
+<app-headline-back [title]="'Impressum'" />
+<app-info-msg
+    [msg]="'This imprint is provided in German in accordance with German law. Please contact us if you have any questions or need clarification in English.'" />
+<section>
+    <p>Angaben gemäß § 5 TMG</p>
+    <p>{{address.name}} <br>
+       {{address.street}}<br>
+       {{address.city}} <br>
+       {{address.country}}
+    </p><br>
+    <p> <strong>Vertreten durch: </strong><br>
+        {{address.name}}<br><br>
+    </p>
+    <p><strong>Kontakt:</strong> <br>
+        Telefon: {{address.contact.phone}}<br>
+        E-Mail: <a [href]="'mailto:' + address.contact.email.name + '@' + address.contact.email.provider">{{address.contact.email.name}}&#64;{{address.contact.email.provider}}</a><br></p>
+    <br>
+    <p>
+        <strong>Haftungsausschluss: </strong><br><br>
+        <strong>Haftung für Links</strong><br><br>
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
+        Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
+        Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten
+        wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum
+        Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
+        jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
+        Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+    </p>
+    <br>
+</section>
+<p class="small-print">
+    Website Impressum von
+    <a class="small-print-link" href="https://www.impressum-generator.de">impressum-generator.de</a>
+</p>
