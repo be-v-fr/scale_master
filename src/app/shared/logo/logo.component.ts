@@ -11,5 +11,5 @@ import { Component, Input } from '@angular/core';
 export class LogoComponent {
   @Input() animate = false;
   @Input() dark = false;
-  @Input() allowCollapse = false;
+  @Input() short = false;
 }

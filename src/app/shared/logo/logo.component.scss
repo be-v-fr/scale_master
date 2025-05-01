@@ -68,12 +68,8 @@
         }
     }
 
-    &.dark {
-        @media screen and (min-height: calc($vh-breakpoint-1 + 0.5px)) {
-            .circle-mask-container .circle-mask {
-                background: #ebd6c0;
-            }
-        }
+    &.dark .circle-mask-container .circle-mask {
+        background: #ebd6c0;
     }
 }
 
@@ -87,11 +83,5 @@
 @keyframes treble-clef-animation {
     to {
         left: 10px;
-    }
-}
-
-.hide-vh-break-1 {
-    @media screen and (max-height: $vh-breakpoint-1) {
-        display: none;
     }
 }
