@@ -26,5 +26,16 @@
         <hr class="string">
     </tr>
     }
+    <tr class="edge">
+        <td class="string-note"></td>
+        @for (_ of frets; track i; let i = $index) { 
+         <td>
+            <div class="dot-container">
+                <span class="dot" *ngIf="[3, 5, 7, 9].includes(i)"></span>
+                <span class="dot" *ngIf="7 === i"></span>
+            </div>
+         </td>   
+        }
+    </tr>
 </table>
 <app-edit-fretboard-overlay *ngIf="custom.mode === 'fretboard' && custom.currentStep !== undefined && custom.currentStep <= 3" [selectedStringNote]="selectedStringNote" />

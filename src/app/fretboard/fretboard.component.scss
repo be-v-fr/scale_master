@@ -1,7 +1,7 @@
 @import "../../styles.scss";
 
 $fret-border: 4px solid #b8b8b8;
-$select: #ff0b;
+$color-nut: rgb(241, 238, 220);
 
 :host {
   position: relative;
@@ -13,6 +13,7 @@ $select: #ff0b;
   background-repeat: no-repeat;
   background-size: cover;
   flex: 1;
+
   @media screen and (max-height: $vh-breakpoint-1) {
     height: 100%;
   }
@@ -22,28 +23,33 @@ table {
   width: 100%;
   height: 100%;
   border-collapse: collapse;
+
   tr {
     position: relative;
+
     .string-note {
       background: black;
       color: white;
       text-align: center;
       width: $fretboard-string-margin;
     }
+
     .nut {
-      background: rgb(241, 238, 220);
+      background: $color-nut;
       width: 5vw;
     }
+
     .fret {
       border-right: $fret-border;
     }
-    
+
     .scale-note-wrapper {
       @include flex();
       position: relative;
       width: 100%;
       height: 100%;
       z-index: 2;
+
       .note-container {
         width: 46px;
         height: 46px;
@@ -51,21 +57,27 @@ table {
         border-radius: 50%;
         transition: 225ms ease;
         @include flex();
+
         @media screen and (max-height: $vh-breaktpoint-3) {
           width: 38px;
           height: 38px;
         }
+
         &.marked {
           border-color: $color-info-bright;
         }
+
         &.marked-selection {
           border-color: $color-warning;
         }
       }
     }
+
     td.enable-hover:hover {
       cursor: pointer;
+
       .scale-note-wrapper {
+
         .note-container,
         .note-container.marked {
           border-color: $color-warning;
@@ -73,6 +85,7 @@ table {
         }
       }
     }
+
     .string {
       position: absolute;
       height: 6px;
@@ -90,17 +103,58 @@ table {
 
 .lefty {
   direction: rtl;
+
   tr {
     td {
       direction: ltr;
     }
+
     .fret {
       border-right: unset;
       border-left: $fret-border;
     }
+
     .string {
       left: 0;
       right: $fretboard-string-margin;
     }
+  }
+}
+
+.edge {
+  position: relative;
+  z-index: 0;
+
+  td {
+    height: 16px;
+
+    &:nth-child(2) {
+      background: $color-nut;
+    }
+
+    &:not(:first-child),
+    &:not(:nth-child(2)) {
+      .dot-container {
+        width: 100%;
+        height: 100%;
+        @include flex($g: 30%);
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: $color-panel-bg;
+        }
+      }
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #0001;
+    z-index: 1;
+    pointer-events: none;
   }
 }
