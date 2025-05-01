@@ -9,41 +9,20 @@ $vh-breaktpoint-3: 520px;
 $circular-btn-size: 32px;
 $fretboard-string-margin: 8vw;
 $padding-text-page: 20px;
-
-
 $shadow-menu: 0 9px 8px -6px #0003;
 
-
-
-// === Grundfarben ===
-$color-wood-bg:        #EBD3B5;   // Holztextur-Hintergrund
-$color-panel-bg:       #FAF3EB;   // Scrollbare Menüs / Panels
-$color-subtle-bg:      #F5E8D8;   // Leicht abgesetzter Bereich
-
-// === Textfarben ===
-$color-text-primary:   #4A3F35;   // Haupttext
-$color-text-secondary: #7D6F63;   // Sekundärer Text
-$color-text-muted:     #B6A89A;   // Deaktivierter / schwacher Text
-
-// === Linien / Icons / Details ===
-$color-line:           #8B7355;   // Linienfarbe (z. B. Saiten, Bünde)
-$color-line-hover:     #C7A781;   // Hover-Linienfarbe
-
-// === Scrollbar ===
-$color-scrollbar:      #BDAA90;
-$color-scrollbar-hover:#A89174;
-
-$color-small-btn-bg: #f1ddc6;
-
-// === Transparenzen (optional) ===
-$color-overlay:        rgba(235, 211, 181, 0.85); // Für Overlays über Holztextur
-
-// === Utility Farben ===
-$color-success:        #9cec51;
-$color-warning:        #f7c12e;
-$color-error:          #B22222;
-$color-info: #4ec5e9;
-$color-info-bright: #72d1ee;
+$color-wood-bg:         #EBD3B5;
+$color-panel-bg:        #FAF3EB;
+$color-subtle-bg:       #F5E8D8;
+$color-text-primary:    #4A3F35;
+$color-text-secondary:  #7D6F63;
+$color-text-muted:      #B6A89A;
+$color-success:         #9cec51;
+$color-warning:         #f7c12e;
+$color-error:           #B22222;
+$color-info:            #4ec5e9;
+$color-info-bright:     #72d1ee;
+$color-almost-black:    #111;
 
 
 
@@ -93,7 +72,7 @@ input {
 }
 
 button, a {
-    color: black;
+    color: $color-almost-black;
     cursor: pointer;
 }
 

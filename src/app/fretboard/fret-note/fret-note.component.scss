@@ -11,7 +11,7 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    color: black;
+    color: $color-almost-black;
     background: whitesmoke;
     border: 1px solid $color-text-primary;
     border-radius: 50%;
@@ -20,6 +20,6 @@
 
 .root {
     color: white;
-    background: black;
-    border-color: black;
+    background: $color-almost-black;
+    border-color: $color-almost-black;
 }
