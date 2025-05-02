@@ -2,4 +2,7 @@
 
 :host {
     @include flex($g: 10px);
+    @media screen and (max-width: $vw-breakpoint-1) {
+        @include flex($dir: column, $ai: flex-end);
+    }
 }

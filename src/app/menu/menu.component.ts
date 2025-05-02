@@ -24,6 +24,7 @@ import { MoreMenuComponent } from './more-menu/more-menu.component';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
+  activePrimarySubmenu: 'scale' | 'fretboard' = 'scale';
 
 
   /**
@@ -37,4 +38,9 @@ export class MenuComponent {
     public display: DisplayService,
     public custom: CustomizeService
   ) { }
+
+
+  toggleActivePrimarySubmenu(): void {
+    this.activePrimarySubmenu = (this.activePrimarySubmenu === 'scale' ? 'fretboard' : 'scale');
+  }
 }

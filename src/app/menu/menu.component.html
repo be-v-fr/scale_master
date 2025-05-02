@@ -9,7 +9,7 @@
         </button>
     </div>
 </div>
-<section>
+<section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'scale'">
     <h4 [class.collapsed]="display.menuCollapsed">
         <app-circular-button *ngIf="currScale.isCustom" [icon]="'arrow_left'" (click)="currScale.closeCustom()" />
         Scale
@@ -34,7 +34,13 @@
         }
     </div>
 </section>
-<section>
+<section *ngIf="activePrimarySubmenu !== 'scale'" class="show-vw-breakpoint-2 activate-submenu">
+    <h4 class="h4-as-button" (click)="toggleActivePrimarySubmenu()">
+        <app-circular-button [icon]="'code'" />
+        Scale
+    </h4>
+</section>
+<section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
     <h4 [class.collapsed]="display.menuCollapsed">
         <app-circular-button *ngIf="currFretboard.isCustom" [icon]="'arrow_left'"
             (click)="currFretboard.closeCustom()" />
@@ -61,12 +67,18 @@
             [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
     </div>
 </section>
-<section class="secondary-submenu">
-    <h4 [class.collapsed]="display.menuCollapsed">Display</h4>
+<section *ngIf="activePrimarySubmenu !== 'fretboard'" class="show-vw-breakpoint-2 activate-submenu">
+    <h4 class="h4-as-button" (click)="toggleActivePrimarySubmenu()">
+        <app-circular-button [icon]="'code'" />    
+        Fretboard
+    </h4>
+</section>
+<section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
+    <h4 [class.collapsed]="display.menuCollapsed" [class.h4-as-button]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]">Display</h4>
     <app-settings-display />
 </section>
-<section class="secondary-submenu">
-    <h4 [class.collapsed]="display.menuCollapsed">Export</h4>
+<section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
+    <h4 [class.collapsed]="display.menuCollapsed" [class.h4-as-button]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">Export</h4>
     <app-export />
 </section>
 <app-more-menu />

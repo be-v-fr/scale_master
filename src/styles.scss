@@ -7,6 +7,8 @@ $vh-breakpoint-1: 800px;
 $vh-breakpoint-2: 640px;
 $vh-breaktpoint-3: 520px;
 $vw-breakpoint-1: 1280px;
+$vw-breakpoint-2: 1024px;
+$vw-breakpoint-3: 800px;
 $circular-btn-size: 32px;
 $fretboard-string-margin: 8vw;
 $padding-text-page: 20px;
@@ -15,18 +17,18 @@ $transition-menu-collapse: 200ms ease-out;
 $menu-x-padding: 8px;
 $menu-y-padding: 18px;
 
-$color-wood-bg:         #EBD3B5;
-$color-panel-bg:        #FAF3EB;
-$color-subtle-bg:       #F5E8D8;
-$color-text-primary:    #4A3F35;
-$color-text-secondary:  #7D6F63;
-$color-text-muted:      #B6A89A;
-$color-success:         #9cec51;
-$color-warning:         #f7c12e;
-$color-error:           #B22222;
-$color-info:            #4ec5e9;
-$color-info-bright:     #72d1ee;
-$color-almost-black:    #111;
+$color-wood-bg: #ebd3b5;
+$color-panel-bg: #faf3eb;
+$color-subtle-bg: #f5e8d8;
+$color-text-primary: #4a3f35;
+$color-text-secondary: #7d6f63;
+$color-text-muted: #b6a89a;
+$color-success: #9cec51;
+$color-warning: #f7c12e;
+$color-error: #b22222;
+$color-info: #4ec5e9;
+$color-info-bright: #72d1ee;
+$color-almost-black: #111;
 
 @mixin flex($jc: center, $ai: center, $g: 0, $dir: row) {
     display: flex;
@@ -58,7 +60,8 @@ body {
     box-sizing: border-box;
 }
 
-p, h2 {
+p,
+h2 {
     margin: 0;
 }
 
@@ -73,7 +76,8 @@ input {
     margin: 0;
 }
 
-button, a {
+button,
+a {
     color: $color-almost-black;
     cursor: pointer;
 }
@@ -185,4 +189,17 @@ button.reset-btn {
 
 .hide {
     display: none;
+}
+
+.show-vw-breakpoint-2, :host section.show-vw-breakpoint-2 {
+    display: none;
+}
+
+@media screen and (max-width: $vw-breakpoint-2) {
+    .show-vw-breakpoint-2, :host section.show-vw-breakpoint-2 {
+        display: flex;
+    }
+    .hide-vw-breakpoint-2 {
+        display: none;
+    }
 }
