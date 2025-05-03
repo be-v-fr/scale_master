@@ -74,11 +74,17 @@
     </h4>
 </section>
 <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
-    <h4 [class.collapsed]="display.menuCollapsed" [class.h4-as-button]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]">Display</h4>
+    <h4 [class.collapsed]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]">
+        <i class="material-icons">palette</i>
+        Display
+    </h4>
     <app-settings-display />
 </section>
 <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
-    <h4 [class.collapsed]="display.menuCollapsed" [class.h4-as-button]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">Export</h4>
+    <h4 [class.collapsed]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">
+        <i class="material-icons">output</i>
+        Export
+    </h4>
     <app-export />
 </section>
 <app-more-menu />
