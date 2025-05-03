@@ -1,6 +1,18 @@
 @import "../../styles.scss";
 @import "../../assets/css/menu.scss";
 
+@mixin h4-as-button() {
+    border: 1px solid $color-text-secondary;
+    border-radius: 6px;
+    transition: 75ms ease;
+    cursor: pointer;
+    &:hover {
+        transition: 75ms ease;
+        color: $color-text-secondary;
+        background: white;
+    }    
+}
+
 :host {
     position: relative;
     app-more-menu {
@@ -10,17 +22,6 @@
         right: $menu-x-padding;
         @media screen and (max-width: $vw-breakpoint-1) {
             display: block;
-        }
-    }
-    section .h4-as-button {
-        border: 1px solid $color-text-secondary;
-        border-radius: 6px;
-        transition: 75ms ease;
-        cursor: pointer;
-        &:hover {
-            transition: 75ms ease;
-            color: $color-text-secondary;
-            background: white;
         }
     }
     .activate-submenu {
@@ -47,6 +48,9 @@
                 top: 26px;
                 width: 100%;
                 height: 32px;
+                &.h4-as-button {
+                    @include h4-as-button();
+                }
             }
         }
     }
@@ -55,6 +59,9 @@
             position: absolute;
             left: 10%;
             bottom: 22px;
+        }
+        section .h4-as-button {
+            @include h4-as-button();
         }
     }
     @media screen and (max-width: $vw-breakpoint-3) {
