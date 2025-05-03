@@ -3,11 +3,12 @@ import { HeadlineBackComponent } from '../../shared/headline-back/headline-back.
 import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
 import { LEGAL } from '../../../../secrets';
 import { Address } from '../../../interfaces/address';
+import { EmailLinkComponent } from '../../shared/email-link/email-link.component';
 
 @Component({
   selector: 'app-imprint',
   standalone: true,
-  imports: [HeadlineBackComponent, InfoMsgComponent],
+  imports: [HeadlineBackComponent, InfoMsgComponent, EmailLinkComponent],
   templateUrl: './imprint.component.html',
   styleUrl: './imprint.component.scss'
 })

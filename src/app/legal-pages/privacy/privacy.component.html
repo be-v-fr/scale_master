@@ -1,1 +1,40 @@
 <app-headline-back [title]="'Privacy policy'" />
+<p><strong>Last updated:</strong> May 2, 2025</p>
+
+<p>The protection of your personal data is important to us. This website does not process any personal data.</p>
+
+<h3>Controller</h3>
+<p>
+    {{address.name}}<br>
+    {{address.street}}<br>
+    {{address.city}}<br>
+    {{address.country}}<br>
+    Email: <app-email-link [name]="address.contact.email.name" [provider]="address.contact.email.provider" /><br>
+    Phone: {{address.contact.phone}}
+</p>
+
+<h3>No Collection of Personal Data</h3>
+<p>
+    No personal data is collected when visiting this website. <br>
+    There is no option for registration, no contact form, no newsletter subscription, and no tracking or analytics
+    tools.<br>
+    IP addresses are neither stored nor analyzed.
+</p>
+
+<h3>No Cookies</h3>
+<p>This website does not use cookies.</p>
+
+<h3>No Disclosure to Third Parties</h3>
+<p>No data is transmitted to third parties.</p>
+
+<h3>Local Data Storage</h3>
+<p>
+    Any settings or data saved in connection with the use of this website (e.g., language preferences) are stored
+    exclusively in the user's browser and are not transmitted to us.
+</p>
+
+<h3>Your Rights</h3>
+<p>
+    Since no personal data is collected, there are generally no data subject rights under the GDPR.<br>
+    If you still have questions about data protection, please contact us via the email address provided above.
+</p>

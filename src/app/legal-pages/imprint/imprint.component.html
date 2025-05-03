@@ -13,7 +13,7 @@
     </p>
     <p><strong>Kontakt:</strong> <br>
         Telefon: {{address.contact.phone}}<br>
-        E-Mail: <a [href]="'mailto:' + address.contact.email.name + '@' + address.contact.email.provider">{{address.contact.email.name}}&#64;{{address.contact.email.provider}}</a><br></p>
+        E-Mail: <app-email-link [name]="address.contact.email.name" [provider]="address.contact.email.provider" /><br></p>
     <br>
     <p>
         <strong>Haftungsausschluss: </strong><br><br>
