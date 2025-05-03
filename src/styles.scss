@@ -58,6 +58,7 @@ body {
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 p,
@@ -76,16 +77,17 @@ input {
     margin: 0;
 }
 
-button,
-a {
-    color: $color-almost-black;
-    cursor: pointer;
-}
-
 .prevent-select {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+button,
+a {
+    @extend .prevent-select;
+    color: $color-almost-black;
+    cursor: pointer;
 }
 
 button.icon-btn {

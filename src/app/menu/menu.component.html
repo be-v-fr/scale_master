@@ -35,7 +35,7 @@
     </div>
 </section>
 <section *ngIf="activePrimarySubmenu !== 'scale'" class="show-vw-breakpoint-2 activate-submenu">
-    <h4 class="h4-as-button" (click)="toggleActivePrimarySubmenu()">
+    <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
         <app-circular-button [icon]="'code'" />
         Scale
     </h4>
@@ -68,7 +68,7 @@
     </div>
 </section>
 <section *ngIf="activePrimarySubmenu !== 'fretboard'" class="show-vw-breakpoint-2 activate-submenu">
-    <h4 class="h4-as-button" (click)="toggleActivePrimarySubmenu()">
+    <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
         <app-circular-button [icon]="'code'" />    
         Fretboard
     </h4>
@@ -81,7 +81,7 @@
     <app-settings-display />
 </section>
 <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
-    <h4 [class.collapsed]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">
+    <h4 [class.collapsed]="display.menuCollapsed" [class.prevent-select]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">
         <i class="material-icons">output</i>
         Export
     </h4>

@@ -1,5 +1,9 @@
 @import '../../../styles.scss';
 
+:host {
+    @extend .prevent-select;
+}
+
 button {
     width: $circular-btn-size;
     height: $circular-btn-size;

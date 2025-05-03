@@ -5,6 +5,7 @@
     top: 22px;
     color: $color-text-primary;
     @include flex($ai: flex-start);
+    @extend .prevent-select;
 
     span {
         font-family: "Nova Script";
