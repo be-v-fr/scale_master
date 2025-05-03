@@ -17,6 +17,7 @@
     animation: fade-in 500ms ease forwards;
     h4 {
         width: 100%;
+        @include flex($g: 6px);
         text-align: center;
         color: $color-text-primary;
         cursor: pointer;

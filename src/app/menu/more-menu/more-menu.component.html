@@ -1,7 +1,13 @@
 <app-circular-button [icon]="'more_vert'" (mousedown)="open()" />
 <div *ngIf="isOpen" class="overlay" (mousedown)="isOpen = false">
     <div class="menu" (mousedown)="$event.stopPropagation()">
-        <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]" (click)="isOpen = false">Display</h4>
-        <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]" (click)="isOpen = false">Export</h4>
+        <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]" (click)="isOpen = false">
+            <i class="material-icons">palette</i>
+            Display
+        </h4>
+        <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]" (click)="isOpen = false">
+            <i class="material-icons">output</i>
+            Export
+        </h4>
     </div>
 </div>
