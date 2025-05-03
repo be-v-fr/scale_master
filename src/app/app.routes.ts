@@ -17,6 +17,7 @@ import { PrivacyComponent } from './legal-pages/privacy/privacy.component';
 import { LegalPageWrapperComponent } from './legal-page-wrapper/legal-page-wrapper.component';
 import { SettingsDisplayComponent } from './menu/settings-display/settings-display.component';
 import { ExportComponent } from './menu/export/export.component';
+import { DialogSubmenuComponent } from './dialogs/dialog-submenu/dialog-submenu.component';
 
 export const routes: Routes = [
     {
@@ -94,7 +95,7 @@ export const routes: Routes = [
                 component: DialogOpenItemComponent
             },
             {
-                path: 'more',
+                path: 'more', component: DialogSubmenuComponent,
                 children: [
                     { path: 'display', component: SettingsDisplayComponent },
                     { path: 'export', component: ExportComponent },
