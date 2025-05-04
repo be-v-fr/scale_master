@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { dateToString } from '../../../utils/string.utils';
 
 @Component({
   selector: 'app-open-item',
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class OpenItemComponent {
   editing: boolean = false;
   @Input({ required: true }) name!: string;
+  @Input({ required: true }) timestamp!: number;
   @Output() nameChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() open: EventEmitter<void> = new EventEmitter<void>();
   @Output() delete: EventEmitter<void> = new EventEmitter<void>();
@@ -21,6 +23,12 @@ export class OpenItemComponent {
   constructor(
     private cdr: ChangeDetectorRef
   ) { }
+
+
+  get date(): string {
+    const date: Date = new Date(this.timestamp);
+    return dateToString(date);
+  }
 
 
   onItemClick() {

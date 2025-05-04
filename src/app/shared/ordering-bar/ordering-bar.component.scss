@@ -2,9 +2,10 @@
 
 $border-color: lightgrey;
 $border-style: 1px solid $border-color;
+$btn-x-padding: 5px;
 
 :host {
-    @include flex($jc: flex-end);
+    @include flex();
     border-bottom: $border-style;
 }
 
@@ -15,11 +16,14 @@ $border-style: 1px solid $border-color;
     border-top-right-radius: 4px;
     border: 1px solid #0000;
     border-bottom: none;
+    color: $color-text-secondary;
     &.active {
         font-weight: bold;
+        color: $color-text-primary;
     }
     &:hover {
         border-color: $border-color;
+        color: $color-text-primary;
     }
     .material-icons.arrow-up {
         transform: rotate(180deg);
@@ -36,4 +40,12 @@ $border-style: 1px solid $border-color;
             display: block;
           }
     }
+}
+
+section:first-child {
+    flex: 1;
+}
+
+section:last-child {
+    width: calc($open-item-secondary-width + $btn-x-padding);
 }

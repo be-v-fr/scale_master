@@ -1,15 +1,21 @@
 <div (mousedown)="onItemClick()" class="item">
     @if(editing) {
-        <input class="input-name" type="text" [(ngModel)]="name" #nameInput (mousedown)="$event.stopPropagation()" (blur)="onInputBlur()" />
+    <input class="input-name" type="text" [(ngModel)]="name" #nameInput (mousedown)="$event.stopPropagation()"
+        (blur)="onInputBlur()" />
     } @else {
-        <span>{{name}}</span>
+    <span class="name">{{name}}</span>
     }
-    <div class="options">
-        @if(editing) {
+    <div class="second-column">
+        <span class="date">{{date}}</span>
+        <div class="options">
+            @if(editing) {
             <button class="material-icons icon-btn">check</button>
-        } @else {
-            <button class="material-icons icon-btn"(mousedown)="$event.stopPropagation()" (click)="edit()">edit</button>
-        }
-        <button class="material-icons icon-btn"(mousedown)="$event.stopPropagation()" (click)="delete.emit()">delete</button>
+            } @else {
+            <button class="material-icons icon-btn" (mousedown)="$event.stopPropagation()"
+                (click)="edit()">edit</button>
+            }
+            <button class="material-icons icon-btn" (mousedown)="$event.stopPropagation()"
+                (click)="delete.emit()">delete</button>
+        </div>
     </div>
 </div>

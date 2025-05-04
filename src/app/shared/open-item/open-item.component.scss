@@ -1,7 +1,7 @@
-@import '../../../styles.scss';
+@import "../../../styles.scss";
 
 .item {
-    @include flex($jc: space-between);
+    @include flex();
     padding: 2px;
     cursor: pointer;
     transition: 75ms ease;
@@ -9,7 +9,22 @@
         background: white;
         transition: 225ms ease;
     }
-    .options {
-        @include flex($g: 3px);
+    .name, .input-name {
+        flex: 1;
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .second-column {
+        width: $open-item-secondary-width;
+        @include flex($jc: space-between, $g: 40px);
+        .date {
+            width: 100px;
+            color: $color-text-muted;
+            text-align: end;
+        }
+        .options {
+            @include flex($g: 3px);
+        }
     }
 }

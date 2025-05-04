@@ -9,6 +9,7 @@
         @for (itemSave of data; track itemSave.timestamp; let i = $index) {
           <app-open-item
             [name]="itemSave.data.name"
+            [timestamp]="itemSave.timestamp"
             (open)="open(itemSave.data)"
             (delete)="deleteSave(itemSave)"
             (nameChange)="updateName(i, $event)" />
