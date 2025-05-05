@@ -68,7 +68,7 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
     }
     this.dialog.close().then(() => {
       if(this.forceRoot) {
-        this.router.navigate([{ outlets: { 'dialog': ['d', 'scale', 'name'] } }]);
+        this.router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }]);
       }
     });
   }
