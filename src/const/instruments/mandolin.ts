@@ -6,6 +6,3 @@ export const MANDOLIN: Instrument = {
     tunings: [GDAE_STANDARD],
     maxExtraStrings: 0
 };
-
-// lute
-// oud

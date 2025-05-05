@@ -1,29 +1,20 @@
 import { Tuning } from "../interfaces/tuning";
 import { Note } from "../models/note";
+import { generateTuning } from "../utils/tunings.utils";
 
 export const EADGBE_STANDARD: Tuning = {
-    name: 'standard',
-    intervals: [0, 5, 10, 15, 19, 24],
-    defaultRoot: new Note(7),
-    extraStrings: { interval: 5 }
+    ...generateTuning(['E', 'A', 'D', 'G', 'B', 'E'], 'standard'),
 };
 
 export const DADGBE_DROP: Tuning = {
-    name: 'drop',
-    intervals: [0, 7, 12, 17, 21, 26],
-    defaultRoot: new Note(5),
+    ...generateTuning(['D', 'A', 'D', 'G', 'B', 'E'], 'drop'),
     extraStrings: {
         interval: 5,
         previousStringCorrection: 2
     }
 }
 
-export const GDAE_STANDARD: Tuning = {
-    name: 'standard',
-    intervals: [0, 7, 14, 21],
-    defaultRoot: new Note(10),
-    extraStrings: { interval: 7 }
-};
+export const GDAE_STANDARD: Tuning = generateTuning(['G', 'D', 'A', 'E'], 'standard');
 
 export const CGDA_STANDARD: Tuning = {
     ...GDAE_STANDARD,

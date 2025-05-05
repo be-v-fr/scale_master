@@ -3,6 +3,7 @@ import { INSTRUMENTS } from "../const/instruments";
 import { Instrument } from "../interfaces/instrument";
 import { Tuning } from "../interfaces/tuning";
 import { isEqual } from "lodash";
+import { replaceSurplus0IntervalsW12s } from "../utils/tunings.utils";
 
 export class Fretboard {
     root: Note;
@@ -68,14 +69,6 @@ export class Fretboard {
     }
 
     replaceSurplus0IntervalsW12s() {
-        let zeroCount: number = 0;
-        for (let i = 0; i < this.tuning.intervals.length; i++) {
-          if (this.tuning.intervals[i] === 0) {
-            zeroCount++;
-            if (zeroCount > 1) {
-              this.tuning.intervals[i] = 12;
-            }
-          }
-        }
+        replaceSurplus0IntervalsW12s(this.tuning.intervals);
     }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { capitalizeFirstLetter } from '../../../utils/string.utils';
 
 @Component({
   selector: 'app-dialog-submenu',
@@ -22,7 +23,7 @@ export class DialogSubmenuComponent {
     if(dialogIndex >= 0) {
       const titleIndex: number = dialogIndex + 2;
       const title: string = urlSegments[titleIndex].split(')')[0].split('(')[0].split(';')[0]
-      return title[0].toUpperCase() + title.slice(1);
+      return capitalizeFirstLetter(title);
     }
     return '';
   }

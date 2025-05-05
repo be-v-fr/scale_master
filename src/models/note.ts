@@ -1,6 +1,7 @@
 import { NOTES } from "../const/notes";
 import { NoteName } from "../interfaces/note-name";
 import { getModTwelveIndex } from "../utils/mod.utils";
+import { capitalizeFirstLetter } from "../utils/string.utils";
 
 export class Note {
     index: number;
@@ -31,17 +32,13 @@ export class Note {
     }
 
     print(): string {
-        return this.capitalizeFirstLetter(this.name);
+        return capitalizeFirstLetter(this.name);
     }
 
     printNaturalWithFlatAlternative(): string {
         const index: number = getModTwelveIndex(this.index);
-        const name = this.capitalizeFirstLetter(NOTES[index]['natural']);
-        return (name.length === 1) ? name : name + '/' + this.capitalizeFirstLetter(NOTES[index]['flat']);
-    }
-
-    capitalizeFirstLetter(string: string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+        const name = capitalizeFirstLetter(NOTES[index]['natural']);
+        return (name.length === 1) ? name : name + '/' + capitalizeFirstLetter(NOTES[index]['flat']);
     }
 
     static textToNote(value: string): Note {
