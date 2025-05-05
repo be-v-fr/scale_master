@@ -1,9 +1,15 @@
 import { Instrument } from "../interfaces/instrument";
+import { BALALAIKA } from "./instruments/balalaika";
 import { BANJO } from "./instruments/banjo";
 import { BASS } from "./instruments/bass";
+import { BOUZOUKI_GREEK } from "./instruments/bouzouki-greek";
+import { BOUZOUKI_IRISH } from "./instruments/bouzouki-irish";
+import { DULCIMER } from "./instruments/dulcimer";
 import { GUITAR } from "./instruments/guitar";
+import { LUTE } from "./instruments/lute";
 import { MANDOLIN } from "./instruments/mandolin";
 import { CELLO, DOUBLE_BASS, VIOLA, VIOLIN } from "./instruments/orchestra";
+import { OUD } from "./instruments/oud";
 import { SITAR } from "./instruments/sitar";
 import { UKULELE } from "./instruments/ukulele";
 
@@ -11,16 +17,17 @@ export const INSTRUMENTS: Instrument[] = [
     GUITAR,
     BASS,
     UKULELE,
-    BANJO,
     VIOLIN,
     VIOLA,
     CELLO,
     DOUBLE_BASS,
-    // dulcimer
-    // lute
+    BANJO,
     MANDOLIN,
-    // balalaika,
-    // bouzouki
-    // oud: (f),c,g,d,a,g / https://www.ethnicmusical.com/oud/how-to-tune-the-oud/?srsltid=AfmBOop-5chILqg93wAS9yvLJc9LkzKhc2-4igNLL6pZzQtqsXSwl8IQ
+    BALALAIKA,
+    BOUZOUKI_GREEK,
+    BOUZOUKI_IRISH,
+    OUD,
     SITAR,
+    DULCIMER,
+    LUTE
 ];
