@@ -18,6 +18,7 @@ import { LegalPageWrapperComponent } from './legal-page-wrapper/legal-page-wrapp
 import { SettingsDisplayComponent } from './menu/settings-display/settings-display.component';
 import { ExportComponent } from './menu/export/export.component';
 import { DialogSubmenuComponent } from './dialogs/dialog-submenu/dialog-submenu.component';
+import { editRedirectGuard } from '../guards/edit-redirect.guard';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,7 @@ export const routes: Routes = [
             {
                 path: 'edit/:step',
                 component: MenuEditComponent,
+                canActivate: [editRedirectGuard],
                 children: [
                     {
                         path: 'scale',
