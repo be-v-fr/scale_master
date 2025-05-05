@@ -5,12 +5,14 @@ app-headline-back {
 }
 
 app-info-msg {
-    border: 1px solid $color-text-muted;
+    // border: 1px solid $color-text-muted;
+    border: 1px solid $color-info;
     border-radius: 5px;
     padding: 6px;
-    color: $color-text-secondary;
+    color: $color-info;
     background: white;
     margin-bottom: 16px;
+    box-shadow: 1px 3px 4px -1px #0002;
 }
 
 section p {

@@ -2,10 +2,11 @@
 
 :host {
     width: 100%;
-    @include flex($g: 20px);
+    @include flex($g: 16px);
 }
 
-i.materials-icons {
+i.material-icons {
+    margin-left: 12px;
     color: $color-info;
 }
 
