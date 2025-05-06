@@ -83,7 +83,7 @@ export class MenuEditComponent implements OnInit {
 
   async completeScale(): Promise<void> {
     if(this.currScale.scale.category.modes) {
-      this.currScale.scale.mode = this.currScale.scale.category.modes.find(m => m.interval === 0);
+      this.currScale.scale.resetMode();
     }
     await this.storage.saveScale(this.currScale.scale.category);
     this.currScale.isCustom = true;
