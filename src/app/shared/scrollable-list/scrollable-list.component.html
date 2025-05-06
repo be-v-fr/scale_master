@@ -17,7 +17,7 @@
 </div>
 <div class="submenu-wrapper" [class.searching]="searchFilter || searchFilter === ''">
     <app-scrollable-list-submenu [(searchFilter)]="searchFilter" (refocus)="refocusByIndex(defaultIndex)"
-        [title]="title" [allowSearch]="allowSearch && !disabled" [allowReset]="allowReset && !disabled"
+        [title]="title" [allowSearch]="allowSearch && !disabled && content.length > 1" [allowReset]="allowReset && !disabled && content.length > 1"
         (searchFilterChange)="onSearchChange()" (bgWidth)="initSubmenuBg($event)" />
     <div *ngIf="submenuBgWidth" class="submenu-bg" [style.width.px]="submenuBgWidth"></div>
 </div>

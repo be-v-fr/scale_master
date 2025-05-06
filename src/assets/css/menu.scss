@@ -1,6 +1,6 @@
 @import "../../styles.scss";
 
-$scrollable-list-narrow: 72px;
+$scrollable-list-width-narrower: 72px;
 
 :host {
     width: 100%;
@@ -73,7 +73,7 @@ section {
         @include flex($g: 10px);
     }
 
-    app-scrollable-list {
+    app-scrollable-list, .custom-content {
         width: 148px;
 
         &.narrow {
@@ -81,7 +81,7 @@ section {
         }
 
         &.narrower {
-            width: $scrollable-list-narrow;
+            width: $scrollable-list-width-narrower;
         }
 
         &.tiny {

@@ -5,6 +5,7 @@
   .item-wrapper {
     width: 100%;
     text-align: center;
+    @include flex();
     color: white;
     cursor: pointer;
     font-size: 20px;
@@ -27,5 +28,11 @@
 }
 
 span {
+  display: inline-block;
+  text-align: center;
   white-space: nowrap;
+  &.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

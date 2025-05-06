@@ -1,4 +1,9 @@
-
 <div class="item-wrapper" [class.menu-collapsed]="display.menuCollapsed">
-    <span #contentElement [class.default-item]="default === content">{{content}}</span>
+    <span #contentElement
+        [class.default-item]="default === content"
+        [style.transform]="'scale(' + (scaleDown ?? 1) + ')'"
+        [style.max-width]="'calc(' + 50 / scaleDownLimit + '%)'"
+        [class.ellipsis]="textEllipsis">
+        {{content}}
+    </span>
 </div>
