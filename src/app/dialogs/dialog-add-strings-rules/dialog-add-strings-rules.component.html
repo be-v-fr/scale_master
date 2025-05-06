@@ -1,4 +1,4 @@
-@if(currFretboard.fretboard.tuning.intervals.length < 8) {
+@if(currFretboard.fretboard.tuning.intervals.length < CONFIG.maxStrings) {
 <div class="slide-toggle-container">
     <app-slide-toggle [(toggleOn)]="custom.allowAddingStrings" />
     <p>Allow adding extra strings.</p>

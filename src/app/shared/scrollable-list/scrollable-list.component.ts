@@ -111,7 +111,7 @@ export class ScrollableListComponent implements OnInit {
     if (currentIndex >= 0) {
       this.focus = currentIndex;
     } else {
-      throw (`Currently selected value "${this.current}" does not exist in list content.`);
+      console.error(`Currently selected value "${this.current}" does not exist in list "${this.title}":`, this.content);
     }
   }
 

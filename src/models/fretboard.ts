@@ -4,6 +4,7 @@ import { Instrument } from "../interfaces/instrument";
 import { Tuning } from "../interfaces/tuning";
 import { isEqual } from "lodash";
 import { replaceSurplus0IntervalsW12s } from "../utils/tunings.utils";
+import { CONFIG } from "../const/config";
 
 export class Fretboard {
     root: Note;
@@ -70,5 +71,9 @@ export class Fretboard {
 
     replaceSurplus0IntervalsW12s() {
         replaceSurplus0IntervalsW12s(this.tuning.intervals);
+    }
+
+    allowAnyExtraStrings(): void {
+        this.instrument.maxExtraStrings = CONFIG.maxStrings - this.tuning.intervals.length;
     }
 }

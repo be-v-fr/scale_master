@@ -6,6 +6,7 @@ import { Fretboard } from '../models/fretboard';
 import { Note } from '../models/note';
 import { CurrentScaleService } from './current-scale.service';
 import { getModTwelveIndex } from '../utils/mod.utils';
+import { CONFIG } from '../const/config';
 
 /**
  * Service for handling the current fretboard.
@@ -100,7 +101,7 @@ export class CurrentFretboardService {
     if (this.fretboard.instrument.maxExtraStrings > 0) {
       for (let i = 0; i <= this.fretboard.instrument.maxExtraStrings; i++) {
         const numberOfStrings: number = this.fretboard.defaultNumberOfStrings + i;
-        if(numberOfStrings > 8) break;
+        if(numberOfStrings > CONFIG.maxStrings) break;
         numbersOfStrings.push(numberOfStrings);
       }
     }

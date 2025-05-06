@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { parseNumberParamIfExists } from '../../../utils/router.utils';
@@ -48,7 +48,7 @@ export class MenuEditFretboardComponent {
 
   initFretboard(): void {
     (typeof this.instrIndex === 'number') ? this.initExistingFretboard() : this.initNewFretboard();
-    this.currFretboard.fretboard.instrument.maxExtraStrings = 8 - this.currFretboard.fretboard.tuning.intervals.length;
+    this.currFretboard.fretboard.allowAnyExtraStrings();
   }
 
 
@@ -78,6 +78,7 @@ export class MenuEditFretboardComponent {
         this.initComplete = true;
       }
       switch (this.currentStep) {
+        case 0: this.currFretboard.fretboard.allowAnyExtraStrings(); break;
         case 1: this.currFretboard.fretboard.tuning.intervals = this.currFretboard.fretboard.intervals.reverse(); break;
         case 4: this.router.navigate([{ outlets: { 'dialog': ['d', 'name'] } }]);
       }

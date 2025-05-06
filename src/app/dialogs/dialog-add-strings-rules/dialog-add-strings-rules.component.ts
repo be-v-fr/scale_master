@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { CurrentFretboardService } from '../../../services/current-fretboard.service';
@@ -7,6 +7,7 @@ import { ScrollableListComponent } from '../../shared/scrollable-list/scrollable
 import { CustomizeService } from '../../../services/customize.service';
 import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
 import { RouterLink } from '@angular/router';
+import { CONFIG } from '../../../const/config';
 
 @Component({
   selector: 'app-dialog-add-strings-rules',
@@ -17,11 +18,13 @@ import { RouterLink } from '@angular/router';
 })
 export class DialogAddStringsRulesComponent implements OnInit {
   getIncrArray: (length: number) => number[] = getIncrementalArray;
+  CONFIG = CONFIG;
 
 
   constructor(
     public currFretboard: CurrentFretboardService,
-    public custom: CustomizeService
+    public custom: CustomizeService,
+    private cdr: ChangeDetectorRef
   ) { }
 
 
@@ -31,7 +34,7 @@ export class DialogAddStringsRulesComponent implements OnInit {
 
 
   get maxNumberOfExtraStringsLimit(): number {
-    return 8 - this.currFretboard.fretboard.tuning.intervals.length;
+    return CONFIG.maxStrings - this.currFretboard.fretboard.tuning.intervals.length;
   }
 
 
@@ -43,5 +46,6 @@ export class DialogAddStringsRulesComponent implements OnInit {
   updateStrings(maxExtraStrings: number) {
     this.currFretboard.fretboard.instrument.maxExtraStrings = maxExtraStrings;
     this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.tuning.intervals.length + maxExtraStrings;
+    this.cdr.detectChanges();
   }
 }
