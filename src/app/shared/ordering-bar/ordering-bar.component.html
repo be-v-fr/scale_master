@@ -1,6 +1,6 @@
 <section>
     <button class="ordering-btn" (click)="onOrderingBtnClick('name')" [class.active]="ordering.orderingBy === 'name'">
-        <i class="material-icons" [class.arrow-up]="ordering.orderingBy === 'name' && ordering.order === 'asc'">
+        <i class="material-icons-outlined" [class.arrow-up]="ordering.orderingBy === 'name' && ordering.order === 'asc'">
             arrow_drop_down
         </i>
         <span data-text="Name">Name</span>
@@ -9,7 +9,7 @@
 <section>
     <button class="ordering-btn" (click)="onOrderingBtnClick('createdAt')"
         [class.active]="ordering.orderingBy === 'createdAt'">
-        <i class="material-icons" [class.arrow-up]="ordering.orderingBy === 'createdAt' && ordering.order === 'asc'">
+        <i class="material-icons-outlined" [class.arrow-up]="ordering.orderingBy === 'createdAt' && ordering.order === 'asc'">
             arrow_drop_down
         </i>
         <span data-text="Created at">Created at</span>

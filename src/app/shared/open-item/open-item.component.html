@@ -9,12 +9,12 @@
         <span class="date">{{date}}</span>
         <div class="options">
             @if(editing) {
-            <button class="material-icons icon-btn">check</button>
+            <button class="material-icons-outlined icon-btn">check</button>
             } @else {
-            <button class="material-icons icon-btn" (mousedown)="$event.stopPropagation()"
+            <button class="material-icons-outlined icon-btn" (mousedown)="$event.stopPropagation()"
                 (click)="edit()">edit</button>
             }
-            <button class="material-icons icon-btn" (mousedown)="$event.stopPropagation()"
+            <button class="material-icons-outlined icon-btn" (mousedown)="$event.stopPropagation()"
                 (click)="delete.emit()">delete</button>
         </div>
     </div>

@@ -142,7 +142,7 @@ button.reset-btn {
         transition: 75ms ease;
         box-shadow: 1px 2px 2px 1px #0003;
 
-        .material-icons {
+        .material-icons-outlined {
             transition: 100ms ease;
             transform: scale(0.9);
         }
@@ -155,7 +155,7 @@ button.reset-btn {
         pointer-events: none;
         cursor: not-allowed;
 
-        .material-icons {
+        .material-icons-outlined {
             transform: none;
         }
     }

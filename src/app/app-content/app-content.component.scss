@@ -106,7 +106,7 @@ app-logo {
     background: white;
     @include flex($dir: column, $g: 24px);
 
-    .material-icons {
+    .material-icons-outlined {
         font-size: 96px;
     }
 

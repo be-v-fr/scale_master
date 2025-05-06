@@ -9,7 +9,7 @@
         padding: 6px;
         @include flex($jc: flex-start, $g: 6px);
 
-        i.material-icons {
+        i.material-icons-outlined {
             width: 24px;
             height: 24px;
         }

@@ -2,14 +2,14 @@
     <div #innerWrapper class="submenu-inner-wrapper">
         <div class="submenu-container">
             @if(allowSearch) {
-            <button class="material-icons icon-btn" (click)="initSearch()">search</button>
+            <button class="material-icons-outlined icon-btn" (click)="initSearch()">search</button>
             }
             <span class="title" *ngIf="title">{{title}}</span>
             @if(allowReset) {
-            <button class="material-icons reset-btn" (click)="refocus.emit()">autorenew</button>
+            <button class="material-icons-outlined reset-btn" (click)="refocus.emit()">autorenew</button>
             }
             <div class="searchbar">
-                <button class="material-icons icon-btn search-off-btn"
+                <button class="material-icons-outlined icon-btn search-off-btn"
                     (click)="$event.stopPropagation(); clearSearch()">
                     search_off
                 </button>

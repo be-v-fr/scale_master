@@ -2,11 +2,11 @@
 <div *ngIf="isOpen" class="overlay" (mousedown)="isOpen = false">
     <div class="menu" (mousedown)="$event.stopPropagation()">
         <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]" (click)="isOpen = false">
-            <i class="material-icons">palette</i>
+            <i class="material-icons-outlined">palette</i>
             Display
         </h4>
         <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]" (click)="isOpen = false">
-            <i class="material-icons">output</i>
+            <i class="material-icons-outlined">output</i>
             Export
         </h4>
     </div>
