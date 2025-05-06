@@ -157,12 +157,12 @@ export class Scale {
         return this.category.modes?.find(m => m.interval === interval);
     }
 
-    resetMode() {
-        this.mode = this.getMode(0);
-    }
-
     get primeMode(): ScaleMode | undefined {
         return this.getMode(0);
+    }
+
+    resetMode() {
+        this.mode = this.primeMode;
     }
 
     modeExists(interval: number): boolean {
