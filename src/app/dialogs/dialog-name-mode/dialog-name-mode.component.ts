@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { parseNumberParamIfExists } from '../../../utils/router.utils';
 import { DialogService } from '../../../services/dialog.service';
 import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
+import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
 @Component({
   selector: 'app-dialog-name-mode',
   standalone: true,
-  imports: [CommonModule, FormsModule, InfoMsgComponent],
+  imports: [CommonModule, FormsModule, InfoMsgComponent, AutofocusDirective],
   templateUrl: './dialog-name-mode.component.html',
   styleUrl: './dialog-name-mode.component.scss'
 })

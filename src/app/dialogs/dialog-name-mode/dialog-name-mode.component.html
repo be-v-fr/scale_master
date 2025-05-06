@@ -1,7 +1,7 @@
 <section>
     <app-info-msg *ngIf="forceRoot" [mode]="'warning'" [msg]="'You have defined modes, but left out the primary mode.'" />
     <p>Please name this mode:</p>
-    <input class="input-name" type="text" [(ngModel)]="modeName" autofocus />
+    <input class="input-name" type="text" [(ngModel)]="modeName" appAutofocus />
 </section>
 <div class="btns-container">
     <button class="border-btn" (click)="dialog.close()">Cancel</button>

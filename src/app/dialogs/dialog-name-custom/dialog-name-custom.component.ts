@@ -5,11 +5,12 @@ import { DialogService } from '../../../services/dialog.service';
 import { FormsModule } from '@angular/forms';
 import { CurrentFretboardService } from '../../../services/current-fretboard.service';
 import { CustomizeService } from '../../../services/customize.service';
+import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
 @Component({
   selector: 'app-dialog-name-custom',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AutofocusDirective],
   templateUrl: './dialog-name-custom.component.html',
   styleUrl: './dialog-name-custom.component.scss'
 })
