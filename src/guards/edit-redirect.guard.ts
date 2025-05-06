@@ -25,7 +25,6 @@ export const editRedirectGuard: CanActivateChildFn = (route, state) => {
 
   const step = findStepParam(state.root);
   if (step !== 0) {
-    console.log(route);
     const childPath = route.children[0].routeConfig?.path ?? '';
     router.navigate(['/edit', 0, childPath]);
     return false;
