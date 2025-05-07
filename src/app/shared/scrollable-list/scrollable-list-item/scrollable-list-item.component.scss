@@ -2,6 +2,7 @@
 
 :host {
   width: 200%;
+  position: relative;
   .item-wrapper {
     width: 100%;
     text-align: center;
@@ -9,6 +10,10 @@
     color: white;
     cursor: pointer;
     font-size: 20px;
+    .item-container {
+      height: 24px;
+      @include flex();
+    }
     .default-item {
       color: $color-info;
     }
@@ -28,6 +33,7 @@
 }
 
 span {
+  max-width: 100%;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
