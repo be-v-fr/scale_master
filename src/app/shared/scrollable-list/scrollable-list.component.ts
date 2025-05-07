@@ -21,9 +21,6 @@ import { DisplayService } from '../../../services/display.service';
 })
 export class ScrollableListComponent implements OnInit {
   private _content: (string | number)[] = [];
-  // get content(): (string | number)[] {
-  //   return this._content;
-  // }
   @Input({ required: true }) set content(value: (string | number)[]) {
     if (!isEqual(this._content, value)) {
       this._content = value;
