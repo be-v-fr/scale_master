@@ -1,4 +1,4 @@
-<div class="item-wrapper" [class.menu-collapsed]="display.menuCollapsed">
+<div *ngIf="content.toString().length > 0" class="item-wrapper" [class.menu-collapsed]="display.menuCollapsed">
     <div class="item-container"
     [style.max-width]="textEllipsis ? 'calc(' + 50 / scaleDownLimit + '%)' : 'auto'"
     [matTooltip]="tooltipContent" [matTooltipShowDelay]="200" [matTooltipPosition]="'right'">

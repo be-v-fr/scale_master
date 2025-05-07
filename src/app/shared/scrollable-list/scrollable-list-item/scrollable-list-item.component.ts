@@ -25,7 +25,7 @@ export class ScrollableListItemComponent implements AfterViewInit {
   };
 
   @Input() default?: string | number;
-  @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>
+  @ViewChild('contentElement') contentRef!: ElementRef<HTMLSpanElement>;
   scaleDown?: number;
   get scaleDownLimit(): number {
     return 0.75;
@@ -51,11 +51,13 @@ export class ScrollableListItemComponent implements AfterViewInit {
 
 
   updateSize(): void {
-    const visibleWidth: number = this.el.nativeElement.offsetWidth / 2;
-    const contentWidth: number = this.contentRef.nativeElement.offsetWidth;
-    const widthRatio: number = contentWidth / visibleWidth;
-    widthRatio > 1 ? this.setScaleDown(widthRatio) : this.resetScaleDown();
-    this.cdr.detectChanges();
+    if (this.contentRef && this.contentRef.nativeElement) {
+      const visibleWidth: number = this.el.nativeElement.offsetWidth / 2;
+      const contentWidth: number = this.contentRef.nativeElement.offsetWidth;
+      const widthRatio: number = contentWidth / visibleWidth;
+      widthRatio > 1 ? this.setScaleDown(widthRatio) : this.resetScaleDown();
+      this.cdr.detectChanges();
+    }
   }
 
 
@@ -70,7 +72,7 @@ export class ScrollableListItemComponent implements AfterViewInit {
 
 
   resetScaleDown(): void {
-    if(this.scaleDown) {
+    if (this.scaleDown) {
       this.scaleDown = undefined;
       this.textEllipsis = false;
       this.cdr.detectChanges();

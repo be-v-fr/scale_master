@@ -85,6 +85,9 @@ $opac-outside: 0.3;
     opacity: 0;
     transition: 200ms ease-in;
     transition-delay: 100ms;
+    &.hidden {
+      visibility: hidden;
+    }
   }
 
   &:hover:not(.list-disabled) app-scrollable-list-arrow {

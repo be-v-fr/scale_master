@@ -21,23 +21,27 @@ import { DisplayService } from '../../../services/display.service';
 })
 export class ScrollableListComponent implements OnInit {
   private _content: (string | number)[] = [];
-  get content(): (string | number)[] {
-    return this._content;
-  }
+  // get content(): (string | number)[] {
+  //   return this._content;
+  // }
   @Input({ required: true }) set content(value: (string | number)[]) {
     if (!isEqual(this._content, value)) {
       this._content = value;
       this.focus = this.defaultIndex;
+      this.applySearchFilter();
     }
   };
+  filteredContent: (string | number)[] = [];
 
   @Input() title?: string;
 
-  private _positions: ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] = [
-    'over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'
-  ];
-  get positions() {
-    return this._positions;
+  get positions(): ('over' | 'top' | 'up' | 'center' | 'down' | 'bottom' | 'under')[] {
+    switch (this.filteredContent.length) {
+      case 1: return ['center'];
+      case 2: return ['up', 'center', 'down'];
+      case 3: return ['top', 'up', 'center', 'down', 'bottom'];
+      default: return ['over', 'over', 'over', 'top', 'up', 'center', 'down', 'bottom', 'under', 'under', 'under'];
+    }
   }
 
   scrollSteps: number = 0;
@@ -66,7 +70,7 @@ export class ScrollableListComponent implements OnInit {
   @Input() allowSearch: boolean = true;
   @Input() allowReset: boolean = true;
   submenuBgWidth?: number;
-  
+
   private _disabled: boolean = false;
   get disabled(): boolean {
     return this._disabled;
@@ -82,21 +86,29 @@ export class ScrollableListComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
-    public display: DisplayService
+    public display: DisplayService,
   ) { }
 
 
   /**
-   * Returns the content filtered by the search filter.
+   * Sets filtered content according to current search filter.
    * If no filter is active, returns the complete content.
    */
-  get filteredContent(): (string | number)[] {
-    return this._content.filter(item => {
+  applySearchFilter(): (void) {
+    this.filteredContent = this._content.filter(item => {
       if (this.searchFilter) {
         return item.toString().toLowerCase().includes(this.searchFilter.toLowerCase());
       }
       return true;
     });
+    if (this.searchFilter) {
+      this.filteredContent.sort((a, b) => {
+        const strA = String(a);
+        const strB = String(b);
+        return strA.localeCompare(strB);
+      });
+    }
+    this.cdr.detectChanges();
   }
 
 
@@ -132,8 +144,13 @@ export class ScrollableListComponent implements OnInit {
    */
   getContentIndexFromPositionIndex(positionIndex: number): number {
     const length = this.filteredContent.length;
-    const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
-    return modWithSubZero(contentIndex, length);
+    if (length > 3) {
+      const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
+      return modWithSubZero(contentIndex, length);
+    } else {
+      const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
+      return contentIndex >= 0 && contentIndex < length ? contentIndex : -1;
+    }
   }
 
 
@@ -141,9 +158,9 @@ export class ScrollableListComponent implements OnInit {
    * Retrieves a content item using a position index.
    * @param positionIndex - Item index in the list positions array.
    */
-  getContentItem(positionIndex: number): any {
-    const contentIndex = this.getContentIndexFromPositionIndex(positionIndex);
-    return this.filteredContent[contentIndex];
+  getContentItem(positionIndex: number): string | number {
+    const contentIndex: number | null = this.getContentIndexFromPositionIndex(positionIndex);
+    return contentIndex >= 0 ? this.filteredContent[contentIndex] : '';
   }
 
 
@@ -217,14 +234,29 @@ export class ScrollableListComponent implements OnInit {
    */
   @HostListener('wheel', ['$event'])
   onMouseWheel(event: WheelEvent) {
-    if (this.elementRef.nativeElement.contains(event.target)) {
+    if (this.elementRef.nativeElement.contains(event.target)) { // bed. zum stoppen
       const now = Date.now();
-      if (now >= this.lastWheelEventTime + this.throttleTime) {
+      if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(event)) {
         const steps = event.deltaY > 0 ? 1 : -1;
         this.scrollBySteps(steps, this.throttleTime / 4);
         this.lastWheelEventTime = now;
       }
     }
+  }
+
+
+  isAboutToCrossContentEnd(event: WheelEvent): boolean {
+    return (event.deltaY < 0 && this.focusIsStart) || (event.deltaY > 0 && this.focusIsEnd);
+  }
+
+
+  get focusIsStart(): boolean {
+    return this.focus === 0 && this.filteredContent.length <= 3;
+  }
+
+
+  get focusIsEnd(): boolean {
+    return this.focus === this.filteredContent.length - 1 && this.filteredContent.length <= 3;
   }
 
 
@@ -234,7 +266,7 @@ export class ScrollableListComponent implements OnInit {
    * @param focusTimeoutLength - Length of refocus timeout. 
    */
   onListArrowClick(steps: number, timeoutLength: number): void {
-    if (!this.disabled && this.content.length > 0) {
+    if (!this.disabled && this.filteredContent.length > 0) {
       this.scrollBySteps(steps, timeoutLength);
     }
   }
@@ -256,7 +288,8 @@ export class ScrollableListComponent implements OnInit {
    * Handles search filter changes. Either refocuses the list or does nothing.
    */
   onSearchChange(): void {
-    const index = this.searchFilter ? 0 : this._content.indexOf(this.focus);
+    const index = this.searchFilter ? 0 : this.focus;
+    this.applySearchFilter();
     this.refocusByIndex(index);
   }
 }

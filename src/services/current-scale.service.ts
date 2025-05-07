@@ -54,7 +54,7 @@ export class CurrentScaleService {
     if (category) {
       this.scale.category = category;
     } else {
-      throw (`Scale category with name ${value} not found.`);
+      console.error(`Scale category with name ${value} not found.`);
     }
   }
 
