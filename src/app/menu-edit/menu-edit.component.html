@@ -35,6 +35,6 @@
             </div>
         </div>
     </div>
-    <app-pagination-dots [total]="custom.totalSteps" [activeIndex]="currentStep"
+    <app-pagination-dots [total]="custom.totalSteps" [activeIndex]="currentStep" [class.hide-collapsed]="display.menuCollapsed"
         (dotClick)="navigateStepByRouter($event)" />
 </section>

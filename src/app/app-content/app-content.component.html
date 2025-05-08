@@ -1,9 +1,22 @@
 <div class="app-bg"></div>
 <div class="menu-wrapper">
     <div class="menu-container" [class.collapsed]="display.menuCollapsed">
-        <router-outlet />
+        <div class="menu-content">
+            <div class="expand-btn-wrapper">
+                <div class="expand-btn-container">
+                    <button (click)="display.menuCollapsed = !display.menuCollapsed">
+                        @if(display.menuCollapsed) {
+                        <i class="material-icons-outlined">keyboard_double_arrow_down</i>
+                        } @else {
+                        <i class="material-icons-outlined">keyboard_double_arrow_up</i>
+                        }
+                    </button>
+                </div>
+            </div>
+            <router-outlet />
+        </div>
         <app-logo [short]="true" />
-        <app-footer />
+        <app-footer [class.top-right]="router.url.includes('edit')" />
     </div>
 </div>
 <div class="fretboard-container">

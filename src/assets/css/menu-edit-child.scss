@@ -4,3 +4,8 @@
     text-align: center;
 }
 
+@media screen and (max-width: $vw-breakpoint-3) {
+    p {
+        font-size: 13px;
+    }
+}

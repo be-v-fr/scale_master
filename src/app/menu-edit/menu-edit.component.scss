@@ -2,7 +2,7 @@
 @import "../../assets/css/menu.scss";
 
 section {
-    width: 50vw;
+    width: 70vw;
     max-width: 640px;
 }
 
@@ -42,4 +42,16 @@ section {
             }
         }
     }
+}
+
+@media screen and (max-height: $vh-breakpoint-2) {
+    :host {
+        padding: 11px 6px;
+    }
+
+    .edit-menu-container .menu-content-wrapper .menu-content {
+        padding: 6px 0;
+        max-height: 50px;
+        overflow-y: auto;
+    }                
 }

@@ -1,8 +1,16 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
+
+$gap: 10px;
 
 :host {
-    @include flex($g: 10px);
+    @include flex($g: $gap);
     @media screen and (max-width: $vw-breakpoint-1) {
         @include flex($dir: column, $ai: flex-end);
+        @media screen and (max-height: $vh-breakpoint-2) {
+            &.top-right {
+                flex-direction: row;
+                gap: $gap;
+            }
+        }
     }
 }

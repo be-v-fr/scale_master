@@ -17,7 +17,8 @@
     position: relative;
     app-more-menu {
         display: none;
-        position: absolute;
+        position: fixed;
+        z-index: 1;
         top: $menu-y-padding;
         right: $menu-x-padding;
         @media screen and (max-width: $vw-breakpoint-1) {
