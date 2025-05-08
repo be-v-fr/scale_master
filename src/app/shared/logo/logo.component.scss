@@ -4,19 +4,21 @@
     position: relative;
     top: 22px;
     color: $color-text-primary;
-    @include flex($ai: flex-start);
+    @include flex($ai: flex-start, $g: 8px);
     @extend .prevent-select;
+
+    .s-letter {
+        animation: fade-in 500ms ease-in-out;
+        position: relative;
+        top: 18px;
+        left: 13px;
+        width: 56px;
+    }
 
     span {
         font-family: "Nova Script";
         font-size: 80px;
         animation: fade-in 500ms ease-in-out;
-
-        &.s-letter {
-            position: relative;
-            top: -4px;
-            font-size: 104px;
-        }
     }
 
     .circle-mask-container {
