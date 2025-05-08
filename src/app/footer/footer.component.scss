@@ -4,7 +4,7 @@ $gap: 10px;
 
 :host {
     @include flex($g: $gap);
-    @media screen and (max-width: $vw-breakpoint-1) {
+    @media screen and (max-height: $vh-breakpoint-1) and (max-width: $vw-breakpoint-1) {
         @include flex($dir: column, $ai: flex-end);
         @media screen and (max-height: $vh-breakpoint-2) {
             &.top-right {
