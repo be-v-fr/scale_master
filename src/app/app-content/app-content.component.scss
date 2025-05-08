@@ -130,41 +130,12 @@ app-logo {
     width: 64px;
     height: 100%;
 
-    .expand-btn-container {
-        width: 44px;
-        height: 44px;
-
-        button {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: white;
-            @include flex();
-            margin: 0;
-            position: relative;
-            bottom: -50%;
-            transition: 50ms;
-            &:hover {
-                transition: 50ms;
-                box-shadow: 1px 2px 2px 4px #0002;
-            }
-            &:active {
-                transition: 50ms;
-                box-shadow: 1px 2px 2px 4px #0003;
-            }
-        }
-    }
-
     @media screen and (max-height: $vh-breakpoint-2) {
         @include flex($ai: flex-end);
     }
 
     @media screen and (max-width: $vw-breakpoint-3) {
         width: 40px;
-        .expand-btn-container {
-            width: 40px;
-            height: 40px;
-        }
     }
 }
 

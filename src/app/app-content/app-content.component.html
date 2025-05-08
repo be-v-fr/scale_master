@@ -3,15 +3,7 @@
     <div class="menu-container" [class.collapsed]="display.menuCollapsed">
         <div class="menu-content">
             <div class="expand-btn-wrapper">
-                <div class="expand-btn-container">
-                    <button (click)="display.menuCollapsed = !display.menuCollapsed">
-                        @if(display.menuCollapsed) {
-                        <i class="material-icons-outlined">keyboard_double_arrow_down</i>
-                        } @else {
-                        <i class="material-icons-outlined">keyboard_double_arrow_up</i>
-                        }
-                    </button>
-                </div>
+                <app-expand-btn />
             </div>
             <router-outlet />
         </div>

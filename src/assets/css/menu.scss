@@ -9,28 +9,28 @@ $scrollable-list-width-narrower: 72px;
     @include flex($g: 24px);
 }
 
+h4 {
+    width: 100%;
+    height: calc($circular-btn-size + 6px);
+    margin: 0;
+    padding-bottom: 6px;
+    @include flex($g: 6px);
+    color: $color-text-primary;
+    border-bottom: 1px solid $color-text-primary;
+    transition: $transition-menu-collapse;
+
+    &.collapsed {
+        @media screen and (max-height: $vh-breakpoint-2) {
+            height: $circular-btn-size;
+            padding-bottom: 0;
+            border-bottom: none;   
+        }
+    }
+}
+
 section {
     height: 100%;
     @include flex($dir: column, $jc: flex-start, $g: 6px);
-
-    h4 {
-        width: 100%;
-        height: calc($circular-btn-size + 6px);
-        margin: 0;
-        padding-bottom: 6px;
-        @include flex($g: 6px);
-        color: $color-text-primary;
-        border-bottom: 1px solid $color-text-primary;
-        transition: $transition-menu-collapse;
-
-        &.collapsed {
-            @media screen and (max-height: $vh-breakpoint-2) {
-                height: $circular-btn-size;
-                padding-bottom: 0;
-                border-bottom: none;   
-            }
-        }
-    }
 
     .scrollable-lists-container {
         @include flex($g: 10px);

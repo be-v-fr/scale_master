@@ -7,6 +7,7 @@ import { ToastMessageComponent } from '../shared/toast-message/toast-message.com
 import { ToastMessageService } from '../../services/toast-message.service';
 import { LogoComponent } from '../shared/logo/logo.component';
 import { FooterComponent } from '../footer/footer.component';
+import { ExpandBtnComponent } from '../shared/expand-btn/expand-btn.component';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -14,7 +15,7 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet, LogoComponent, FooterComponent],
+  imports: [CommonModule, FretboardComponent, ToastMessageComponent, RouterOutlet, LogoComponent, FooterComponent, ExpandBtnComponent],
   templateUrl: './app-content.component.html',
   styleUrl: './app-content.component.scss'
 })

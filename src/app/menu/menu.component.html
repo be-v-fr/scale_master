@@ -1,12 +1,5 @@
 <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'scale'">
-    <h4 [class.collapsed]="display.menuCollapsed">
-        <app-circular-button *ngIf="currScale.isCustom" [icon]="'arrow_left'" (click)="currScale.closeCustom()" />
-        Scale
-        <app-circular-button [icon]="'edit'" [routerLink]="custom.getEditRouteWParams('scale', true)" />
-        <app-circular-button [icon]="'add'" [routerLink]="custom.getEditRouteWParams('scale', false)" />
-        <app-circular-button [icon]="'folder_open'"
-            [routerLink]="[{ outlets: { 'dialog': ['d', 'open', 'scale'] } }]" />
-    </h4>
+    <app-main-headline-bar [mode]="'scale'" />
     <div class="scrollable-lists-container">
         <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames"
             [content]="scalesData.extendedNaturalNoteNames" [title]="'Root'"
@@ -23,20 +16,12 @@
 </section>
 <section *ngIf="activePrimarySubmenu !== 'scale'" class="show-vw-breakpoint-2 activate-submenu">
     <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
-        <app-circular-button [icon]="'code'" />
+        <app-circular-button [icon]="'code'" [info]="'Expand'" />
         Scale
     </h4>
 </section>
 <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
-    <h4 [class.collapsed]="display.menuCollapsed">
-        <app-circular-button *ngIf="currFretboard.isCustom" [icon]="'arrow_left'"
-            (click)="currFretboard.closeCustom()" />
-        Fretboard
-        <app-circular-button [icon]="'edit'" [routerLink]="custom.getEditRouteWParams('fretboard', true)" />
-        <app-circular-button [icon]="'add'" [routerLink]="custom.getEditRouteWParams('fretboard', false)" />
-        <app-circular-button [icon]="'folder_open'"
-            [routerLink]="[{ outlets: { 'dialog': ['d', 'open', 'tuning'] } }]" />
-    </h4>
+    <app-main-headline-bar [mode]="'fretboard'" />
     <div class="scrollable-lists-container">
         <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames"
             [content]="currFretboard.isCustom ? [] : tuningsData.instrumentNames" [title]="'Instrument'"
@@ -55,7 +40,7 @@
 </section>
 <section *ngIf="activePrimarySubmenu !== 'fretboard'" class="show-vw-breakpoint-2 activate-submenu">
     <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
-        <app-circular-button [icon]="'code'" />
+        <app-circular-button [icon]="'code'" [info]="'Expand'" />
         Fretboard
     </h4>
 </section>

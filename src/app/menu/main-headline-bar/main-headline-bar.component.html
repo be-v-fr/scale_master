@@ -1,0 +1,8 @@
+<h4 [class.collapsed]="display.menuCollapsed">
+    <app-circular-button *ngIf="currScale.isCustom" [icon]="'arrow_left'" (click)="currScale.closeCustom()" />
+    {{capitalize(mode)}}
+    <app-circular-button [icon]="'edit'" [info]="'Edit'" [routerLink]="custom.getEditRouteWParams(mode, true)" />
+    <app-circular-button [icon]="'add'" [info]="'Add'" [routerLink]="custom.getEditRouteWParams(mode, false)" />
+    <app-circular-button [icon]="'folder_open'" [info]="'Open'" 
+        [routerLink]="[{ outlets: { 'dialog': ['d', 'open', mode === 'scale' ? 'scale' : 'tuning'] } }]" />
+</h4>

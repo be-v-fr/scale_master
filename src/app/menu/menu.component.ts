@@ -12,6 +12,7 @@ import { ExportComponent } from './export/export.component';
 import { RouterLink } from '@angular/router';
 import { CustomizeService } from '../../services/customize.service';
 import { MoreMenuComponent } from './more-menu/more-menu.component';
+import { MainHeadlineBarComponent } from './main-headline-bar/main-headline-bar.component';
 
 /**
  * Displays the menu offering any app controls.
@@ -19,7 +20,7 @@ import { MoreMenuComponent } from './more-menu/more-menu.component';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink, MoreMenuComponent],
+  imports: [CommonModule, MainHeadlineBarComponent, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink, MoreMenuComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

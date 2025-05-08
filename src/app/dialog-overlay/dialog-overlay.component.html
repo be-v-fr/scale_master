@@ -1,6 +1,6 @@
 <div class="dialog-overlay" (mousedown)="onOverlayMouseDown($event)">
     <div class="dialog-wrapper">
-        <app-circular-button [icon]="'close'" (click)="dialog.close()" />
+        <app-circular-button [icon]="'close'" [info]="'Close'" (click)="dialog.close()" />
         <div class="dialog-container">
             <router-outlet />
         </div>

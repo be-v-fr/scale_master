@@ -1,4 +1,4 @@
-<app-circular-button [icon]="'more_vert'" (mousedown)="open()" />
+<app-circular-button [icon]="'more_vert'" [info]="'More'" (mousedown)="open()" />
 <div *ngIf="isOpen" class="overlay" (mousedown)="isOpen = false">
     <div class="menu" (mousedown)="$event.stopPropagation()">
         <h4 [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]" (click)="isOpen = false">
