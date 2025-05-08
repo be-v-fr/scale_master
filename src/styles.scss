@@ -132,6 +132,11 @@ button.reset-btn {
     padding: 10px;
     background: #fdfbf8;
 
+    .material-icons-outlined {
+        font-size: 17px;
+        @include flex();
+    }
+
     &:hover {
         background: white;
         transition: 75ms ease;
@@ -194,12 +199,18 @@ button.reset-btn {
     display: none;
 }
 
-.show-vw-breakpoint-2, :host section.show-vw-breakpoint-2 {
+.show-vw-breakpoint-2,
+:host section.show-vw-breakpoint-2 {
     display: none;
 }
 
+h4 i.material-icons-outlined {
+    font-size: 19px;
+}
+
 @media screen and (max-width: $vw-breakpoint-2) {
-    .show-vw-breakpoint-2, :host section.show-vw-breakpoint-2 {
+    .show-vw-breakpoint-2,
+    :host section.show-vw-breakpoint-2 {
         display: flex;
     }
     .hide-vw-breakpoint-2 {
