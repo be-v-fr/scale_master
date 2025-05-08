@@ -1,5 +1,5 @@
 <div class="list-wrapper" [class.list-disabled]="disabled || filteredContent.length === 0" appHover
-    (hoverKeyDown)="onHoverKeyDown($event)" [class.collapsed]="display.menuCollapsed">
+    (hoverKeyDown)="onHoverKeyDown($event)" [class.collapsed]="!preventCollapse && display.menuCollapsed">
     <app-scrollable-list-arrow [orientation]="'up'" (click)="onListArrowClick(-1, 200)" [class.hidden]="focusIsStart" />
     <div class="list-container">
         @if(filteredContent.length > 0) {

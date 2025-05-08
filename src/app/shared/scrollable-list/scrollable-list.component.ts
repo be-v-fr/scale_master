@@ -66,6 +66,7 @@ export class ScrollableListComponent implements OnInit {
   searchFilter?: string;
   @Input() allowSearch: boolean = true;
   @Input() allowReset: boolean = true;
+  @Input() preventCollapse: boolean = false;
   submenuBgWidth?: number;
 
   private _disabled: boolean = false;

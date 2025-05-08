@@ -6,7 +6,7 @@
 <div class="scrollable-lists-container">
     <div class="scrollable-list-container">
         <p>Maximum number<br>of extra strings</p>
-        <app-scrollable-list *ngIf="maxNumberOfExtraStringsLimit > 0"
+        <app-scrollable-list *ngIf="maxNumberOfExtraStringsLimit > 0" [preventCollapse]="true"
             [content]="[0].concat(getIncrArray(maxNumberOfExtraStringsLimit))" [title]="'Number'"
             [current]="currFretboard.fretboard.instrument.maxExtraStrings" (currentChange)="updateStrings($event)"
             [allowSearch]="false" [disabled]="!custom.allowAddingStrings" />
@@ -14,13 +14,13 @@
     <div class="scrollable-list-container">
         <p>Semitones difference<br>for extra strings</p>
         <app-scrollable-list [content]="semitones" [defaultIndex]="16" [allowSearch]="false"
-            [disabled]="!custom.allowAddingStrings" [title]="'Difference'"
+            [disabled]="!custom.allowAddingStrings" [title]="'Difference'" [preventCollapse]="true"
             [(current)]="currFretboard.fretboard.tuning.extraStrings.interval" />
     </div>
     <div class="scrollable-list-container">
         <p>Semitones correction<br>for previous string</p>
         <app-scrollable-list [content]="semitones" [defaultIndex]="11" [allowSearch]="false"
-            [disabled]="!custom.allowAddingStrings" [title]="'Correction'"
+            [disabled]="!custom.allowAddingStrings" [title]="'Correction'" [preventCollapse]="true"
             [(current)]="custom.previousStringCorrectionInterface" />
     </div>
 </div>
