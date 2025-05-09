@@ -1,5 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import domtoimage from 'dom-to-image';
+import domtoimage from 'dom-to-image-more';
 
 @Directive({
   selector: '[appExportTo]',
