@@ -8,6 +8,7 @@ import { ToastMessageService } from '../../services/toast-message.service';
 import { LogoComponent } from '../shared/logo/logo.component';
 import { FooterComponent } from '../footer/footer.component';
 import { ExpandBtnComponent } from '../shared/expand-btn/expand-btn.component';
+import { HoverService } from '../../services/hover.service';
 
 /**
  * Displays the app's main content, i.e. the fretboard and menu components.
@@ -28,6 +29,7 @@ export class AppContentComponent {
   constructor(
     public router: Router,
     public display: DisplayService,
-    public toastMsg: ToastMessageService
+    public toastMsg: ToastMessageService,
+    public hover: HoverService,
   ) { }
 }

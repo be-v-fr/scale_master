@@ -1,62 +1,66 @@
-<section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'scale'">
-    <app-main-headline-bar [mode]="'scale'" />
-    <div class="scrollable-lists-container">
-        <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames"
-            [content]="scalesData.extendedNaturalNoteNames" [title]="'Root'"
-            [current]="currScale.scale.root.printNaturalWithFlatAlternative()"
-            (currentChange)="currScale.updateCurrScaleRootNote($event)" [allowSearch]="false" />
-        <app-scrollable-list *ngIf="scalesData.categoryNames"
-            [content]="currScale.isCustom ? [currScale.categoryName] : scalesData.categoryNames" [title]="'Category'"
-            [(current)]="currScale.categoryName" (currentChange)="currScale.checkCurrentMode()" />
-        <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames && currScale.modeName"
-            [content]="currScale.categoryModeNames" [(current)]="currScale.modeName"
-            [allowSearch]="currScale.categoryModeNames.length > 0" [allowReset]="currScale.categoryModeNames.length > 0"
-            [title]="'Mode'" />
-    </div>
-</section>
-<section *ngIf="activePrimarySubmenu !== 'scale'" class="show-vw-breakpoint-2 activate-submenu">
-    <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
-        <app-circular-button [icon]="'code'" [info]="'Expand'" />
-        Scale
-    </h4>
-</section>
-<section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
-    <app-main-headline-bar [mode]="'fretboard'" />
-    <div class="scrollable-lists-container">
-        <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames"
-            [content]="currFretboard.isCustom ? [] : tuningsData.instrumentNames" [title]="'Instrument'"
-            [(current)]="currFretboard.instrumentName" />
-        <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames && currFretboard.tuningName"
-            [content]="currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames"
-            [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
-        <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"
-            [title]="'Root'" [current]="currFretboard.fretboard.root.print()"
-            (currentChange)="currFretboard.updateCurrFretboardRootNote($event)" [allowSearch]="false"
-            [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
-            [autofocus]="currFretboard.fretboard.root.index" />
-        <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
-            [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
-    </div>
-</section>
-<section *ngIf="activePrimarySubmenu !== 'fretboard'" class="show-vw-breakpoint-2 activate-submenu">
-    <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
-        <app-circular-button [icon]="'code'" [info]="'Expand'" />
-        Fretboard
-    </h4>
-</section>
-<section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
-    <h4 [class.collapsed]="display.menuCollapsed" [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]">
-        <i class="material-icons-outlined">palette</i>
-        Display
-    </h4>
-    <app-settings-display />
-</section>
-<section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
-    <h4 [class.collapsed]="display.menuCollapsed" [class.prevent-select]="display.menuCollapsed"
-        [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">
-        <i class="material-icons-outlined">output</i>
-        Export
-    </h4>
-    <app-export />
-</section>
-<app-more-menu />
+<div class="wrapper" [class.collapsed]="display.menuCollapsed" [class.parent-hover]="hover.menuWrapperHovered$ | async">
+    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'scale'">
+        <app-main-headline-bar [mode]="'scale'" />
+        <div class="scrollable-lists-container">
+            <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames"
+                [content]="scalesData.extendedNaturalNoteNames" [title]="'Root'"
+                [current]="currScale.scale.root.printNaturalWithFlatAlternative()"
+                (currentChange)="currScale.updateCurrScaleRootNote($event)" [allowSearch]="false" />
+            <app-scrollable-list *ngIf="scalesData.categoryNames"
+                [content]="currScale.isCustom ? [currScale.categoryName] : scalesData.categoryNames"
+                [title]="'Category'" [(current)]="currScale.categoryName"
+                (currentChange)="currScale.checkCurrentMode()" />
+            <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames && currScale.modeName"
+                [content]="currScale.categoryModeNames" [(current)]="currScale.modeName"
+                [allowSearch]="currScale.categoryModeNames.length > 0"
+                [allowReset]="currScale.categoryModeNames.length > 0" [title]="'Mode'" />
+        </div>
+    </section>
+    <section *ngIf="activePrimarySubmenu !== 'scale'" class="show-vw-breakpoint-2 activate-submenu">
+        <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
+            <app-circular-button [icon]="'code'" [info]="'Expand'" />
+            Scale
+        </h4>
+    </section>
+    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
+        <app-main-headline-bar [mode]="'fretboard'" />
+        <div class="scrollable-lists-container">
+            <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames"
+                [content]="currFretboard.isCustom ? [] : tuningsData.instrumentNames" [title]="'Instrument'"
+                [(current)]="currFretboard.instrumentName" />
+            <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames && currFretboard.tuningName"
+                [content]="currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames"
+                [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
+            <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"
+                [title]="'Root'" [current]="currFretboard.fretboard.root.print()"
+                (currentChange)="currFretboard.updateCurrFretboardRootNote($event)" [allowSearch]="false"
+                [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
+                [autofocus]="currFretboard.fretboard.root.index" />
+            <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
+                [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
+        </div>
+    </section>
+    <section *ngIf="activePrimarySubmenu !== 'fretboard'" class="show-vw-breakpoint-2 activate-submenu">
+        <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">
+            <app-circular-button [icon]="'code'" [info]="'Expand'" />
+            Fretboard
+        </h4>
+    </section>
+    <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
+        <h4 [class.collapsed]="display.menuCollapsed"
+            [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'display'] } }]">
+            <i class="material-icons-outlined">palette</i>
+            Display
+        </h4>
+        <app-settings-display />
+    </section>
+    <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">
+        <h4 [class.collapsed]="display.menuCollapsed" [class.prevent-select]="display.menuCollapsed"
+            [routerLink]="[{ outlets: { 'dialog': ['d', 'more', 'export'] } }]">
+            <i class="material-icons-outlined">output</i>
+            Export
+        </h4>
+        <app-export />
+    </section>
+    <app-more-menu />
+</div>

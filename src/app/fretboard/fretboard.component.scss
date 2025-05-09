@@ -6,8 +6,6 @@ $color-nut: rgb(241, 238, 220);
 :host {
   position: relative;
   width: 100%;
-  height: var(--fretboard-height);
-  min-height: 360px;
   background: url(../../assets/img/wood.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
@@ -58,7 +56,7 @@ table {
         transition: 225ms ease;
         @include flex();
 
-        @media screen and (max-height: $vh-breaktpoint-3) {
+        @media screen and (max-height: $vh-breakpoint-3) {
           width: 38px;
           height: 38px;
         }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
 import { CurrentScaleService } from '../../services/current-scale.service';
@@ -13,6 +13,8 @@ import { RouterLink } from '@angular/router';
 import { CustomizeService } from '../../services/customize.service';
 import { MoreMenuComponent } from './more-menu/more-menu.component';
 import { MainHeadlineBarComponent } from './main-headline-bar/main-headline-bar.component';
+import { HoverService } from '../../services/hover.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Displays the menu offering any app controls.
@@ -37,9 +39,9 @@ export class MenuComponent {
     public currScale: CurrentScaleService,
     public scalesData: ScalesDataService,
     public display: DisplayService,
-    public custom: CustomizeService
+    public custom: CustomizeService,
+    public hover: HoverService
   ) { }
-
 
   toggleActivePrimarySubmenu(): void {
     this.activePrimarySubmenu = (this.activePrimarySubmenu === 'scale' ? 'fretboard' : 'scale');

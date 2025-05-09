@@ -78,6 +78,12 @@ app-logo {
             height: var(--expanded-menu-height);
         }
     }
+
+    @media screen and (max-height: $vh-breakpoint-3) {
+        .menu-container.collapsed:hover {
+            height: var(--collapsed-menu-height-hover);
+        }
+    }
 }
 
 .fretboard-container {
@@ -99,9 +105,9 @@ app-logo {
     app-logo {
         position: absolute;
         top: 0;
-        bottom: calc((100dvh - var(--expanded-menu-height) + var(--fretboard-height)) / 2);
+        // bottom: calc((100dvh - var(--expanded-menu-height) + var(--fretboard-height)) / 2);
         @media screen and (max-height: 920px) {
-            transform: scale($logo-scale-small);                
+            transform: scale($logo-scale-small);
         }
         @media screen and (max-height: $vh-breakpoint-1) {
             display: none;
@@ -126,16 +132,18 @@ app-logo {
 }
 
 .expand-btn-wrapper {
+    position: absolute;
+    z-index: 1;
     display: none;
-    width: 64px;
-    height: 100%;
+    left: 110px;
+    bottom: 0;
 
     @media screen and (max-height: $vh-breakpoint-2) {
         @include flex($ai: flex-end);
     }
 
     @media screen and (max-width: $vw-breakpoint-3) {
-        width: 40px;
+        left: 70px;
     }
 }
 

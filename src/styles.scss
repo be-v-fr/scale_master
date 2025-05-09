@@ -5,7 +5,7 @@
 
 $vh-breakpoint-1: 800px;
 $vh-breakpoint-2: 640px;
-$vh-breaktpoint-3: 520px;
+$vh-breakpoint-3: 480px;
 $vw-breakpoint-1: 1280px;
 $vw-breakpoint-2: 1024px;
 $vw-breakpoint-3: 800px;
@@ -42,10 +42,15 @@ $color-almost-black: #111;
 :root {
     --collapsed-menu-height: 120px;
     --expanded-menu-height: 240px;
-    --fretboard-height: 400px;
+    // --fretboard-height: 400px;
 
     @media screen and (max-height: $vh-breakpoint-1) {
         --expanded-menu-height: 206px;
+    }
+
+    @media screen and (max-height: $vh-breakpoint-3) {
+        --collapsed-menu-height-hover: 120px;
+        --collapsed-menu-height: 88px;
     }
 }
 

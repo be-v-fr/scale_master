@@ -15,12 +15,13 @@
 
 :host {
     position: relative;
-    app-more-menu {
+    .wrapper app-more-menu {
         display: none;
         position: fixed;
         z-index: 1;
         top: $menu-y-padding;
         right: $menu-x-padding;
+        transition: top $transition-menu-collapse;
         @media screen and (max-width: $vw-breakpoint-1) {
             display: block;
         }
@@ -62,18 +63,13 @@
         }
     }
     @media screen and (max-width: $vw-breakpoint-2) {
-        .expand-btn-wrapper {
-            position: absolute;
-            left: 10%;
-            bottom: 22px;
-        }
         section .h4-as-button {
             @include h4-as-button();
         }
     }
-    @media screen and (max-width: $vw-breakpoint-3) {
-        .expand-btn-wrapper {
-            left: 4%;
+    @media screen and (max-height: $vh-breakpoint-3) {
+        .wrapper:not(.parent-hover).collapsed app-more-menu {
+            top: calc($menu-y-padding / 2);
         }
     }
 }

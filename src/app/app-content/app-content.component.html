@@ -1,5 +1,5 @@
 <div class="app-bg"></div>
-<div class="menu-wrapper">
+<div class="menu-wrapper" (mouseenter)="hover.setMenuWrapperHovered(true)" (mouseleave)="hover.setMenuWrapperHovered(false)">
     <div class="menu-container" [class.collapsed]="display.menuCollapsed">
         <div class="menu-content">
             <div class="expand-btn-wrapper">
@@ -8,7 +8,7 @@
             <router-outlet />
         </div>
         <app-logo [short]="true" />
-        <app-footer [class.top-right]="router.url.includes('edit')" />
+        <app-footer [class.top-right]="router.url.includes('edit')"/>
     </div>
 </div>
 <div class="fretboard-container">

@@ -16,6 +16,7 @@ import { StorageService } from '../../services/storage.service';
 import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
 import { ExtendedTuning } from '../../interfaces/extended-tuning';
 import { Tuning } from '../../interfaces/tuning';
+import { HoverService } from '../../services/hover.service';
 
 @Component({
   selector: 'app-menu-edit',
@@ -39,6 +40,7 @@ export class MenuEditComponent implements OnInit {
     public currScale: CurrentScaleService,
     public currFretboard: CurrentFretboardService,
     public custom: CustomizeService,
+    public hover: HoverService,
     private storage: StorageService
   ) { }
 

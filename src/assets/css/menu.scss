@@ -3,10 +3,20 @@
 $scrollable-list-width-narrower: 72px;
 
 :host {
-    width: auto;
+    width: 100%;
     height: 100%;
-    padding: $menu-y-padding $menu-x-padding;
     @include flex($g: 24px);
+
+    .wrapper {
+        width: 100%;
+        height: 100%;
+        padding: $menu-y-padding $menu-x-padding;
+        display: inherit;
+        justify-content: inherit;
+        align-items: inherit;
+        gap: inherit;
+        transition: padding $transition-menu-collapse;
+    }
 }
 
 h4 {
@@ -23,7 +33,7 @@ h4 {
         @media screen and (max-height: $vh-breakpoint-2) {
             height: $circular-btn-size;
             padding-bottom: 0;
-            border-bottom: none;   
+            border-bottom: none;
         }
     }
 }
@@ -31,12 +41,16 @@ h4 {
 section {
     height: 100%;
     @include flex($dir: column, $jc: flex-start, $g: 6px);
+    transition: gap $transition-menu-collapse;
 
     .scrollable-lists-container {
         @include flex($g: 10px);
     }
 
-    app-scrollable-list, .custom-content {
+    app-scrollable-list,
+    .custom-content {
+        margin-top: 0;
+        transition: margin-top $transition-menu-collapse;
         width: 148px;
 
         &.narrow {
@@ -61,11 +75,26 @@ section {
 @media screen and (max-width: $vw-breakpoint-1) {
     section.secondary-submenu {
         display: none;
-    }   
+    }
 }
 
 .hide-collapsed {
     @media screen and (max-height: $vh-breakpoint-2) {
         display: none;
+    }
+}
+
+@media screen and (max-height: $vh-breakpoint-3) {
+    .wrapper:not(.parent-hover) {
+        &.collapsed {
+            padding: calc($menu-y-padding / 2) $menu-x-padding;
+            section {
+                gap: 0;
+                app-scrollable-list,
+                .custom-content {
+                    margin-top: -6px;
+                }
+            }
+        }
     }
 }
