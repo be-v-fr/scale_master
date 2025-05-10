@@ -58,15 +58,14 @@ app-logo {
     app-logo {
         display: none;
         position: absolute;
-        top: 18px;
-        bottom: 0;
+        top: 0;
+        bottom: 18px;
         left: 20px;
         @media screen and (max-height: $vh-breakpoint-1) {
             @include flex();
         }
-        @media screen and (max-width: $vw-breakpoint-3) {
+        @media screen and (max-height: $vh-breakpoint-2) and (max-width: $vw-breakpoint-3) {
             transform: scale($logo-scale-small);
-            top: calc(-1 / 2 * $menu-y-padding);
             left: calc(-1 / 2 * $menu-x-padding);
         }
     }
@@ -98,14 +97,22 @@ app-logo {
         max-width: unset;
     }
 
-    app-fretboard {
-        box-shadow: 1px 3px 8px 1px #0005;
+    .fretboard-content {
+        margin: auto 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-shrink: 0;
+        max-height: 100%;
+
+        app-fretboard {
+            box-shadow: 1px 3px 8px 1px #0005;
+        }
     }
 
     app-logo {
         position: absolute;
-        top: 0;
-        // bottom: calc((100dvh - var(--expanded-menu-height) + var(--fretboard-height)) / 2);
+        top: 5%;
         @media screen and (max-height: 920px) {
             transform: scale($logo-scale-small);
         }
@@ -143,7 +150,7 @@ app-logo {
     }
 
     @media screen and (max-width: $vw-breakpoint-3) {
-        left: 70px;
+        left: 24px;
     }
 }
 

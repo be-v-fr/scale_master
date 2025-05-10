@@ -7,14 +7,8 @@ $color-nut: rgb(241, 238, 220);
   position: relative;
   width: 100%;
   background: url(../../assets/img/wood.jpg);
-  background-size: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  flex: 1;
-
-  @media screen and (max-height: $vh-breakpoint-1) {
-    height: 100%;
-  }
 }
 
 table {
