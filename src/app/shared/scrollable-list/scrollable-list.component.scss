@@ -68,7 +68,7 @@ $opac-outside: 0.3;
     overflow: hidden;
     border: 1px solid $color-text-primary;
     @include flex($dir: column);
-    background: linear-gradient(to bottom, #b6a496 -6%, #7D6F63 26%, #7D6F63 76%, #554b43 100%);
+    background: linear-gradient(to bottom, #bba89a -5%, #948478 28%, #948478 72%, #696058 104%);
   }
 
   &.list-disabled .list-container {
