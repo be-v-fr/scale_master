@@ -2,11 +2,12 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, I
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { dateToString } from '../../../utils/string.utils';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-open-item',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatTooltipModule],
   templateUrl: './open-item.component.html',
   styleUrl: './open-item.component.scss'
 })
