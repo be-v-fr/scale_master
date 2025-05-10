@@ -1,7 +1,7 @@
 <h2>Export as {{fileTypeToString}}</h2>
-<div class="export-wrapper">
+<div class="export-wrapper" [ngClass]="fileType">
     <div *ngIf="fileType" [ngSwitch]="fileType" [appExportTo]="fileType" [export]="data" (urlReady)="downloadUrl = $event">
-        <app-fretboard *ngSwitchCase="'img'" />
+        <app-fretboard *ngSwitchCase="'img'" [isExport]="true" />
         <app-fretboard-as-text *ngSwitchCase="'txt'" (onFretboardInit)="data = $event" />
     </div>
     <div *ngIf="!downloadUrl" class="overlay exporting">

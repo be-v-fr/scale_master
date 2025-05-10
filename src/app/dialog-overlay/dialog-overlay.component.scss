@@ -10,12 +10,12 @@
 
     .dialog-wrapper {
         position: relative;
-        max-width: 80vw;
+        max-width: $dialog-max-width;
         max-height: 80dvh;
         overflow-y: auto;
         background: $color-panel-bg;
         border-radius: 16px;
-        padding: 16px;
+        padding: $dialog-padding;
         box-shadow: 1px 6px 6px -1px #0003;
 
         app-circular-button {

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
@@ -20,6 +20,7 @@ import { EditFretboardOverlayComponent } from '../edit-fretboard-overlay/edit-fr
   styleUrl: './fretboard.component.scss'
 })
 export class FretboardComponent {
+  @Input() isExport: boolean = false;
   @ViewChildren('stringNoteContainer') stringNoteRefs!: QueryList<ElementRef<HTMLElement>>;
   get selectedStringNote(): HTMLElement | undefined {
     if (typeof (this.custom.currentStringSelection) === 'number') {

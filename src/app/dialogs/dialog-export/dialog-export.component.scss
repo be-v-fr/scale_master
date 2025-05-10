@@ -5,6 +5,10 @@
     @include flex($dir: column, $ai: flex-start, $g: 16px);
     .export-wrapper {
         position: relative;
+        &.img {
+            width: calc($dialog-max-width - 2 * $dialog-padding);
+            overflow: visible;
+        }
         .overlay {
             position: absolute;
             z-index: 10;

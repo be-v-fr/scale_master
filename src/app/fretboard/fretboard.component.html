@@ -1,4 +1,4 @@
-<table class="prevent-select" [class.lefty]="display.lefty">
+<table class="prevent-select" [class.lefty]="display.lefty" [class.export-styling]="isExport">
     @for (string of currFretboard.fretboard.intervals; track i; let i = $index) {
     <tr>
         <td class="string-note" (click)="onStringNoteClick(string, i)"
