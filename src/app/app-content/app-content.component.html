@@ -1,7 +1,7 @@
 <div class="app-bg"></div>
 <div class="menu-wrapper" (mouseenter)="hover.setMenuWrapperHovered(true)"
     (mouseleave)="hover.setMenuWrapperHovered(false)">
-    <div class="menu-container" [class.collapsed]="display.menuCollapsed">
+    <div class="menu-container" [class.collapsed]="display.menuCollapsed" [class.parent-hover]="hover.menuWrapperHovered$ | async">
         <div class="menu-content">
             <div class="expand-btn-wrapper">
                 <app-expand-btn />

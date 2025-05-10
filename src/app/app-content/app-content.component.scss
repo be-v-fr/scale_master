@@ -79,7 +79,7 @@ app-logo {
     }
 
     @media screen and (max-height: $vh-breakpoint-3) {
-        .menu-container.collapsed:hover {
+        .menu-container.collapsed.parent-hover {
             height: var(--collapsed-menu-height-hover);
         }
     }
