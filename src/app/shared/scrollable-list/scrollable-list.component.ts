@@ -69,6 +69,7 @@ export class ScrollableListComponent implements OnInit {
   @Input() preventCollapse: boolean = false;
   submenuBgWidth?: number;
   private touchStartY: number | null = null;
+  private cumulatedDeltaY: number = 0;
 
   private _disabled: boolean = false;
   get disabled(): boolean {
@@ -266,10 +267,15 @@ export class ScrollableListComponent implements OnInit {
   handleScroll(deltaY: number): boolean {
     const now = Date.now();
     if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
-      const steps = deltaY > 0 ? 1 : -1;
-      this.scrollBySteps(steps, this.throttleTime / 4);
-      this.lastWheelEventTime = now;
-      return true;
+      if(Math.abs(this.cumulatedDeltaY) > 4) {
+        const steps = deltaY > 0 ? 1 : -1;
+        this.scrollBySteps(steps, this.throttleTime / 4);
+        this.lastWheelEventTime = now;
+        this.cumulatedDeltaY = 0;
+        return true;
+      } else {
+        this.cumulatedDeltaY += deltaY;
+      }
     }
     return false;
   }
