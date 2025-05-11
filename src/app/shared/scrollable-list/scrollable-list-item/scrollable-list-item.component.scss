@@ -17,17 +17,19 @@
     .default-item {
       color: $color-info;
     }
-    &:hover {
-      background: $color-text-primary;
-      @media screen and (max-height: $vh-breakpoint-2) {
-        &.menu-collapsed {
-          background: none;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: $color-text-primary;
+        @media screen and (max-height: $vh-breakpoint-2) {
+          &.menu-collapsed {
+            background: none;
+          }
         }
       }
-    }
-    &:active {
-      color: $color-text-muted;
-      opacity: 1;
+      &:active {
+        color: $color-text-muted;
+        opacity: 1;
+      }
     }
   }
 }

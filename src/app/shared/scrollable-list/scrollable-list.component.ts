@@ -68,6 +68,7 @@ export class ScrollableListComponent implements OnInit {
   @Input() allowReset: boolean = true;
   @Input() preventCollapse: boolean = false;
   submenuBgWidth?: number;
+  private touchStartY: number | null = null;
 
   private _disabled: boolean = false;
   get disabled(): boolean {
@@ -233,18 +234,49 @@ export class ScrollableListComponent implements OnInit {
   @HostListener('wheel', ['$event'])
   onMouseWheel(event: WheelEvent) {
     if (this.elementRef.nativeElement.contains(event.target)) { // bed. zum stoppen
-      const now = Date.now();
-      if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(event)) {
-        const steps = event.deltaY > 0 ? 1 : -1;
-        this.scrollBySteps(steps, this.throttleTime / 4);
-        this.lastWheelEventTime = now;
-      }
+      this.handleScroll(event.deltaY);
     }
   }
 
 
-  isAboutToCrossContentEnd(event: WheelEvent): boolean {
-    return (event.deltaY < 0 && this.focusIsStart) || (event.deltaY > 0 && this.focusIsEnd);
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchStartY = event.touches[0].clientY;
+  }
+
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    if (this.touchStartY === null) return;
+    const currentY = event.touches[0].clientY;
+    const deltaY = this.touchStartY - currentY;
+    const isScrolling: boolean = this.handleScroll(deltaY);
+    if (isScrolling) {
+      this.touchStartY = currentY; // Update for continuous scroll
+    }
+  }
+
+  
+  @HostListener('touchend')
+  onTouchEnd() {
+    this.touchStartY = null;
+  }
+
+
+  handleScroll(deltaY: number): boolean {
+    const now = Date.now();
+    if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
+      const steps = deltaY > 0 ? 1 : -1;
+      this.scrollBySteps(steps, this.throttleTime / 4);
+      this.lastWheelEventTime = now;
+      return true;
+    }
+    return false;
+  }
+
+
+  isAboutToCrossContentEnd(deltaY: number): boolean {
+    return (deltaY < 0 && this.focusIsStart) || (deltaY > 0 && this.focusIsEnd);
   }
 
 

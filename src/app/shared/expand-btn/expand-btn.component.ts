@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DisplayService } from '../../../services/display.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HoverService } from '../../../services/hover.service';
 
 @Component({
   selector: 'app-expand-btn',
@@ -14,12 +15,14 @@ export class ExpandBtnComponent {
 
 
   constructor(
-    public display: DisplayService
+    public display: DisplayService,
+    private hover: HoverService
   ) { }
 
 
   toggle() {
     this.display.menuCollapsed = !this.display.menuCollapsed;
+    this.hover.setMenuWrapperHovered(false);
     setTimeout(() => {
       this.tooltipLabel = this.display.menuCollapsed ? 'Expand' : 'Collapse';
     }, 200);
