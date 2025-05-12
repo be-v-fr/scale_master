@@ -257,7 +257,7 @@ export class ScrollableListComponent implements OnInit {
     }
   }
 
-  
+
   @HostListener('touchend')
   onTouchEnd() {
     this.touchStartY = null;
@@ -267,7 +267,7 @@ export class ScrollableListComponent implements OnInit {
   handleScroll(deltaY: number): boolean {
     const now = Date.now();
     if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
-      if(Math.abs(this.cumulatedDeltaY) > 4) {
+      if (Math.abs(this.cumulatedDeltaY) > 4) {
         const steps = deltaY > 0 ? 1 : -1;
         this.scrollBySteps(steps, this.throttleTime / 4);
         this.lastWheelEventTime = now;
@@ -313,10 +313,19 @@ export class ScrollableListComponent implements OnInit {
    */
   onHoverKeyDown(event: KeyboardEvent) {
     const scrollTimeoutLength: number = 240;
-    switch (event.key) {
-      case 'ArrowDown': this.scrollBySteps(1, scrollTimeoutLength); break;
-      case 'ArrowUp': this.scrollBySteps(-1, scrollTimeoutLength);
+    const steps: number = this.getStepsFromKey(event);
+    if (steps !== 0 && !this.isAboutToCrossContentEnd(steps)) {
+      this.scrollBySteps(steps, scrollTimeoutLength);
     }
+  }
+
+
+  getStepsFromKey(event: KeyboardEvent): number {
+    switch (event.key) {
+      case 'ArrowDown': return 1;
+      case 'ArrowUp': return -1;
+    }
+    return 0;
   }
 
 
