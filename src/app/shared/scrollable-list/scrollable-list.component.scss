@@ -86,6 +86,11 @@ $opac-outside: 0.3;
         opacity: 1;
         transition: opacity 30ms ease;
       }
+      &.collapsed {
+        @media screen and (max-height: $vh-breakpoint-2) {
+          display: none;
+        }
+      }
     }
   }
 
