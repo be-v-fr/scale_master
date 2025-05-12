@@ -14,15 +14,6 @@ $opac-outside: 0.3;
   @extend .prevent-select;
   width: 100%;
   @include flex($dir: column);
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  touch-action: pan-y;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 
   .submenu-wrapper {
     width: 100%;
@@ -57,30 +48,34 @@ $opac-outside: 0.3;
   }
 }
 
-.list-wrapper {
+.list-outer-wrapper {
   width: 100%;
-  height: 144px;
   @include flex($dir: column, $g: 3px);
-  position: relative;
-  transition: height $transition-menu-collapse;
+  .list-inner-wrapper {
+    width: 100%;
+    height: 106px;
+    @include flex($dir: column, $g: 3px);
+    position: relative;
+    transition: height $transition-menu-collapse;
 
-  &.collapsed {
-    @media screen and (max-height: $vh-breakpoint-2) {
-      height: 61px;
+    &.collapsed {
+      @media screen and (max-height: $vh-breakpoint-2) {
+        height: 27px;
+      }
+    }
+
+    .list-container {
+      position: relative;
+      width: 100%;
+      height: 108px;
+      overflow: hidden;
+      border: 1px solid $color-text-primary;
+      @include flex($dir: column);
+      background: linear-gradient(to bottom, #bba89a -5%, #948478 28%, #948478 72%, #696058 104%);
     }
   }
 
-  .list-container {
-    position: relative;
-    width: 100%;
-    height: 130px;
-    overflow: hidden;
-    border: 1px solid $color-text-primary;
-    @include flex($dir: column);
-    background: linear-gradient(to bottom, #bba89a -5%, #948478 28%, #948478 72%, #696058 104%);
-  }
-
-  &.list-disabled .list-container {
+  &.list-disabled .list-inner-wrapper .list-container {
     pointer-events: none;
     background: $color-text-muted;
 

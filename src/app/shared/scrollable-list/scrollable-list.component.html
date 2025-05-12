@@ -1,23 +1,26 @@
-<div class="list-wrapper" [class.list-disabled]="disabled || filteredContent.length === 0" appHover
-    (hoverKeyDown)="onHoverKeyDown($event)" [class.collapsed]="!preventCollapse && display.menuCollapsed">
+<div class="list-outer-wrapper" [class.list-disabled]="disabled || filteredContent.length === 0">
     <app-scrollable-list-arrow [orientation]="'up'" (click)="onListArrowClick(-1, 200)" [class.hidden]="focusIsStart" />
-    <div class="list-container">
-        @if(filteredContent.length > 0) {
-        @for (pos of positions; track i; let i = $index; let f = $first; let l = $last) {
-        <app-scrollable-list-item #contentRef
-            [ngClass]="(filteredContent.length > 3 && (f || l)) || (i === 1 && scrollSteps === 2) || (i === positions.length - 2 && scrollSteps === -2) ? pos : positions[i - scrollSteps]"
-            [class.scroll]="scrollSteps !== 0" [default]="filteredContent[defaultIndex]" (mousedown)="onListItemClick(i)"
-            [content]="getContentItem(i)" />
-        }
-        } @else {
-        <span class="empty-field">&ndash;</span>
-        }
+    <div class="list-inner-wrapper" appHover (hoverKeyDown)="onHoverKeyDown($event)"
+        [class.collapsed]="!preventCollapse && display.menuCollapsed">
+        <div class="list-container">
+            @if(filteredContent.length > 0) {
+            @for (pos of positions; track i; let i = $index; let f = $first; let l = $last) {
+            <app-scrollable-list-item #contentRef
+                [ngClass]="(filteredContent.length > 3 && (f || l)) || (i === 1 && scrollSteps === 2) || (i === positions.length - 2 && scrollSteps === -2) ? pos : positions[i - scrollSteps]"
+                [class.scroll]="scrollSteps !== 0" [default]="filteredContent[defaultIndex]"
+                (mousedown)="onListItemClick(i)" [content]="getContentItem(i)" />
+            }
+            } @else {
+            <span class="empty-field">&ndash;</span>
+            }
+        </div>
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" [class.hidden]="focusIsEnd" />
 </div>
 <div class="submenu-wrapper" [class.searching]="searchFilter || searchFilter === ''">
     <app-scrollable-list-submenu [(searchFilter)]="searchFilter" (refocus)="refocusByIndex(defaultIndex)"
-        [title]="title" [allowSearch]="allowSearch && !disabled && filteredContent.length > 1" [allowReset]="allowReset && !disabled && filteredContent.length > 1"
-        (searchFilterChange)="onSearchChange()" (bgWidth)="initSubmenuBg($event)" />
+        [title]="title" [allowSearch]="allowSearch && !disabled && filteredContent.length > 1"
+        [allowReset]="allowReset && !disabled && filteredContent.length > 1" (searchFilterChange)="onSearchChange()"
+        (bgWidth)="initSubmenuBg($event)" />
     <div *ngIf="submenuBgWidth" class="submenu-bg" [style.width.px]="submenuBgWidth"></div>
 </div>

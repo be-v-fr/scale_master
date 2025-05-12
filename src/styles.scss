@@ -56,6 +56,14 @@ $color-almost-black: #111;
     }
 }
 
+html,
+body {
+    overscroll-behavior-y: none;
+    // height: 100%;
+    overflow: hidden;
+    touch-action: none;
+}
+
 body {
     width: 100vw;
     height: 100dvh;
