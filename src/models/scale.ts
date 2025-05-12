@@ -2,9 +2,10 @@ import { Note } from "./note";
 import { SCALES } from "../const/scales";
 import { ScaleMode } from "../interfaces/scale-mode";
 import { ScaleCategory } from "../interfaces/scale-category";
-import { isEqual } from "lodash";
+import { cloneDeep, isEqual } from "lodash";
 import { getModTwelveIndex, modWithSubZero } from "../utils/mod.utils";
 import { getAlphabetDistance, getHarmonicMeaningIndex } from "../utils/intervals.utils";
+import { equalItems } from "../utils/array.utils";
 
 export class Scale {
     category: ScaleCategory;
@@ -23,15 +24,16 @@ export class Scale {
     }
 
     get notes(): Note[] {
-        const defaultNotes = this._constructNotes(this.root);
+        let notes = this._constructNotes(this.root);
+        notes = this._optimizeNoteFirstLetters(notes);
         if (this.root.name.length > 1) {
             const flatRoot: Note = new Note(this.root.index, 'flat');
             if (flatRoot.name[1] === 'b') {
                 const flatNotes: Note[] = this._constructNotes(flatRoot);
-                return this._selectMoreNaturalNotes(flatNotes, defaultNotes);
+                return this._selectMoreNaturalNotes(flatNotes, notes);
             }
         }
-        return defaultNotes;
+        return notes;
     }
 
     get name(): string {
@@ -84,6 +86,46 @@ export class Scale {
             }
         }
         return notes2;
+    }
+
+    private _getRedundantNotesAll(notes: Note[]): Note[][] {
+        const redundantNotesAll: Note[][] = [];
+        notes.forEach(n => {
+            const redundantNotesSet: Note[] = this._getRedundantNotesSet(n, notes);
+            if (redundantNotesSet.length > 1 && !redundantNotesAll.some(set => equalItems(set, redundantNotesSet))) {
+                redundantNotesAll.push(redundantNotesSet);
+            }
+        });
+        return redundantNotesAll;
+    }
+
+    private _getRedundantNotesSet(note: Note, notes: Note[]): Note[] {
+        return notes.filter(n => n.name.charAt(0) === note.name.charAt(0));
+    }
+
+    private _isUniqueNoteLetter(note: Note, notes: Note[]): boolean {
+        return this._getRedundantNotesSet(note, notes).length === 1;
+    }
+
+    private _optimizeNoteFirstLetters(notes: Note[]): Note[] {
+        const redundantNotesAll: Note[][] = this._getRedundantNotesAll(notes);
+        if (redundantNotesAll.length > 0) {
+            redundantNotesAll.forEach(set => {
+                set.forEach(n => this._optimizeRedundantNote(n, notes));
+            });
+        }
+        return notes;
+    }
+
+    private _optimizeRedundantNote(note: Note, notes: Note[]) {
+        const noteClone: Note = cloneDeep(note);
+        noteClone.toggleAccidental();
+        if (noteClone.name.length < 3) {
+            const updatedNotes: Note[] = notes.map(n2 => n2.index === noteClone.index ? noteClone : n2);
+            if (this._isUniqueNoteLetter(noteClone, updatedNotes)) {
+                notes = updatedNotes;
+            }
+        }
     }
 
     private _countDoubleAccidentals(notes: Note[]): number {

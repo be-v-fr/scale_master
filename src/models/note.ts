@@ -120,6 +120,10 @@ export class Note {
         return this.name.includes('b') || this.name.length === 3;        
     }
 
+    toggleAccidental(): void {
+        this.accidental = (this.accidental === 'flat') ? 'natural' : 'flat';
+    }
+
     static flattenNotes(notes: Note[]): Note[] {
         notes.forEach((n: Note, i: number) => {
             if(n.isSharp()) {
