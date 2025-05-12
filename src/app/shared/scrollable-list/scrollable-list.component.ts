@@ -7,6 +7,7 @@ import { HoverDirective } from '../../../directives/hover.directive';
 import { modWithSubZero } from '../../../utils/mod.utils';
 import { ScrollableListSubmenuComponent } from './scrollable-list-submenu/scrollable-list-submenu.component';
 import { DisplayService } from '../../../services/display.service';
+import { ArrowPointerComponent } from '../arrow-pointer/arrow-pointer.component';
 
 /**
  * Displays a scrollable list for any content array that consists of strings or numbers.
@@ -15,7 +16,7 @@ import { DisplayService } from '../../../services/display.service';
 @Component({
   selector: 'app-scrollable-list',
   standalone: true,
-  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent, HoverDirective, ScrollableListSubmenuComponent],
+  imports: [CommonModule, ScrollableListItemComponent, ScrollableListArrowComponent, HoverDirective, ScrollableListSubmenuComponent, ArrowPointerComponent],
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })

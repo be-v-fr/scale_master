@@ -73,6 +73,20 @@ $opac-outside: 0.3;
       @include flex($dir: column);
       background: linear-gradient(to bottom, #bba89a -5%, #948478 28%, #948478 72%, #696058 104%);
     }
+
+    app-arrow-pointer {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      @include flex();
+      opacity: 0;
+      transition: opacity 150ms ease 600ms;
+      &.show-and-fade-out {
+        opacity: 1;
+        transition: opacity 30ms ease;
+      }
+    }
   }
 
   &.list-disabled .list-inner-wrapper .list-container {
