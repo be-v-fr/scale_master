@@ -41,7 +41,7 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
     setTimeout(() => {
       this.cdr.detectChanges();
       this.initWidth();
-    }, 200);
+    }, 160);
   }
 
 
@@ -49,8 +49,10 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
    * Reads the submenu width from the DOM tree and emits the corresponding background width.
    */
   initWidth(): void {
-    const submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
-    this.bgWidth.emit(submenuWidth + 16);
+    setTimeout(() => {
+      const submenuWidth = this.innerWrapper.nativeElement.offsetWidth;
+      this.bgWidth.emit(submenuWidth + 16);
+    }, 40);
   }
 
 
