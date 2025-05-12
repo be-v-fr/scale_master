@@ -24,12 +24,12 @@ $opac-outside: 0.3;
 
     app-scrollable-list-submenu {
       position: relative;
-      z-index: 10;
+      z-index: 1;
     }
 
     .submenu-bg {
       position: relative;
-      z-index: 1;
+      z-index: -1;
       height: 32px;
       top: -30px;
       left: 50%;
