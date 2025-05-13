@@ -18,6 +18,9 @@ import { ExtendedTuning } from '../../interfaces/extended-tuning';
 import { Tuning } from '../../interfaces/tuning';
 import { HoverService } from '../../services/hover.service';
 
+/**
+ * Displays the menu bar for content customization.
+ */
 @Component({
   selector: 'app-menu-edit',
   standalone: true,
@@ -32,6 +35,9 @@ export class MenuEditComponent implements OnInit {
   previousFretboard: Fretboard = cloneDeep(this.currFretboard.fretboard);
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -45,6 +51,10 @@ export class MenuEditComponent implements OnInit {
   ) { }
 
 
+
+  /**
+   * Subscribes to route parameters to track the current step.
+   */
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const step: number = parseInt(params['step'], 10);
@@ -57,6 +67,9 @@ export class MenuEditComponent implements OnInit {
   }
 
 
+  /**
+   * Navigates to a specific editing step using the router.
+   */
   navigateStepByRouter(stepToNav: number): void {
     const mainUrl = this.router.url.split(';')[0];
     const urlSegments: (string | number)[] = mainUrl.split('/');
@@ -68,12 +81,18 @@ export class MenuEditComponent implements OnInit {
   }
 
 
+  /**
+   * Reverts all edits to the previous scale and fretboard state.
+   */
   undoAll(): void {
     this.currScale.scale = this.previousScale;
     this.currFretboard.fretboard = this.previousFretboard;
   }
 
 
+  /**
+   * Completes the current editing workflow and returns to the home screen.
+   */
   async complete(): Promise<void> {
     switch(this.custom.mode) {
       case 'scale': await this.completeScale(); break;
@@ -83,6 +102,9 @@ export class MenuEditComponent implements OnInit {
   }
 
 
+  /**
+   * Completes a scale editing operation and saves the result, resetting the current mode if needed.
+   */
   async completeScale(): Promise<void> {
     if(this.currScale.scale.category.modes) {
       this.currScale.scale.resetMode();
@@ -92,6 +114,9 @@ export class MenuEditComponent implements OnInit {
   }
 
 
+  /**
+   * Completes a tuning editing operation and stores the current fretboard as a custom tuning.
+   */
   async completeTuning(): Promise<void> {
     const currentTuning: Tuning = this.currFretboard.fretboard.tuning;
     const extendedTuning: ExtendedTuning = {

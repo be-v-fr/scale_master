@@ -8,6 +8,9 @@ import { RouterLink } from '@angular/router';
 import { CustomizeService } from '../../../services/customize.service';
 import { capitalizeFirstLetter } from '../../../utils/string.utils';
 
+/**
+ * Displays a submenu headline as an additional bar with buttons for the main submenus (scale, fretboard).
+ */
 @Component({
   selector: 'app-main-headline-bar',
   standalone: true,
@@ -20,6 +23,9 @@ export class MainHeadlineBarComponent {
   capitalize = capitalizeFirstLetter;
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public currScale: CurrentScaleService,
     public currFretboard: CurrentFretboardService,
