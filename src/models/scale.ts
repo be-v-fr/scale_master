@@ -111,21 +111,22 @@ export class Scale {
         const redundantNotesAll: Note[][] = this._getRedundantNotesAll(notes);
         if (redundantNotesAll.length > 0) {
             redundantNotesAll.forEach(set => {
-                set.forEach(n => this._optimizeRedundantNote(n, notes));
+                set.forEach(n => notes = this._optimizeRedundantNote(n, notes));
             });
         }
         return notes;
     }
 
-    private _optimizeRedundantNote(note: Note, notes: Note[]) {
+    private _optimizeRedundantNote(note: Note, notes: Note[]): Note[] {
         const noteClone: Note = cloneDeep(note);
         noteClone.toggleAccidental();
         if (noteClone.name.length < 3) {
             const updatedNotes: Note[] = notes.map(n2 => n2.index === noteClone.index ? noteClone : n2);
             if (this._isUniqueNoteLetter(noteClone, updatedNotes)) {
-                notes = updatedNotes;
+                return updatedNotes;
             }
         }
+        return notes;
     }
 
     private _countDoubleAccidentals(notes: Note[]): number {
