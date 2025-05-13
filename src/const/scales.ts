@@ -22,7 +22,7 @@ export const SCALES: ScaleCategory[] = [
     DOUBLE_HARMONIC,
     CHROMATIC,
     WHOLE_TONE,
-    PERSIAN,
     JAPANESE,
-    HIRAJOSHI
+    HIRAJOSHI,
+    PERSIAN
 ];
