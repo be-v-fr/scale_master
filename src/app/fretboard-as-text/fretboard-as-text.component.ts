@@ -22,6 +22,7 @@ export class FretboardAsTextComponent implements OnInit {
   @Output() onFretboardInit: EventEmitter<string> = new EventEmitter<string>();
   fretboardInitComplete: boolean = false;
 
+
   /**
    * Constructor for dependency injection.
    */
@@ -31,6 +32,9 @@ export class FretboardAsTextComponent implements OnInit {
   ) { }
 
 
+  /**
+   * Lifecycle hook that initializes the component.
+   */
   ngOnInit(): void {
     this.initFretboardContent();
   }
@@ -38,17 +42,6 @@ export class FretboardAsTextComponent implements OnInit {
 
   get cols(): number {
     return this._cols;
-  }
-
-
-  initFretboardContent(): void {
-    let content: string = '';
-    for(let i = 0; i < this.currFretboard.fretboard.intervals.length; i++) {
-      content += this.getInstrumentStringContent(i) + '\n';
-    }
-    content += this._fretboardMarks;
-    this.handleFretboardContentEmission(content);
-    this.fretboardContent = content;
   }
 
 
@@ -61,6 +54,23 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+  /**
+   * Initializes the full textual representation of the fretboard.
+   */
+  initFretboardContent(): void {
+    let content: string = '';
+    for(let i = 0; i < this.currFretboard.fretboard.intervals.length; i++) {
+      content += this.getInstrumentStringContent(i) + '\n';
+    }
+    content += this._fretboardMarks;
+    this.handleFretboardContentEmission(content);
+    this.fretboardContent = content;
+  }
+
+
+  /**
+   * Determines whether a given fret column index should be marked with a dot.
+   */
   private _isMarkedColumn(col: number) {
     const markedColumns: Array<number> = [];
     for(let i = 0; i < 4; i++) {
@@ -71,11 +81,19 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+
+  /**
+   * Returns the textual representation of a string, depending on orientation.
+   */
   getInstrumentStringContent(stringIndex: number): string {
     return this.display.lefty ? this.getInstrumentStringContentLefty(stringIndex) : this.getInstrumentStringContentRighthanded(stringIndex);
   }
 
 
+
+  /**
+   * Returns the right-handed layout of a string's fret line.
+   */
   getInstrumentStringContentRighthanded(stringIndex: number): string {
     let content: string = this.getInstrumentStringRoot(stringIndex).padEnd(3, ' ') + this.getOpenInstrumentStringNoteOrNone(stringIndex, 2) + '||';
     for(let fret = 1; fret < 12; fret++) {
@@ -85,6 +103,9 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+  /**
+   * Returns the left-handed layout of a string's fret line.
+   */
   getInstrumentStringContentLefty(stringIndex: number): string {
     let content: string = '';
     for(let fret = 1; fret < 12; fret++) {
@@ -95,11 +116,17 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+  /**
+   * Returns the root note name of a string.
+   */
   getInstrumentStringRoot(stringIndex: number): string {
     return this.currFretboard.notes[stringIndex].print();
   }
 
 
+  /**
+   * Returns the open string note or a placeholder if undefined.
+   */
   getOpenInstrumentStringNoteOrNone(stringIndex: number, padTo: number): string {
     const note: Note | undefined = this.currFretboard.getNoteFromFret(stringIndex, 0);
     let value: string = note ? note.print() : '-';
@@ -108,6 +135,9 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+  /**
+   * Returns a formatted fret note (or root indicator) or a placeholder if undefined.
+   */
   getFretNoteOrNone(stringIndex: number, fret: number): string {
     const note: Note | undefined = this.currFretboard.getNoteFromFret(stringIndex, fret);
     let value: string = this.currFretboard.isRoot(stringIndex, fret) ? '>' : '-';
@@ -117,6 +147,9 @@ export class FretboardAsTextComponent implements OnInit {
   }
 
 
+  /**
+   * Emits the generated fretboard text only once, upon initialization.
+   */
   handleFretboardContentEmission(content: string) {
     if(!this.fretboardInitComplete) {
       this.onFretboardInit.emit(content);

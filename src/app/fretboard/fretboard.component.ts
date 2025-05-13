@@ -41,16 +41,25 @@ export class FretboardComponent {
     public custom: CustomizeService
   ) { }
 
+
   get frets(): number[] {
     return Array.from({ length: 12 });
   }
 
+
+  /**
+   * Handles clicks on frets when in scale editing mode.
+   */
   onFretClick(instrumentStringIndex: number, fret: number) {
     if (this.custom.mode === 'scale' && typeof (this.custom.currentStep) === 'number') {
       this.onScaleEditFretClick(this.custom.currentStep, instrumentStringIndex, fret);
     }
   }
 
+
+  /**
+   * Applies the selected editing step to a clicked fret during scale editing.
+   */
   onScaleEditFretClick(step: number, instrumentStringIndex: number, fret: number) {
     const pitch: number = this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
     let interval: number = pitch - this.currScale.scale.root.index;
@@ -61,6 +70,10 @@ export class FretboardComponent {
     }
   }
 
+
+  /**
+   * Toggles a mode and opens a dialog if the mode exists.
+   */
   handleModeToggling(interval: number): void {
     this.currScale.scale.toggleMode(interval);
     if (this.currScale.scale.modeExists(interval)) {
@@ -68,12 +81,20 @@ export class FretboardComponent {
     }
   }
 
+
+  /**
+   * Handles clicks on string notes in fretboard editing mode.
+   */
   onStringNoteClick(interval: number, stringIndex: number): void {
     if (this.custom.mode === 'fretboard' && typeof (this.custom.currentStep) === 'number') {
       this.onFretboardEditStringClick(this.custom.currentStep, interval, stringIndex);
     }
   }
 
+
+  /**
+   * Applies the selected editing step to a clicked string note during fretboard editing.
+   */
   onFretboardEditStringClick(step: number, interval: number, stringIndex: number) {
     switch (step) {
       case 0: break;

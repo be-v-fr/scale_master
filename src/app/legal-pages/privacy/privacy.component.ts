@@ -4,6 +4,9 @@ import { Address } from '../../../interfaces/address';
 import { LEGAL } from '../../../../secrets';
 import { EmailLinkComponent } from '../../shared/email-link/email-link.component';
 
+/**
+ * Displays the privacy policy.
+ */
 @Component({
   selector: 'app-privacy',
   standalone: true,

@@ -30,6 +30,9 @@ export class EditFretboardOverlayComponent {
   @ViewChild('listContainer') listContainerRef!: ElementRef<HTMLElement>;
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public custom: CustomizeService,
     public display: DisplayService,
@@ -39,6 +42,11 @@ export class EditFretboardOverlayComponent {
   ) { }
 
 
+
+  /**
+   * Updates the tuning of the currently selected string based on user input.
+   * If the selected string is the root string, the root note is adjusted.
+   */
   onCurrentStringSelectionChange(noteString: string) {
     if (typeof (this.custom.currentStringSelection) === 'number') {
       const intervalIndex: number = this.currFretboard.fretboard.tuning.intervals.length - this.custom.currentStringSelection - 1;
@@ -54,6 +62,9 @@ export class EditFretboardOverlayComponent {
   }
 
 
+  /**
+   * Adjusts the root note and updates all tuning intervals accordingly.
+   */
   private _changeRootString(diff: number): void {
     this.currFretboard.fretboard.root.index += diff;
     this.currFretboard.fretboard.root.normalize();
