@@ -268,14 +268,13 @@ export class ScrollableListComponent implements OnInit {
   handleScroll(deltaY: number): boolean {
     const now = Date.now();
     if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
+      this.cumulatedDeltaY += deltaY;
       if (Math.abs(this.cumulatedDeltaY) > 4) {
         const steps = deltaY > 0 ? 1 : -1;
         this.scrollBySteps(steps, this.throttleTime / 4);
         this.lastWheelEventTime = now;
         this.cumulatedDeltaY = 0;
         return true;
-      } else {
-        this.cumulatedDeltaY += deltaY;
       }
     }
     return false;
