@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { capitalizeFirstLetter } from '../../../utils/string.utils';
 
+/**
+ * Displays a submenu from the menu bar as a dialog.
+ */
 @Component({
   selector: 'app-dialog-submenu',
   standalone: true,
@@ -12,6 +15,9 @@ import { capitalizeFirstLetter } from '../../../utils/string.utils';
 export class DialogSubmenuComponent {
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private router: Router
   ) { }

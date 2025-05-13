@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CopyToClipboardDirective } from '../../../../directives/copy-to-clipboard.directive';
 
+/**
+ * Displays a dialog containing the export options, i.e. the different file type options.
+ */
 @Component({
   selector: 'app-export-options',
   standalone: true,

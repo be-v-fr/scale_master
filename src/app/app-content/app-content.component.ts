@@ -24,7 +24,7 @@ export class AppContentComponent {
 
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     public router: Router,

@@ -82,7 +82,7 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Constructor for injection of the component HTML element reference.
+   * Constructor for dependency injection.
    */
   constructor(
     private elementRef: ElementRef,
@@ -92,10 +92,10 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Sets filtered content according to current search filter.
-   * If no filter is active, returns the complete content.
+   * Filters content based on the current search input.
+   * Sorts filtered content alphabetically if a filter is applied.
    */
-  applySearchFilter(): (void) {
+  applySearchFilter(): void {
     this.filteredContent = this._content.filter(item => {
       if (this.searchFilter) {
         return item.toString().toLowerCase().includes(this.searchFilter.toLowerCase());
@@ -103,23 +103,17 @@ export class ScrollableListComponent implements OnInit {
       return true;
     });
     if (this.searchFilter) {
-      this.filteredContent.sort((a, b) => {
-        const strA = String(a);
-        const strB = String(b);
-        return strA.localeCompare(strB);
-      });
+      this.filteredContent.sort((a, b) => String(a).localeCompare(String(b)));
     }
     this.cdr.detectChanges();
   }
 
 
   /**
-   * Upon component initialization, checks if a current value is transferred as an input property.
-   * If a current value is transferred, checks if it is present in the content array and sets the
-   * list focus accordingly.
+   * Component lifecycle hook. Sets focus if `current` input is present.
    */
   ngOnInit(): void {
-    if (this.current === undefined) return
+    if (this.current === undefined) return;
     const currentIndex = this._content.indexOf(this.current);
     if (currentIndex >= 0) {
       this.focus = currentIndex;
@@ -130,7 +124,8 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Initializes submenu background element using the width from the submenu component. 
+   * Initializes background width for submenu visual element.
+   * @param bgWidth Width in pixels
    */
   initSubmenuBg(bgWidth: number): void {
     this.submenuBgWidth = bgWidth;
@@ -139,35 +134,32 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Transforms the index of an item in the positions array to the index
-   * of the same item in the content array.
-   * @param positionIndex - Item index in the list positions array (not to be confused with the list content array).
+   * Converts visual position index to real content index.
+   * @param positionIndex Index in `positions` array
    */
   getContentIndexFromPositionIndex(positionIndex: number): number {
     const length = this.filteredContent.length;
-    if (length > 3) {
-      const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
-      return modWithSubZero(contentIndex, length);
-    } else {
-      const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
-      return contentIndex >= 0 && contentIndex < length ? contentIndex : -1;
-    }
+    const contentIndex = positionIndex - Math.floor(this.positions.length / 2) + this.focus;
+    return length > 3 ?
+      modWithSubZero(contentIndex, length) :
+      (contentIndex >= 0 && contentIndex < length ? contentIndex : -1);
   }
 
 
   /**
-   * Retrieves a content item using a position index.
-   * @param positionIndex - Item index in the list positions array.
+   * Returns the content item at the given position index.
+   * @param positionIndex Position index to resolve
    */
   getContentItem(positionIndex: number): string | number {
-    const contentIndex: number | null = this.getContentIndexFromPositionIndex(positionIndex);
+    const contentIndex = this.getContentIndexFromPositionIndex(positionIndex);
     return contentIndex >= 0 ? this.filteredContent[contentIndex] : '';
   }
 
 
   /**
-   * Handles list item click events depending on the item position.
-   * @param positionIndex - Item index in the list positions array.
+   * Handles click events on list items.
+   * Determines whether to scroll or trigger selection.
+   * @param positionIndex Clicked item index
    */
   onListItemClick(positionIndex: number) {
     if (this.currentTimeout && this.scrollSteps !== 0) {
@@ -175,7 +167,7 @@ export class ScrollableListComponent implements OnInit {
     } else if (!['over', 'under'].includes(this.positions[positionIndex])) {
       const steps = positionIndex - Math.floor(this.positions.length / 2);
       if (steps !== 0) {
-        const timeoutLength = Math.abs(steps) == 1 ? 210 : 270;
+        const timeoutLength = Math.abs(steps) === 1 ? 210 : 270;
         this.scrollBySteps(steps, timeoutLength);
       }
     }
@@ -183,7 +175,7 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Handles list item double click events
+   * Triggers a double scroll animation if item is clicked twice quickly.
    */
   handleListItemDoubleClick() {
     if (this.currentTimeout) {
@@ -196,9 +188,9 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Scrolls the list by setting the scroll steps number and starting a refocus timeout.
-   * @param steps - Number of steps to scroll (can be positive or negative).
-   * @param focusTimeoutLength - Length of refocus timeout.
+   * Initiates scrolling by given number of steps with delay.
+   * @param steps Scroll steps (positive/negative)
+   * @param focusTimeoutLength Timeout in ms before scroll is applied
    */
   scrollBySteps(steps: number, focusTimeoutLength: number) {
     this.scrollSteps = steps;
@@ -207,8 +199,8 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Refocuses the list to a given item marked by its index.
-   * @param index - Content index.
+   * Sets focus by absolute content index and emits change event.
+   * @param index Content index to focus
    */
   refocusByIndex(index: number) {
     this.focus = index;
@@ -217,9 +209,8 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Refocuses the list using a given number of steps to go
-   * starting from the current/previous value.
-   * @param steps - Scrolling steps.
+   * Sets focus by relative scroll steps and emits change.
+   * @param steps Scroll direction and count
    */
   refocusBySteps(steps: number) {
     this.scrollSteps = 0;
@@ -231,40 +222,53 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Handles mouse wheel events by scrolling the list accordingly.
+   * Mouse wheel event listener for scrolling.
    */
   @HostListener('wheel', ['$event'])
   onMouseWheel(event: WheelEvent) {
-    if (this.elementRef.nativeElement.contains(event.target)) { // bed. zum stoppen
+    if (this.elementRef.nativeElement.contains(event.target)) {
       this.handleScroll(event.deltaY);
     }
   }
 
 
+  /**
+   * Records Y position when touch starts.
+   */
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
     this.touchStartY = event.touches[0].clientY;
   }
 
 
+  /**
+   * Scrolls the list based on touch move gesture.
+   */
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent) {
     if (this.touchStartY === null) return;
     const currentY = event.touches[0].clientY;
     const deltaY = this.touchStartY - currentY;
-    const isScrolling: boolean = this.handleScroll(deltaY);
+    const isScrolling = this.handleScroll(deltaY);
     if (isScrolling) {
-      this.touchStartY = currentY; // Update for continuous scroll
+      this.touchStartY = currentY;
     }
   }
 
 
+  /**
+   * Clears touch position at the end of a gesture.
+   */
   @HostListener('touchend')
   onTouchEnd() {
     this.touchStartY = null;
   }
 
 
+  /**
+   * Core scroll handler for mouse/touch input.
+   * @param deltaY Scroll distance (positive or negative)
+   */
   handleScroll(deltaY: number): boolean {
     const now = Date.now();
     if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
@@ -281,25 +285,31 @@ export class ScrollableListComponent implements OnInit {
   }
 
 
+  /**
+   * Checks whether the next scroll step would exceed bounds.
+   * @param deltaY Scroll direction
+   */
   isAboutToCrossContentEnd(deltaY: number): boolean {
     return (deltaY < 0 && this.focusIsStart) || (deltaY > 0 && this.focusIsEnd);
   }
 
 
+  /** True if focus is at first item and content is small */
   get focusIsStart(): boolean {
     return this.focus === 0 && this.filteredContent.length <= 3;
   }
 
 
+  /** True if focus is at last item and content is small */
   get focusIsEnd(): boolean {
     return this.focus === this.filteredContent.length - 1 && this.filteredContent.length <= 3;
   }
 
 
   /**
-   * Handles clicks on the arrow-shapred buttons above and below the list itself.
-   * @param steps - Number of steps to scroll (can be positive or negative).
-   * @param focusTimeoutLength - Length of refocus timeout. 
+   * Handles arrow control click for manual scrolling.
+   * @param steps Scroll direction
+   * @param timeoutLength Delay before focus change
    */
   onListArrowClick(steps: number, timeoutLength: number): void {
     if (!this.disabled && this.filteredContent.length > 0) {
@@ -309,7 +319,8 @@ export class ScrollableListComponent implements OnInit {
 
 
   /**
-   * Handles key down events that occur while the mouse cursor is hovering over the list.
+   * Handles keydown events while hovering over the list.
+   * Enables keyboard navigation.
    */
   onHoverKeyDown(event: KeyboardEvent) {
     const scrollTimeoutLength: number = 240;
@@ -320,6 +331,10 @@ export class ScrollableListComponent implements OnInit {
   }
 
 
+  /**
+   * Converts arrow key event to scroll step.
+   * @param event Keyboard event
+   */
   getStepsFromKey(event: KeyboardEvent): number {
     switch (event.key) {
       case 'ArrowDown': return 1;
@@ -328,9 +343,10 @@ export class ScrollableListComponent implements OnInit {
     return 0;
   }
 
-
+  
   /**
-   * Handles search filter changes. Either refocuses the list or does nothing.
+   * Handles changes in search input.
+   * Applies new filter and resets focus.
    */
   onSearchChange(): void {
     const index = this.searchFilter ? 0 : this.focus;

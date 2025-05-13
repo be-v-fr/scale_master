@@ -9,6 +9,10 @@ import { Instrument } from '../../../interfaces/instrument';
 import { CurrentFretboardService } from '../../../services/current-fretboard.service';
 import { Fretboard } from '../../../models/fretboard';
 
+/**
+ * Displays a dialog informing the user that the custom tuning he configured already exists in the database,
+ * offering him to abort customization and load that tuning instead.
+ */
 @Component({
   selector: 'app-dialog-tuning-found',
   standalone: true,
@@ -21,6 +25,10 @@ export class DialogTuningFoundComponent {
   instrument?: Instrument;
   tuningIndex: number = 0;
 
+
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -29,6 +37,10 @@ export class DialogTuningFoundComponent {
   ) { }
 
 
+  /**
+   * Lifecycle hook that initializes the component.
+   * Parses route parameters and loads the instrument and tuning index.
+   */
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const instrIndex: number | undefined = parseNumberParamIfExists(params, 'instrIndex');
@@ -43,11 +55,18 @@ export class DialogTuningFoundComponent {
   }
 
 
+  /**
+   * Lifecycle hook that unsubscribes from the route parameters when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
 
 
+  /**
+   * Aborts dialog and loads the selected fretboard tuning,
+   * then navigates to the root page.
+   */
   abortWithMatchingFretboard(): void {
     if (this.instrument) {
       this._loadFretboard();
@@ -57,6 +76,9 @@ export class DialogTuningFoundComponent {
   }
 
 
+  /**
+   * Loads the selected instrument and tuning into the current fretboard.
+   */
   private _loadFretboard(): void {
     if (this.instrument) {
       this.currFretboard.fretboard = new Fretboard(

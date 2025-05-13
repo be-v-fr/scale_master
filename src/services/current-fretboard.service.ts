@@ -21,7 +21,7 @@ export class CurrentFretboardService {
 
 
   /**
-   * Constructor for injection of services and data initialization.
+   * Constructor for dependency injection and data initialization.
    */
   constructor(
     private currScale: CurrentScaleService,

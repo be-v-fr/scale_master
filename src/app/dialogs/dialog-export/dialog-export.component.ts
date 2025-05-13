@@ -24,6 +24,10 @@ export class DialogExportComponent implements OnInit, OnDestroy {
   private _downloadUrl?: string;
   private _data?: any;
 
+
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private route: ActivatedRoute,
     private currScale: CurrentScaleService,
@@ -50,6 +54,10 @@ export class DialogExportComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Lifecycle hook that runs after component initialization.
+   * Retrieves the export file type from the route parameters.
+   */
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const fileType = params['fileType'];
@@ -62,6 +70,10 @@ export class DialogExportComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Lifecycle hook that runs when the component is destroyed.
+   * Unsubscribes from the route parameters to avoid memory leaks.
+   */
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }

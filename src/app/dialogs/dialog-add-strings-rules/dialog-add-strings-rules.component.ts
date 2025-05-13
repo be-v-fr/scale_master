@@ -9,6 +9,10 @@ import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
 import { RouterLink } from '@angular/router';
 import { CONFIG } from '../../../const/config';
 
+/**
+ * Displays a menu to define rules regarding the addiction of extra strings
+ * regarding a custom tuning.
+ */
 @Component({
   selector: 'app-dialog-add-strings-rules',
   standalone: true,
@@ -21,6 +25,9 @@ export class DialogAddStringsRulesComponent implements OnInit {
   CONFIG = CONFIG;
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public currFretboard: CurrentFretboardService,
     public custom: CustomizeService,
@@ -28,6 +35,9 @@ export class DialogAddStringsRulesComponent implements OnInit {
   ) { }
 
 
+  /**
+   * Initializes the component by setting the default number of additional strings.
+   */
   ngOnInit(): void {
     this.updateStrings(0);
   }
@@ -43,6 +53,10 @@ export class DialogAddStringsRulesComponent implements OnInit {
   };
 
 
+  /**
+   * Updates the number of strings on the fretboard based on the number
+   * of additional strings selected by the user.
+   */
   updateStrings(maxExtraStrings: number) {
     this.currFretboard.fretboard.instrument.maxExtraStrings = maxExtraStrings;
     this.currFretboard.fretboard.numberOfStrings = this.currFretboard.fretboard.tuning.intervals.length + maxExtraStrings;

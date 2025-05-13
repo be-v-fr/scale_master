@@ -26,7 +26,7 @@ export class ToastMessageComponent implements OnInit {
 
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     private toastMsg: ToastMessageService

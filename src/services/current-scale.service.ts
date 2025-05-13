@@ -20,7 +20,7 @@ export class CurrentScaleService {
 
 
   /**
-   * Constructor for injection of services and data initialization.
+   * Constructor for dependency injection and data initialization.
    */
   constructor(
     private scalesData: ScalesDataService,

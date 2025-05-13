@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { FretNoteComponent } from './fret-note/fret-note.component';
 import { CommonModule } from '@angular/common';
 import { CurrentFretboardService } from '../../services/current-fretboard.service';
@@ -31,7 +31,7 @@ export class FretboardComponent {
 
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     public router: Router,

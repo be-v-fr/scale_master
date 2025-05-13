@@ -17,7 +17,7 @@ export class SettingsDisplayComponent {
 
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     public display: DisplayService,

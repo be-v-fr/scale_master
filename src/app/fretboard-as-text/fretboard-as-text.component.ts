@@ -23,7 +23,7 @@ export class FretboardAsTextComponent implements OnInit {
   fretboardInitComplete: boolean = false;
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     public currFretboard: CurrentFretboardService,

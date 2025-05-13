@@ -7,6 +7,9 @@ import { CurrentFretboardService } from '../../../services/current-fretboard.ser
 import { CustomizeService } from '../../../services/customize.service';
 import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
+/**
+ * Displays a dialog for naming a custom scale or tuning.
+ */
 @Component({
   selector: 'app-dialog-name-custom',
   standalone: true,
@@ -17,6 +20,9 @@ import { AutofocusDirective } from '../../../directives/autofocus.directive';
 export class DialogNameCustomComponent {
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public currScale: CurrentScaleService,
     public currFretboard: CurrentFretboardService,

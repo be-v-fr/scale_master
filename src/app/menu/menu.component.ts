@@ -31,7 +31,7 @@ export class MenuComponent {
 
 
   /**
-   * Constructor for injection of services.
+   * Constructor for dependency injection.
    */
   constructor(
     public currFretboard: CurrentFretboardService,
@@ -43,6 +43,10 @@ export class MenuComponent {
     public hover: HoverService
   ) { }
 
+
+  /**
+   * Toggles the active primary submenu (for small screen widths).
+   */
   toggleActivePrimarySubmenu(): void {
     this.activePrimarySubmenu = (this.activePrimarySubmenu === 'scale' ? 'fretboard' : 'scale');
   }

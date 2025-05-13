@@ -11,6 +11,9 @@ import { DialogService } from '../../../services/dialog.service';
 import { InfoMsgComponent } from '../../shared/info-msg/info-msg.component';
 import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
+/**
+ * Displays a dialog for naming a custom scale category's mode.
+ */
 @Component({
   selector: 'app-dialog-name-mode',
   standalone: true,
@@ -24,6 +27,10 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   routeSub: Subscription = new Subscription();
   forceRoot?: boolean;
 
+
+  /**
+   * Constructor for dependency injection. 
+   */
   constructor(
     private route: ActivatedRoute,
     private currScale: CurrentScaleService,
@@ -31,6 +38,12 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
+
+  /**
+   * Lifecycle hook that runs after component initialization.
+   * Parses route parameters to determine the mode interval and whether root mode should be forced.
+   * Initializes the mode name if a valid interval is provided.
+   */
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       const interval: number | undefined = parseNumberParamIfExists(params, 'interval');
@@ -45,11 +58,19 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Lifecycle hook that runs on component destruction.
+   * Unsubscribes from route params to prevent memory leaks.
+   */
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
 
 
+  /**
+   * Initializes the editable name of the mode by cloning the original mode based on the interval.
+   * If the mode can't be found, logs an error.
+   */
   initModeName(interval: number): void {
     const modeOriginal: ScaleMode | undefined = this.currScale.scale.getMode(interval);
     if (modeOriginal) {
@@ -61,6 +82,10 @@ export class DialogNameModeComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Applies the updated mode name and closes the dialog.
+   * If the 'forceRoot' flag is set, redirects to the route to name the root mode after closing.
+   */
   submit(): void {
     if(!this.modeName || !(typeof(this.modeInterval) === 'number')) return;
     const modeOriginal: ScaleMode | undefined = this.currScale.scale.getMode(this.modeInterval);
