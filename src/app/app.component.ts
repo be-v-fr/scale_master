@@ -4,6 +4,9 @@ import { RouterOutlet } from '@angular/router';
 import { IntroLogoComponent } from './intro-logo/intro-logo.component';
 import { FooterComponent } from './footer/footer.component';
 
+/**
+ * This is the native Angular app component displaying any app content.
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,6 +19,9 @@ export class AppComponent implements OnInit {
   awaitingIntro: boolean = true;
 
 
+  /**
+   * On app initialization, sets timer for intro control.
+   */
   ngOnInit(): void {
     setTimeout(() => this.awaitingIntro = false, 3000);
   }

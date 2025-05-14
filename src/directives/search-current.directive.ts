@@ -13,6 +13,10 @@ import { Tuning } from '../interfaces/tuning';
 type ScaleResult = { catIndex: number, modeIndex: number };
 type TuningResult = { instrIndex: number, tuningIndex: number };
 
+
+/**
+ * Searches for a matching scale category or instrument tuning based on the current scale or fretboard.
+ */
 @Directive({
   selector: '[appSearchCurrent]',
   standalone: true
@@ -22,12 +26,18 @@ export class SearchCurrentDirective implements OnInit {
   @Output() indexFound: EventEmitter<{ primary: number, secondary: number }> = new EventEmitter();
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService
   ) { }
 
 
+  /**
+   * Initializes the directive by searching based on the provided mode.
+   */
   ngOnInit(): void {
     switch (this.mode) {
       case 'scale': this.searchScaleCategories(); break;
@@ -36,6 +46,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Searches for the scale category that matches the current scale's intervals.
+   */
   searchScaleCategories(): void {
     let result: ScaleResult = { catIndex: -1, modeIndex: -1 };
     SCALES.forEach((s: ScaleCategory, sIndex: number) => {
@@ -47,6 +60,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Searches through a given scale category.
+   */
   searchScaleCategory(s: ScaleCategory, sIndex: number): { catIndex: number, modeIndex: number } {
     if (equalItems(s.intervals, this.currScale.scale.category.intervals)) {
       return { catIndex: sIndex, modeIndex: 0 };
@@ -56,6 +72,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Searches through modes within a given scale category.
+   */
   searchScaleCategoryModes(s: ScaleCategory, sIndex: number): { catIndex: number, modeIndex: number } {
     let catIndex: number = -1;
     let modeIndex: number = -1;
@@ -72,6 +91,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Searches for the instrument and its tuning that matches the current fretboard's tuning.
+   */
   searchFretboard(): void {
     let result: TuningResult = { instrIndex: -1, tuningIndex: -1 };
     INSTRUMENTS.forEach((i: Instrument, iIndex: number) => {
@@ -83,6 +105,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Searches for the matching tuning of an instrument.
+   */
   searchInstrumentTunings(i: Instrument, iIndex: number): { instrIndex: number, tuningIndex: number } {
     let instrIndex: number = -1;
     let tuningIndex: number = -1;
@@ -100,6 +125,9 @@ export class SearchCurrentDirective implements OnInit {
   }
 
 
+  /**
+   * Emits the result of the search with the primary and secondary index found.
+   */
   onSearchComplete(result: ScaleResult | TuningResult): void {
     const primary: number = 'catIndex' in result ? result.catIndex : result.instrIndex;
     const secondary: number = 'modeIndex' in result ? result.modeIndex : result.tuningIndex;

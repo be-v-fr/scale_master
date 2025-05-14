@@ -1,5 +1,8 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
+/**
+ * Copies data from a file URL to the client's clipboard.
+ */
 @Directive({
   selector: '[appCopyToClipboard]',
   standalone: true
@@ -8,8 +11,12 @@ export class CopyToClipboardDirective {
   @Input('appCopyToClipboard') fileUrl?: string;
   @Output() copied: EventEmitter<void> = new EventEmitter();
 
+
+  /**
+   * Executes copy to clipboard.
+   */
   @HostListener('click')
-  async copyFileContent() {
+  async copyFileContent(): Promise<void> {
     if (!this.fileUrl) return;
     try {
       const response = await fetch(this.fileUrl);

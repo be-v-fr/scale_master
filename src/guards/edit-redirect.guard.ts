@@ -3,15 +3,21 @@ import { CanActivateChildFn, Router, ActivatedRouteSnapshot } from '@angular/rou
 
 let wasInitialNavigationDone = false;
 
+/**
+ * Checks if the initial navigation has been done and redirects to the first step if not.
+ */
 export const editRedirectGuard: CanActivateChildFn = (route, state) => {
   const router = inject(Router);
-
   if (wasInitialNavigationDone) {
     return true;
   }
   wasInitialNavigationDone = true;
 
 
+  /**
+   * Checks if the initial navigation is done.
+   * If not, sets the flag and redirects to the first step.
+   */
   const findStepParam = (snapshot: ActivatedRouteSnapshot): number | null => {
     if (snapshot.paramMap.has('step')) {
       return Number(snapshot.paramMap.get('step'));
