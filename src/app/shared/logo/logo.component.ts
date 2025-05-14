@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+/**
+ * Displays the Scalion logo with a number of optional settings.
+ */
 @Component({
   selector: 'app-logo',
   standalone: true,

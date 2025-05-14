@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 
+/**
+ * Displays a subtly animated line
+ * from the right side of a left element
+ * to the left side of a right element.
+ */
 @Component({
   selector: 'app-dynamic-line',
   standalone: true,
@@ -29,9 +34,15 @@ export class DynamicLineComponent implements AfterViewInit {
   lineRight!: { x: number; y: number };
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(private cdr: ChangeDetectorRef) {}
 
 
+  /**
+   * Initializes coordinate calculation after view is ready.
+   */
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateCoordinates();
@@ -44,6 +55,9 @@ export class DynamicLineComponent implements AfterViewInit {
   }
 
   
+  /**
+   * Recalculates start/end line coordinates based on element bounds.
+   */
   private updateCoordinates(): void {
     if (!this._leftEl || !this._rightEl) return;
     const rectLeft = this._leftEl.getBoundingClientRect();
@@ -63,6 +77,9 @@ export class DynamicLineComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Calculates the center point of a given rectangle.
+   */
   private getCenter(rect: DOMRect): { x: number; y: number } {
     return {
       x: rect.left + rect.width / 2,
@@ -71,11 +88,17 @@ export class DynamicLineComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Calculates the gradient between two points.
+   */
   private calcGradient(dx: number, dy: number): number {
     return dx === 0 ? 0 : dy / dx;
   }
 
 
+  /**
+   * Computes a y-coordinate on a line defined by a center point and gradient.
+   */
   private calcYCoord(x: number, gradient: number, center: { x: number; y: number }) {
     return center.y + gradient * (x - center.x);
   }

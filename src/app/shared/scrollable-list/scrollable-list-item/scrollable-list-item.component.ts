@@ -4,7 +4,7 @@ import { DisplayService } from '../../../../services/display.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 /**
- * Displays an item contained in a scrollable list.
+ * Displays an item in a scrollable list with responsive scaling or ellipsis if overflow occurs.
  */
 @Component({
   selector: 'app-scrollable-list-item',
@@ -33,6 +33,9 @@ export class ScrollableListItemComponent implements AfterViewInit {
   textEllipsis: boolean = false;
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public display: DisplayService,
     private el: ElementRef,
@@ -45,11 +48,17 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Initial measurement after view is initialized.
+   */
   ngAfterViewInit(): void {
     this.updateSize();
   }
 
 
+  /**
+   * Updates text size or triggers ellipsis if overflow is detected.
+   */
   updateSize(): void {
     if (this.contentRef && this.contentRef.nativeElement) {
       const visibleWidth: number = this.el.nativeElement.offsetWidth / 2;
@@ -61,6 +70,9 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Adjusts the scale down or switches to ellipsis if ratio exceeds limits.
+   */
   setScaleDown(widthRatio: number): void {
     if (widthRatio > 1 / this.scaleDownLimit) {
       this.textEllipsis = true;
@@ -71,6 +83,9 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Resets scaling and ellipsis to default.
+   */
   resetScaleDown(): void {
     if (this.scaleDown) {
       this.scaleDown = undefined;

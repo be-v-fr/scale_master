@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+/**
+ * Displays a message with an info icon.
+ */
 @Component({
   selector: 'app-info-msg',
   standalone: true,

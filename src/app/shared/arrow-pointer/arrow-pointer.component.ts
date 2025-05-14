@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * Displays a small pointer arrow pointing to the right, e.g. vor visual help.
+ */
 @Component({
   selector: 'app-arrow-pointer',
   standalone: true,

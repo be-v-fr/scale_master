@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+/**
+ * Displays a circular action button containing an icon from the material icons iconfont.
+ */
 @Component({
   selector: 'app-circular-button',
   standalone: true,

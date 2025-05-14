@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { CustomizeService } from '../../../services/customize.service';
-import { CurrentScaleService } from '../../../services/current-scale.service';
 
+/**
+ * Displays a name that is also a link to a dialog to edit that name.
+ * (This component does not transfer the name data to the dialog component.
+ * It has to be received separately.)
+ */
 @Component({
   selector: 'app-inline-name-link',
   standalone: true,
@@ -20,6 +23,9 @@ export class InlineNameLinkComponent {
   };
 
 
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     public router: Router
   ) { }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * Displays a simple animated circular loader.
+ */
 @Component({
   selector: 'app-loader',
   standalone: true,

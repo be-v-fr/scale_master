@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/**
+ * Displays pagination dots and emits an event when a dot is clicked.
+ */
 @Component({
   selector: 'app-pagination-dots',
   standalone: true,
@@ -13,11 +16,16 @@ export class PaginationDotsComponent {
   @Input() activeIndex: number = 0;
   @Output() dotClick: EventEmitter<number> = new EventEmitter<number>();
 
+
   get dots(): number[] {
     return Array.from({ length: this.total });
   }
 
-  onDotClick(index: number) {
-    this.dotClick.emit(index);
+
+  /**
+   * Handles click events on individual dots
+   */
+  onDotClick(dotIndex: number) {
+    this.dotClick.emit(dotIndex);
   }
 }

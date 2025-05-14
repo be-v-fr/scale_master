@@ -3,6 +3,9 @@ import { DisplayService } from '../../../services/display.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HoverService } from '../../../services/hover.service';
 
+/**
+ * Displays a double arrow expand (down)/collapse (up) button to toggle the menu bar state.
+ */
 @Component({
   selector: 'app-expand-btn',
   standalone: true,

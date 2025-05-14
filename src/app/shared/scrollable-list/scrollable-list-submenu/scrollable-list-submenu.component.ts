@@ -26,7 +26,7 @@ export class ScrollableListSubmenuComponent implements AfterViewInit {
 
 
   /**
-   * Constructor for injections.
+   * Constructor for dependency injection.
    */
   constructor(
     private cdr: ChangeDetectorRef
