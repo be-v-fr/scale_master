@@ -1,15 +1,15 @@
 import { ScaleCategory } from "../../interfaces/scale-category";
 
 export const PENTATONIC: ScaleCategory = {
-    name: 'pentatonic',
+    name: 'Pentatonic',
     intervals: [0, 2, 4, 7, 9],
     modes: [
         {
-            name: 'major',
+            name: 'Major',
             interval: 0,
         },
         {
-            name: 'minor',
+            name: 'Minor',
             interval: 9,
         },
         {

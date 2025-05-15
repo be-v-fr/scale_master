@@ -9,11 +9,11 @@ export const PERSIAN: ScaleCategory = {
             interval: 0,
         },
         {
-            name: 'ionian',
+            name: 'Ionian',
             interval: 1,
         },
         {
-            name: 'ultraphrygian',
+            name: 'Ultraphrygian',
             interval: 4,
         },
         {
@@ -21,15 +21,15 @@ export const PERSIAN: ScaleCategory = {
             interval: 5,
         },
         {
-            name: 'lydian',
+            name: 'Lydian',
             interval: 6,
         },
         {
-            name: 'mixolydian augmented',
+            name: 'Mixolydian Augmented',
             interval: 8,
         },
         {
-            name: 'chromatic hypophrygian inverse',
+            name: 'Chromatic Hypophrygian Inverse',
             interval: 11,
         }
     ]
