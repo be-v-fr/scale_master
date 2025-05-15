@@ -2,7 +2,7 @@ import { Instrument } from "../../interfaces/instrument";
 import { DADGBE_DROP, EADGBE_STANDARD } from "../tunings";
 
 export const BASS: Instrument = {
-    name: 'bass',
+    name: 'Bass',
     tunings: [
         {
             ...EADGBE_STANDARD,
