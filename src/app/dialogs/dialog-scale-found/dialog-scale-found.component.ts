@@ -45,7 +45,7 @@ export class DialogScaleFoundComponent {
     this.routeSub = this.route.params.subscribe(params => {
       const catIndex: number | undefined = parseNumberParamIfExists(params, 'catIndex');
       const modeIndex: number | undefined = parseNumberParamIfExists(params, 'modeIndex');
-      if(typeof(catIndex) === 'number' && this.dialog.checkIndexLeqZeroOnInit(catIndex, 'scale category')) {
+      if(typeof(catIndex) === 'number' && this.dialog.checkIndexGeqZeroOnInit(catIndex, 'scale category')) {
         this.category = cloneDeep(SCALES[catIndex]);
       }
       if (typeof(modeIndex) === 'number' && modeIndex > 0) {

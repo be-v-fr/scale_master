@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Service for handling toast notifications.
+ */
 @Injectable({
   providedIn: 'root'
 })

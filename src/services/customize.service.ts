@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { CurrentScaleService } from './current-scale.service';
 import { CurrentFretboardService } from './current-fretboard.service';
 
+/**
+ * Service for content customization.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -17,13 +20,17 @@ export class CustomizeService {
     this._currentStringSelection = value;
   }
   allowAddingStrings: boolean = false;
-  // maxNumberOfExtraStrings: number = 0;
 
+
+  /**
+   * Constructor for dependency injection.
+   */
   constructor(
     private router: Router,
     private currScale: CurrentScaleService,
     private currFretboard: CurrentFretboardService,
   ) { }
+
 
   get mode(): 'scale' | 'fretboard' | null {
     const mainSegments: string[] = this.router.url.split('/');
@@ -38,9 +45,11 @@ export class CustomizeService {
     return null;
   }
 
+
   get isActive(): boolean {
     return this.router.url.includes('edit');
   }
+
 
   get currentStep(): number | undefined {
     const maxStep: number = 10;
@@ -57,6 +66,7 @@ export class CustomizeService {
     return undefined;
   }
 
+
   get totalSteps(): number {
     switch (this.mode) {
       case 'scale': return this._scaleSteps;
@@ -64,6 +74,7 @@ export class CustomizeService {
     }
     return 0;
   }
+
 
   get editScaleParams(): { catIndex: number, modeIndex?: number } {
     const params: { catIndex: number, modeIndex?: number } = {
@@ -75,6 +86,7 @@ export class CustomizeService {
     return params;
   }
 
+
   get editFretboardParams(): { instrIndex: number, tuningIndex: number } {
     return {
       instrIndex: this.currFretboard.fretboard.instrIndex,
@@ -82,14 +94,20 @@ export class CustomizeService {
     }
   }
 
+
   get previousStringCorrectionInterface(): number {
     return this.currFretboard.fretboard.tuning.extraStrings.previousStringCorrection || 0;
   }
+
 
   set previousStringCorrectionInterface(value: number) {
     this.currFretboard.fretboard.tuning.extraStrings.previousStringCorrection = value;
   }
 
+
+  /**
+   * Builds edit route including parameters.
+   */
   getEditRouteWParams(editMode: 'scale' | 'fretboard', useCurrent: boolean): (string | number | {})[] {
     const route: (string | number | {})[] = ['edit', 0];
     route.push(editMode);

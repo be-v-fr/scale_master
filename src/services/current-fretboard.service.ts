@@ -180,6 +180,9 @@ export class CurrentFretboardService {
   }
 
 
+  /**
+   * Checks if a fretboard position is a mode root.
+   */
   isModeRoot(instrumentString: number, fret: number): boolean {
     let result: boolean = false;
     this.currScale.scale.category.modes?.forEach(m => {
@@ -192,6 +195,9 @@ export class CurrentFretboardService {
   }
   
 
+  /**
+   * Resets to default fretboard and disables custom flag.
+   */
   closeCustom(): void {
     this.fretboard = this._defaultFretboard;
     this.isCustom = false;

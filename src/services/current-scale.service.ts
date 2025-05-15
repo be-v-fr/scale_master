@@ -127,12 +127,18 @@ export class CurrentScaleService {
   }
 
 
+  /**
+  * Closes the custom scale and resets state,
+  */
   closeCustom(): void {
     this.scale = this._defaultScale;
     this.isCustom = false;
   }
 
 
+  /**
+   * Shifts root note based on mode and optionally opens a dialog.
+   */
   shiftRootAccordingToMode(showDialog: boolean): void {
     if (this.scale.mode && this.scale.mode.interval !== 0) {
       if (showDialog) {

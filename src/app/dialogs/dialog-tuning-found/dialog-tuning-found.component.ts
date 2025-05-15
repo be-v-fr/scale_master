@@ -45,10 +45,10 @@ export class DialogTuningFoundComponent {
     this.routeSub = this.route.params.subscribe(params => {
       const instrIndex: number | undefined = parseNumberParamIfExists(params, 'instrIndex');
       const tuningIndex: number | undefined = parseNumberParamIfExists(params, 'tuningIndex');
-      if (typeof (instrIndex) === 'number' && this.dialog.checkIndexLeqZeroOnInit(instrIndex, 'instrument')) {
+      if (typeof (instrIndex) === 'number' && this.dialog.checkIndexGeqZeroOnInit(instrIndex, 'instrument')) {
         this.instrument = cloneDeep(INSTRUMENTS[instrIndex]);
       }
-      if (typeof (tuningIndex) === 'number' && this.dialog.checkIndexLeqZeroOnInit(tuningIndex, 'tuning')) {
+      if (typeof (tuningIndex) === 'number' && this.dialog.checkIndexGeqZeroOnInit(tuningIndex, 'tuning')) {
         this.tuningIndex = tuningIndex;
       }
     });
