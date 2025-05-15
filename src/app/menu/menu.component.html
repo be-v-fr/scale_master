@@ -25,9 +25,13 @@
     <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
         <app-main-headline-bar [mode]="'fretboard'" />
         <div class="scrollable-lists-container">
+            @if(currFretboard.isCustom) {
+            <app-scrollable-list class="narrow" [content]="[]" [title]="'Instrument'" />
+            } @else {
             <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames"
-                [content]="currFretboard.isCustom ? [] : tuningsData.instrumentNames" [title]="'Instrument'"
+                [content]="tuningsData.instrumentNames" [title]="'Instrument'"
                 [(current)]="currFretboard.instrumentName" />
+            }
             <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames && currFretboard.tuningName"
                 [content]="currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames"
                 [(current)]="currFretboard.tuningName" [title]="'Tuning'" />

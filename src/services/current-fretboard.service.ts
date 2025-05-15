@@ -65,7 +65,7 @@ export class CurrentFretboardService {
       this.updateTuningForNewInstrument();
       this.updateRootToNewTuning();
     } else {
-      throw (`Instrument with name ${value} not found.`);
+      console.error(`Instrument with name ${value} not found.`);
     }
   }
 
@@ -88,7 +88,7 @@ export class CurrentFretboardService {
       this.fretboard.tuning = tuning;
       this.updateRootToNewTuning(diffToDefault);
     } else {
-      throw (`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
+      console.error(`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
     }
   }
 
