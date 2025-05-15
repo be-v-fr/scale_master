@@ -7,11 +7,18 @@ import { getModTwelveIndex, modWithSubZero } from "../utils/mod.utils";
 import { getAlphabetDistance, getHarmonicMeaningIndex } from "../utils/intervals.utils";
 import { equalItems } from "../utils/array.utils";
 
+/**
+ * Represents a musical scale, including the current mode (if any) and root note.
+ */
 export class Scale {
     category: ScaleCategory;
     mode?: ScaleMode;
     root: Note;
 
+
+    /**
+     * Constructor for property definition.
+     */
     constructor(root: Note, category: ScaleCategory, mode?: ScaleMode) {
         this.root = root;
         this.category = category;
@@ -22,6 +29,7 @@ export class Scale {
             this.mode = this.category.modes[0];
         }
     }
+
 
     get notes(): Note[] {
         let notes = this._constructNotes(this.root);
@@ -36,19 +44,26 @@ export class Scale {
         return notes;
     }
 
+
     get name(): string {
         const baseName: string = `${this.root.print()} ${this.category.name}`;
         return this.mode ? `${baseName} ${this.mode.name}` : baseName;
     }
 
+
     get catIndex(): number {
         return SCALES.findIndex(s => isEqual(s, this.category));
     }
+
 
     get modeIndex(): number {
         return this.category.modes ? this.category.modes.findIndex(m => isEqual(m, this.mode)) : -1;
     }
 
+
+    /**
+     * Builds the scale notes from the root.
+     */
     private _constructNotes(root: Note): Note[] {
         let notes: Note[] = [];
         const intervals: number[] = Array.from(this.category.intervals);
@@ -59,6 +74,10 @@ export class Scale {
         return notes;
     }
 
+
+    /** 
+     * Constructs a note from an interval relative to the root.
+     */
     private _contructNote(interval: number, root: Note): Note {
         interval = this.applyModeToBaseInterval(interval);
         const note: Note = this.createNaturalNoteFromInterval(interval);
@@ -73,6 +92,10 @@ export class Scale {
         return note;
     }
 
+
+    /**
+     * Chooses the more readable of two note lists.
+     */
     private _selectMoreNaturalNotes(notes1: Note[], notes2: Note[]): Note[] {
         const doubleAccidentals1: number = this._countDoubleAccidentals(notes1);
         const doubleAccidentals2: number = this._countDoubleAccidentals(notes2);
@@ -88,6 +111,10 @@ export class Scale {
         return notes2;
     }
 
+
+    /**
+     * Returns all sets of notes with duplicate letter names.
+     */
     private _getRedundantNotesAll(notes: Note[]): Note[][] {
         const redundantNotesAll: Note[][] = [];
         notes.forEach(n => {
@@ -99,14 +126,26 @@ export class Scale {
         return redundantNotesAll;
     }
 
+
+    /**
+     * Finds all notes with the same starting letter.
+     */
     private _getRedundantNotesSet(note: Note, notes: Note[]): Note[] {
-        return notes.filter(n => n.name.charAt(0) === note.name.charAt(0));
+        return notes.filter(n => n.firstLetterEqualsNoteName(note));
     }
 
+
+    /**
+     * Checks if the note has a unique letter name.
+     */
     private _isUniqueNoteLetter(note: Note, notes: Note[]): boolean {
         return this._getRedundantNotesSet(note, notes).length === 1;
     }
 
+
+    /**
+     * Optimizes notes to avoid duplicated letter names.
+     */
     private _optimizeNoteFirstLetters(notes: Note[]): Note[] {
         const redundantNotesAll: Note[][] = this._getRedundantNotesAll(notes);
         if (redundantNotesAll.length > 0) {
@@ -117,6 +156,10 @@ export class Scale {
         return notes;
     }
 
+
+    /**
+     * Attempts to rename a redundant note.
+     */
     private _optimizeRedundantNote(note: Note, notes: Note[]): Note[] {
         const noteClone: Note = cloneDeep(note);
         noteClone.toggleAccidental();
@@ -129,14 +172,26 @@ export class Scale {
         return notes;
     }
 
+
+    /**
+     * Counts notes with double accidentals.
+     */
     private _countDoubleAccidentals(notes: Note[]): number {
         return notes.filter(n => (n.name.includes('x') || n.name.length === 3)).length;
     }
 
+
+    /**
+     * Counts notes without accidentals.
+     */
     private _countNoAccidentals(notes: Note[]): number {
         return notes.filter(n => n.name.length === 1).length;
     }
 
+
+    /**
+     * Applies the mode offset to a base interval.
+     */
     applyModeToBaseInterval(baseInterval: number) {
         if (this.mode) {
             baseInterval -= this.mode.interval;
@@ -144,6 +199,10 @@ export class Scale {
         return getModTwelveIndex(baseInterval);
     }
 
+
+    /**
+     * Creates a natural note from a given interval.
+     */
     createNaturalNoteFromInterval(interval: number): Note {
         const meaning: number = getHarmonicMeaningIndex(interval);
         const note: Note = new Note(
@@ -155,6 +214,10 @@ export class Scale {
         return note;
     }
 
+
+    /**
+     * Determines the accidental from letter and harmonic differences.
+     */
     private _getAccidentalFromDiffs(letterDiff: number, meaningDiff: number): 'natural' | 'sharp' | 'flat' {
         if (letterDiff < meaningDiff) {
             return 'flat';
@@ -164,6 +227,10 @@ export class Scale {
         return 'natural';
     }
 
+
+    /**
+     * Checks whether a mode exists in the category.
+     */
     checkModeInCategory(mode: ScaleMode): void {
         if (!this.category.modes || !this.category.modes.find(m => isEqual(m, mode))) {
             const modeNames: string[] = [];
@@ -172,6 +239,10 @@ export class Scale {
         }
     }
 
+
+    /**
+     * Toggles the presence of an interval in the category.
+     */
     toggleInterval(interval: number): void {
         if (interval === 0) return;
         const arrayIndex: number = this.category.intervals.findIndex(i => i === interval);
@@ -183,11 +254,19 @@ export class Scale {
         }
     }
 
+
+    /**
+     * Removes all modes matching the given interval.
+     */
     removeModeByInterval(interval: number) {
         this.category.modes = this.category.modes?.filter(m => m.interval !== interval);
         if (this.category.modes && this.category.modes.length === 0) this.category.modes = undefined;
     }
 
+
+    /**
+     * Toggles a mode for the given interval.
+     */
     toggleMode(interval: number): void {
         if (this.modeExists(interval)) {
             this.removeModeByInterval(interval);
@@ -196,22 +275,39 @@ export class Scale {
         }
     }
 
+
+    /**
+     * Retrieves a mode by interval.
+     */
     getMode(interval: number): ScaleMode | undefined {
         return this.category.modes?.find(m => m.interval === interval);
     }
+
 
     get primeMode(): ScaleMode | undefined {
         return this.getMode(0);
     }
 
+
+    /**
+     * Resets the current mode to the prime mode.
+     */
     resetMode() {
         this.mode = this.primeMode;
     }
 
+
+    /**
+     * Checks if a mode exists for the given interval.
+     */
     modeExists(interval: number): boolean {
         return this.getMode(interval) !== undefined;
     }
 
+
+    /**
+     * Adds a new unnamed mode for the given interval.
+     */
     addMode(interval: number): void {
         if (this.category.intervals.includes(interval)) {
             const mode: ScaleMode = { name: `untitled/${interval}`, interval: interval };

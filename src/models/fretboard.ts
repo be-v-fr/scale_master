@@ -6,12 +6,19 @@ import { isEqual } from "lodash";
 import { replaceSurplus0IntervalsW12s } from "../utils/tunings.utils";
 import { CONFIG } from "../const/config";
 
+/**
+ * Represents a musical fretboard, including instrument, tuning, and logic for calculating note intervals.
+ */
 export class Fretboard {
     root: Note;
     instrument: Instrument;
     numberOfStrings: number;
     tuning: Tuning;
 
+
+    /**
+     * Constructor for property definition.
+     */
     constructor(instrument: Instrument, tuning: Tuning, root: Note, numberOfStrings?: number) {
         this.root = root;
         this.instrument = instrument;
@@ -19,18 +26,22 @@ export class Fretboard {
         this.numberOfStrings = numberOfStrings && numberOfStrings > this.defaultNumberOfStrings ? numberOfStrings : this.defaultNumberOfStrings;
     }
 
+
     get defaultNumberOfStrings(): number {
         return this.intervalsForDefaultStringNumber.length;
     }
+
 
     get intervalsForDefaultStringNumber(): number[] {
         return Array.from(this.tuning.intervals).reverse();
     }
 
+
     get intervals(): number[] {
         const intervals: number[] = Array.from(this.intervalsForDefaultStringNumber);
         return this.numberOfStrings > this.defaultNumberOfStrings ? this._addIntervalsForExtraStrings(intervals) : intervals;
     }
+
 
     get naturalNotes(): Note[] {
         const notes: Note[] = [];
@@ -41,15 +52,20 @@ export class Fretboard {
         return notes;
     }
 
+
     get instrIndex(): number {
         return INSTRUMENTS.findIndex(i => isEqual(i, this.instrument));
     }
 
+    
     get tuningIndex(): number {
         return this.instrument.tunings.findIndex(t => isEqual(t, this.tuning));
     }
 
 
+    /**
+     * Appends calculated intervals for extra strings based on tuning rules.
+     */
     private _addIntervalsForExtraStrings(intervals: number[]): number[] {
         for (let i = this.defaultNumberOfStrings; i < this.numberOfStrings; i++) {
             let value: number = intervals[i - 1];
@@ -63,16 +79,28 @@ export class Fretboard {
         return intervals;
     }
 
+
+    /**
+     * Shifts all intervals so that the given interval becomes the new root.
+     */
     setIntervalAsRoot(interval: number) {
         this.tuning.intervals = this.tuning.intervals.map(i => i - interval);
         this.root.index += interval;
         this.root.normalize();
     }
 
+
+    /**
+     * Replaces redundant 0 intervals at the end of the tuning with 12s for clarity.
+     */
     replaceSurplus0IntervalsW12s() {
         replaceSurplus0IntervalsW12s(this.tuning.intervals);
     }
 
+
+    /**
+     * Sets the maximum allowed number of extra strings based on global configuration.
+     */
     allowAnyExtraStrings(): void {
         this.instrument.maxExtraStrings = CONFIG.maxStrings - this.tuning.intervals.length;
     }
