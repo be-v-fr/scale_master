@@ -60,14 +60,16 @@ export class CurrentFretboardService {
   /**
    * Updates the current instrument by name.
    */
-  set instrumentName(value: string) {
-    const instrument: Instrument | undefined = INSTRUMENTS.find(i => i.name === value);
-    if (instrument) {
-      this.fretboard.instrument = instrument;
-      this.updateTuningForNewInstrument();
-      this.updateRootToNewTuning();
-    } else {
-      console.error(`Instrument with name ${value} not found.`);
+  set instrumentName(value: string | undefined) {
+    if (value) {
+      const instrument: Instrument | undefined = INSTRUMENTS.find(i => i.name === value);
+      if (instrument) {
+        this.fretboard.instrument = instrument;
+        this.updateTuningForNewInstrument();
+        this.updateRootToNewTuning();
+      } else {
+        console.error(`Instrument with name ${value} not found.`);
+      }
     }
   }
 
@@ -83,14 +85,16 @@ export class CurrentFretboardService {
   /**
    * Updates the current tuning by name.
    */
-  set tuningName(value: string) {
-    const diffToDefault: number = this.fretboard.root.index - this.fretboard.tuning.defaultRoot.index;
-    const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
-    if (tuning) {
-      this.fretboard.tuning = tuning;
-      this.updateRootToNewTuning(diffToDefault);
-    } else {
-      console.error(`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
+  set tuningName(value: string | undefined) {
+    if (value) {
+      const diffToDefault: number = this.fretboard.root.index - this.fretboard.tuning.defaultRoot.index;
+      const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
+      if (tuning) {
+        this.fretboard.tuning = tuning;
+        this.updateRootToNewTuning(diffToDefault);
+      } else {
+        console.error(`Fretboard tuning with name ${value} not found in the current instrument's tunings array: ${this.fretboard.instrument.tunings}`);
+      }
     }
   }
 
@@ -103,7 +107,7 @@ export class CurrentFretboardService {
     if (this.fretboard.instrument.maxExtraStrings > 0) {
       for (let i = 0; i <= this.fretboard.instrument.maxExtraStrings; i++) {
         const numberOfStrings: number = this.fretboard.defaultNumberOfStrings + i;
-        if(numberOfStrings > CONFIG.maxStrings) break;
+        if (numberOfStrings > CONFIG.maxStrings) break;
         numbersOfStrings.push(numberOfStrings);
       }
     }
@@ -142,7 +146,7 @@ export class CurrentFretboardService {
    */
   updateRootToNewTuning(diffToDefault?: number): void {
     let updatedIndex: number = this.fretboard.tuning.defaultRoot.index;
-    if(diffToDefault) {
+    if (diffToDefault) {
       updatedIndex += diffToDefault;
     }
     const note: Note | undefined = this.currScale.matchedNotes?.find(n => n.index === updatedIndex);
@@ -191,11 +195,11 @@ export class CurrentFretboardService {
       let modeIndex: number = this.currScale.scale.root.index + m.interval;
       modeIndex = getModTwelveIndex(modeIndex);
       const indexEqual: boolean = (modeIndex === this.getFretNoteIndex(instrumentString, fret));
-      if(indexEqual) result = true;
+      if (indexEqual) result = true;
     });
     return result;
   }
-  
+
 
   /**
    * Resets to default fretboard and disables custom flag.

@@ -51,7 +51,7 @@ export class CurrentScaleService {
   /**
    * Updates the current category by name.
    */
-  set categoryName(value: string) {
+  set categoryName(value: string | undefined) {
     if (value) {
       const category: ScaleCategory | undefined = SCALES.find(s => s.name === value);
       if (category) {
@@ -74,12 +74,14 @@ export class CurrentScaleService {
   /**
    * Updates the current mode by name.
    */
-  set modeName(value: string) {
-    const mode: ScaleMode | undefined = this.scale.category.modes?.find(s => s.name === value);
-    if (mode) {
-      this.scale.mode = mode;
-    } else {
-      console.error(`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
+  set modeName(value: string | undefined) {
+    if (value) {
+      const mode: ScaleMode | undefined = this.scale.category.modes?.find(s => s.name === value);
+      if (mode) {
+        this.scale.mode = mode;
+      } else {
+        console.error(`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
+      }
     }
   }
 
