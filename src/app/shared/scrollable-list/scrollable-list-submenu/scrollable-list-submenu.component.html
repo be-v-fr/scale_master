@@ -4,7 +4,7 @@
             @if(allowSearch) {
             <button class="material-icons-outlined icon-btn" (click)="initSearch()">search</button>
             }
-            <span class="title" *ngIf="title">{{title}}</span>
+            <h5 class="title" *ngIf="title">{{title}}</h5>
             @if(allowReset) {
             <button class="material-icons-outlined reset-btn" (click)="refocus.emit()">autorenew</button>
             }

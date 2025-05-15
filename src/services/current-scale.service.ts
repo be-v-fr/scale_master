@@ -52,11 +52,13 @@ export class CurrentScaleService {
    * Updates the current category by name.
    */
   set categoryName(value: string) {
-    const category: ScaleCategory | undefined = SCALES.find(s => s.name === value);
-    if (category) {
-      this.scale.category = category;
-    } else {
-      console.error(`Scale category with name ${value} not found.`);
+    if (value) {
+      const category: ScaleCategory | undefined = SCALES.find(s => s.name === value);
+      if (category) {
+        this.scale.category = category;
+      } else {
+        console.error(`Scale category with name ${value} not found.`);
+      }
     }
   }
 
