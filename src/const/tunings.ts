@@ -14,6 +14,10 @@ export const DADGBE_DROP: Tuning = {
     }
 }
 
+export const GDGD_STANDARD: Tuning = {
+    ...generateTuning(['G', 'D', 'G', 'D'], 'standard')
+}
+
 export const GDAE_STANDARD: Tuning = generateTuning(['G', 'D', 'A', 'E'], 'standard');
 
 export const CGDA_STANDARD: Tuning = {
