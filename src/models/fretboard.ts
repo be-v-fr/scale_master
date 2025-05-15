@@ -5,12 +5,13 @@ import { Tuning } from "../interfaces/tuning";
 import { isEqual } from "lodash";
 import { replaceSurplus0IntervalsW12s } from "../utils/tunings.utils";
 import { CONFIG } from "../const/config";
+import { getModTwelveIndex } from "../utils/mod.utils";
 
 /**
  * Represents a musical fretboard, including instrument, tuning, and logic for calculating note intervals.
  */
 export class Fretboard {
-    root: Note;
+    rootPitchIndex: number;
     instrument: Instrument;
     numberOfStrings: number;
     tuning: Tuning;
@@ -19,8 +20,8 @@ export class Fretboard {
     /**
      * Constructor for property definition.
      */
-    constructor(instrument: Instrument, tuning: Tuning, root: Note, numberOfStrings?: number) {
-        this.root = root;
+    constructor(instrument: Instrument, tuning: Tuning, rootPitchIndex: number, numberOfStrings?: number) {
+        this.rootPitchIndex = rootPitchIndex;
         this.instrument = instrument;
         this.tuning = tuning;
         this.numberOfStrings = numberOfStrings && numberOfStrings > this.defaultNumberOfStrings ? numberOfStrings : this.defaultNumberOfStrings;
@@ -46,7 +47,7 @@ export class Fretboard {
     get naturalNotes(): Note[] {
         const notes: Note[] = [];
         this.intervals.forEach(i => {
-            let index = this.root.index + i;
+            let index = this.rootPitchIndex + i;
             notes.push(new Note(index));
         });
         return notes;
@@ -85,8 +86,8 @@ export class Fretboard {
      */
     setIntervalAsRoot(interval: number) {
         this.tuning.intervals = this.tuning.intervals.map(i => i - interval);
-        this.root.index += interval;
-        this.root.normalize();
+        this.rootPitchIndex += interval;
+        this.rootPitchIndex = getModTwelveIndex(this.rootPitchIndex);
     }
 
 

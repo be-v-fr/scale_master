@@ -102,7 +102,7 @@ export class DialogOpenItemComponent implements OnInit {
    */
   openTuning(tuning: ExtendedTuning): void {
     this.currFretboard.isCustom = true;
-    this.currFretboard.fretboard = new Fretboard(this.currFretboard.fretboard.instrument, tuning, this.currFretboard.fretboard.root, tuning.intervals.length);
+    this.currFretboard.fretboard = new Fretboard(this.currFretboard.fretboard.instrument, tuning, this.currFretboard.fretboard.rootPitchIndex, tuning.intervals.length);
     this.currFretboard.fretboard.instrument.maxExtraStrings = tuning.maxExtraStrings;
   }
 

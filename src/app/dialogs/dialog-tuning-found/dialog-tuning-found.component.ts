@@ -84,7 +84,7 @@ export class DialogTuningFoundComponent {
       this.currFretboard.fretboard = new Fretboard(
         this.instrument,
         this.instrument.tunings[this.tuningIndex],
-        this.currFretboard.fretboard.root
+        this.currFretboard.fretboard.rootPitchIndex
       );
     }
   }

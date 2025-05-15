@@ -11,10 +11,10 @@
                 (currentChange)="currScale.updateCurrScaleRootNote($event)" />
             } @else {
             <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
-                [title]="'Root'" [current]="currFretboard.fretboard.root.printNaturalWithFlatAlternative()"
+                [title]="'Root'" [current]="currFretboard.root.printNaturalWithFlatAlternative()"
                 (currentChange)="currFretboard.updateCurrFretboardRootNote($event)"
                 [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
-                [autofocus]="currFretboard.fretboard.root.index" />
+                [autofocus]="currFretboard.root.index" />
             }
             <div class="menu-content-wrapper">
                 <div class="menu-content">

@@ -16,7 +16,7 @@ import { CONFIG } from '../const/config';
 })
 export class CurrentFretboardService {
   private get _defaultFretboard(): Fretboard {
-    return new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], new Note(7));
+    return new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], 7);
   };
   public fretboard: Fretboard = this._defaultFretboard;
   isCustom: boolean = false;
@@ -38,6 +38,11 @@ export class CurrentFretboardService {
   get notes(): Note[] {
     const notes = Note.matchOverlappingNotes(this.fretboard.naturalNotes, this.currScale.scale.notes);
     return Note.makeConsistentAccidentals(notes, this.currScale.scale.notes);
+  }
+
+
+  get root(): Note {
+    return this.notes.find(n => n.index === this.fretboard.rootPitchIndex) || new Note(this.fretboard.rootPitchIndex);
   }
 
 
@@ -87,7 +92,7 @@ export class CurrentFretboardService {
    */
   set tuningName(value: string | undefined) {
     if (value) {
-      const diffToDefault: number = this.fretboard.root.index - this.fretboard.tuning.defaultRoot.index;
+      const diffToDefault: number = this.fretboard.rootPitchIndex - this.fretboard.tuning.defaultRoot.index;
       const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
       if (tuning) {
         this.fretboard.tuning = tuning;
@@ -122,7 +127,7 @@ export class CurrentFretboardService {
    */
   updateCurrFretboardRootNote(noteString: string) {
     const note: Note = Note.textToNote(noteString);
-    this.fretboard.root = note;
+    this.fretboard.rootPitchIndex = note.index;
   }
 
 
@@ -150,7 +155,7 @@ export class CurrentFretboardService {
       updatedIndex += diffToDefault;
     }
     const note: Note | undefined = this.currScale.matchedNotes?.find(n => n.index === updatedIndex);
-    this.fretboard.root = note ? note : this.fretboard.tuning.defaultRoot;
+    this.fretboard.rootPitchIndex = note ? note.index : this.fretboard.tuning.defaultRoot.index;
   }
 
 

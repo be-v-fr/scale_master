@@ -36,10 +36,10 @@
                 [content]="currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames"
                 [(current)]="currFretboard.tuningName" [title]="'Tuning'" />
             <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"
-                [title]="'Root'" [current]="currFretboard.fretboard.root.print()"
+                [title]="'Root'" [current]="currFretboard.root.print()"
                 (currentChange)="currFretboard.updateCurrFretboardRootNote($event)" [allowSearch]="false"
                 [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
-                [autofocus]="currFretboard.fretboard.root.index" />
+                [autofocus]="currFretboard.root.index" />
             <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="'#str.'"
                 [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />
         </div>

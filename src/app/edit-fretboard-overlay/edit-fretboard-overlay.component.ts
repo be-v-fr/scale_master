@@ -8,6 +8,7 @@ import { Note } from '../../models/note';
 import { DynamicLineComponent } from '../shared/dynamic-line/dynamic-line.component';
 import { DialogAddStringsRulesComponent } from '../dialogs/dialog-add-strings-rules/dialog-add-strings-rules.component';
 import { ScrollableListComponent } from '../shared/scrollable-list/scrollable-list.component';
+import { getModTwelveIndex } from '../../utils/mod.utils';
 
 @Component({
   selector: 'app-edit-fretboard-overlay',
@@ -52,7 +53,7 @@ export class EditFretboardOverlayComponent {
       const intervalIndex: number = this.currFretboard.fretboard.tuning.intervals.length - this.custom.currentStringSelection - 1;
       const isRootString: boolean = (this.currFretboard.fretboard.tuning.intervals.findIndex(i => i === 0) === intervalIndex);
       const updatedNote: Note = Note.textToNote(noteString);
-      const updatedInterval: number = updatedNote.getIntervalFromIndex(this.currFretboard.fretboard.root.index);
+      const updatedInterval: number = updatedNote.getIntervalFromIndex(this.currFretboard.fretboard.rootPitchIndex);
       if (isRootString) {
         this._changeRootString(updatedInterval);
       } else {
@@ -66,10 +67,10 @@ export class EditFretboardOverlayComponent {
    * Adjusts the root note and updates all tuning intervals accordingly.
    */
   private _changeRootString(diff: number): void {
-    this.currFretboard.fretboard.root.index += diff;
-    this.currFretboard.fretboard.root.normalize();
+    this.currFretboard.fretboard.rootPitchIndex += diff;
+    this.currFretboard.fretboard.rootPitchIndex = getModTwelveIndex(this.currFretboard.fretboard.rootPitchIndex);
     this.currFretboard.fretboard.tuning.intervals = this.currFretboard.fretboard.tuning.intervals.map(i => i === 0 ? i : i - diff);
     this.currFretboard.fretboard.replaceSurplus0IntervalsW12s();
-    this.currFretboard.fretboard.tuning.defaultRoot.index = this.currFretboard.fretboard.root.index;
+    this.currFretboard.fretboard.tuning.defaultRoot.index = this.currFretboard.fretboard.rootPitchIndex;
   }
 }

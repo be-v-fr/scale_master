@@ -122,7 +122,7 @@ export class MenuEditComponent implements OnInit {
     const extendedTuning: ExtendedTuning = {
       name: currentTuning.name,
       intervals: currentTuning.intervals,
-      defaultRoot: this.currFretboard.fretboard.root,
+      defaultRoot: this.currFretboard.root,
       extraStrings: {
         interval: currentTuning.extraStrings.interval,
         previousStringCorrection: currentTuning.extraStrings.previousStringCorrection
