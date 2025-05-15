@@ -1,3 +1,6 @@
+/**
+ * Represents an address for legal information.
+ */
 export interface Address {
     name: string,
     street: string,
