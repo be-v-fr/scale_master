@@ -15,7 +15,9 @@ import { CONFIG } from '../const/config';
   providedIn: 'root'
 })
 export class CurrentFretboardService {
-  private _defaultFretboard: Fretboard = new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], new Note(7));
+  private get _defaultFretboard(): Fretboard {
+    return new Fretboard(INSTRUMENTS[0], INSTRUMENTS[0].tunings[0], new Note(7));
+  };
   public fretboard: Fretboard = this._defaultFretboard;
   isCustom: boolean = false;
 

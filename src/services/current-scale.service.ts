@@ -14,7 +14,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class CurrentScaleService {
-  private _defaultScale = new Scale(new Note(0), SCALES[0], { name: 'minor', interval: 9 });
+  private get _defaultScale(): Scale {
+    return new Scale(new Note(0), SCALES[0], { name: 'Minor', interval: 9 });
+  }
   public scale: Scale = this._defaultScale;
   isCustom: boolean = false;
 
@@ -75,7 +77,7 @@ export class CurrentScaleService {
     if (mode) {
       this.scale.mode = mode;
     } else {
-      throw (`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
+      console.error(`Scale mode with name ${value} not found in the current category's modes array: ${this.scale.category.modes}`);
     }
   }
 
