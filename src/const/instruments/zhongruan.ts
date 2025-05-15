@@ -2,7 +2,7 @@ import { Instrument } from "../../interfaces/instrument";
 import { GDGD_STANDARD } from "../tunings";
 
 export const ZHONGRUAN: Instrument = {
-    name: 'zhongruan',
+    name: 'Zhongruan',
     tunings: [
         GDGD_STANDARD
     ],

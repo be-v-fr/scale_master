@@ -1,7 +1,7 @@
 import { generateTuning } from "../../utils/tunings.utils";
 
 export const SITAR = {
-    name: 'sitar',
+    name: 'Sitar',
     tunings: [
         generateTuning(['G', 'D', 'F#', 'A', 'D', 'D'], 'standard', 5),
     ],

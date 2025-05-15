@@ -4,31 +4,31 @@ import { CGDA_STANDARD, GDAE_STANDARD } from "../tunings";
 
 
 export const VIOLIN: Instrument = {
-    name: 'violin',
+    name: 'Violin',
     tunings: [GDAE_STANDARD],
     maxExtraStrings: 0
 };
 
 export const VIOLA: Instrument = {
-    name: 'viola',
+    name: 'Viola',
     tunings: [CGDA_STANDARD],
     maxExtraStrings: 0
 };
 
 export const CELLO: Instrument = {
-    name: 'cello',
+    name: 'Cello',
     tunings: [CGDA_STANDARD],
     maxExtraStrings: 0
 };
 
 export const DOUBLE_BASS: Instrument = {
-    name: 'double bass',
+    name: 'Double bass',
     tunings: [
         GDAE_STANDARD,
         {
             ...GDAE_STANDARD,
             defaultRoot: new Note(0),
-            name: 'solo'
+            name: 'Solo'
         }
     ],
     maxExtraStrings: 0

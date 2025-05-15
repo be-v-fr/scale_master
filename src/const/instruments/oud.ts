@@ -2,7 +2,7 @@ import { Instrument } from "../../interfaces/instrument";
 import { generateTuning } from "../../utils/tunings.utils";
 
 export const OUD: Instrument = {
-  name: 'oud',
+  name: 'Oud',
   tunings: [
     generateTuning(['C', 'F', 'A', 'D', 'G', 'C'], 'Arabic'),
     generateTuning(['C#', 'F#', 'B', 'E', 'A', 'D'], 'Turkish'),

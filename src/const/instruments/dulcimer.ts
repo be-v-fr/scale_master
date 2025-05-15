@@ -1,12 +1,11 @@
 import { Instrument } from "../../interfaces/instrument";
-import { Note } from "../../models/note";
 import { generateTuning } from "../../utils/tunings.utils";
 
 export const DULCIMER: Instrument = {
-  name: 'dulcimer',
+  name: 'Dulcimer',
   tunings: [
-    generateTuning(['D', 'A', 'D'], 'mixolydian'),
-    generateTuning(['D', 'A', 'A'], 'ionian'),
+    generateTuning(['D', 'A', 'D'], 'Mixolydian'),
+    generateTuning(['D', 'A', 'A'], 'Ionian'),
   ],
   maxExtraStrings: 0,
 };
