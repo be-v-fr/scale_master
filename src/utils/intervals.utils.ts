@@ -1,5 +1,9 @@
 import { getModTwelveIndex } from "./mod.utils";
 
+
+/*
+ * Maps an interval (0–11) to a harmonic meaning index (1–7).
+ */
 export function getHarmonicMeaningIndex(interval: number): number {
     interval = getModTwelveIndex(interval);
     switch(interval) {
@@ -19,9 +23,13 @@ export function getHarmonicMeaningIndex(interval: number): number {
     }
 }
 
+
+/*
+ * Returns the distance in letters from lower to higher (a–g).
+ */
 export function getAlphabetDistance(higherLetter: string, lowerLetter: string): number {
     if (!/^[a-g]$/.test(higherLetter) || !/^[a-g]$/.test(lowerLetter)) {
-        throw new Error("Only letters from 'a' to 'g' are allowed.");
+        console.error("Only letters from 'a' to 'g' are allowed.");
     }
     const higherPosition: number = higherLetter.charCodeAt(0) - 'a'.charCodeAt(0);
     const lowerPosition: number = lowerLetter.charCodeAt(0) - 'a'.charCodeAt(0);
