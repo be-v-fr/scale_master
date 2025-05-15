@@ -13,7 +13,7 @@
             <app-scrollable-list class="narrower" [content]="scalesData.extendedNaturalNoteNames" [allowSearch]="false"
                 [title]="'Root'" [current]="currFretboard.root.printNaturalWithFlatAlternative()"
                 (currentChange)="currFretboard.updateCurrFretboardRootNote($event)"
-                [defaultIndex]="currFretboard.fretboard.tuning.defaultRoot.index"
+                [defaultIndex]="currFretboard.fretboard.tuning.defaultRootPitchIndex"
                 [autofocus]="currFretboard.root.index" />
             }
             <div class="menu-content-wrapper">

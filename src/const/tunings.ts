@@ -18,5 +18,5 @@ export const GDAE_STANDARD: Tuning = generateTuning(['G', 'D', 'A', 'E'], 'Stand
 
 export const CGDA_STANDARD: Tuning = {
     ...GDAE_STANDARD,
-    defaultRoot: new Note(3),
+    defaultRootPitchIndex: 3,
 };

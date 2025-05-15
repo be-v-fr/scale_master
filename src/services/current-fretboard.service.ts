@@ -92,7 +92,7 @@ export class CurrentFretboardService {
    */
   set tuningName(value: string | undefined) {
     if (value) {
-      const diffToDefault: number = this.fretboard.rootPitchIndex - this.fretboard.tuning.defaultRoot.index;
+      const diffToDefault: number = this.fretboard.rootPitchIndex - this.fretboard.tuning.defaultRootPitchIndex;
       const tuning: Tuning | undefined = this.fretboard.instrument.tunings.find(t => t.name === value);
       if (tuning) {
         this.fretboard.tuning = tuning;
@@ -150,12 +150,12 @@ export class CurrentFretboardService {
    * @param diffToDefault - Difference to default root in half tone steps.
    */
   updateRootToNewTuning(diffToDefault?: number): void {
-    let updatedIndex: number = this.fretboard.tuning.defaultRoot.index;
+    let updatedIndex: number = this.fretboard.tuning.defaultRootPitchIndex;
     if (diffToDefault) {
       updatedIndex += diffToDefault;
     }
     const note: Note | undefined = this.currScale.matchedNotes?.find(n => n.index === updatedIndex);
-    this.fretboard.rootPitchIndex = note ? note.index : this.fretboard.tuning.defaultRoot.index;
+    this.fretboard.rootPitchIndex = note ? note.index : this.fretboard.tuning.defaultRootPitchIndex;
   }
 
 

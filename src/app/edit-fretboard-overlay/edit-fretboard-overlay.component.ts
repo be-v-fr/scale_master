@@ -71,6 +71,6 @@ export class EditFretboardOverlayComponent {
     this.currFretboard.fretboard.rootPitchIndex = getModTwelveIndex(this.currFretboard.fretboard.rootPitchIndex);
     this.currFretboard.fretboard.tuning.intervals = this.currFretboard.fretboard.tuning.intervals.map(i => i === 0 ? i : i - diff);
     this.currFretboard.fretboard.replaceSurplus0IntervalsW12s();
-    this.currFretboard.fretboard.tuning.defaultRoot.index = this.currFretboard.fretboard.rootPitchIndex;
+    this.currFretboard.fretboard.tuning.defaultRootPitchIndex = this.currFretboard.fretboard.rootPitchIndex;
   }
 }

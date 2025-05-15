@@ -27,7 +27,7 @@ export const DOUBLE_BASS: Instrument = {
         GDAE_STANDARD,
         {
             ...GDAE_STANDARD,
-            defaultRoot: new Note(0),
+            defaultRootPitchIndex: 0,
             name: 'Solo'
         }
     ],

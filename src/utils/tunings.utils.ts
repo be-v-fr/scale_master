@@ -32,7 +32,7 @@ export function generateTuning(noteLetters: string[], name: string, defaultRootI
     return {
         name: name,
         intervals: intervals,
-        defaultRoot: new Note(defaultRootIndex),
+        defaultRootPitchIndex: defaultRootIndex,
         extraStrings: {
             interval: 5,
         }
