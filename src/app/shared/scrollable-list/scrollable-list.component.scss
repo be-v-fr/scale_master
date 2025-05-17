@@ -170,4 +170,8 @@ app-scrollable-list-item {
   &.under-out {
     @extend .under;
   }
+
+  &.scaling-simulation {
+    visibility: hidden;
+  }
 }

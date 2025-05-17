@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { DisplayService } from '../../../../services/display.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -20,8 +20,7 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
   @Input({ required: true }) set content(value: string | number) {
     this._content = value;
-    this.cdr.detectChanges();
-    this.updateSize();
+    this.applyMapScaling();
   };
 
   @Input() default?: string | number;
@@ -32,6 +31,13 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
   textEllipsis: boolean = false;
 
+  private _initScalingFlag: boolean = true;
+  @Input() set initScalingFlag(value: boolean) {
+    this._initScalingFlag = value;
+    this.initScaling();
+  }
+  @Output() scalingInitComplete: EventEmitter<{ content: string | number, scaleDown?: number, textEllipsis: boolean }> = new EventEmitter();
+  @Input() itemScalingMap?: Map<string | number, { scaleDown: number | undefined, textEllipsis: boolean }>;
 
   /**
    * Constructor for dependency injection.
@@ -52,20 +58,44 @@ export class ScrollableListItemComponent implements AfterViewInit {
    * Initial measurement after view is initialized.
    */
   ngAfterViewInit(): void {
-    this.updateSize();
+    this.initScaling();
+  }
+
+
+  initScaling(): void {
+    if (this._initScalingFlag) {
+      this.calcScaling();
+      this.scalingInitComplete.emit({ content: this.content, scaleDown: this.scaleDown, textEllipsis: this.textEllipsis });
+      this._initScalingFlag = false;
+    } else if(this.itemScalingMap) {
+      this.applyMapScaling();
+    }
+  }
+
+
+  applyMapScaling(): void {
+    if(this.itemScalingMap) {
+      const scaling: { scaleDown: number | undefined, textEllipsis: boolean } | undefined = this.itemScalingMap.get(this._content);
+      if (scaling) {
+        this.scaleDown = scaling.scaleDown;
+        this.textEllipsis = scaling.textEllipsis;
+      }
+    }
+    this.cdr.detectChanges();
   }
 
 
   /**
    * Updates text size or triggers ellipsis if overflow is detected.
    */
-  updateSize(): void {
+  calcScaling(): void {
     if (this.contentRef && this.contentRef.nativeElement) {
       const visibleWidth: number = this.el.nativeElement.offsetWidth / 2;
       const contentWidth: number = this.contentRef.nativeElement.offsetWidth;
       const widthRatio: number = contentWidth / visibleWidth;
-      widthRatio > 1 ? this.setScaleDown(widthRatio) : this.resetScaleDown();
-      this.cdr.detectChanges();
+      if (widthRatio > 1) this.setScaleDown(widthRatio);
+      // widthRatio > 1 ? this.setScaleDown(widthRatio) : this.resetScaleDown();
+      // this.cdr.detectChanges();
     }
   }
 
@@ -78,6 +108,7 @@ export class ScrollableListItemComponent implements AfterViewInit {
       this.textEllipsis = true;
       this.scaleDown = this.scaleDownLimit;
     } else {
+      this.textEllipsis = false;
       this.scaleDown = 1 / widthRatio;
     }
   }
@@ -86,12 +117,12 @@ export class ScrollableListItemComponent implements AfterViewInit {
   /**
    * Resets scaling and ellipsis to default.
    */
-  resetScaleDown(): void {
-    if (this.scaleDown) {
-      this.scaleDown = undefined;
-      this.textEllipsis = false;
-      this.cdr.detectChanges();
-      this.updateSize();
-    }
-  }
+  // resetScaleDown(): void {
+  //   if (this.scaleDown !== undefined) {
+  //     this.scaleDown = undefined;
+  //     this.textEllipsis = false;
+  //     this.cdr.detectChanges();
+  //     this.updateSize();
+  //   }
+  // }
 }

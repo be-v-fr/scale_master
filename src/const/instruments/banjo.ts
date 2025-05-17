@@ -3,7 +3,7 @@ import { generateTuning } from "../../utils/tunings.utils";
 import { CGDA_STANDARD, EADGBE_STANDARD, GDAE_STANDARD } from "../tunings";
 
 export const BANJO: Instrument = {
-  name: 'banjo',
+  name: 'Banjo',
   tunings: [
     generateTuning(['G', 'D', 'G', 'B', 'D'], 'Open (5th String)'),
     generateTuning(['G', 'C', 'G', 'C', 'E'], 'Open (4th String)', 3),

@@ -3,12 +3,18 @@
     <div class="list-inner-wrapper" appHover (hoverKeyDown)="onHoverKeyDown($event)"
         [class.collapsed]="!preventCollapse && display.menuCollapsed">
         <div class="list-container">
-            @if(filteredContent.length > 0) {
+            @if(calculatingItemScaling && content && content.length > 0) {
+            @for(item of content; track item; let l = $last) {
+            <app-scrollable-list-item class="scaling-simulation" [content]="item"
+                (scalingInitComplete)="addToScalingMap($event, l)" />
+            }
+            } @else if (filteredContent.length > 0) {
             @for (pos of positions; track i; let i = $index; let f = $first; let l = $last) {
             <app-scrollable-list-item #contentRef
                 [ngClass]="(filteredContent.length > 3 && (f || l)) || (i === 1 && scrollSteps === 2) || (i === positions.length - 2 && scrollSteps === -2) ? pos : positions[i - scrollSteps]"
                 [class.scroll]="scrollSteps !== 0" [default]="filteredContent[defaultIndex]"
-                (mousedown)="onListItemClick(i)" [content]="getContentItem(i)" />
+                (mousedown)="onListItemClick(i)" [content]="getContentItem(i)" [initScalingFlag]="false"
+                [itemScalingMap]="itemScalingMap" />
             }
             } @else {
             <span class="empty-field">&ndash;</span>

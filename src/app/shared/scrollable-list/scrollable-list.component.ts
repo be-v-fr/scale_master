@@ -22,11 +22,15 @@ import { ArrowPointerComponent } from '../arrow-pointer/arrow-pointer.component'
 })
 export class ScrollableListComponent implements OnInit {
   private _content: (string | number)[] = [];
+  get content(): (string | number)[] {
+    return this._content;
+  }
   @Input({ required: true }) set content(value: (string | number)[]) {
     if (!isEqual(this._content, value)) {
       this._content = value;
       this.focus = this.defaultIndex;
       this.applySearchFilter();
+      this.calculatingItemScaling = true;
     }
   };
   filteredContent: (string | number)[] = [];
@@ -79,6 +83,9 @@ export class ScrollableListComponent implements OnInit {
   @Input() set disabled(value: boolean) {
     this._disabled = value;
   }
+
+  calculatingItemScaling: boolean = true;
+  itemScalingMap = new Map<string | number, { scaleDown: number | undefined, textEllipsis: boolean }>();
 
 
   /**
@@ -343,7 +350,7 @@ export class ScrollableListComponent implements OnInit {
     return 0;
   }
 
-  
+
   /**
    * Handles changes in search input.
    * Applies new filter and resets focus.
@@ -352,5 +359,14 @@ export class ScrollableListComponent implements OnInit {
     const index = this.searchFilter ? 0 : this.focus;
     this.applySearchFilter();
     this.refocusByIndex(index);
+  }
+
+
+  addToScalingMap(item: { content: string | number, scaleDown?: number, textEllipsis: boolean }, lastItem: boolean): void {
+    this.itemScalingMap.set(item.content, { scaleDown: item.scaleDown || undefined, textEllipsis: item.textEllipsis });
+    if(lastItem) {
+      this.calculatingItemScaling = false;
+      this.cdr.detectChanges();
+    }
   }
 }
