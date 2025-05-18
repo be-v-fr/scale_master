@@ -1,0 +1,1061 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>scales-on-frets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">scales-on-frets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DialogExportComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/dialogs/dialog-export/dialog-export.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dialog-export</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../directives/ExportToDirective.html" target="_self" >ExportToDirective</a></code>
+                                <code><a href="../components/FretboardComponent.html" target="_self" >FretboardComponent</a></code>
+                                <code><a href="../components/FretboardAsTextComponent.html" target="_self" >FretboardAsTextComponent</a></code>
+                                <code><a href="../components/ExportOptionsComponent.html" target="_self" >ExportOptionsComponent</a></code>
+                                <code><a href="../components/LoaderComponent.html" target="_self" >LoaderComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dialog-export.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./dialog-export.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#_data" >_data</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#_downloadUrl" >_downloadUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#fileType" >fileType</a>
+                            </li>
+                            <li>
+                                <a href="#routeSub" >routeSub</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toastMsg" >toastMsg</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#downloadUrl" >downloadUrl</a>
+                                </li>
+                                <li>
+                                    <a href="#data" >data</a>
+                                </li>
+                                <li>
+                                    <a href="#fileTypeToString" >fileTypeToString</a>
+                                </li>
+                                <li>
+                                    <a href="#fileName" >fileName</a>
+                                </li>
+                                <li>
+                                    <a href="#copyMsg" >copyMsg</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: ActivatedRoute, currScale: <a href="../injectables/CurrentScaleService.html" target="_self">CurrentScaleService</a>, cdr: ChangeDetectorRef, toastMsg: <a href="../injectables/ToastMessageService.html" target="_self">ToastMessageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for dependency injection.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>currScale</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CurrentScaleService.html" target="_self" >CurrentScaleService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cdr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toastMsg</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToastMessageService.html" target="_self" >ToastMessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that runs when the component is destroyed.
+Unsubscribes from the route parameters to avoid memory leaks.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that runs after component initialization.
+Retrieves the export file type from the route parameters.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_data"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>_data</b></span>
+                        <a href="#_data"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_downloadUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>_downloadUrl</b></span>
+                        <a href="#_downloadUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileType"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>fileType</b></span>
+                        <a href="#fileType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;img&quot; | &quot;txt&quot;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeSub"></a>
+                    <span class="name">
+                        <span ><b>routeSub</b></span>
+                        <a href="#routeSub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastMsg"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>toastMsg</b></span>
+                        <a href="#toastMsg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ToastMessageService.html" target="_self" >ToastMessageService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="downloadUrl"></a>
+                        <span class="name"><b>downloadUrl</b><a href="#downloadUrl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>downloadUrl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:39</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>downloadUrl(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:42</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name"><b>data</b><a href="#data"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>data()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:48</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>data(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:51</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fileTypeToString"></a>
+                        <span class="name"><b>fileTypeToString</b><a href="#fileTypeToString"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>fileTypeToString()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:82</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fileName"></a>
+                        <span class="name"><b>fileName</b><a href="#fileName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>fileName()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:91</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="copyMsg"></a>
+                        <span class="name"><b>copyMsg</b><a href="#copyMsg"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>copyMsg()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/dialogs/dialog-export/dialog-export.component.ts:96</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { ExportToDirective } from &#x27;../../../directives/export-to.directive&#x27;;
+import { FretboardComponent } from &#x27;../../fretboard/fretboard.component&#x27;;
+import { FretboardAsTextComponent } from &#x27;../../fretboard-as-text/fretboard-as-text.component&#x27;;
+import { CurrentScaleService } from &#x27;../../../services/current-scale.service&#x27;;
+import { ExportOptionsComponent } from &#x27;./export-options/export-options.component&#x27;;
+import { ToastMessageService } from &#x27;../../../services/toast-message.service&#x27;;
+import { capitalizeFirstLetter } from &#x27;../../../utils/string.utils&#x27;;
+import { LoaderComponent } from &#x27;../../shared/loader/loader.component&#x27;;
+
+@Component({
+  selector: &#x27;app-dialog-export&#x27;,
+  standalone: true,
+  imports: [CommonModule, ExportToDirective, FretboardComponent, FretboardAsTextComponent, ExportOptionsComponent, LoaderComponent],
+  templateUrl: &#x27;./dialog-export.component.html&#x27;,
+  styleUrl: &#x27;./dialog-export.component.scss&#x27;
+})
+export class DialogExportComponent implements OnInit, OnDestroy {
+  fileType?: &#x27;img&#x27; | &#x27;txt&#x27;;
+  routeSub: Subscription &#x3D; new Subscription();
+  private _downloadUrl?: string;
+  private _data?: any;
+
+
+  /**
+   * Constructor for dependency injection.
+   */
+  constructor(
+    private route: ActivatedRoute,
+    private currScale: CurrentScaleService,
+    private cdr: ChangeDetectorRef,
+    public toastMsg: ToastMessageService
+  ) { }
+
+
+  get downloadUrl(): string | undefined {
+    return this._downloadUrl;
+  }
+  set downloadUrl(value: string) {
+    this._downloadUrl &#x3D; value;
+    this.cdr.detectChanges();
+  }
+
+
+  get data(): any {
+    return this._data;
+  }
+  set data(value: any) {
+    this._data &#x3D; value;
+    this.cdr.detectChanges();
+  }
+
+
+  /**
+   * Lifecycle hook that runs after component initialization.
+   * Retrieves the export file type from the route parameters.
+   */
+  ngOnInit(): void {
+    this.routeSub &#x3D; this.route.params.subscribe(params &#x3D;&gt; {
+      const fileType &#x3D; params[&#x27;fileType&#x27;];
+      if(fileType) {
+        this.fileType &#x3D; fileType;
+      } else {
+        console.error(&#x27;Export dialog initialization failed because no file type was specified in the router params.&#x27;);
+      }
+    });
+  }
+
+
+  /**
+   * Lifecycle hook that runs when the component is destroyed.
+   * Unsubscribes from the route parameters to avoid memory leaks.
+   */
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
+  }
+
+
+  get fileTypeToString(): string | undefined {
+    switch(this.fileType) {
+      case &#x27;img&#x27;: return &#x27;image&#x27;;
+      case &#x27;txt&#x27;: return &#x27;text&#x27;;
+    }
+    return undefined;
+  }
+
+
+  get fileName(): string {
+    return this.currScale.scale.name.replaceAll(&#x27; &#x27;, &#x27;_&#x27;);
+  }
+
+
+  get copyMsg(): string | undefined {
+    const type: string | undefined &#x3D; this.fileTypeToString;
+    if(!type) return;
+    return &#x60;${capitalizeFirstLetter(type)} copied to clipboard&#x60;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2&gt;Export as {{fileTypeToString}}&lt;/h2&gt;
+&lt;div class&#x3D;&quot;export-wrapper&quot; [ngClass]&#x3D;&quot;fileType&quot;&gt;
+    &lt;div *ngIf&#x3D;&quot;fileType&quot; [ngSwitch]&#x3D;&quot;fileType&quot; [appExportTo]&#x3D;&quot;fileType&quot; [export]&#x3D;&quot;data&quot; (urlReady)&#x3D;&quot;downloadUrl &#x3D; $event&quot;&gt;
+        &lt;app-fretboard *ngSwitchCase&#x3D;&quot;&#x27;img&#x27;&quot; [isExport]&#x3D;&quot;true&quot; /&gt;
+        &lt;app-fretboard-as-text *ngSwitchCase&#x3D;&quot;&#x27;txt&#x27;&quot; (onFretboardInit)&#x3D;&quot;data &#x3D; $event&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div *ngIf&#x3D;&quot;!downloadUrl&quot; class&#x3D;&quot;overlay exporting&quot;&gt;
+        &lt;app-loader /&gt; 
+        &lt;span&gt;Exporting...&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;img class&#x3D;&quot;overlay export-img-result&quot; *ngIf&#x3D;&quot;downloadUrl &amp;&amp; fileType &#x3D;&#x3D; &#x27;img&#x27;&quot; [src]&#x3D;&quot;downloadUrl&quot; alt&#x3D;&quot;Export preview&quot; /&gt;
+&lt;/div&gt;
+&lt;app-export-options *ngIf&#x3D;&quot;fileTypeToString&quot; [fileName]&#x3D;&quot;fileName&quot; [fileUrl]&#x3D;&quot;downloadUrl&quot; (copied)&#x3D;&quot;toastMsg.message &#x3D; copyMsg&quot; /&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2>Export as {{fileTypeToString}}</h2><div class="export-wrapper" [ngClass]="fileType">    <div *ngIf="fileType" [ngSwitch]="fileType" [appExportTo]="fileType" [export]="data" (urlReady)="downloadUrl = $event">        <app-fretboard *ngSwitchCase="\'img\'" [isExport]="true" />        <app-fretboard-as-text *ngSwitchCase="\'txt\'" (onFretboardInit)="data = $event" />    </div>    <div *ngIf="!downloadUrl" class="overlay exporting">        <app-loader />         <span>Exporting...</span>    </div>    <img class="overlay export-img-result" *ngIf="downloadUrl && fileType == \'img\'" [src]="downloadUrl" alt="Export preview" /></div><app-export-options *ngIf="fileTypeToString" [fileName]="fileName" [fileUrl]="downloadUrl" (copied)="toastMsg.message = copyMsg" /></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppContentComponent', 'selector': 'app-content'},{'name': 'ArrowPointerComponent', 'selector': 'app-arrow-pointer'},{'name': 'CircularButtonComponent', 'selector': 'app-circular-button'},{'name': 'DialogAddStringsRulesComponent', 'selector': 'app-dialog-add-strings-rules'},{'name': 'DialogExportComponent', 'selector': 'app-dialog-export'},{'name': 'DialogNameCustomComponent', 'selector': 'app-dialog-name-custom'},{'name': 'DialogNameModeComponent', 'selector': 'app-dialog-name-mode'},{'name': 'DialogOpenItemComponent', 'selector': 'app-dialog-open-item'},{'name': 'DialogOverlayComponent', 'selector': 'app-dialog-overlay'},{'name': 'DialogRootModeInitComponent', 'selector': 'app-dialog-root-mode-init'},{'name': 'DialogScaleFoundComponent', 'selector': 'app-dialog-scale-found'},{'name': 'DialogSubmenuComponent', 'selector': 'app-dialog-submenu'},{'name': 'DialogTuningFoundComponent', 'selector': 'app-dialog-tuning-found'},{'name': 'DynamicLineComponent', 'selector': 'app-dynamic-line'},{'name': 'EditFretboardOverlayComponent', 'selector': 'app-edit-fretboard-overlay'},{'name': 'EmailLinkComponent', 'selector': 'app-email-link'},{'name': 'ExpandBtnComponent', 'selector': 'app-expand-btn'},{'name': 'ExportComponent', 'selector': 'app-export'},{'name': 'ExportOptionsComponent', 'selector': 'app-export-options'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FretboardAsTextComponent', 'selector': 'app-fretboard-as-text'},{'name': 'FretboardComponent', 'selector': 'app-fretboard'},{'name': 'FretNoteComponent', 'selector': 'app-fret-note'},{'name': 'HeadlineBackBtnComponent', 'selector': 'app-headline-back-btn'},{'name': 'HeadlineBackComponent', 'selector': 'app-headline-back'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'InfoMsgComponent', 'selector': 'app-info-msg'},{'name': 'InlineNameLinkComponent', 'selector': 'app-inline-name-link'},{'name': 'IntroLogoComponent', 'selector': 'app-intro-logo'},{'name': 'LegalPageWrapperComponent', 'selector': 'app-legal-page-wrapper'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainHeadlineBarComponent', 'selector': 'app-main-headline-bar'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'MenuEditComponent', 'selector': 'app-menu-edit'},{'name': 'MenuEditFretboardComponent', 'selector': 'app-menu-edit-fretboard'},{'name': 'MenuEditScaleComponent', 'selector': 'app-menu-edit-scale'},{'name': 'MoreMenuComponent', 'selector': 'app-more-menu'},{'name': 'OpenItemComponent', 'selector': 'app-open-item'},{'name': 'OrderingBarComponent', 'selector': 'app-ordering-bar'},{'name': 'PaginationDotsComponent', 'selector': 'app-pagination-dots'},{'name': 'PrivacyComponent', 'selector': 'app-privacy'},{'name': 'ScrollableListArrowComponent', 'selector': 'app-scrollable-list-arrow'},{'name': 'ScrollableListComponent', 'selector': 'app-scrollable-list'},{'name': 'ScrollableListItemComponent', 'selector': 'app-scrollable-list-item'},{'name': 'ScrollableListSubmenuComponent', 'selector': 'app-scrollable-list-submenu'},{'name': 'SettingsDisplayComponent', 'selector': 'app-settings-display'},{'name': 'SlideToggleComponent', 'selector': 'app-slide-toggle'},{'name': 'ToastMessageComponent', 'selector': 'app-toast-message'}];
+    var DIRECTIVES = [{'name': 'AutofocusDirective', 'selector': '[appAutofocus]'},{'name': 'CopyToClipboardDirective', 'selector': '[appCopyToClipboard]'},{'name': 'ExportToDirective', 'selector': '[appExportTo]'},{'name': 'HoverDirective', 'selector': '[appHover]'},{'name': 'SearchCurrentDirective', 'selector': '[appSearchCurrent]'}];
+    var ACTUAL_COMPONENT = {'name': 'DialogExportComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogExportComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,917 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>scales-on-frets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">scales-on-frets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MenuComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/menu/menu.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Displays the menu offering any app controls.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-menu</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/MainHeadlineBarComponent.html" target="_self" >MainHeadlineBarComponent</a></code>
+                                <code><a href="../components/ScrollableListComponent.html" target="_self" >ScrollableListComponent</a></code>
+                                <code><a href="../components/SettingsDisplayComponent.html" target="_self" >SettingsDisplayComponent</a></code>
+                                <code><a href="../components/ExportComponent.html" target="_self" >ExportComponent</a></code>
+                                <code><a href="../components/CircularButtonComponent.html" target="_self" >CircularButtonComponent</a></code>
+                            <code>RouterLink</code>
+                                <code><a href="../components/MoreMenuComponent.html" target="_self" >MoreMenuComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./menu.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./menu.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activePrimarySubmenu" >activePrimarySubmenu</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currFretboard" >currFretboard</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currScale" >currScale</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#custom" >custom</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#display" >display</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hover" >hover</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#scalesData" >scalesData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#tuningsData" >tuningsData</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#toggleActivePrimarySubmenu" >toggleActivePrimarySubmenu</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(currFretboard: <a href="../injectables/CurrentFretboardService.html" target="_self">CurrentFretboardService</a>, tuningsData: <a href="../injectables/TuningsDataService.html" target="_self">TuningsDataService</a>, currScale: <a href="../injectables/CurrentScaleService.html" target="_self">CurrentScaleService</a>, scalesData: <a href="../injectables/ScalesDataService.html" target="_self">ScalesDataService</a>, display: <a href="../injectables/DisplayService.html" target="_self">DisplayService</a>, custom: <a href="../injectables/CustomizeService.html" target="_self">CustomizeService</a>, hover: <a href="../injectables/HoverService.html" target="_self">HoverService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/menu/menu.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for dependency injection.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>currFretboard</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CurrentFretboardService.html" target="_self" >CurrentFretboardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>tuningsData</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TuningsDataService.html" target="_self" >TuningsDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>currScale</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CurrentScaleService.html" target="_self" >CurrentScaleService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>scalesData</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ScalesDataService.html" target="_self" >ScalesDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>display</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DisplayService.html" target="_self" >DisplayService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>custom</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CustomizeService.html" target="_self" >CustomizeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>hover</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HoverService.html" target="_self" >HoverService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleActivePrimarySubmenu"></a>
+                    <span class="name">
+                        <span ><b>toggleActivePrimarySubmenu</b></span>
+                        <a href="#toggleActivePrimarySubmenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleActivePrimarySubmenu()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/menu/menu.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the active primary submenu (for small screen widths).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activePrimarySubmenu"></a>
+                    <span class="name">
+                        <span ><b>activePrimarySubmenu</b></span>
+                        <a href="#activePrimarySubmenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;scale&quot; | &quot;fretboard&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;scale&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/menu/menu.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currFretboard"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currFretboard</b></span>
+                        <a href="#currFretboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/CurrentFretboardService.html" target="_self" >CurrentFretboardService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/menu/menu.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currScale"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currScale</b></span>
+                        <a href="#currScale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/CurrentScaleService.html" target="_self" >CurrentScaleService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/menu/menu.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="custom"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>custom</b></span>
+                        <a href="#custom"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/CustomizeService.html" target="_self" >CustomizeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/menu/menu.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="display"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>display</b></span>
+                        <a href="#display"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/DisplayService.html" target="_self" >DisplayService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/menu/menu.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hover"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>hover</b></span>
+                        <a href="#hover"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/HoverService.html" target="_self" >HoverService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/menu/menu.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scalesData"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>scalesData</b></span>
+                        <a href="#scalesData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ScalesDataService.html" target="_self" >ScalesDataService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/menu/menu.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tuningsData"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>tuningsData</b></span>
+                        <a href="#tuningsData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/TuningsDataService.html" target="_self" >TuningsDataService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/menu/menu.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ScrollableListComponent } from &#x27;../shared/scrollable-list/scrollable-list.component&#x27;;
+import { CurrentScaleService } from &#x27;../../services/current-scale.service&#x27;;
+import { ScalesDataService } from &#x27;../../services/scales-data.service&#x27;;
+import { CurrentFretboardService } from &#x27;../../services/current-fretboard.service&#x27;;
+import { TuningsDataService } from &#x27;../../services/tunings-data.service&#x27;;
+import { SettingsDisplayComponent } from &#x27;./settings-display/settings-display.component&#x27;;
+import { DisplayService } from &#x27;../../services/display.service&#x27;;
+import { CircularButtonComponent } from &#x27;../shared/circular-button/circular-button.component&#x27;;
+import { ExportComponent } from &#x27;./export/export.component&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+import { CustomizeService } from &#x27;../../services/customize.service&#x27;;
+import { MoreMenuComponent } from &#x27;./more-menu/more-menu.component&#x27;;
+import { MainHeadlineBarComponent } from &#x27;./main-headline-bar/main-headline-bar.component&#x27;;
+import { HoverService } from &#x27;../../services/hover.service&#x27;;
+
+/**
+ * Displays the menu offering any app controls.
+ */
+@Component({
+  selector: &#x27;app-menu&#x27;,
+  standalone: true,
+  imports: [CommonModule, MainHeadlineBarComponent, ScrollableListComponent, SettingsDisplayComponent, ExportComponent, CircularButtonComponent, RouterLink, MoreMenuComponent],
+  templateUrl: &#x27;./menu.component.html&#x27;,
+  styleUrl: &#x27;./menu.component.scss&#x27;
+})
+export class MenuComponent {
+  activePrimarySubmenu: &#x27;scale&#x27; | &#x27;fretboard&#x27; &#x3D; &#x27;scale&#x27;;
+
+
+  /**
+   * Constructor for dependency injection.
+   */
+  constructor(
+    public currFretboard: CurrentFretboardService,
+    public tuningsData: TuningsDataService,
+    public currScale: CurrentScaleService,
+    public scalesData: ScalesDataService,
+    public display: DisplayService,
+    public custom: CustomizeService,
+    public hover: HoverService
+  ) { }
+
+
+  /**
+   * Toggles the active primary submenu (for small screen widths).
+   */
+  toggleActivePrimarySubmenu(): void {
+    this.activePrimarySubmenu &#x3D; (this.activePrimarySubmenu &#x3D;&#x3D;&#x3D; &#x27;scale&#x27; ? &#x27;fretboard&#x27; : &#x27;scale&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;wrapper&quot; [class.collapsed]&#x3D;&quot;display.menuCollapsed&quot; [class.parent-hover]&#x3D;&quot;hover.menuWrapperHovered$ | async&quot;&gt;
+    &lt;section [class.hide-vw-breakpoint-2]&#x3D;&quot;activePrimarySubmenu !&#x3D;&#x3D; &#x27;scale&#x27;&quot;&gt;
+        &lt;app-main-headline-bar [mode]&#x3D;&quot;&#x27;scale&#x27;&quot; /&gt;
+        &lt;div class&#x3D;&quot;scrollable-lists-container&quot;&gt;
+            &lt;app-scrollable-list class&#x3D;&quot;narrower&quot; *ngIf&#x3D;&quot;scalesData.extendedNaturalNoteNames&quot;
+                [content]&#x3D;&quot;scalesData.extendedNaturalNoteNames&quot; [title]&#x3D;&quot;&#x27;Root&#x27;&quot;
+                [current]&#x3D;&quot;currScale.scale.root.printNaturalWithFlatAlternative()&quot;
+                (currentChange)&#x3D;&quot;currScale.updateCurrScaleRootNote($event)&quot; [allowSearch]&#x3D;&quot;false&quot; /&gt;
+            &lt;app-scrollable-list *ngIf&#x3D;&quot;scalesData.categoryNames&quot;
+                [content]&#x3D;&quot;currScale.isCustom ? [currScale.categoryName] : scalesData.categoryNames&quot;
+                [title]&#x3D;&quot;&#x27;Category&#x27;&quot; [(current)]&#x3D;&quot;currScale.categoryName&quot;
+                (currentChange)&#x3D;&quot;currScale.checkCurrentMode()&quot; /&gt;
+            &lt;app-scrollable-list class&#x3D;&quot;narrow&quot; *ngIf&#x3D;&quot;currScale.categoryModeNames &amp;&amp; currScale.modeName&quot;
+                [content]&#x3D;&quot;currScale.categoryModeNames&quot; [(current)]&#x3D;&quot;currScale.modeName&quot;
+                [allowSearch]&#x3D;&quot;currScale.categoryModeNames.length &gt; 0&quot;
+                [allowReset]&#x3D;&quot;currScale.categoryModeNames.length &gt; 0&quot; [title]&#x3D;&quot;&#x27;Mode&#x27;&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section *ngIf&#x3D;&quot;activePrimarySubmenu !&#x3D;&#x3D; &#x27;scale&#x27;&quot; class&#x3D;&quot;show-vw-breakpoint-2 activate-submenu&quot;&gt;
+        &lt;h4 class&#x3D;&quot;h4-as-button prevent-select&quot; (click)&#x3D;&quot;toggleActivePrimarySubmenu()&quot;&gt;
+            &lt;app-circular-button [icon]&#x3D;&quot;&#x27;code&#x27;&quot; [info]&#x3D;&quot;&#x27;Expand&#x27;&quot; /&gt;
+            Scale
+        &lt;/h4&gt;
+    &lt;/section&gt;
+    &lt;section [class.hide-vw-breakpoint-2]&#x3D;&quot;activePrimarySubmenu !&#x3D;&#x3D; &#x27;fretboard&#x27;&quot;&gt;
+        &lt;app-main-headline-bar [mode]&#x3D;&quot;&#x27;fretboard&#x27;&quot; /&gt;
+        &lt;div class&#x3D;&quot;scrollable-lists-container&quot;&gt;
+            @if(currFretboard.isCustom) {
+            &lt;app-scrollable-list class&#x3D;&quot;narrow&quot; [content]&#x3D;&quot;[]&quot; [title]&#x3D;&quot;&#x27;Instrument&#x27;&quot; /&gt;
+            } @else {
+            &lt;app-scrollable-list class&#x3D;&quot;narrow&quot; *ngIf&#x3D;&quot;tuningsData.instrumentNames&quot;
+                [content]&#x3D;&quot;tuningsData.instrumentNames&quot; [title]&#x3D;&quot;&#x27;Instrument&#x27;&quot;
+                [(current)]&#x3D;&quot;currFretboard.instrumentName&quot; /&gt;
+            }
+            &lt;app-scrollable-list *ngIf&#x3D;&quot;currFretboard.instrumentTuningNames &amp;&amp; currFretboard.tuningName&quot;
+                [content]&#x3D;&quot;currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames&quot;
+                [(current)]&#x3D;&quot;currFretboard.tuningName&quot; [title]&#x3D;&quot;&#x27;Tuning&#x27;&quot; /&gt;
+            &lt;app-scrollable-list class&#x3D;&quot;tiny&quot; *ngIf&#x3D;&quot;currScale.matchedNoteNames&quot; [content]&#x3D;&quot;currScale.matchedNoteNames&quot;
+                [title]&#x3D;&quot;&#x27;Root&#x27;&quot; [current]&#x3D;&quot;currFretboard.root.print()&quot;
+                (currentChange)&#x3D;&quot;currFretboard.updateCurrFretboardRootNote($event)&quot; [allowSearch]&#x3D;&quot;false&quot;
+                [defaultIndex]&#x3D;&quot;currFretboard.fretboard.tuning.defaultRootPitchIndex&quot;
+                [autofocus]&#x3D;&quot;currFretboard.root.index&quot; /&gt;
+            &lt;app-scrollable-list class&#x3D;&quot;tiny&quot; [content]&#x3D;&quot;currFretboard.numbersOfStrings&quot; [title]&#x3D;&quot;&#x27;#str.&#x27;&quot;
+                [(current)]&#x3D;&quot;currFretboard.fretboard.numberOfStrings&quot; [allowSearch]&#x3D;&quot;false&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section *ngIf&#x3D;&quot;activePrimarySubmenu !&#x3D;&#x3D; &#x27;fretboard&#x27;&quot; class&#x3D;&quot;show-vw-breakpoint-2 activate-submenu&quot;&gt;
+        &lt;h4 class&#x3D;&quot;h4-as-button prevent-select&quot; (click)&#x3D;&quot;toggleActivePrimarySubmenu()&quot;&gt;
+            &lt;app-circular-button [icon]&#x3D;&quot;&#x27;code&#x27;&quot; [info]&#x3D;&quot;&#x27;Expand&#x27;&quot; /&gt;
+            Fretboard
+        &lt;/h4&gt;
+    &lt;/section&gt;
+    &lt;section class&#x3D;&quot;secondary-submenu&quot; [class.collapsed]&#x3D;&quot;display.menuCollapsed&quot;&gt;
+        &lt;h4 [class.collapsed]&#x3D;&quot;display.menuCollapsed&quot;
+            [routerLink]&#x3D;&quot;[{ outlets: { &#x27;dialog&#x27;: [&#x27;d&#x27;, &#x27;more&#x27;, &#x27;display&#x27;] } }]&quot;&gt;
+            &lt;i class&#x3D;&quot;material-icons-outlined&quot;&gt;palette&lt;/i&gt;
+            Display
+        &lt;/h4&gt;
+        &lt;app-settings-display /&gt;
+    &lt;/section&gt;
+    &lt;section class&#x3D;&quot;secondary-submenu&quot; [class.collapsed]&#x3D;&quot;display.menuCollapsed&quot;&gt;
+        &lt;h4 [class.collapsed]&#x3D;&quot;display.menuCollapsed&quot; [class.prevent-select]&#x3D;&quot;display.menuCollapsed&quot;
+            [routerLink]&#x3D;&quot;[{ outlets: { &#x27;dialog&#x27;: [&#x27;d&#x27;, &#x27;more&#x27;, &#x27;export&#x27;] } }]&quot;&gt;
+            &lt;i class&#x3D;&quot;material-icons-outlined&quot;&gt;output&lt;/i&gt;
+            Export
+        &lt;/h4&gt;
+        &lt;app-export /&gt;
+    &lt;/section&gt;
+    &lt;app-more-menu /&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="wrapper" [class.collapsed]="display.menuCollapsed" [class.parent-hover]="hover.menuWrapperHovered$ | async">    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== \'scale\'">        <app-main-headline-bar [mode]="\'scale\'" />        <div class="scrollable-lists-container">            <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames"                [content]="scalesData.extendedNaturalNoteNames" [title]="\'Root\'"                [current]="currScale.scale.root.printNaturalWithFlatAlternative()"                (currentChange)="currScale.updateCurrScaleRootNote($event)" [allowSearch]="false" />            <app-scrollable-list *ngIf="scalesData.categoryNames"                [content]="currScale.isCustom ? [currScale.categoryName] : scalesData.categoryNames"                [title]="\'Category\'" [(current)]="currScale.categoryName"                (currentChange)="currScale.checkCurrentMode()" />            <app-scrollable-list class="narrow" *ngIf="currScale.categoryModeNames && currScale.modeName"                [content]="currScale.categoryModeNames" [(current)]="currScale.modeName"                [allowSearch]="currScale.categoryModeNames.length > 0"                [allowReset]="currScale.categoryModeNames.length > 0" [title]="\'Mode\'" />        </div>    </section>    <section *ngIf="activePrimarySubmenu !== \'scale\'" class="show-vw-breakpoint-2 activate-submenu">        <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">            <app-circular-button [icon]="\'code\'" [info]="\'Expand\'" />            Scale        </h4>    </section>    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== \'fretboard\'">        <app-main-headline-bar [mode]="\'fretboard\'" />        <div class="scrollable-lists-container">            @if(currFretboard.isCustom) {            <app-scrollable-list class="narrow" [content]="[]" [title]="\'Instrument\'" />            } @else {            <app-scrollable-list class="narrow" *ngIf="tuningsData.instrumentNames"                [content]="tuningsData.instrumentNames" [title]="\'Instrument\'"                [(current)]="currFretboard.instrumentName" />            }            <app-scrollable-list *ngIf="currFretboard.instrumentTuningNames && currFretboard.tuningName"                [content]="currFretboard.isCustom ? [currFretboard.tuningName] : currFretboard.instrumentTuningNames"                [(current)]="currFretboard.tuningName" [title]="\'Tuning\'" />            <app-scrollable-list class="tiny" *ngIf="currScale.matchedNoteNames" [content]="currScale.matchedNoteNames"                [title]="\'Root\'" [current]="currFretboard.root.print()"                (currentChange)="currFretboard.updateCurrFretboardRootNote($event)" [allowSearch]="false"                [defaultIndex]="currFretboard.fretboard.tuning.defaultRootPitchIndex"                [autofocus]="currFretboard.root.index" />            <app-scrollable-list class="tiny" [content]="currFretboard.numbersOfStrings" [title]="\'#str.\'"                [(current)]="currFretboard.fretboard.numberOfStrings" [allowSearch]="false" />        </div>    </section>    <section *ngIf="activePrimarySubmenu !== \'fretboard\'" class="show-vw-breakpoint-2 activate-submenu">        <h4 class="h4-as-button prevent-select" (click)="toggleActivePrimarySubmenu()">            <app-circular-button [icon]="\'code\'" [info]="\'Expand\'" />            Fretboard        </h4>    </section>    <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">        <h4 [class.collapsed]="display.menuCollapsed"            [routerLink]="[{ outlets: { \'dialog\': [\'d\', \'more\', \'display\'] } }]">            <i class="material-icons-outlined">palette</i>            Display        </h4>        <app-settings-display />    </section>    <section class="secondary-submenu" [class.collapsed]="display.menuCollapsed">        <h4 [class.collapsed]="display.menuCollapsed" [class.prevent-select]="display.menuCollapsed"            [routerLink]="[{ outlets: { \'dialog\': [\'d\', \'more\', \'export\'] } }]">            <i class="material-icons-outlined">output</i>            Export        </h4>        <app-export />    </section>    <app-more-menu /></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppContentComponent', 'selector': 'app-content'},{'name': 'ArrowPointerComponent', 'selector': 'app-arrow-pointer'},{'name': 'CircularButtonComponent', 'selector': 'app-circular-button'},{'name': 'DialogAddStringsRulesComponent', 'selector': 'app-dialog-add-strings-rules'},{'name': 'DialogExportComponent', 'selector': 'app-dialog-export'},{'name': 'DialogNameCustomComponent', 'selector': 'app-dialog-name-custom'},{'name': 'DialogNameModeComponent', 'selector': 'app-dialog-name-mode'},{'name': 'DialogOpenItemComponent', 'selector': 'app-dialog-open-item'},{'name': 'DialogOverlayComponent', 'selector': 'app-dialog-overlay'},{'name': 'DialogRootModeInitComponent', 'selector': 'app-dialog-root-mode-init'},{'name': 'DialogScaleFoundComponent', 'selector': 'app-dialog-scale-found'},{'name': 'DialogSubmenuComponent', 'selector': 'app-dialog-submenu'},{'name': 'DialogTuningFoundComponent', 'selector': 'app-dialog-tuning-found'},{'name': 'DynamicLineComponent', 'selector': 'app-dynamic-line'},{'name': 'EditFretboardOverlayComponent', 'selector': 'app-edit-fretboard-overlay'},{'name': 'EmailLinkComponent', 'selector': 'app-email-link'},{'name': 'ExpandBtnComponent', 'selector': 'app-expand-btn'},{'name': 'ExportComponent', 'selector': 'app-export'},{'name': 'ExportOptionsComponent', 'selector': 'app-export-options'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FretboardAsTextComponent', 'selector': 'app-fretboard-as-text'},{'name': 'FretboardComponent', 'selector': 'app-fretboard'},{'name': 'FretNoteComponent', 'selector': 'app-fret-note'},{'name': 'HeadlineBackBtnComponent', 'selector': 'app-headline-back-btn'},{'name': 'HeadlineBackComponent', 'selector': 'app-headline-back'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'InfoMsgComponent', 'selector': 'app-info-msg'},{'name': 'InlineNameLinkComponent', 'selector': 'app-inline-name-link'},{'name': 'IntroLogoComponent', 'selector': 'app-intro-logo'},{'name': 'LegalPageWrapperComponent', 'selector': 'app-legal-page-wrapper'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainHeadlineBarComponent', 'selector': 'app-main-headline-bar'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'MenuEditComponent', 'selector': 'app-menu-edit'},{'name': 'MenuEditFretboardComponent', 'selector': 'app-menu-edit-fretboard'},{'name': 'MenuEditScaleComponent', 'selector': 'app-menu-edit-scale'},{'name': 'MoreMenuComponent', 'selector': 'app-more-menu'},{'name': 'OpenItemComponent', 'selector': 'app-open-item'},{'name': 'OrderingBarComponent', 'selector': 'app-ordering-bar'},{'name': 'PaginationDotsComponent', 'selector': 'app-pagination-dots'},{'name': 'PrivacyComponent', 'selector': 'app-privacy'},{'name': 'ScrollableListArrowComponent', 'selector': 'app-scrollable-list-arrow'},{'name': 'ScrollableListComponent', 'selector': 'app-scrollable-list'},{'name': 'ScrollableListItemComponent', 'selector': 'app-scrollable-list-item'},{'name': 'ScrollableListSubmenuComponent', 'selector': 'app-scrollable-list-submenu'},{'name': 'SettingsDisplayComponent', 'selector': 'app-settings-display'},{'name': 'SlideToggleComponent', 'selector': 'app-slide-toggle'},{'name': 'ToastMessageComponent', 'selector': 'app-toast-message'}];
+    var DIRECTIVES = [{'name': 'AutofocusDirective', 'selector': '[appAutofocus]'},{'name': 'CopyToClipboardDirective', 'selector': '[appCopyToClipboard]'},{'name': 'ExportToDirective', 'selector': '[appExportTo]'},{'name': 'HoverDirective', 'selector': '[appHover]'},{'name': 'SearchCurrentDirective', 'selector': '[appSearchCurrent]'}];
+    var ACTUAL_COMPONENT = {'name': 'MenuComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MenuComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

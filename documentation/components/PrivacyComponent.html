@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>scales-on-frets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">scales-on-frets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PrivacyComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/legal-pages/privacy/privacy.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Displays the privacy policy.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-privacy</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/HeadlineBackComponent.html" target="_self" >HeadlineBackComponent</a></code>
+                                <code><a href="../components/EmailLinkComponent.html" target="_self" >EmailLinkComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./privacy.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./privacy.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#address" >address</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <span class="name"><b>address</b><a href="#address"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>address()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/legal-pages/privacy/privacy.component.ts:18</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { HeadlineBackComponent } from &#x27;../../shared/headline-back/headline-back.component&#x27;;
+import { Address } from &#x27;../../../interfaces/address&#x27;;
+import { LEGAL } from &#x27;../../../../secrets&#x27;;
+import { EmailLinkComponent } from &#x27;../../shared/email-link/email-link.component&#x27;;
+
+/**
+ * Displays the privacy policy.
+ */
+@Component({
+  selector: &#x27;app-privacy&#x27;,
+  standalone: true,
+  imports: [HeadlineBackComponent, EmailLinkComponent],
+  templateUrl: &#x27;./privacy.component.html&#x27;,
+  styleUrl: &#x27;./privacy.component.scss&#x27;
+})
+export class PrivacyComponent {
+  get address(): Address {
+    return LEGAL.address;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-headline-back [title]&#x3D;&quot;&#x27;Privacy policy&#x27;&quot; /&gt;
+&lt;p&gt;&lt;strong&gt;Last updated:&lt;/strong&gt; May 2, 2025&lt;/p&gt;
+
+&lt;p&gt;The protection of your personal data is important to us. This website does not process any personal data.&lt;/p&gt;
+
+&lt;h3&gt;Controller&lt;/h3&gt;
+&lt;p&gt;
+    {{address.name}}&lt;br&gt;
+    {{address.street}}&lt;br&gt;
+    {{address.city}}&lt;br&gt;
+    {{address.country}}&lt;br&gt;
+    Email: &lt;app-email-link [name]&#x3D;&quot;address.contact.email.name&quot; [provider]&#x3D;&quot;address.contact.email.provider&quot; /&gt;&lt;br&gt;
+    Phone: {{address.contact.phone}}
+&lt;/p&gt;
+
+&lt;h3&gt;No Collection of Personal Data&lt;/h3&gt;
+&lt;p&gt;
+    No personal data is collected when visiting this website. &lt;br&gt;
+    There is no option for registration, no contact form, no newsletter subscription, and no tracking or analytics
+    tools.&lt;br&gt;
+    IP addresses are neither stored nor analyzed.
+&lt;/p&gt;
+
+&lt;h3&gt;No Cookies&lt;/h3&gt;
+&lt;p&gt;This website does not use cookies.&lt;/p&gt;
+
+&lt;h3&gt;No Disclosure to Third Parties&lt;/h3&gt;
+&lt;p&gt;No data is transmitted to third parties.&lt;/p&gt;
+
+&lt;h3&gt;Local Data Storage&lt;/h3&gt;
+&lt;p&gt;
+    Any settings or data saved in connection with the use of this website (e.g., language preferences) are stored
+    exclusively in the user&#x27;s browser and are not transmitted to us.
+&lt;/p&gt;
+
+&lt;h3&gt;Your Rights&lt;/h3&gt;
+&lt;p&gt;
+    Since no personal data is collected, there are generally no data subject rights under the GDPR.&lt;br&gt;
+    If you still have questions about data protection, please contact us via the email address provided above.
+&lt;/p&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-headline-back [title]="\'Privacy policy\'" /><p><strong>Last updated:</strong> May 2, 2025</p><p>The protection of your personal data is important to us. This website does not process any personal data.</p><h3>Controller</h3><p>    {{address.name}}<br>    {{address.street}}<br>    {{address.city}}<br>    {{address.country}}<br>    Email: <app-email-link [name]="address.contact.email.name" [provider]="address.contact.email.provider" /><br>    Phone: {{address.contact.phone}}</p><h3>No Collection of Personal Data</h3><p>    No personal data is collected when visiting this website. <br>    There is no option for registration, no contact form, no newsletter subscription, and no tracking or analytics    tools.<br>    IP addresses are neither stored nor analyzed.</p><h3>No Cookies</h3><p>This website does not use cookies.</p><h3>No Disclosure to Third Parties</h3><p>No data is transmitted to third parties.</p><h3>Local Data Storage</h3><p>    Any settings or data saved in connection with the use of this website (e.g., language preferences) are stored    exclusively in the user\'s browser and are not transmitted to us.</p><h3>Your Rights</h3><p>    Since no personal data is collected, there are generally no data subject rights under the GDPR.<br>    If you still have questions about data protection, please contact us via the email address provided above.</p></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppContentComponent', 'selector': 'app-content'},{'name': 'ArrowPointerComponent', 'selector': 'app-arrow-pointer'},{'name': 'CircularButtonComponent', 'selector': 'app-circular-button'},{'name': 'DialogAddStringsRulesComponent', 'selector': 'app-dialog-add-strings-rules'},{'name': 'DialogExportComponent', 'selector': 'app-dialog-export'},{'name': 'DialogNameCustomComponent', 'selector': 'app-dialog-name-custom'},{'name': 'DialogNameModeComponent', 'selector': 'app-dialog-name-mode'},{'name': 'DialogOpenItemComponent', 'selector': 'app-dialog-open-item'},{'name': 'DialogOverlayComponent', 'selector': 'app-dialog-overlay'},{'name': 'DialogRootModeInitComponent', 'selector': 'app-dialog-root-mode-init'},{'name': 'DialogScaleFoundComponent', 'selector': 'app-dialog-scale-found'},{'name': 'DialogSubmenuComponent', 'selector': 'app-dialog-submenu'},{'name': 'DialogTuningFoundComponent', 'selector': 'app-dialog-tuning-found'},{'name': 'DynamicLineComponent', 'selector': 'app-dynamic-line'},{'name': 'EditFretboardOverlayComponent', 'selector': 'app-edit-fretboard-overlay'},{'name': 'EmailLinkComponent', 'selector': 'app-email-link'},{'name': 'ExpandBtnComponent', 'selector': 'app-expand-btn'},{'name': 'ExportComponent', 'selector': 'app-export'},{'name': 'ExportOptionsComponent', 'selector': 'app-export-options'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FretboardAsTextComponent', 'selector': 'app-fretboard-as-text'},{'name': 'FretboardComponent', 'selector': 'app-fretboard'},{'name': 'FretNoteComponent', 'selector': 'app-fret-note'},{'name': 'HeadlineBackBtnComponent', 'selector': 'app-headline-back-btn'},{'name': 'HeadlineBackComponent', 'selector': 'app-headline-back'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'InfoMsgComponent', 'selector': 'app-info-msg'},{'name': 'InlineNameLinkComponent', 'selector': 'app-inline-name-link'},{'name': 'IntroLogoComponent', 'selector': 'app-intro-logo'},{'name': 'LegalPageWrapperComponent', 'selector': 'app-legal-page-wrapper'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainHeadlineBarComponent', 'selector': 'app-main-headline-bar'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'MenuEditComponent', 'selector': 'app-menu-edit'},{'name': 'MenuEditFretboardComponent', 'selector': 'app-menu-edit-fretboard'},{'name': 'MenuEditScaleComponent', 'selector': 'app-menu-edit-scale'},{'name': 'MoreMenuComponent', 'selector': 'app-more-menu'},{'name': 'OpenItemComponent', 'selector': 'app-open-item'},{'name': 'OrderingBarComponent', 'selector': 'app-ordering-bar'},{'name': 'PaginationDotsComponent', 'selector': 'app-pagination-dots'},{'name': 'PrivacyComponent', 'selector': 'app-privacy'},{'name': 'ScrollableListArrowComponent', 'selector': 'app-scrollable-list-arrow'},{'name': 'ScrollableListComponent', 'selector': 'app-scrollable-list'},{'name': 'ScrollableListItemComponent', 'selector': 'app-scrollable-list-item'},{'name': 'ScrollableListSubmenuComponent', 'selector': 'app-scrollable-list-submenu'},{'name': 'SettingsDisplayComponent', 'selector': 'app-settings-display'},{'name': 'SlideToggleComponent', 'selector': 'app-slide-toggle'},{'name': 'ToastMessageComponent', 'selector': 'app-toast-message'}];
+    var DIRECTIVES = [{'name': 'AutofocusDirective', 'selector': '[appAutofocus]'},{'name': 'CopyToClipboardDirective', 'selector': '[appCopyToClipboard]'},{'name': 'ExportToDirective', 'selector': '[appExportTo]'},{'name': 'HoverDirective', 'selector': '[appHover]'},{'name': 'SearchCurrentDirective', 'selector': '[appSearchCurrent]'}];
+    var ACTUAL_COMPONENT = {'name': 'PrivacyComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PrivacyComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

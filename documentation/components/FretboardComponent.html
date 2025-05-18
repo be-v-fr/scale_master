@@ -1,0 +1,1323 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>scales-on-frets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">scales-on-frets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FretboardComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/fretboard/fretboard.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Displays the fretboard with the currently selected scale.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-fretboard</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/FretNoteComponent.html" target="_self" >FretNoteComponent</a></code>
+                                <code><a href="../components/EditFretboardOverlayComponent.html" target="_self" >EditFretboardOverlayComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./fretboard.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./fretboard.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currFretboard" >currFretboard</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#custom" >custom</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#display" >display</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#stringNoteRefs" >stringNoteRefs</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#handleModeToggling" >handleModeToggling</a>
+                            </li>
+                            <li>
+                                <a href="#onFretboardEditStringClick" >onFretboardEditStringClick</a>
+                            </li>
+                            <li>
+                                <a href="#onFretClick" >onFretClick</a>
+                            </li>
+                            <li>
+                                <a href="#onScaleEditFretClick" >onScaleEditFretClick</a>
+                            </li>
+                            <li>
+                                <a href="#onStringNoteClick" >onStringNoteClick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isExport" >isExport</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#selectedStringNote" >selectedStringNote</a>
+                                </li>
+                                <li>
+                                    <a href="#frets" >frets</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, currScale: <a href="../injectables/CurrentScaleService.html" target="_self">CurrentScaleService</a>, currFretboard: <a href="../injectables/CurrentFretboardService.html" target="_self">CurrentFretboardService</a>, display: <a href="../injectables/DisplayService.html" target="_self">DisplayService</a>, custom: <a href="../injectables/CustomizeService.html" target="_self">CustomizeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/fretboard/fretboard.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for dependency injection.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>currScale</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CurrentScaleService.html" target="_self" >CurrentScaleService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>currFretboard</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CurrentFretboardService.html" target="_self" >CurrentFretboardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>display</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DisplayService.html" target="_self" >DisplayService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>custom</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CustomizeService.html" target="_self" >CustomizeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isExport"></a>
+                        <b>isExport</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/fretboard/fretboard.component.ts:23</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleModeToggling"></a>
+                    <span class="name">
+                        <span ><b>handleModeToggling</b></span>
+                        <a href="#handleModeToggling"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleModeToggling(interval: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/fretboard/fretboard.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles a mode and opens a dialog if the mode exists.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>interval</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFretboardEditStringClick"></a>
+                    <span class="name">
+                        <span ><b>onFretboardEditStringClick</b></span>
+                        <a href="#onFretboardEditStringClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFretboardEditStringClick(step: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, interval: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, stringIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/fretboard/fretboard.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the selected editing step to a clicked string note during fretboard editing.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>step</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>interval</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>stringIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFretClick"></a>
+                    <span class="name">
+                        <span ><b>onFretClick</b></span>
+                        <a href="#onFretClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFretClick(instrumentStringIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, fret: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/fretboard/fretboard.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles clicks on frets when in scale editing mode.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>instrumentStringIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>fret</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onScaleEditFretClick"></a>
+                    <span class="name">
+                        <span ><b>onScaleEditFretClick</b></span>
+                        <a href="#onScaleEditFretClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onScaleEditFretClick(step: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, instrumentStringIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, fret: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/fretboard/fretboard.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the selected editing step to a clicked fret during scale editing.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>step</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>instrumentStringIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>fret</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onStringNoteClick"></a>
+                    <span class="name">
+                        <span ><b>onStringNoteClick</b></span>
+                        <a href="#onStringNoteClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onStringNoteClick(interval: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, stringIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/fretboard/fretboard.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles clicks on string notes in fretboard editing mode.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>interval</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>stringIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currFretboard"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currFretboard</b></span>
+                        <a href="#currFretboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/CurrentFretboardService.html" target="_self" >CurrentFretboardService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/fretboard/fretboard.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="custom"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>custom</b></span>
+                        <a href="#custom"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/CustomizeService.html" target="_self" >CustomizeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/fretboard/fretboard.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="display"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>display</b></span>
+                        <a href="#display"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/DisplayService.html" target="_self" >DisplayService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/fretboard/fretboard.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Router</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/fretboard/fretboard.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stringNoteRefs"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>stringNoteRefs</b></span>
+                        <a href="#stringNoteRefs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(&#x27;stringNoteContainer&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/fretboard/fretboard.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedStringNote"></a>
+                        <span class="name"><b>selectedStringNote</b><a href="#selectedStringNote"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>selectedStringNote()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/fretboard/fretboard.component.ts:25</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="frets"></a>
+                        <span class="name"><b>frets</b><a href="#frets"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>frets()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/fretboard/fretboard.component.ts:45</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, Input, QueryList, ViewChildren } from &#x27;@angular/core&#x27;;
+import { FretNoteComponent } from &#x27;./fret-note/fret-note.component&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { CurrentFretboardService } from &#x27;../../services/current-fretboard.service&#x27;;
+import { DisplayService } from &#x27;../../services/display.service&#x27;;
+import { CurrentScaleService } from &#x27;../../services/current-scale.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { CustomizeService } from &#x27;../../services/customize.service&#x27;;
+import { getModTwelveIndex } from &#x27;../../utils/mod.utils&#x27;;
+import { EditFretboardOverlayComponent } from &#x27;../edit-fretboard-overlay/edit-fretboard-overlay.component&#x27;;
+
+/**
+ * Displays the fretboard with the currently selected scale.
+ */
+@Component({
+  selector: &#x27;app-fretboard&#x27;,
+  standalone: true,
+  imports: [CommonModule, FretNoteComponent, EditFretboardOverlayComponent],
+  templateUrl: &#x27;./fretboard.component.html&#x27;,
+  styleUrl: &#x27;./fretboard.component.scss&#x27;
+})
+export class FretboardComponent {
+  @Input() isExport: boolean &#x3D; false;
+  @ViewChildren(&#x27;stringNoteContainer&#x27;) stringNoteRefs!: QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;;
+  get selectedStringNote(): HTMLElement | undefined {
+    if (typeof (this.custom.currentStringSelection) &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+      return this.stringNoteRefs.toArray()[this.custom.currentStringSelection].nativeElement;
+    }
+    return undefined;
+  }
+
+
+  /**
+   * Constructor for dependency injection.
+   */
+  constructor(
+    public router: Router,
+    private currScale: CurrentScaleService,
+    public currFretboard: CurrentFretboardService,
+    public display: DisplayService,
+    public custom: CustomizeService
+  ) { }
+
+
+  get frets(): number[] {
+    return Array.from({ length: 12 });
+  }
+
+
+  /**
+   * Handles clicks on frets when in scale editing mode.
+   */
+  onFretClick(instrumentStringIndex: number, fret: number) {
+    if (this.custom.mode &#x3D;&#x3D;&#x3D; &#x27;scale&#x27; &amp;&amp; typeof (this.custom.currentStep) &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+      this.onScaleEditFretClick(this.custom.currentStep, instrumentStringIndex, fret);
+    }
+  }
+
+
+  /**
+   * Applies the selected editing step to a clicked fret during scale editing.
+   */
+  onScaleEditFretClick(step: number, instrumentStringIndex: number, fret: number) {
+    const pitch: number &#x3D; this.currFretboard.getFretNoteIndex(instrumentStringIndex, fret);
+    let interval: number &#x3D; pitch - this.currScale.scale.root.index;
+    interval &#x3D; getModTwelveIndex(interval);
+    switch (step) {
+      case 0: this.currScale.scale.toggleInterval(interval); break;
+      case 1: this.handleModeToggling(interval);
+    }
+  }
+
+
+  /**
+   * Toggles a mode and opens a dialog if the mode exists.
+   */
+  handleModeToggling(interval: number): void {
+    this.currScale.scale.toggleMode(interval);
+    if (this.currScale.scale.modeExists(interval)) {
+      this.router.navigate([{ outlets: { &#x27;dialog&#x27;: [&#x27;d&#x27;, &#x27;modes&#x27;, &#x27;name&#x27;, interval] } }])
+    }
+  }
+
+
+  /**
+   * Handles clicks on string notes in fretboard editing mode.
+   */
+  onStringNoteClick(interval: number, stringIndex: number): void {
+    if (this.custom.mode &#x3D;&#x3D;&#x3D; &#x27;fretboard&#x27; &amp;&amp; typeof (this.custom.currentStep) &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+      this.onFretboardEditStringClick(this.custom.currentStep, interval, stringIndex);
+    }
+  }
+
+
+  /**
+   * Applies the selected editing step to a clicked string note during fretboard editing.
+   */
+  onFretboardEditStringClick(step: number, interval: number, stringIndex: number) {
+    switch (step) {
+      case 0: break;
+      case 1: this.currFretboard.fretboard.setIntervalAsRoot(interval); break;
+      case 2: this.custom.currentStringSelection &#x3D; (stringIndex ?? 0);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;table class&#x3D;&quot;prevent-select&quot; [class.lefty]&#x3D;&quot;display.lefty&quot; [class.export-styling]&#x3D;&quot;isExport&quot;&gt;
+    @for (string of currFretboard.fretboard.intervals; track i; let i &#x3D; $index) {
+    &lt;tr&gt;
+        &lt;td class&#x3D;&quot;string-note&quot; (click)&#x3D;&quot;onStringNoteClick(string, i)&quot;
+            [class.enable-hover]&#x3D;&quot;custom.mode &#x3D;&#x3D;&#x3D; &#x27;fretboard&#x27; &amp;&amp; custom.currentStep &amp;&amp; [1, 2].includes(custom.currentStep)&quot;&gt;
+            &lt;div class&#x3D;&quot;scale-note-wrapper&quot;&gt;
+                &lt;div class&#x3D;&quot;note-container&quot; #stringNoteContainer
+                    [class.marked]&#x3D;&quot;custom.mode &#x3D;&#x3D;&#x3D; &#x27;fretboard&#x27; &amp;&amp; custom.currentStep &amp;&amp; [1, 2].includes(custom.currentStep) &amp;&amp; string &#x3D;&#x3D;&#x3D; 0&quot;
+                    [class.marked-selection]&#x3D;&quot;i &#x3D;&#x3D;&#x3D; custom.currentStringSelection&quot;&gt;
+                    {{currFretboard.notes[i].print()}}
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/td&gt;
+        @for (_ of frets; track j; let j &#x3D; $index; let first &#x3D; $first) {
+        &lt;td [ngClass]&#x3D;&quot;first ? &#x27;nut&#x27; : &#x27;fret&#x27;&quot; (click)&#x3D;&quot;onFretClick(i, j)&quot; [class.enable-hover]&#x3D;&quot;custom.mode &#x3D;&#x3D;&#x3D; &#x27;scale&#x27; &amp;&amp; (
+            (custom.currentStep &#x3D;&#x3D;&#x3D; 0 &amp;&amp; !currFretboard.isRoot(i, j)) ||
+            (custom.currentStep &#x3D;&#x3D;&#x3D; 1 &amp;&amp; currFretboard.getNoteFromFret(i, j)))&quot;&gt;
+            &lt;div class&#x3D;&quot;scale-note-wrapper&quot;&gt;
+                &lt;div class&#x3D;&quot;note-container&quot;
+                    [class.marked]&#x3D;&quot;custom.mode &#x3D;&#x3D;&#x3D; &#x27;scale&#x27; &amp;&amp; custom.currentStep &amp;&amp; [1, 2].includes(custom.currentStep) &amp;&amp; currFretboard.isModeRoot(i, j)&quot;&gt;
+                    &lt;app-fret-note [note]&#x3D;&quot;currFretboard.getNoteFromFret(i, j)&quot; [root]&#x3D;&quot;currFretboard.isRoot(i, j)&quot; /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/td&gt;
+        }
+        &lt;hr class&#x3D;&quot;string&quot;&gt;
+    &lt;/tr&gt;
+    }
+    &lt;tr class&#x3D;&quot;edge&quot;&gt;
+        &lt;td class&#x3D;&quot;string-note&quot;&gt;&lt;/td&gt;
+        @for (_ of frets; track i; let i &#x3D; $index) { 
+         &lt;td&gt;
+            &lt;div class&#x3D;&quot;dot-container&quot;&gt;
+                &lt;span class&#x3D;&quot;dot&quot; *ngIf&#x3D;&quot;[3, 5, 7, 9].includes(i)&quot;&gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;dot&quot; *ngIf&#x3D;&quot;7 &#x3D;&#x3D;&#x3D; i&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;   
+        }
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;app-edit-fretboard-overlay *ngIf&#x3D;&quot;custom.mode &#x3D;&#x3D;&#x3D; &#x27;fretboard&#x27; &amp;&amp; custom.currentStep !&#x3D;&#x3D; undefined &amp;&amp; custom.currentStep &lt;&#x3D; 3&quot; [selectedStringNote]&#x3D;&quot;selectedStringNote&quot; /&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><table class="prevent-select" [class.lefty]="display.lefty" [class.export-styling]="isExport">    @for (string of currFretboard.fretboard.intervals; track i; let i = $index) {    <tr>        <td class="string-note" (click)="onStringNoteClick(string, i)"            [class.enable-hover]="custom.mode === \'fretboard\' && custom.currentStep && [1, 2].includes(custom.currentStep)">            <div class="scale-note-wrapper">                <div class="note-container" #stringNoteContainer                    [class.marked]="custom.mode === \'fretboard\' && custom.currentStep && [1, 2].includes(custom.currentStep) && string === 0"                    [class.marked-selection]="i === custom.currentStringSelection">                    {{currFretboard.notes[i].print()}}                </div>            </div>        </td>        @for (_ of frets; track j; let j = $index; let first = $first) {        <td [ngClass]="first ? \'nut\' : \'fret\'" (click)="onFretClick(i, j)" [class.enable-hover]="custom.mode === \'scale\' && (            (custom.currentStep === 0 && !currFretboard.isRoot(i, j)) ||            (custom.currentStep === 1 && currFretboard.getNoteFromFret(i, j)))">            <div class="scale-note-wrapper">                <div class="note-container"                    [class.marked]="custom.mode === \'scale\' && custom.currentStep && [1, 2].includes(custom.currentStep) && currFretboard.isModeRoot(i, j)">                    <app-fret-note [note]="currFretboard.getNoteFromFret(i, j)" [root]="currFretboard.isRoot(i, j)" />                </div>            </div>        </td>        }        <hr class="string">    </tr>    }    <tr class="edge">        <td class="string-note"></td>        @for (_ of frets; track i; let i = $index) {          <td>            <div class="dot-container">                <span class="dot" *ngIf="[3, 5, 7, 9].includes(i)"></span>                <span class="dot" *ngIf="7 === i"></span>            </div>         </td>           }    </tr></table><app-edit-fretboard-overlay *ngIf="custom.mode === \'fretboard\' && custom.currentStep !== undefined && custom.currentStep <= 3" [selectedStringNote]="selectedStringNote" /></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppContentComponent', 'selector': 'app-content'},{'name': 'ArrowPointerComponent', 'selector': 'app-arrow-pointer'},{'name': 'CircularButtonComponent', 'selector': 'app-circular-button'},{'name': 'DialogAddStringsRulesComponent', 'selector': 'app-dialog-add-strings-rules'},{'name': 'DialogExportComponent', 'selector': 'app-dialog-export'},{'name': 'DialogNameCustomComponent', 'selector': 'app-dialog-name-custom'},{'name': 'DialogNameModeComponent', 'selector': 'app-dialog-name-mode'},{'name': 'DialogOpenItemComponent', 'selector': 'app-dialog-open-item'},{'name': 'DialogOverlayComponent', 'selector': 'app-dialog-overlay'},{'name': 'DialogRootModeInitComponent', 'selector': 'app-dialog-root-mode-init'},{'name': 'DialogScaleFoundComponent', 'selector': 'app-dialog-scale-found'},{'name': 'DialogSubmenuComponent', 'selector': 'app-dialog-submenu'},{'name': 'DialogTuningFoundComponent', 'selector': 'app-dialog-tuning-found'},{'name': 'DynamicLineComponent', 'selector': 'app-dynamic-line'},{'name': 'EditFretboardOverlayComponent', 'selector': 'app-edit-fretboard-overlay'},{'name': 'EmailLinkComponent', 'selector': 'app-email-link'},{'name': 'ExpandBtnComponent', 'selector': 'app-expand-btn'},{'name': 'ExportComponent', 'selector': 'app-export'},{'name': 'ExportOptionsComponent', 'selector': 'app-export-options'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FretboardAsTextComponent', 'selector': 'app-fretboard-as-text'},{'name': 'FretboardComponent', 'selector': 'app-fretboard'},{'name': 'FretNoteComponent', 'selector': 'app-fret-note'},{'name': 'HeadlineBackBtnComponent', 'selector': 'app-headline-back-btn'},{'name': 'HeadlineBackComponent', 'selector': 'app-headline-back'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'InfoMsgComponent', 'selector': 'app-info-msg'},{'name': 'InlineNameLinkComponent', 'selector': 'app-inline-name-link'},{'name': 'IntroLogoComponent', 'selector': 'app-intro-logo'},{'name': 'LegalPageWrapperComponent', 'selector': 'app-legal-page-wrapper'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainHeadlineBarComponent', 'selector': 'app-main-headline-bar'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'MenuEditComponent', 'selector': 'app-menu-edit'},{'name': 'MenuEditFretboardComponent', 'selector': 'app-menu-edit-fretboard'},{'name': 'MenuEditScaleComponent', 'selector': 'app-menu-edit-scale'},{'name': 'MoreMenuComponent', 'selector': 'app-more-menu'},{'name': 'OpenItemComponent', 'selector': 'app-open-item'},{'name': 'OrderingBarComponent', 'selector': 'app-ordering-bar'},{'name': 'PaginationDotsComponent', 'selector': 'app-pagination-dots'},{'name': 'PrivacyComponent', 'selector': 'app-privacy'},{'name': 'ScrollableListArrowComponent', 'selector': 'app-scrollable-list-arrow'},{'name': 'ScrollableListComponent', 'selector': 'app-scrollable-list'},{'name': 'ScrollableListItemComponent', 'selector': 'app-scrollable-list-item'},{'name': 'ScrollableListSubmenuComponent', 'selector': 'app-scrollable-list-submenu'},{'name': 'SettingsDisplayComponent', 'selector': 'app-settings-display'},{'name': 'SlideToggleComponent', 'selector': 'app-slide-toggle'},{'name': 'ToastMessageComponent', 'selector': 'app-toast-message'}];
+    var DIRECTIVES = [{'name': 'AutofocusDirective', 'selector': '[appAutofocus]'},{'name': 'CopyToClipboardDirective', 'selector': '[appCopyToClipboard]'},{'name': 'ExportToDirective', 'selector': '[appExportTo]'},{'name': 'HoverDirective', 'selector': '[appHover]'},{'name': 'SearchCurrentDirective', 'selector': '[appSearchCurrent]'}];
+    var ACTUAL_COMPONENT = {'name': 'FretboardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FretboardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
