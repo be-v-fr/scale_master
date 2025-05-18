@@ -62,6 +62,14 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Initializes scaling details that cannot be handled using SCSS alone.
+   * The initial calculation, controlled by "_initScalingFlag" is only done a single time in this component's lifecycle.
+   * The calculation result is emitted to the parent component to be stored in a map containing scaling information for all list items.
+   * To handle changing content after custom scrolling events, that "itemScalingMap" is fed back into this component.
+   * In case the list content of the parent component changes, this component is destroyed in the parent,
+   * meaning that the complete initial calculation will be done again when the list content changes. 
+   */
   initScaling(): void {
     if (this._initScalingFlag) {
       this.calcScaling();
@@ -73,6 +81,9 @@ export class ScrollableListItemComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Applies parent list scaling map to this component's scaling properties.
+   */
   applyMapScaling(): void {
     if(this.itemScalingMap) {
       const scaling: { scaleDown: number | undefined, textEllipsis: boolean } | undefined = this.itemScalingMap.get(this._content);
@@ -112,17 +123,4 @@ export class ScrollableListItemComponent implements AfterViewInit {
       this.scaleDown = 1 / widthRatio;
     }
   }
-
-
-  /**
-   * Resets scaling and ellipsis to default.
-   */
-  // resetScaleDown(): void {
-  //   if (this.scaleDown !== undefined) {
-  //     this.scaleDown = undefined;
-  //     this.textEllipsis = false;
-  //     this.cdr.detectChanges();
-  //     this.updateSize();
-  //   }
-  // }
 }

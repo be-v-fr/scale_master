@@ -362,6 +362,11 @@ export class ScrollableListComponent implements OnInit {
   }
 
 
+  /**
+   * Adds list item scaling information to current list scaling map.
+   * Controls "calculatingItemScaling" flag through checking whether the current item
+   * is the last content item.
+   */
   addToScalingMap(item: { content: string | number, scaleDown?: number, textEllipsis: boolean }, lastItem: boolean): void {
     this.itemScalingMap.set(item.content, { scaleDown: item.scaleDown || undefined, textEllipsis: item.textEllipsis });
     if(lastItem) {
