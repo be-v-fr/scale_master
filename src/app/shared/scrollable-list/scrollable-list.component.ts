@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, HostListener, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, QueryList, ViewChildren, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ScrollableListItemComponent } from './scrollable-list-item/scrollable-list-item.component';
 import { ScrollableListArrowComponent } from './scrollable-list-arrow/scrollable-list-arrow.component';
 import { isEqual } from 'lodash';
@@ -20,7 +20,7 @@ import { ArrowPointerComponent } from '../arrow-pointer/arrow-pointer.component'
   templateUrl: './scrollable-list.component.html',
   styleUrl: './scrollable-list.component.scss'
 })
-export class ScrollableListComponent implements OnInit {
+export class ScrollableListComponent implements OnInit, OnDestroy {
   private _content: (string | number)[] = [];
   get content(): (string | number)[] {
     return this._content;
@@ -87,6 +87,17 @@ export class ScrollableListComponent implements OnInit {
   calculatingItemScaling: boolean = true;
   itemScalingMap = new Map<string | number, { scaleDown: number | undefined, textEllipsis: boolean }>();
 
+  private readonly passiveListenerConfigs: {
+    type: keyof HTMLElementEventMap;
+    handler: EventListenerOrEventListenerObject;
+  }[] = [
+      { type: 'wheel', handler: (e: Event) => this.onMouseWheel(e as WheelEvent) },
+      { type: 'touchstart', handler: (e: Event) => this.onTouchStart(e as TouchEvent) },
+      { type: 'touchmove', handler: (e: Event) => this.onTouchMove(e as TouchEvent) },
+      { type: 'touchend', handler: () => this.onTouchEnd() }
+    ];
+  private removePassiveListeners: (() => void)[] = [];
+
 
   /**
    * Constructor for dependency injection.
@@ -126,6 +137,29 @@ export class ScrollableListComponent implements OnInit {
       this.focus = currentIndex;
     } else {
       console.error(`Currently selected value "${this.current}" does not exist in list "${this.title}":`, this.content);
+    }
+    this.initPassiveListeners();
+  }
+
+
+  /**
+   * Lifecycle hook that is called upon component destruction.
+   * Removes passive event listeners by calling the corresponding methods defined before.
+   */
+  ngOnDestroy(): void {
+    this.removePassiveListeners.forEach(rm => rm());
+  }
+
+
+  /**
+   * Initializes passive event listeners using the given configuration.
+   * Note: "HostListener" cannot be used here since it doesn't feature the "passive" key.
+   */
+  initPassiveListeners(): void {
+    const nativeEl = this.elementRef.nativeElement;
+    for (const { type, handler } of this.passiveListenerConfigs) {
+      nativeEl.addEventListener(type, handler, { passive: true });
+      this.removePassiveListeners.push(() => nativeEl.removeEventListener(type, handler));
     }
   }
 
@@ -231,7 +265,6 @@ export class ScrollableListComponent implements OnInit {
   /**
    * Mouse wheel event listener for scrolling.
    */
-  @HostListener('wheel', ['$event'])
   onMouseWheel(event: WheelEvent) {
     if (this.elementRef.nativeElement.contains(event.target)) {
       this.handleScroll(event.deltaY);
@@ -242,7 +275,6 @@ export class ScrollableListComponent implements OnInit {
   /**
    * Records Y position when touch starts.
    */
-  @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
     this.touchStartY = event.touches[0].clientY;
   }
@@ -251,7 +283,6 @@ export class ScrollableListComponent implements OnInit {
   /**
    * Scrolls the list based on touch move gesture.
    */
-  @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent) {
     if (this.touchStartY === null) return;
     const currentY = event.touches[0].clientY;
@@ -266,7 +297,6 @@ export class ScrollableListComponent implements OnInit {
   /**
    * Clears touch position at the end of a gesture.
    */
-  @HostListener('touchend')
   onTouchEnd() {
     this.touchStartY = null;
   }
@@ -369,7 +399,7 @@ export class ScrollableListComponent implements OnInit {
    */
   addToScalingMap(item: { content: string | number, scaleDown?: number, textEllipsis: boolean }, lastItem: boolean): void {
     this.itemScalingMap.set(item.content, { scaleDown: item.scaleDown || undefined, textEllipsis: item.textEllipsis });
-    if(lastItem) {
+    if (lastItem) {
       this.calculatingItemScaling = false;
       this.cdr.detectChanges();
     }

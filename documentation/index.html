@@ -82,18 +82,39 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<h1>ScaleMaster</h1>
-<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 17.2.1.</p>
+<h1>Scalion</h1>
+<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 17.2.1.
+Scalion displays musical scales on the fretboard of a string instrument.
+By default, it contains a database of both scales (with corresponding modes) and instruments (with corresponding tunings).
+But scales and tunings are entirely customizable as well, including local saving and loading of custom content,
+and automatic search algorithms to check if identical or similar content already exists in the database.
+Any given scale/fretboard configuration can be exported as a PNG or TXT file.</p>
 <h2>Development server</h2>
-<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.</p>
-<h2>Code scaffolding</h2>
+<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.
+The product owner&#39;s address information has not been uploaded to this repository, which may lead to errors. To run the server, you need to create a <code>secrets.ts</code>
+file in the project base folder containing code with the following structure:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">import { Address } from &quot;./src/interfaces/address&quot;;
+
+export const LEGAL: { address: Address } = {
+    address: {
+        name: &#39;myName&#39;,
+        street: &#39;myStreet&#39;,
+        city: &#39;myCity&#39;,
+        country: &#39;myCountry&#39;,
+        contact: {
+            phone: &#39;myPhone&#39;,
+            email: {
+                name: &#39;myEmailName&#39;,
+                provider: &#39;myEmailProvider&#39;
+            }
+        }
+    },
+};</code></pre></div><h2>Code scaffolding</h2>
 <p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
 <h2>Build</h2>
 <p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2>Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2>Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
+<h2>Build documentation</h2>
+<p>Run <code>npm run compodoc:build</code> to build the documentation.</p>
 <h2>Further help</h2>
 <p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a> page.</p>
 
