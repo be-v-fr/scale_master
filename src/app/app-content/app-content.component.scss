@@ -112,7 +112,7 @@ app-logo {
 
     app-logo {
         position: absolute;
-        top: 5%;
+        top: 0;
         @media screen and (max-height: 920px) {
             transform: scale($logo-scale-small);
         }
