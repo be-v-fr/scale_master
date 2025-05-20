@@ -1,8 +1,5 @@
 @import "../../../styles.scss";
 
-$treble-clef-left-start: -30px;
-$treble-clef-left-end: 10px;
-
 .logo {
     position: relative;
     top: 22px;
@@ -38,9 +35,7 @@ $treble-clef-left-end: 10px;
             border-radius: 50%;
             background: $color-panel-bg;
             opacity: 0;
-            animation:
-                to-full 450ms ease-out forwards 500ms,
-                fade-in 300ms ease-out forwards 450ms;
+            animation: circle-mask-animation 700ms ease-out forwards 500ms;
         }
     }
 
@@ -48,11 +43,10 @@ $treble-clef-left-end: 10px;
         position: absolute;
         width: 58px;
         top: -36px;
-        left: $treble-clef-left-start;
+        left: 10px;
         opacity: 0;
         animation:
-            treble-clef-animation 1100ms ease-out forwards 50ms,
-            fade-in 1400ms ease-in forwards 150ms;
+            treble-clef-animation 1100ms ease-out forwards 150ms;
     }
 
     &.no-animation {
@@ -68,7 +62,6 @@ $treble-clef-left-end: 10px;
         }
 
         .treble-clef {
-            left: $treble-clef-left-end;
             opacity: 1;
             animation: none;
         }
@@ -79,18 +72,36 @@ $treble-clef-left-end: 10px;
     }
 }
 
-@keyframes to-full {
-    to {
-        width: 100%;
-        height: 100%;
-    }
+@keyframes circle-mask-animation {
+  0% {
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+  }
+  60% {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
 }
 
 @keyframes treble-clef-animation {
-    from {
-        left: $treble-clef-left-start;
-    }
-    to {
-        left: $treble-clef-left-end;
-    }
+  0% {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

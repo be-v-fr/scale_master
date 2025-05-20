@@ -64,7 +64,7 @@ app-logo {
         @media screen and (max-height: $vh-breakpoint-1) {
             @include flex();
         }
-        @media screen and (max-height: $vh-breakpoint-2) and (max-width: $vw-breakpoint-3) {
+        @media screen and (max-height: $vh-breakpoint-2) and ((max-width: $vw-breakpoint-3) or (max-height: $vh-breakpoint-3)) {
             transform: scale($logo-scale-small);
             left: calc(-1 / 2 * $menu-x-padding);
         }
