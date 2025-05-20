@@ -8,6 +8,9 @@
         width: 100%;
         flex: 1;
         @include flex($dir: column);
+        .empty-msg {
+            color: $color-text-secondary;
+        }
         .content-main {
             width: 100%;
             flex: 1;

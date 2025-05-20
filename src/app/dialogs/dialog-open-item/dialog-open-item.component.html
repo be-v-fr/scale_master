@@ -2,7 +2,7 @@
 <div class="content-wrapper">
   @if(data) {
     @if (data.length === 0) {
-      <p>You have not created any {{ type }}s yet.</p>
+      <p class="empty-msg">You have not created any {{ type }}s yet.</p>
     } @else {
       <div class="content-main">
         <app-ordering-bar [(ordering)]="ordering" />
