@@ -1,7 +1,7 @@
 @import "../../styles.scss";
 
 .overlay {
-    width: 100%;
+    width: calc(100% - $fretboard-string-margin);
     max-width: calc(1280px - $fretboard-string-margin);
     height: 100%;
     position: absolute;
