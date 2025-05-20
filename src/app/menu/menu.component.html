@@ -1,5 +1,5 @@
 <div class="wrapper" [class.collapsed]="display.menuCollapsed" [class.parent-hover]="hover.menuWrapperHovered$ | async">
-    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'scale'">
+    <section [class.hide-vw-breakpoint-2-but-measurable]="activePrimarySubmenu !== 'scale'">
         <app-main-headline-bar [mode]="'scale'" />
         <div class="scrollable-lists-container">
             <app-scrollable-list class="narrower" *ngIf="scalesData.extendedNaturalNoteNames"
@@ -22,7 +22,7 @@
             Scale
         </h4>
     </section>
-    <section [class.hide-vw-breakpoint-2]="activePrimarySubmenu !== 'fretboard'">
+    <section [class.hide-vw-breakpoint-2-but-measurable]="activePrimarySubmenu !== 'fretboard'">
         <app-main-headline-bar [mode]="'fretboard'" />
         <div class="scrollable-lists-container">
             @if(currFretboard.isCustom) {
