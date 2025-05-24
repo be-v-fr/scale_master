@@ -15,7 +15,7 @@ import { FooterComponent } from './footer/footer.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'ScaleMaster';
+  title = 'Scalion';
   awaitingIntro: boolean = true;
 
 

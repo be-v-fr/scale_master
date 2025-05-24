@@ -11,7 +11,16 @@ app-footer {
     bottom: 0;
     padding-right: 16px;
     padding-bottom: 10px;
+
     @media screen and (max-height: $vh-breakpoint-1) {
         display: none;
     }
+}
+
+app-intro-logo.hidden {
+    opacity: 0;
+    pointer-events: none;
+    left: -9999px;
+    width: 0;
+    height: 0;
 }

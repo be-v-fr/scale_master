@@ -9,6 +9,7 @@ $vh-breakpoint-3: 480px;
 $vw-breakpoint-1: 1280px;
 $vw-breakpoint-2: 1024px;
 $vw-breakpoint-3: 800px;
+$vw-breakpoint-4: 480px;
 $circular-btn-size: 32px;
 $fretboard-string-margin: 8vw;
 $padding-text-page: 20px;
@@ -59,7 +60,6 @@ $color-almost-black: #111;
 html,
 body {
     overscroll-behavior-y: none;
-    // height: 100%;
     overflow: hidden;
     touch-action: none;
 }
