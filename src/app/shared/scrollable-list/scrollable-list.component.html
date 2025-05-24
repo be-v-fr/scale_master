@@ -24,7 +24,7 @@
     </div>
     <app-scrollable-list-arrow [orientation]="'down'" (click)="onListArrowClick(1, 200)" [class.hidden]="focusIsEnd" />
 </div>
-<div class="submenu-wrapper" [class.searching]="searchFilter || searchFilter === ''">
+<div class="submenu-wrapper" [class.searching]="searchFilter || searchFilter === ''" [class.scrolling]="scrollSteps">
     <app-scrollable-list-submenu [(searchFilter)]="searchFilter" (refocus)="refocusByIndex(defaultIndex)"
         [title]="title" [allowSearch]="allowSearch && !disabled && filteredContent.length > 1"
         [allowReset]="allowReset && !disabled && filteredContent.length > 1" (searchFilterChange)="onSearchChange()"

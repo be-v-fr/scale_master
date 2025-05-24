@@ -64,7 +64,7 @@ export class ScrollableListComponent implements OnInit, OnDestroy {
   }
 
   @Output() currentChange: EventEmitter<any> = new EventEmitter<any>();
-  private lastWheelEventTime = 0;
+  private lastScrollEventTime = 0;
   private throttleTime = 100;
   private currentTimeout: ReturnType<typeof setTimeout> | null = null;
   @ViewChildren(ScrollableListItemComponent) items!: QueryList<ScrollableListItemComponent>;
@@ -308,12 +308,12 @@ export class ScrollableListComponent implements OnInit, OnDestroy {
    */
   handleScroll(deltaY: number): boolean {
     const now = Date.now();
-    if (now >= this.lastWheelEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
+    if (now >= this.lastScrollEventTime + this.throttleTime && !this.isAboutToCrossContentEnd(deltaY)) {
       this.cumulatedDeltaY += deltaY;
       if (Math.abs(this.cumulatedDeltaY) > 4) {
         const steps = deltaY > 0 ? 1 : -1;
         this.scrollBySteps(steps, this.throttleTime / 4);
-        this.lastWheelEventTime = now;
+        this.lastScrollEventTime = now;
         this.cumulatedDeltaY = 0;
         return true;
       }

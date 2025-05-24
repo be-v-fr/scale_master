@@ -41,7 +41,8 @@ $opac-outside: 0.3;
   }
 
   &:hover .submenu-wrapper,
-  .submenu-wrapper.searching {
+  .submenu-wrapper.searching,
+  .submenu-wrapper.scrolling {
     opacity: 1;
     transition: 50ms;
     transition-delay: 0;
