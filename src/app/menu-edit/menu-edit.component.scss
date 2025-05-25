@@ -4,6 +4,11 @@
 section {
     width: 70vw;
     max-width: 640px;
+
+    h4 app-circular-button {
+        position: relative;
+        z-index: 1;
+    }
 }
 
 .edit-menu-container {
