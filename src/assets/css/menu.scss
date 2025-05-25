@@ -47,8 +47,7 @@ section {
         @include flex($g: 10px);
     }
 
-    app-scrollable-list,
-    .custom-content {
+    app-scrollable-list {
         margin-top: 0;
         transition: margin-top $transition-menu-collapse;
         width: 148px;
@@ -90,8 +89,7 @@ section {
             padding: calc($menu-y-padding / 2) $menu-x-padding;
             section {
                 gap: 0;
-                app-scrollable-list,
-                .custom-content {
+                app-scrollable-list {
                     margin-top: -6px;
                 }
             }

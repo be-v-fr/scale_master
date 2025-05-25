@@ -12,11 +12,13 @@ section {
     flex-shrink: 1;
     min-height: 0;
     @include flex($ai: flex-start, $g: 10px);
+
     .menu-content-wrapper {
         flex: 1;
         height: 100%;
         @include flex();
         padding: 0 12px;
+
         .menu-content {
             width: 100%;
             height: auto;
@@ -26,17 +28,21 @@ section {
             border-radius: 8px;
         }
     }
+
     .side-arrow-btns-container {
         position: absolute;
         inset: 0;
         pointer-events: none;
         @include flex($jc: space-between);
         $translate-btn: 150%;
+
         .side-arrow-btn-container {
             pointer-events: auto;
+
             &:nth-child(1) {
                 transform: translateX(-$translate-btn);
             }
+
             &:nth-child(2) {
                 transform: translateX($translate-btn);
             }
@@ -45,13 +51,21 @@ section {
 }
 
 @media screen and (max-height: $vh-breakpoint-2) {
-    :host {
-        padding: 11px 6px;
-    }
-
     .edit-menu-container .menu-content-wrapper .menu-content {
         padding: 6px 0;
         max-height: 50px;
         overflow-y: auto;
-    }                
+    }
+}
+
+@media screen and (max-height: $vh-breakpoint-3) {
+    .wrapper.collapsed {
+        section app-scrollable-list {
+            margin-top: -8px;
+        }
+
+        &:not(.parent-hover) section app-scrollable-list {
+            margin-top: -13px;
+        }
+    }
 }
